@@ -18,4 +18,12 @@ return [
             'url' => '/v1/accounts/{accountId}/orders',
         ],
     ],
+    'api_key' => env('TD_AMERITRADE_API_KEY'),
+    'auth_url' => 'https://api.tdameritrade.com/v1/oauth2/token',
+    'base_url' => 'https://api.tdameritrade.com',
+    'account_id' => 12345,
+    'redirect_uri' => 'http://localhost',
+    'client_id' => '12345',
+    'client_secret' => '12345',
+    'refresh_token' => '12345',
 ];

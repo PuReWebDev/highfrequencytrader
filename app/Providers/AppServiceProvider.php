@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\TDAmeritrade\AcctActivity;
+use App\TDAmeritrade\Admin;
+use App\TDAmeritrade\ChartHistory;
+use App\TDAmeritrade\LevelOne;
+use App\TDAmeritrade\Order;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +18,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Admin::class, function ($app) {
+            return new Admin($app['GuzzleHttp\Client'], config('td-ameritrade.api_key'));
+        });
+
+        $this->app->singleton(AcctActivity::class, function ($app) {
+            return new AcctActivity($app['GuzzleHttp\Client'], config('td-ameritrade.api_key'));
+        });
+
+        $this->app->singleton(ChartHistory::class, function ($app) {
+            return new ChartHistory($app['GuzzleHttp\Client'], config('td-ameritrade.api_key'));
+        });
+
+        $this->app->singleton(LevelOne::class, function ($app) {
+            return new LevelOne($app['GuzzleHttp\Client'], config('td-ameritrade.api_key'));
+        });
+
+        $this->app->singleton(Order::class, function ($app) {
+            return new Order($app['GuzzleHttp\Client'], config('td-ameritrade.api_key'));
+        });
     }
 
     /**
