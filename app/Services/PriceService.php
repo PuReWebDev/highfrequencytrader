@@ -43,7 +43,7 @@ class PriceService
      * @param  string  $symbol
      * @return \App\Models\Price
      */
-    public function getPrice(string $symbol): Price
+    public static function getPrice(string $symbol): Price
     {
         $url = "{$this->endpoint}/{$symbol}/pricehistory";
 
