@@ -24,18 +24,7 @@ class PriceService
      *
      * @var string
      */
-    protected $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
-
-    /**
-     * Create a new service instance.
-     *
-     * @param  \GuzzleHttp\Client  $client
-     * @return void
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
+    protected static $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
 
     /**
      * Get the current price for a given symbol.
@@ -45,10 +34,12 @@ class PriceService
      */
     public static function getPrice(string $symbol): Price
     {
-        $url = "{$this->endpoint}/{$symbol}/pricehistory";
+        $endpoint = self::$endpoint;
+        $url = "{$endpoint}/{$symbol}/pricehistory";
+        $client = new \GuzzleHttp\Client();
 
         try {
-            $response = $this->client->get($url);
+            $response = $client->get($url);
         } catch (ClientException $e) {
             return $this->handleError($e);
         }
