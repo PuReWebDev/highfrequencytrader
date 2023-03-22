@@ -50,16 +50,12 @@ class MarketHours
      */
     public static function getHoursForSingleMarket(string $market): array
     {
-        $accessToken = self::getAccessToken();
+        // $accessToken = self::getAccessToken();
+        $apiKey = env('TDAMERITRADE_APP_KEY');
         $client = new Client();
-
+        
         $response = $client->get(
-            "https://api.tdameritrade.com/v1/marketdata/{$market}/hours",
-            [
-                'headers' => [
-                    'Authorization' => "Bearer {$accessToken}",
-                ],
-            ]
+            "https://api.tdameritrade.com/v1/marketdata/$market/hours?apikey=$apiKey"
         );
 
         return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
@@ -126,10 +122,7 @@ class MarketHours
 
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
-
-        $isOpen = $nowTimestamp >= $hours['regularMarketStart'] && $nowTimestamp <= $hours['regularMarketEnd'];
-
-        return $isOpen;
+        return (bool)$hours[strtolower($market)]["EQ"]["isOpen"];
     }
 
     /**
