@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,12 +9,26 @@ use Illuminate\Database\Eloquent\Model;
 class Token extends Model
 {
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'tokens';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'token', 'expires_at',
+        'user_id',
+        'code',
+        'token',
+        'refresh_token',
+        'expires_in',
+        'refresh_token_expires_in',
+        'abilities',
+        'last_used_at',
     ];
 
     /**
