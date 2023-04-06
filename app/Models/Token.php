@@ -24,4 +24,11 @@ class Token extends Model
         'expires_at' => 'datetime',
     ];
 
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
