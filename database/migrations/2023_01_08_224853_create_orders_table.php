@@ -35,6 +35,7 @@ class CreateOrdersTable extends Migration
             $table->string('stop_price_offset')->nullable();
             $table->string('stop_type')->nullable();
             $table->string('order_duration')->nullable();;
+            $table->string('order_leg_collection')->nullable();;
             $table->date('cancel_time')->nullable();;
             $table->dateTime('entered_time');
             $table->dateTime('close_time')->nullable();;
