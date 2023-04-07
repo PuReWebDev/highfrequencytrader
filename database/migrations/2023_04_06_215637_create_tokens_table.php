@@ -20,7 +20,7 @@ class CreateTokensTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('code');
-            $table->text('token')->nullable();
+            $table->text('access_token')->nullable();
             $table->text('refresh_token')->nullable();
             $table->integer('expires_in')->nullable();
             $table->integer('refresh_token_expires_in')->nullable();
