@@ -19,9 +19,9 @@ class CreateTokensTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('code')->unique();
-            $table->text('token')->nullable()->unique();
-            $table->text('refresh_token')->nullable()->unique();
+            $table->text('code');
+            $table->text('token')->nullable();
+            $table->text('refresh_token')->nullable();
             $table->integer('expires_in')->nullable();
             $table->integer('refresh_token_expires_in')->nullable();
             $table->text('abilities')->nullable();

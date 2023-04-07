@@ -14,10 +14,10 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->bigIncrements('account_id');
+            $table->string('account_id');
             $table->string('order_id');
             $table->string('symbol');
             $table->string('cusip');
