@@ -22,7 +22,7 @@ class CallbackController extends Controller
         $code = base64_decode($request->input('code'));
 
         Token::updateOrCreate(
-            ['id' => $request->user()->id],
+            ['user_id' => $request->user()->id],
             [
                 'code' => $code,
             ]
