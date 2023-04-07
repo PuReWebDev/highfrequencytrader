@@ -22,7 +22,7 @@ class DashboardController extends Controller
         // check if the logged in user has a TD Ameritrade Authentication Code
         $code = Token::where('user_id', Auth::id())->get();
 
-        if (empty($code) || count($code) < 1) {
+        if (empty($code['0']) || count($code) < 1) {
             $msg = 'Please use click the following url to grant needed trading permission';
         }
 
