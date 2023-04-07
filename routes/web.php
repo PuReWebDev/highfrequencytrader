@@ -20,8 +20,11 @@ Route::get('/', function () {
 
 Route::resource('callback', CallbackController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth'])
+    ->name('dashboard');
+
+Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 require __DIR__.'/auth.php';
