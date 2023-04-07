@@ -85,39 +85,40 @@ class OrderService
         }
     }
 
-    public static function placeOtoOrder(string $symbol, string $priceType, string $duration, int $quantity, float $limitPrice, float $stopPrice): array
+    public static function placeOtoOrder(string $symbol): array
     {
         // Set up the request body
         $order = [
             'orderType' => 'OTO',
             'session' => 'NORMAL',
-            'priceType' => $priceType,
-            'duration' => $duration,
+//            'priceType' => $priceType,
+            'duration' => 'GOOD_TILL_CANCEL',
             'complexOrderStrategyType' => 'NONE',
             'orderLegCollection' => [
                 [
                     'instruction' => 'BUY',
-                    'quantity' => $quantity,
+                    'quantity' => config("tdameritrade.quantity"),
                     'instrument' => [
                         'symbol' => $symbol,
                     ],
                 ],
                 [
                     'instruction' => 'SELL',
-                    'quantity' => $quantity,
+                    'quantity' => config("tdameritrade.quantity"),
                     'instrument' => [
                         'symbol' => $symbol,
                     ],
                     'orderLegType' => 'TRAILING_STOP',
-                    'trailingStopPrice' => $stopPrice,
+//                    'trailingStopPrice' => $stopPrice,
                     'trailingStopPriceType' => 'ACTIVE_TRAIL',
-                    'trailingPercent' => $limitPrice,
+//                    'trailingPercent' => $limitPrice,
                 ],
             ],
         ];
 
         // Send the request and get the response
-        $response = self::sendRequest('POST', '/orders', $order);
+        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('services.tdameritrade.account_id') . '/orders';
+        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
 
         // Return the response as an array
         return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
@@ -189,5 +190,37 @@ class OrderService
 
         // Return the order resources
         return OrderResource::collection($orders);
+    }
+
+    /**
+     * Send a request to the TD Ameritrade API
+     *
+     * @param string $method
+     * @param string $url
+     * @param array $data
+     * @return array
+     */
+    private static function sendRequest(string $method, string $url, array $data = [])
+    {
+        $client = new \GuzzleHttp\Client();
+        try {
+            $response = $client->request($method, $url, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . self::getAccessToken(),
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $data
+            ]);
+        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+            return [
+                'success' => false,
+                'error' => $e->getMessage()
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => json_decode($response->getBody()->getContents())
+        ];
     }
 }
