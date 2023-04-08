@@ -75,6 +75,9 @@ class AdminService
      */
     public static function login(array $request): array
     {
+        self::setClient(new Client());
+        self::setToken(new Token());
+
         $response = self::$client->post('https://api.tdameritrade.com/v1/oauth2/token', [
             RequestOptions::JSON => $request
         ]);
