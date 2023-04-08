@@ -33,6 +33,8 @@ class AccountController extends Controller
 
             Log::info($authResponse);
 
+            dd($authResponse);
+
             Token::updateOrCreate(
                 ['user_id' => Auth::id()],
                 [
