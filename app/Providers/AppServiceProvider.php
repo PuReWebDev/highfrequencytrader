@@ -8,6 +8,7 @@ use App\TDAmeritrade\ChartHistory;
 use App\TDAmeritrade\LevelOne;
 use App\TDAmeritrade\Order;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 class AppServiceProvider extends ServiceProvider
 {
