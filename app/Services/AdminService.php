@@ -17,12 +17,44 @@ class AdminService
     /**
      * @var Client
      */
-    private $client;
+    private static Client $client;
+
+    /**
+     * @return Client
+     */
+    public static function getClient(): Client
+    {
+        return self::$client;
+    }
+
+    /**
+     * @param Client $client
+     */
+    public static function setClient(Client $client): void
+    {
+        self::$client = $client;
+    }
+
+    /**
+     * @return Token
+     */
+    public function getToken(): Token
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param Token $token
+     */
+    public function setToken(Token $token): void
+    {
+        $this->token = $token;
+    }
 
     /**
      * @var Token
      */
-    private $token;
+    private static Token $token;
 
     /**
      * AdminService constructor.
@@ -32,8 +64,8 @@ class AdminService
      */
     public function __construct(Client $client, Token $token)
     {
-        $this->client = $client;
-        $this->token = $token;
+        self::setClient($client);
+        self::setToken($token);
     }
 
     /**
@@ -41,15 +73,15 @@ class AdminService
      * @return array
      * @throws GuzzleException|\JsonException
      */
-    public function login(array $request): array
+    public static function login(array $request): array
     {
-        $response = $this->client->post('https://api.tdameritrade.com/v1/oauth2/token', [
+        $response = self::$client->post('https://api.tdameritrade.com/v1/oauth2/token', [
             RequestOptions::JSON => $request
         ]);
 
         $response = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->token->updateOrCreate(
+        self::$token->updateOrCreate(
             ['user_id' => Auth::id()],
             [
                 'token' => $response['access_token'], // TODO change
