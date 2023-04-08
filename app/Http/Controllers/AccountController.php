@@ -26,7 +26,7 @@ class AccountController extends Controller
                 'access_type' => config('tdameritrade.access_type'),
                 'code' => $token['0']['code'],
                 'client_id' => config('tdameritrade.client_id'),
-                'redirect_uri' => config('tdameritrade.redirect_uri')
+                'redirect_uri' => config('tdameritrade.redirect_url')
             ]);
 
             $authResponse = AdminService::login($authentication->toArray());
