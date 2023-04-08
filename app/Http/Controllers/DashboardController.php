@@ -17,6 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
 
+        $codeHasExpired = false;
         // Message Default, gets changed if permission isn't granted yet
         $msg = 'Your Account Has Granted Trading Permission Please Set Your Trading Options';
         $linkaddress = '/account';
@@ -25,7 +26,13 @@ class DashboardController extends Controller
         // check if the logged in user has a TD Ameritrade Authentication Code
         $code = Token::where('user_id', Auth::id())->get();
 
-        if (empty($code['0']) || count($code) < 1) {
+        if (empty($code['0']['refresh_token']) && !empty($code['0']) &&
+        strtotime($code['0']['updated_at']) < (time() -
+                (30*60))) {
+            $codeHasExpired = true;
+        }
+
+        if ($codeHasExpired === true || empty($code['0']) || count($code) < 1) {
             $msg = 'Please click here to';
             $linkaddress = config("tdameritrade.registerapp");
             $linktext = 'Grant Needed Trading Permission';
