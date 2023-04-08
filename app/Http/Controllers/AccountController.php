@@ -20,7 +20,7 @@ class AccountController extends Controller
     {
         $token = Token::where('user_id', Auth::id())->get();
 
-        if (empty($token['0']['access_token'])) {
+        if (empty($token['0']['refresh_token'])) {
             $authentication = collect([
                 'grant_type' => config("tdameritrade.grant_type"),
                 'access_type' => config('tdameritrade.access_type'),
