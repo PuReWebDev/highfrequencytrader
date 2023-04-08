@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use App\Models\Token;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
@@ -29,7 +28,10 @@ class AccountController extends Controller
                 'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
             ]);
 
-            Log::info(urlencode(config('tdameritrade.client_id')));
+            Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
+            Log::info('grant_type: ' .config("tdameritrade.grant_type"));
+            Log::info('access_type: ' .config('tdameritrade.access_type'));
+            Log::info('redirect_uri: ' .config('tdameritrade.redirect_uri'));
             Log::info($token['0']['code']);
 
             $authResponse = AdminService::login($authentication->toArray());
