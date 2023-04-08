@@ -29,7 +29,10 @@ class AccountController extends Controller
                 'redirect_uri' => config('tdameritrade.redirect_url')
             ]);
 
+            Log::info(urlencode(config('tdameritrade.client_id')));
+
             $authResponse = AdminService::login($authentication->toArray());
+
 
             Log::info($authResponse);
 
