@@ -20,14 +20,6 @@ class AdminService
     private static Client $client;
 
     /**
-     * @return Client
-     */
-    public static function getClient(): Client
-    {
-        return self::$client;
-    }
-
-    /**
      * @param Client $client
      */
     public static function setClient(Client $client): void
@@ -36,19 +28,11 @@ class AdminService
     }
 
     /**
-     * @return Token
-     */
-    public function getToken(): Token
-    {
-        return $this->token;
-    }
-
-    /**
      * @param Token $token
      */
-    public function setToken(Token $token): void
+    public static function setToken(Token $token): void
     {
-        $this->token = $token;
+        self::$token = $token;
     }
 
     /**
