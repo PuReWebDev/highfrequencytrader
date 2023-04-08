@@ -23,8 +23,6 @@ return [
     'base_url' => 'https://api.tdameritrade.com',
     'account_id' => 12345,
     'redirect_uri' => 'http://localhost',
-    'client_id' => '12345',
-    'client_secret' => '12345',
     // @doc: https://developer.tdameritrade.com/authentication/apis/post/token-0
     'grant_type' => 'authorization_code',
     'refresh_token' => '',
@@ -34,5 +32,6 @@ return [
     'order_threshold' => 1,
     'quantity' => 1,
     'registerapp' => 'https://auth.tdameritrade.com/auth?response_type=code&redirect_uri=https%3A%2F%2Fhighfrequencytradingservices.com%2Fcallback%2F&client_id=PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR%40AMER.OAUTHAP',
-    'redirect_url' => 'https://highfrequencytradingservices.com/dashboard',
+    'redirect_url' => 'https://highfrequencytradingservices.com/callback/',
+//    'redirect_url' => 'https://highfrequencytradingservices.com/dashboard',
 ];
