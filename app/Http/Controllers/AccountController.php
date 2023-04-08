@@ -24,12 +24,13 @@ class AccountController extends Controller
             $authentication = collect([
                 'grant_type' => config("tdameritrade.grant_type"),
                 'access_type' => config('tdameritrade.access_type'),
-                'code' => urlencode($token['0']['code']),
+                'code' => $token['0']['code'],
                 'client_id' => urlencode(config('tdameritrade.client_id')),
-                'redirect_uri' => config('tdameritrade.redirect_url')
+                'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
             ]);
 
             Log::info(urlencode(config('tdameritrade.client_id')));
+            Log::info($token['0']['code']);
 
             $authResponse = AdminService::login($authentication->toArray());
 
