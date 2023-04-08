@@ -25,6 +25,6 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
 
 Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])
     ->middleware(['auth'])
-    ->name('dashboard');
+    ->name('account');
 
 require __DIR__.'/auth.php';
