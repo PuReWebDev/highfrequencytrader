@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if(in_array($request->ip(), ['67.9.66.186'])) {
             config(['app.debug' => true]);
+            config(['app.env' => 'local']);
         }
     }
 }
