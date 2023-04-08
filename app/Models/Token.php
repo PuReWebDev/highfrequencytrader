@@ -28,6 +28,7 @@ class Token extends Model
         'expires_in',
         'refresh_token_expires_in',
         'abilities',
+        'token_type',
         'last_used_at',
     ];
 

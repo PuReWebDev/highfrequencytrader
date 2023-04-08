@@ -22,6 +22,7 @@ class CreateTokensTable extends Migration
             $table->text('code');
             $table->text('access_token')->nullable();
             $table->text('refresh_token')->nullable();
+            $table->text('token_type')->nullable();
             $table->integer('expires_in')->nullable();
             $table->integer('refresh_token_expires_in')->nullable();
             $table->text('abilities')->nullable();
