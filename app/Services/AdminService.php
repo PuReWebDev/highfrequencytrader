@@ -10,6 +10,7 @@ use App\TDAmeritrade\Admin as AdminAPI;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Facades\Auth;
 
 class AdminService
 {
@@ -49,13 +50,14 @@ class AdminService
         $response = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->token->updateOrCreate(
-            ['access_token' => $response['access_token']],
+            ['user_id' => Auth::id()],
             [
-                'access_token' => $response['access_token'],
+                'token' => $response['access_token'], // TODO change
+                // this back to access_token
                 'refresh_token' => $response['refresh_token'],
                 'expires_in' => $response['expires_in'],
                 'refresh_token_expires_in' => $response['refresh_token_expires_in'],
-                'token_type' => $response['token_type'],
+//                'token_type' => $response['token_type'], // TODO uncomment
                 'scope' => $response['scope'],
             ]
         );
