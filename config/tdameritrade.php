@@ -30,7 +30,7 @@ return [
     'refresh_token' => '',
     'access_type' => 'offline',
     'code' => '',
-    'client_id' => 'PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR@AMER.OAUTHAP',
+    'client_id' => env('TD_API_CLIENT_ID'),
     'order_threshold' => 1,
     'quantity' => 1,
     'registerapp' => 'https://auth.tdameritrade.com/auth?response_type=code&redirect_uri=https%3A%2F%2Fhighfrequencytradingservices.com%2Fcallback%2F&client_id=PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR%40AMER.OAUTHAP',
