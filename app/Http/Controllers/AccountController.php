@@ -25,13 +25,13 @@ class AccountController extends Controller
                 'access_type' => config('tdameritrade.access_type'),
                 'code' => $token['0']['code'],
                 'client_id' => urlencode(config('tdameritrade.client_id')),
-                'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
+                'redirect_url' => urlencode(config('tdameritrade.redirect_url')),
             ]);
 
             Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
             Log::info('grant_type: ' .config("tdameritrade.grant_type"));
             Log::info('access_type: ' .config('tdameritrade.access_type'));
-            Log::info('redirect_uri: ' .config('tdameritrade.redirect_uri'));
+            Log::info('redirect_url: ' .config('tdameritrade.redirect_url'));
             Log::info($token['0']['code']);
 
             $authResponse = AdminService::login($authentication->toArray());
