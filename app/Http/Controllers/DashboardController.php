@@ -31,6 +31,12 @@ class DashboardController extends Controller
             $linktext = 'Grant Needed Trading Permission';
         }
 
+        if (empty($code['0']['refresh_token'])) {
+            $msg = 'Please update your config options to begin trading';
+            $linkaddress = '/preferences';
+            $linktext = 'Preferences';
+        }
+
         return View::make('dashboard', [
             'msg' => $msg,
             'linkaddress' => $linkaddress,
