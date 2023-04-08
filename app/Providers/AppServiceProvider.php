@@ -45,9 +45,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
-        if(in_array(Request::ip(), ['67.9.66.186'])) {
+        if(in_array($request->ip(), ['67.9.66.186'])) {
             config(['app.debug' => true]);
         }
     }
