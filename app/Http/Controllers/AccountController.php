@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Token;
+use App\Services\AdminService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
@@ -13,7 +18,33 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //dd($code['0']['code']);
+        $token = Token::where('user_id', Auth::id())->get();
+
+        if (empty($token['0']['access_token'])) {
+            $authentication = collect([
+                'grant_type' => config("tdameritrade.grant_type"),
+                'access_type' => config('tdameritrade.access_type'),
+                'code' => $token['0']['code'],
+                'client_id' => config('tdameritrade.client_id'),
+                'redirect_uri' => config('tdameritrade.redirect_uri')
+            ]);
+
+            $authResponse = AdminService::login($authentication->toArray());
+
+            Log::info($authResponse);
+
+            Token::updateOrCreate(
+                ['user_id' => Auth::id()],
+                [
+                    'token' => $authResponse->token,
+                    'refresh_token' => $authResponse->refresh_token
+                ]
+            );
+        }
+
+
+
+
     }
 
     /**
