@@ -8,6 +8,7 @@ use App\Models\Token;
 use App\Services\AdminService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CallbackController extends Controller
 {
@@ -19,9 +20,7 @@ class CallbackController extends Controller
     public function index(Request $request): RedirectResponse
     {
         // Receive the provided code and base64 decode the value
-        $code = base64_decode($request->input('code'));
-
-        dd($code);
+        $code = urldecode($request->input('code'));
 
         Token::updateOrCreate(
             ['user_id' => $request->user()->id],
