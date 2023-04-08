@@ -21,6 +21,8 @@ class CallbackController extends Controller
         // Receive the provided code and base64 decode the value
         $code = base64_decode($request->input('code'));
 
+        dd($code);
+
         Token::updateOrCreate(
             ['user_id' => $request->user()->id],
             [
