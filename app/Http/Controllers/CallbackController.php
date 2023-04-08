@@ -22,12 +22,14 @@ class CallbackController extends Controller
         // Receive the provided code and base64 decode the value
         $code = urldecode($request->input('code'));
 
-        Token::updateOrCreate(
-            ['user_id' => $request->user()->id],
-            [
-                'code' => $code,
-            ]
-        );
+        if (!empty($code)) {
+            Token::updateOrCreate(
+                ['user_id' => $request->user()->id],
+                [
+                    'code' => $code,
+                ]
+            );
+        }
 
         return redirect('/dashboard');
     }
