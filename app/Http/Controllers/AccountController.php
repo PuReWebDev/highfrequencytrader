@@ -23,7 +23,7 @@ class AccountController extends Controller
             $authentication = collect([
                 'grant_type' => config("tdameritrade.grant_type"),
                 'access_type' => config('tdameritrade.access_type'),
-                'code' => $token['0']['code'],
+                'code' => urlencode($token['0']['code']),
                 'client_id' => urlencode(config('tdameritrade.client_id')),
                 'redirect_url' => config('tdameritrade.redirect_url'),
             ]);
