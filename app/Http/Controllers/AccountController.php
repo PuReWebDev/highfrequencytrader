@@ -25,7 +25,7 @@ class AccountController extends Controller
                 'access_type' => config('tdameritrade.access_type'),
                 'code' => $token['0']['code'],
                 'client_id' => urlencode(config('tdameritrade.client_id')),
-                'redirect_url' => urlencode(config('tdameritrade.redirect_url')),
+                'redirect_url' => config('tdameritrade.redirect_url'),
             ]);
 
             Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
