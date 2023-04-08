@@ -16,17 +16,26 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
         // Message Default, gets changed if permission isn't granted yet
-        $msg = 'Your Account Has Granted Trading Permission Please Set Your Trading Options <a href="/account">Account</a>';
+        $msg = 'Your Account Has Granted Trading Permission Please Set Your Trading Options';
+        $linkaddress = '/account';
+        $linktext = 'Account';
 
         // check if the logged in user has a TD Ameritrade Authentication Code
         $code = Token::where('user_id', Auth::id())->get();
 
         if (empty($code['0']) || count($code) < 1) {
-            $msg = 'Please click here to <a href="https://auth.tdameritrade.com/auth?response_type=code&redirect_uri=https%3A%2F%2Fhighfrequencytradingservices.com%2Fcallback%2F&client_id=PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR%40AMER.OAUTHAP">Grant Needed Trading Permission</a>';
+            $msg = 'Please click here to';
+            $linkaddress = config("tdameritrade.registerapp");
+            $linktext = 'Grant Needed Trading Permission';
         }
 
-        return View::make('dashboard', ['msg' => $msg]);
+        return View::make('dashboard', [
+            'msg' => $msg,
+            'linkaddress' => $linkaddress,
+            'linktext' => $linktext,
+        ]);
     }
 
     /**
