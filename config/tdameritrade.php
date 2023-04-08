@@ -30,7 +30,7 @@ return [
     'refresh_token' => '',
     'access_type' => 'offline',
     'code' => '',
-    'client_id' => '',
+    'client_id' => 'PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR',
     'redirect_uri' => 'http://localhost',
     'order_threshold' => 1,
     'quantity' => 1,
