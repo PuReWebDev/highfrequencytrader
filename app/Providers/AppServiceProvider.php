@@ -46,6 +46,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if(in_array(Request::ip(), ['67.9.66.186'])) {
+            config(['app.debug' => true]);
+        }
     }
 }
