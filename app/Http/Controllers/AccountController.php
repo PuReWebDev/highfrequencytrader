@@ -25,7 +25,7 @@ class AccountController extends Controller
                 'grant_type' => config("tdameritrade.grant_type"),
                 'access_type' => config('tdameritrade.access_type'),
                 'code' => $token['0']['code'],
-                'client_id' => config('tdameritrade.client_id'),
+                'client_id' => urlencode(config('tdameritrade.client_id')),
                 'redirect_uri' => config('tdameritrade.redirect_url')
             ]);
 
