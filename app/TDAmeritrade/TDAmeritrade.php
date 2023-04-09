@@ -78,7 +78,7 @@ class TDAmeritrade
         $body = [
             'grant_type' => 'authorization_code',
             'access_type' => 'offline',
-            'client_id' => config('tdameritrade.api_key'),
+            'client_id' => config('tdameritrade.api_key') . "%40AMER.OAUTHAP",
             'redirect_uri' => config('tdameritrade.callback'),
             'code'  => $code
         ];
