@@ -79,7 +79,7 @@ class TDAmeritrade
             'grant_type' => 'authorization_code',
             'access_type' => 'offline',
             'client_id' => config('tdameritrade.api_key'),
-            'redirect_uri' => config('tdameritrade.callback'),
+            'redirect_uri' => urlencode(config('tdameritrade.callback')),
             'code'  => $code
         ];
 
