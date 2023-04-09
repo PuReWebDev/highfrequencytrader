@@ -7,6 +7,7 @@ namespace App\TDAmeritrade;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @method Api\Accounts accounts() Account balances, positions, and orders for all linked accounts.
@@ -96,6 +97,7 @@ class TDAmeritrade
 
         try {
             $res = $client->request('post', SELF::API_VER . $path, $data);
+            Log::debug('Authentication Data',$data);
             return json_decode((string)$res->getBody(), true, 512, JSON_THROW_ON_ERROR);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
