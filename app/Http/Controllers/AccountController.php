@@ -51,14 +51,15 @@ class AccountController extends Controller
 
 
 
-
-            Token::updateOrCreate(
-                ['user_id' => Auth::id()],
-                [
-                    'token' => $authResponse->token,
-                    'refresh_token' => $authResponse->refresh_token
-                ]
-            );
+            if (!empty($authResponse)) {
+                Token::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'token' => $authResponse->token,
+                        'refresh_token' => $authResponse->refresh_token
+                    ]
+                );
+            }
         }
 
 
