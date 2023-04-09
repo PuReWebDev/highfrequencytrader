@@ -81,7 +81,7 @@ class TDAmeritrade
             'access_type' => 'offline',
 //            'client_id' => config('tdameritrade.api_key') . '%40AMER.OAUTHAP',
             'client_id' => config('tdameritrade.api_key'),
-            'redirect_uri' => urlencode(config('tdameritrade.callback')),
+            'redirect_uri' => config('tdameritrade.callback'),
             'code'  => $code
         ];
 
