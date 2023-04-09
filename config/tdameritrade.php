@@ -32,5 +32,7 @@ return [
     'quantity' => 1,
     'registerapp' => 'https://auth.tdameritrade.com/auth?response_type=code&redirect_uri=https%3A%2F%2Fhighfrequencytradingservices.com%2Fcallback%2F&client_id=PP8HGBTPVG2IXJ9FY9NRPZFJ7M82UIPR%40AMER.OAUTHAP',
     'redirect_url' => 'https://highfrequencytradingservices.com/callback/',
+    'redirect_uri' => 'https://highfrequencytradingservices.com/callback/',
+    'callback' => 'https://highfrequencytradingservices.com/callback/',
 //    'redirect_url' => 'https://highfrequencytradingservices.com/dashboard',
 ];

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
-use App\Services\AdminService;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
@@ -26,24 +25,26 @@ class AccountController extends Controller
         }
 
         if (empty($token['0']['refresh_token'])) {
-            $authentication = collect([
-                'grant_type' =>config("tdameritrade.grant_type"),
-                'access_type' => config('tdameritrade.access_type'),
-                'code' => urldecode($token['0']['code']),
-                'client_id' => config('tdameritrade.client_id'),
-                'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
-            ]);
+//            $authentication = collect([
+//                'grant_type' =>config("tdameritrade.grant_type"),
+//                'access_type' => config('tdameritrade.access_type'),
+//                'code' => urldecode($token['0']['code']),
+//                'client_id' => config('tdameritrade.client_id'),
+//                'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
+//            ]);
+//
+//            Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
+//            Log::info('grant_type: ' .urlencode(config("tdameritrade.grant_type")));
+//            Log::info('access_type: ' .urlencode(config('tdameritrade.access_type')));
+//            Log::info('redirect_uri: ' .urlencode(config('tdameritrade.redirect_url')));
+//            Log::info(urldecode($token['0']['code']));
+//
+//            $authResponse = AdminService::login($authentication->toArray());
+//
+//
+//            Log::info($authResponse);
 
-            Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
-            Log::info('grant_type: ' .urlencode(config("tdameritrade.grant_type")));
-            Log::info('access_type: ' .urlencode(config('tdameritrade.access_type')));
-            Log::info('redirect_uri: ' .urlencode(config('tdameritrade.redirect_url')));
-            Log::info(urldecode($token['0']['code']));
-
-            $authResponse = AdminService::login($authentication->toArray());
-
-
-            Log::info($authResponse);
+            $authResponse = TDAmeritrade::createAccessToken($token['0']['code']);
 
             dd($authResponse);
 
