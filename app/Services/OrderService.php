@@ -89,31 +89,38 @@ class OrderService
     {
         // Set up the request body
         $order = [
-            'orderType' => 'OTO',
+            'orderType' => 'MARKET',
             'session' => 'NORMAL',
 //            'priceType' => $priceType,
             'duration' => 'GOOD_TILL_CANCEL',
             'complexOrderStrategyType' => 'NONE',
+            'orderStrategyType' => 'TRIGGER',
             'orderLegCollection' => [
-                [
                     'instruction' => 'BUY',
-                    'quantity' => config("tdameritrade.quantity"),
+                    'quantity' => config('tdameritrade.quantity'),
                     'instrument' => [
                         'symbol' => $symbol,
                     ],
-                ],
-                [
-                    'instruction' => 'SELL',
-                    'quantity' => config("tdameritrade.quantity"),
-                    'instrument' => [
-                        'symbol' => $symbol,
-                    ],
-                    'orderLegType' => 'TRAILING_STOP',
-//                    'trailingStopPrice' => $stopPrice,
-                    'trailingStopPriceType' => 'ACTIVE_TRAIL',
-//                    'trailingPercent' => $limitPrice,
-                ],
             ],
+            'childOrderStrategies' => [
+                'complexOrderStrategyType' => 'NONE',
+                'orderType' => 'TRAILING_STOP',
+                'session' => 'NORMAL',
+                'stopPriceLinkBasis' => 'BID',
+                'stopPriceLinkType' => 'VALUE',
+                'stopPriceOffset' => 0.01,
+                'duration' => 'GOOD_TILL_CANCEL',
+                'orderStrategyType' => 'SINGLE',
+                // 'trailingStopPriceType' => 'ACTIVE_TRAIL',
+                'orderLegCollection' => [
+                    'instruction' => 'SELL',
+                    'quantity' => config('tdameritrade.quantity'),
+                    'instrument' => [
+                      'symbol' => $symbol,
+                      'assetType' => 'EQUITY'
+                    ]
+                ]
+            ]
         ];
 
         // Send the request and get the response
