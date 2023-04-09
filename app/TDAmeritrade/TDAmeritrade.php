@@ -60,13 +60,13 @@ class TDAmeritrade
         return redirect(static::generateOAuth());
     }
 
-    public function refreshToken()
+    public static function refreshToken($refreshToken)
     {
         $body = [
             'grant_type' => "refresh_token",
             'access_type' => 'offline',
-            'client_id' => config('tdameritrade.key'),
-            'refresh_token' => $this->refresh_token
+            'client_id' => config('tdameritrade.api_key'),
+            'refresh_token' => $refreshToken
         ];
 
         return static::post('/oauth2/token', [
@@ -79,7 +79,6 @@ class TDAmeritrade
         $body = [
             'grant_type' => 'authorization_code',
             'access_type' => 'offline',
-//            'client_id' => config('tdameritrade.api_key') . '%40AMER.OAUTHAP',
             'client_id' => config('tdameritrade.api_key'),
             'redirect_uri' => config('tdameritrade.callback'),
             'code'  => $code
@@ -145,5 +144,43 @@ class TDAmeritrade
     public static function getNamespace()
     {
         return __NAMESPACE__ . '\\Api\\';
+    }
+
+    public static function isAccessTokenExpired($timestamp):bool
+    {
+        if (strtotime($timestamp['0']['updated_at']) < (time() -
+                (30*60))) {
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * list
+     * Account balances, positions, and orders for all linked accounts.
+     * @param  mixed $fields
+     * @return void
+     */
+    public static function list(string $fields = 'positions,orders')
+    {
+        return (new Client([
+            'base_uri' => SELF::BASE_URL
+        ]))->getWithAuth('/accounts', [
+            'query' => ['fields' => $fields]
+        ]);
+    }
+
+
+    /**
+     * get
+     * Account balances, positions, and orders for a specific account.
+     * @param  string $account_id
+     * @return void
+     */
+    public function get(string  $account_id)
+    {
+        return $this->client->getWithAuth('/accounts/' . $account_id);
     }
 }
