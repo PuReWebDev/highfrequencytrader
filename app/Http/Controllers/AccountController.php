@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\Auth;
 class AccountController extends Controller
 {
     /**
+     * @param mixed $authResponse
+     */
+    public static function saveTokenInformation(mixed $authResponse): void
+    {
+        Token::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'access_token' => $authResponse['access_token'] ?: null,
+                'refresh_token' => $authResponse['refresh_token'] ?: null,
+                'scope' => $authResponse['scope'] ?: null,
+                'expires_in' => $authResponse['expires_in'] ?: null,
+                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?: null,
+                'token_type' => $authResponse['token_type'] ?: null,
+            ]
+        );
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,41 +47,27 @@ class AccountController extends Controller
         }
 
         if (empty($token['0']['refresh_token'])) {
-//            $authentication = collect([
-//                'grant_type' =>config("tdameritrade.grant_type"),
-//                'access_type' => config('tdameritrade.access_type'),
-//                'code' => urldecode($token['0']['code']),
-//                'client_id' => config('tdameritrade.client_id'),
-//                'redirect_uri' => urlencode(config('tdameritrade.redirect_url')),
-//            ]);
-//
-//            Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
-//            Log::info('grant_type: ' .urlencode(config("tdameritrade.grant_type")));
-//            Log::info('access_type: ' .urlencode(config('tdameritrade.access_type')));
-//            Log::info('redirect_uri: ' .urlencode(config('tdameritrade.redirect_url')));
-//            Log::info(urldecode($token['0']['code']));
-//
-//            $authResponse = AdminService::login($authentication->toArray());
-//
-//
-//            Log::info($authResponse);
 
             if (!empty($token['0']['code'])) {
                 $authResponse = TDAmeritrade::createAccessToken($token['0']['code']);
-                dd($authResponse);
             }
-
-
 
             if (!empty($authResponse)) {
-                Token::updateOrCreate(
-                    ['user_id' => Auth::id()],
-                    [
-                        'token' => $authResponse->token,
-                        'refresh_token' => $authResponse->refresh_token
-                    ]
-                );
+                self::saveTokenInformation($authResponse);
             }
+        }
+
+        if (!empty($token['0']['access_token'])) {
+            if (TDAmeritrade::isAccessTokenExpired
+            ($token['0']['access_token']) === true) {
+                // Time To Refresh The Token
+                self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+            }
+
+            // Retrieve The Account Information
+            $accountResponse = TDAmeritrade::list();
+
+            dd($accountResponse);
         }
 
 
