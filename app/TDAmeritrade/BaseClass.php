@@ -29,10 +29,12 @@ abstract class BaseClass
      * @param  string  $apiKey
      * @return void
      */
-    public function __construct(Client $client, string $apiKey)
+    public function __construct()
     {
-        $this->client = $client;
-        $this->apiKey = $apiKey;
+        $this->client = new Client([
+            'base_uri' => "https://api.tdameritrade.com",
+        ]);
+        $this->apiKey = config('tdameritrade.api_key');
     }
 
     /**
