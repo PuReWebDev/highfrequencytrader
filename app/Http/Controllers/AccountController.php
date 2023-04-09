@@ -46,10 +46,11 @@ class AccountController extends Controller
 
             if (!empty($token['0']['code'])) {
                 $authResponse = TDAmeritrade::createAccessToken(urldecode($token['0']['code']));
+                dd($authResponse);
             }
 
 
-            dd($authResponse);
+
 
             Token::updateOrCreate(
                 ['user_id' => Auth::id()],
