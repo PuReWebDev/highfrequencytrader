@@ -21,11 +21,11 @@ class AccountController extends Controller
 
         if (empty($token['0']['refresh_token'])) {
             $authentication = collect([
-                'grant_type' => config("tdameritrade.grant_type"),
-                'access_type' => config('tdameritrade.access_type'),
-                'code' => urlencode($token['0']['code']),
-                'client_id' => urlencode(config('tdameritrade.client_id')),
-                'redirect_uri' => config('tdameritrade.redirect_url'),
+                urlencode('grant_type') => urlencode(config("tdameritrade.grant_type")),
+                urlencode('access_type') => urlencode(config('tdameritrade.access_type')),
+                urlencode('code') => urlencode($token['0']['code']),
+                urlencode('client_id') => urlencode(config('tdameritrade.client_id')),
+                urlencode('redirect_uri') => urlencode(config('tdameritrade.redirect_url')),
             ]);
 
             Log::info('client_id: ' .urlencode(config('tdameritrade.client_id')));
