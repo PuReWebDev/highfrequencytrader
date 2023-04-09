@@ -16,7 +16,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
+        $link=Tdameritrade::redirectOAuth();
         $codeHasExpired = false;
         // Message Default, gets changed if permission isn't granted yet
         $msg = 'Your Account Has Granted Trading Permission Please Set Your Trading Options';
@@ -34,7 +34,8 @@ class DashboardController extends Controller
 
         if ($codeHasExpired === true || empty($code['0']) || count($code) < 1) {
             $msg = 'Please click here to';
-            $linkaddress = config("tdameritrade.registerapp");
+//            $linkaddress = config("tdameritrade.registerapp");
+            $linkaddress = $link;
             $linktext = 'Grant Needed Trading Permission';
         }
 
