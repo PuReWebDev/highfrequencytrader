@@ -122,7 +122,8 @@ class MarketHours
 
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
-        return (bool)$hours[strtolower($market)][strtolower($market)]["isOpen"];
+        $marketKey = strtolower($market);
+        return (bool)$hours[$marketKey][$marketKey]["isOpen"];
     }
 
     /**

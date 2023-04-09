@@ -18,7 +18,13 @@ class MarketTest extends TestCase
     public function testCanCheckIfMarketIsOpen()
     {
         $setting = MarketHours::isMarketOpen("EQUITY");
-        $this->assertTrue($setting);
+        $isInMarketHours = date('H') < 17;
+        if ($isInMarketHours) {
+            $this->assertTrue($setting);
+        } else {
+            $this->assertTrue(!$setting);
+
+        }
     }
 
     /**
