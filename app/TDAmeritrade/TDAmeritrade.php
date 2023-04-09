@@ -148,7 +148,7 @@ class TDAmeritrade
 
     public static function isAccessTokenExpired($timestamp):bool
     {
-        if (strtotime($timestamp['0']['updated_at']) < (time() -
+        if (strtotime($timestamp) < (time() -
                 (30*60))) {
 
             return true;
