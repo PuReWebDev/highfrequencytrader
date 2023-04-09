@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Cache;
 $accountId = '123456';
 $orders = $account->getOrdersByPath($accountId);
  */
-class Accounts extends BaseClass
+class Accounts
+//class Accounts extends BaseClass
 {
     /**
      * Initialize the Guzzle client instance.
@@ -375,7 +376,7 @@ class Accounts extends BaseClass
      * @param  array  $query
      * @return array
      */
-    public function get(string $uri, array $query = []): array
+    public static function get(string $uri, array $query = []): array
     {
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
