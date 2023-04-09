@@ -23,11 +23,11 @@ class Token extends Model
     protected $fillable = [
         'user_id',
         'code',
-        'token',
+        'access_token',
         'refresh_token',
         'expires_in',
         'refresh_token_expires_in',
-        'abilities',
+        'scope',
         'token_type',
         'last_used_at',
     ];
