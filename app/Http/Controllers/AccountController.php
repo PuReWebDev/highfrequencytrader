@@ -74,6 +74,8 @@ class AccountController extends Controller
             $accountResponse = Accounts::getAccounts();
             Log::info('Account Informatino Retrieved');
 
+            Log::info($accountResponse);
+
             dd($accountResponse);
         }
 
