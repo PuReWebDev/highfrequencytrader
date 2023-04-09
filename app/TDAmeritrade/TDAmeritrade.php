@@ -96,8 +96,8 @@ class TDAmeritrade
         ]);
 
         try {
-            $res = $client->request('post', SELF::API_VER . $path, $data);
             Log::debug('Authentication Data',$data);
+            $res = $client->request('post', SELF::API_VER . $path, $data);
             return json_decode((string)$res->getBody(), true, 512, JSON_THROW_ON_ERROR);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
