@@ -61,7 +61,7 @@ class AccountController extends Controller
 
         if (!empty($token['0']['access_token'])) {
             if (TDAmeritrade::isAccessTokenExpired
-            ($token['0']['access_token']) === true) {
+            ($token['0']['access_token']) === false) {
                 // Time To Refresh The Token
                 Log::info('The Token Was Determined To Be Expired');
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
