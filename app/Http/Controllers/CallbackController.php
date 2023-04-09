@@ -19,7 +19,7 @@ class CallbackController extends Controller
     public function index(Request $request): RedirectResponse
     {
         // Receive the provided code and base64 decode the value
-        $code = urldecode($request->input('code'));
+        $code = $request->input('code');
 
         if (!empty($code)) {
             Token::updateOrCreate(
