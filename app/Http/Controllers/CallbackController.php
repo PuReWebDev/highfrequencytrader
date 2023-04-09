@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Token;
-use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -34,9 +33,9 @@ class CallbackController extends Controller
         Log::debug('Request Array',$request->toArray());
 
 
-        $authResponse = TDAmeritrade::createAccessToken(urldecode($code));
-
-        dd($authResponse);
+//        $authResponse = TDAmeritrade::createAccessToken(urldecode($code));
+//
+//        dd($authResponse);
 
         return redirect('/dashboard');
     }
