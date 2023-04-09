@@ -18,6 +18,10 @@ class AccountController extends Controller
     {
         $token = Token::where('user_id', Auth::id())->get();
 
+        if (empty($token['0']['code'])) {
+            return redirect('/dashboard');
+        }
+
         if (empty($token['0']['refresh_token']) && !empty($token['0']) &&
             strtotime($token['0']['updated_at']) < (time() -
                 (30*60))) {
