@@ -357,7 +357,7 @@ class Accounts
     {
         try {
             // make the request to the TD Ameritrade API
-            $data = self::get('/accounts');
+            $data = self::get('v1/accounts');
         } catch (ClientException $e) {
             // handle the error if the request fails
             $data = [
