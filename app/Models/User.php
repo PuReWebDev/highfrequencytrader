@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,5 +47,29 @@ class User extends Authenticatable
     public function token(): HasOne
     {
         return $this->hasOne(Token::class);
+    }
+
+    /**
+     * Get the Accounts associated with the user.
+     */
+    public function account(): HasOne
+    {
+        return $this->hasMany(Account::class);
+    }
+
+    /**
+     * Get the Orders associated with the user.
+     */
+    public function orders(): HasOne
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get the Orders associated with the user.
+     */
+    public function positions(): HasOne
+    {
+        return $this->hasMany(Position::class);
     }
 }
