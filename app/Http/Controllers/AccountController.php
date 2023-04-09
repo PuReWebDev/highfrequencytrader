@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
+use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,12 +65,13 @@ class AccountController extends Controller
                 // Time To Refresh The Token
                 Log::info('The Token Was Determined To Be Expired');
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
-                Log::info('We have refreshed the token automagicall');
+                Log::info('We have refreshed the token automagically');
             }
 
             Log::info('Retrieving Account Information');
             // Retrieve The Account Information
-            $accountResponse = TDAmeritrade::list();
+//            $accountResponse = TDAmeritrade::list();
+            $accountResponse = Accounts::getAccounts();
             Log::info('Account Informatino Retrieved');
 
             dd($accountResponse);
