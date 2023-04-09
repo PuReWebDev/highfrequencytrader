@@ -144,7 +144,6 @@ class MarketHours
                         'grant_type' => 'refresh_token',
                         'refresh_token' => config('tdameritrade.refresh_token'),
                         'client_id' => config('tdameritrade.client_id'),
-                        'client_secret' => config('tdameritrade.client_secret'),
                     ],
                 ]
             );

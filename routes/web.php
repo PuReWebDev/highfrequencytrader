@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CallbackController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('callback', CallbackController::class);
+
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth'])
+    ->name('dashboard');
+
+Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('account');
+
+require __DIR__.'/auth.php';

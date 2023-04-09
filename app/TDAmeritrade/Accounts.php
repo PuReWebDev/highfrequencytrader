@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
-use Illuminate\Support\Facades\Cache;
+use App\Models\Token;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * The Accounts class handles requests for account information.
@@ -14,7 +17,8 @@ use GuzzleHttp\Exception\ClientException;
 $accountId = '123456';
 $orders = $account->getOrdersByPath($accountId);
  */
-class Accounts extends BaseClass
+class Accounts
+//class Accounts extends BaseClass
 {
     /**
      * Initialize the Guzzle client instance.
@@ -349,11 +353,11 @@ class Accounts extends BaseClass
      * @return array
      * @throws \JsonException
      */
-    public function getAccounts(): array
+    public static function getAccounts(): array
     {
         try {
             // make the request to the TD Ameritrade API
-            $data = $this->get('/accounts');
+            $data = self::get('v1/accounts');
         } catch (ClientException $e) {
             // handle the error if the request fails
             $data = [
@@ -363,6 +367,30 @@ class Accounts extends BaseClass
         }
 
         return $data;
+    }
+
+    /**
+     * Make a GET request to the TD Ameritrade API.
+     *
+     * @param  string  $uri
+     * @param  array  $query
+     * @return array
+     */
+    public static function get(string $uri, array $query = ['fields' => 'positions,orders']):
+    array
+    {
+        $token = Token::where('user_id', Auth::id())->get();
+        $client = new Client([
+            'base_uri' => "https://api.tdameritrade.com/v1",
+        ]);
+        $response = $client->get($uri, [
+            'headers' => [
+                'Authorization' => 'Bearer '.$token['0']['access_token'],
+            ],
+            'query' => $query,
+        ]);
+
+        return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
     }
 
 }

@@ -41,4 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the token associated with the user.
+     */
+    public function token(): HasOne
+    {
+        return $this->hasOne(Token::class);
+    }
 }

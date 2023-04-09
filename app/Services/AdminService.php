@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Admin;
@@ -8,18 +10,35 @@ use App\TDAmeritrade\Admin as AdminAPI;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Facades\Auth;
 
 class AdminService
 {
     /**
      * @var Client
      */
-    private $client;
+    private static Client $client;
+
+    /**
+     * @param Client $client
+     */
+    public static function setClient(Client $client): void
+    {
+        self::$client = $client;
+    }
+
+    /**
+     * @param Token $token
+     */
+    public static function setToken(Token $token): void
+    {
+        self::$token = $token;
+    }
 
     /**
      * @var Token
      */
-    private $token;
+    private static Token $token;
 
     /**
      * AdminService constructor.
@@ -29,8 +48,8 @@ class AdminService
      */
     public function __construct(Client $client, Token $token)
     {
-        $this->client = $client;
-        $this->token = $token;
+        self::setClient($client);
+        self::setToken($token);
     }
 
     /**
@@ -38,22 +57,26 @@ class AdminService
      * @return array
      * @throws GuzzleException|\JsonException
      */
-    public function login(array $request): array
+    public static function login(array $request): array
     {
-        $response = $this->client->post('https://api.tdameritrade.com/v1/oauth2/token', [
+        self::setClient(new Client());
+        self::setToken(new Token());
+
+        $response = self::$client->post('https://api.tdameritrade.com/v1/oauth2/token', [
             RequestOptions::JSON => $request
         ]);
 
         $response = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->token->updateOrCreate(
-            ['access_token' => $response['access_token']],
+        self::$token->updateOrCreate(
+            ['user_id' => Auth::id()],
             [
-                'access_token' => $response['access_token'],
+                'token' => $response['access_token'], // TODO change
+                // this back to access_token
                 'refresh_token' => $response['refresh_token'],
                 'expires_in' => $response['expires_in'],
                 'refresh_token_expires_in' => $response['refresh_token_expires_in'],
-                'token_type' => $response['token_type'],
+//                'token_type' => $response['token_type'], // TODO uncomment
                 'scope' => $response['scope'],
             ]
         );

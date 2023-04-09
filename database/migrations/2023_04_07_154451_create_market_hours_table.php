@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMarketsTable extends Migration
+class CreateMarketHoursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateMarketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('markets', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+        Schema::create('market_hours', function (Blueprint $table) {
+            $table->id();
+            $table->string('category')->nullable();
+            $table->string('exchange');
             $table->boolean('is_open')->default(false);
+            $table->string('market_type');
+            $table->string('product')->nullable();
+            $table->string('product_name')->nullable();
+            $table->string('session_hours')->nullable();
             $table->dateTime('open_time');
             $table->dateTime('close_time');
             $table->timestamps();
@@ -30,6 +35,6 @@ class CreateMarketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('markets');
+        Schema::dropIfExists('market_hours');
     }
 }

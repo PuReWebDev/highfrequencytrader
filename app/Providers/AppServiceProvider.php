@@ -8,6 +8,7 @@ use App\TDAmeritrade\ChartHistory;
 use App\TDAmeritrade\LevelOne;
 use App\TDAmeritrade\Order;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,8 +45,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Request $request)
     {
-        //
+        if(in_array($request->ip(), ['67.9.66.186'])) {
+            config(['app.debug' => true]);
+            config(['app.env' => 'local']);
+        }
     }
 }
