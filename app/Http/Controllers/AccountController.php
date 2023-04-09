@@ -44,7 +44,7 @@ class AccountController extends Controller
 //
 //            Log::info($authResponse);
 
-            $authResponse = TDAmeritrade::createAccessToken($token['0']['code']);
+            $authResponse = TDAmeritrade::createAccessToken(urldecode($token['0']['code']));
 
             dd($authResponse);
 
