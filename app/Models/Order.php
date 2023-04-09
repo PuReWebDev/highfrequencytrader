@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'orders';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -62,6 +69,14 @@ class Order extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
 
