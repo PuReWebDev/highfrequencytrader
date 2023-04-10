@@ -24,9 +24,8 @@ class Position extends Model
      * @var array
      */
     protected $fillable = [
-        'account_id',
+        'accountId',
         'user_id',
-        'account_id',
         'shortQuantity',
         'averagePrice',
         'currentDayProfitLoss',
@@ -42,10 +41,11 @@ class Position extends Model
         'marketValue',
         'maintenanceRequirement',
         'previousSessionLongQuantity',
+        'previousSessionLongQuantity',
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the user that owns the Position.
      */
     public function user(): BelongsTo
     {
@@ -53,7 +53,7 @@ class Position extends Model
     }
 
     /**
-     * The account that this order belongs to.
+     * The account that this position belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

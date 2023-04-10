@@ -24,9 +24,8 @@ class Balance extends Model
      * @var array
      */
     protected $fillable = [
-        'account_id',
+        'accountId',
         'user_id',
-        'account_id',
         'accruedInterest',
         'availableFunds',
         'availableFundsNonMarginableTrade',
@@ -68,4 +67,22 @@ class Balance extends Model
         'mutualFundValue',
         'stockBuyingPower',
     ];
+
+    /**
+     * Get the user that owns the Balance
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The account that this balance belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }
