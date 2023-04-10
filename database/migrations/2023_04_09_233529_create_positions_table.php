@@ -19,8 +19,7 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('account_id');
-            $table->foreign('account_id')->references('account_id')->on('accounts');
+            $table->integer('account_id');
             $table->double('shortQuantity');
             $table->double('averagePrice');
             $table->double('currentDayProfitLoss');

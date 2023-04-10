@@ -19,8 +19,7 @@ class CreateBalancesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('account_id');
-            $table->foreign('account_id')->references('account_id')->on('accounts');
+            $table->integer('account_id');
             $table->double('accruedInterest');
             $table->double('availableFunds');
             $table->double('availableFundsNonMarginableTrade');
@@ -58,8 +57,6 @@ class CreateBalancesTable extends Migration
             $table->double('savings');
             $table->double('sma');
             $table->double('shortMarketValue');
-            $table->double('pendingDeposits');
-            $table->double('mutualFundValue');
             $table->double('stockBuyingPower');
             $table->timestamps();
         });

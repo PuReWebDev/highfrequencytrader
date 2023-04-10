@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('account_id');
+            $table->integer('account_id');
             $table->string('type');
             $table->integer('roundTrips');
             $table->boolean('isDayTrader');
