@@ -20,6 +20,7 @@ class CreateBalancesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('accountId');
+            $table->string('balanceType');
             $table->double('accruedInterest');
             $table->double('availableFunds');
             $table->double('availableFundsNonMarginableTrade');
