@@ -97,7 +97,7 @@ class AccountController extends Controller
     {
         foreach ($accountResponse as $key => $value) {
             Log::debug('The Key',$key);
-            Log::info('The Value',$value);
+            Log::debug('The Value',$value);
             Account::updateOrCreate(
                 ['user_id' => Auth::id(),'account_id' => $value['securitiesAccount']['accountId']],
                 [
