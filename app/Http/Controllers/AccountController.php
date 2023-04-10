@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Order;
 use App\Models\Position;
 use App\Models\Token;
 use App\TDAmeritrade\Accounts;
@@ -15,6 +16,50 @@ use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
+    /**
+     * @param $orderStrategies
+     */
+    private static function saveOrdersInformation($orderStrategies): void
+    {
+        Order::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'account_id' => $orderStrategies['accountId'],
+                'orderId' => $orderStrategies['orderId'],
+            ],
+            [
+                'session' => $orderStrategies['session'],
+                'averagePrice' => $orderStrategies['averagePrice'],
+                'currentDayCost' => $orderStrategies['currentDayCost'],
+                'currentDayProfitLoss' => $orderStrategies['currentDayProfitLoss'],
+                'duration' => $orderStrategies['duration'],
+                'orderType' => $orderStrategies['orderType'],
+                'cancelTime' => $orderStrategies['cancelTime'],
+                'complexOrderStrategyType' => $orderStrategies['complexOrderStrategyType'],
+                'quantity' => $orderStrategies['quantity'],
+                'filledQuantity' => $orderStrategies['filledQuantity'],
+                'remainingQuantity' => $orderStrategies['remainingQuantity'],
+                'requestedDestination' => $orderStrategies['requestedDestination'],
+                'destinationLinkName' => $orderStrategies['destinationLinkName'],
+                'price' => $orderStrategies['price'],
+                'orderLegType' => $orderStrategies['orderLegCollection']['orderLegType'],
+                'legId' => $orderStrategies['orderLegCollection']['legId'],
+                'cusip' => $orderStrategies['orderLegCollection']['instrument']['cusip'],
+                'symbol' => $orderStrategies['orderLegCollection']['instrument']['symbol'],
+                'instruction' => $orderStrategies['orderLegCollection']['instruction'],
+                'positionEffect' => $orderStrategies['orderLegCollection']['positionEffect'],
+                'orderStrategyType' => $orderStrategies['orderStrategyType'],
+                'orderId' => $orderStrategies['orderId'],
+                'cancelable' => $orderStrategies['cancelable'],
+                'editable' => $orderStrategies['editable'],
+                'status' => $orderStrategies['status'],
+                'enteredTime' => $orderStrategies['enteredTime'],
+                'tag' => $orderStrategies['tag'],
+                'accountId' => $orderStrategies['accountId'],
+            ]
+        );
+    }
+
     /**
      * @param mixed $position_value
      * @param $account_id
@@ -114,7 +159,7 @@ class AccountController extends Controller
 
             Log::info('Account Information Retrieved');
 
-            Log::info($accountResponse);
+            Log::debug('The Account Response', $accountResponse);
             self::saveAccountInformation($accountResponse);
             dd($accountResponse);
         }
@@ -147,6 +192,13 @@ class AccountController extends Controller
                 Log::info('The Position Key: '.$position_key);
                 Log::debug('The Position Value',$position_value);
                 self::savePositionInformation($position_value, $account['0']['account_id']);
+            }
+
+            foreach ($value['securitiesAccount']['orderStrategies'] as
+                     $order_key => $order_value) {
+                Log::info('The Position Key: '.$order_key);
+                Log::debug('The Position Value',$order_value);
+                self::saveOrdersInformation($order_value['orderStrategies']);
             }
 
         }
