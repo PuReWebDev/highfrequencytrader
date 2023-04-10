@@ -96,7 +96,7 @@ class AccountController extends Controller
     public static function saveAccountInformation(mixed $accountResponse): void
     {
         foreach ($accountResponse as $key => $value) {
-            Log::debug('The Key',$key);
+            Log::info('The Key: '.$key);
             Log::debug('The Value',$value);
             Account::updateOrCreate(
                 ['user_id' => Auth::id(),'account_id' => $value['securitiesAccount']['accountId']],
