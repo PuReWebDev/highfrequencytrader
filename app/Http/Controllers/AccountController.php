@@ -105,8 +105,8 @@ class AccountController extends Controller
                     'account_id' => $value['securitiesAccount']['accountId'] ?: null,
                     'type' => $value['securitiesAccount']['type'] ?: null,
                     'roundTrips' => $value['securitiesAccount']['roundTrips'],
-                    'isDayTrader' => $value['securitiesAccount']['isDayTrader'] ?: null,
-                    'isClosingOnlyRestricted' => $value['securitiesAccount']['isClosingOnlyRestricted'] ?: null,
+                    'isDayTrader' => $value['securitiesAccount']['isDayTrader'],
+                    'isClosingOnlyRestricted' => $value['securitiesAccount']['isClosingOnlyRestricted'],
                 ]
             );
         }
