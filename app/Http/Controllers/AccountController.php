@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Token;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -79,15 +80,35 @@ class AccountController extends Controller
                 return redirect('/account');
             }
 
-            Log::info('Account Informatino Retrieved');
+            Log::info('Account Information Retrieved');
 
             Log::info($accountResponse);
-
+            self::saveAccountInformation($accountResponse);
             dd($accountResponse);
         }
 
 
+    }
 
+    /**
+     * @param mixed $authResponse
+     */
+    public static function saveAccountInformation(mixed $accountResponse): void
+    {
+        foreach ($accountResponse as $key => $value) {
+            Log::info("Key is $key,Value is: $value");
+            Account::updateOrCreate(
+                ['user_id' => Auth::id(),'account_id' => $value['securitiesAccount']['accountId']],
+                [
+                    'user_id' => $value['securitiesAccount']['user_id'] ?: null,
+                    'account_id' => $value['securitiesAccount']['accountId'] ?: null,
+                    'type' => $value['securitiesAccount']['type'] ?: null,
+                    'roundTrips' => $value['securitiesAccount']['roundTrips'] ?: null,
+                    'isDayTrader' => $value['securitiesAccount']['isDayTrader'] ?: null,
+                    'isClosingOnlyRestricted' => $value['securitiesAccount']['isClosingOnlyRestricted'] ?: null,
+                ]
+            );
+        }
 
     }
 
