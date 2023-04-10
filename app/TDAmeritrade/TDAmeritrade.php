@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Log;
  * @method Api\Orders orders() All orders for a specific account
  * @method Api\Price price() Historical price data for charts
  * @method Api\Transactions transactions() APIs to access transaction history on the account
- * @method string getAccessToken() Get the current access token
- * @method string getRefreshToken() Get the current Refresh Token
- * @method static string generateOAuth() Generate a OAuth Link
- * @method static \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse  redirectOAuth() Redirect to the Oauth Link
- * @method  mixed refreshToken() Refresh the current access token using the refresh token
- * @method static mixed createAccessToken(string $code = null) Allows you to create an access token using the code given from Oauth
+ * getAccessToken() Get the current access token
+ * string getRefreshToken() Get the current Refresh Token
+ * static string generateOAuth() Generate a OAuth Link
+ * static \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse  redirectOAuth() Redirect to the Oauth Link
+ * mixed refreshToken() Refresh the current access token using the refresh token
+ * static mixed createAccessToken(string $code = null) Allows you to create an access token using the code given from Oauth
  */
 
 class TDAmeritrade
