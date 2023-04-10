@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\Token;
@@ -61,7 +63,7 @@ class AccountController extends Controller
 
         if (!empty($token['0']['access_token'])) {
             if (TDAmeritrade::isAccessTokenExpired
-            ($token['0']['access_token']) === false) {
+            ($token['0']['access_token']) === true) {
                 // Time To Refresh The Token
                 Log::info('The Token Was Determined To Be Expired');
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
@@ -70,7 +72,6 @@ class AccountController extends Controller
 
             Log::info('Retrieving Account Information');
             // Retrieve The Account Information
-//            $accountResponse = TDAmeritrade::list();
             $accountResponse = Accounts::getAccounts();
             Log::info('Account Informatino Retrieved');
 
