@@ -73,6 +73,12 @@ class AccountController extends Controller
             Log::info('Retrieving Account Information');
             // Retrieve The Account Information
             $accountResponse = Accounts::getAccounts();
+
+            if (!empty($accountResponse['error'])) {
+                self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+                return redirect('/account');
+            }
+
             Log::info('Account Informatino Retrieved');
 
             Log::info($accountResponse);
