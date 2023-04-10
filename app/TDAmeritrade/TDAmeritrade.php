@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -148,9 +149,13 @@ class TDAmeritrade
 
     public static function isAccessTokenExpired($timestamp):bool
     {
-        if (strtotime($timestamp) < (time() -
-                (30*60))) {
+        # Create anchor time and another date time to be compared
+        $anchorTime = Carbon::createFromFormat("Y-m-d H:i:s", $timestamp);
+        $currentTime = Carbon::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:00"));
+# count difference in minutes
+        $minuteDiff = $anchorTime->diffInMinutes($currentTime);
 
+        if ($minuteDiff > 30) {
             return true;
         }
 
