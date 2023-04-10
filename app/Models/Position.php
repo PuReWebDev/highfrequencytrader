@@ -42,7 +42,6 @@ class Position extends Model
         'marketValue',
         'maintenanceRequirement',
         'previousSessionLongQuantity',
-
     ];
 
     /**
