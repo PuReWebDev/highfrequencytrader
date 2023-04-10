@@ -101,7 +101,7 @@ class AccountController extends Controller
             Account::updateOrCreate(
                 ['user_id' => Auth::id(),'account_id' => $value['securitiesAccount']['accountId']],
                 [
-                    'user_id' => $value['securitiesAccount']['user_id'] ?: null,
+                    'user_id' => Auth::id() ?: null,
                     'account_id' => $value['securitiesAccount']['accountId'] ?: null,
                     'type' => $value['securitiesAccount']['type'] ?: null,
                     'roundTrips' => $value['securitiesAccount']['roundTrips'] ?: null,
