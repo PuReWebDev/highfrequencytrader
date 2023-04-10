@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Position;
 use App\Models\Token;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -14,6 +15,37 @@ use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
+    /**
+     * @param mixed $position_value
+     * @param $account_id
+     */
+    private static function savePositionInformation(mixed $position_value, $account_id): void
+    {
+        Position::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'symbol' => $position_value['instrument']['symbol'],
+                'account_id' => $account_id
+            ],
+            [
+                'shortQuantity' => $position_value['shortQuantity'],
+                'averagePrice' => $position_value['averagePrice'],
+                'currentDayCost' => $position_value['currentDayCost'],
+                'currentDayProfitLoss' => $position_value['currentDayProfitLoss'],
+                'currentDayProfitLossPercentage' => $position_value['currentDayProfitLossPercentage'],
+                'longQuantity' => $position_value['longQuantity'],
+                'settledLongQuantity' => $position_value['settledLongQuantity'],
+                'settledShortQuantity' => $position_value['settledShortQuantity'],
+                'assetType' => $position_value['instrument']['assetType'],
+                'cusip' => $position_value['instrument']['cusip'],
+                'symbol' => $position_value['instrument']['symbol'],
+                'marketValue' => $position_value['marketValue'],
+                'maintenanceRequirement' => $position_value['maintenanceRequirement'],
+                'previousSessionLongQuantity' => $position_value['previousSessionLongQuantity'],
+            ]
+        );
+    }
+
     /**
      * @param mixed $authResponse
      */
@@ -98,7 +130,7 @@ class AccountController extends Controller
         foreach ($accountResponse as $key => $value) {
             Log::info('The Key: '.$key);
             Log::debug('The Value',$value);
-            Account::updateOrCreate(
+            $account = Account::updateOrCreate(
                 ['user_id' => Auth::id(),'account_id' => $value['securitiesAccount']['accountId']],
                 [
                     'user_id' => Auth::id() ?: null,
@@ -109,6 +141,14 @@ class AccountController extends Controller
                     'isClosingOnlyRestricted' => $value['securitiesAccount']['isClosingOnlyRestricted'],
                 ]
             );
+
+            foreach ($value['securitiesAccount']['positions'] as
+                     $position_key => $position_value) {
+                Log::info('The Position Key: '.$position_key);
+                Log::debug('The Position Value',$position_value);
+                self::savePositionInformation($position_value, $account['0']['account_id']);
+            }
+
         }
     }
 
