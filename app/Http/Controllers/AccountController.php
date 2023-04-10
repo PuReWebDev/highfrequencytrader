@@ -104,7 +104,7 @@ class AccountController extends Controller
                     'user_id' => Auth::id() ?: null,
                     'account_id' => $value['securitiesAccount']['accountId'] ?: null,
                     'type' => $value['securitiesAccount']['type'] ?: null,
-                    'roundTrips' => !empty($value['securitiesAccount']['roundTrips']) ? $value['securitiesAccount']['roundTrips'] : null,
+                    'roundTrips' => $value['securitiesAccount']['roundTrips'],
                     'isDayTrader' => $value['securitiesAccount']['isDayTrader'] ?: null,
                     'isClosingOnlyRestricted' => $value['securitiesAccount']['isClosingOnlyRestricted'] ?: null,
                 ]
