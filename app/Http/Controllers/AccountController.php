@@ -186,8 +186,6 @@ class AccountController extends Controller
      */
     private static function saveOrdersInformation($orderStrategies): void
     {
-        Log::debug('Orders: ', $orderStrategies);
-        dd($orderStrategies['orderLegCollection']);
         Order::updateOrCreate(
             [
                 'user_id' => Auth::id(),
@@ -210,11 +208,12 @@ class AccountController extends Controller
                 'destinationLinkName' => $orderStrategies['destinationLinkName'] ?? null,
                 'price' => $orderStrategies['price'] ?? null,
                 'orderLegType' => $orderStrategies['orderLegCollection']['orderLegType'] ?? null,
-                'legId' => $orderStrategies['orderLegCollection']['legId'] ?? null,
-                'cusip' => $orderStrategies['orderLegCollection']['instrument']['cusip'] ?? null,
-                'symbol' => $orderStrategies['orderLegCollection']['instrument']['symbol'] ?? null,
-                'instruction' => $orderStrategies['orderLegCollection']['instruction'] ?? null,
-                'positionEffect' => $orderStrategies['orderLegCollection']['positionEffect'] ?? null,
+                'legId' => $orderStrategies['orderLegCollection']['0']['legId']
+                ?? null,
+                'cusip' => $orderStrategies['orderLegCollection']['0']['instrument']['cusip'] ?? null,
+                'symbol' => $orderStrategies['orderLegCollection']['0']['instrument']['symbol'] ?? null,
+                'instruction' => $orderStrategies['orderLegCollection']['0']['instruction'] ?? null,
+                'positionEffect' => $orderStrategies['orderLegCollection']['0']['positionEffect'] ?? null,
                 'orderStrategyType' => $orderStrategies['orderStrategyType'] ?? null,
                 'orderId' => $orderStrategies['orderId'] ?? null,
                 'cancelable' => $orderStrategies['cancelable'] ?? null,
