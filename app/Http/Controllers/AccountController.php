@@ -292,17 +292,14 @@ class AccountController extends Controller
             }
 
             // Retrieve The Account Information
-            Log::info('Retrieving Account Information in Next Call');
             $accountResponse = Accounts::getAccounts();
 
-            Log::debug('Account Info', $accountResponse);
 
             if (!empty($accountResponse['error'])) {
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
                 return redirect('/account');
             }
 
-            Log::info('About To Save Account Information');
             self::saveAccountInformation($accountResponse);
             dd($accountResponse);
         }
@@ -317,7 +314,7 @@ class AccountController extends Controller
     {
         foreach ($accountResponse as $key => $value) {
             $account = self::storeAccountInfo($value['securitiesAccount']);
-            dd($account);
+
             foreach ($value['securitiesAccount']['positions'] as
                      $position_key => $position_value) {
                 self::savePositionInformation($position_value, $account->accountId);
@@ -330,17 +327,17 @@ class AccountController extends Controller
 
             foreach ($value['securitiesAccount']['initialBalances'] as
                      $initialBalance_key => $initialBalance_value) {
-                self::saveInitialBalanceInformation($value['securitiesAccount']['accountId'], $initialBalance_value);
+                self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
             }
 
             foreach ($value['securitiesAccount']['currentBalances'] as
                      $currentBalanceKey => $currentBalanceValue) {
-                self::saveCurrentBalancesInformation($value['securitiesAccount']['accountId'], $currentBalanceValue);
+                self::saveCurrentBalancesInformation($account->accountId, $currentBalanceValue);
             }
 
             foreach ($value['securitiesAccount']['projectedBalances'] as
                      $projectedBalanceKey => $projectedBalancesValue) {
-                self::saveProjectedBalancesInformation($value['securitiesAccount']['accountId'], $projectedBalancesValue);
+                self::saveProjectedBalancesInformation($account->accountId, $projectedBalancesValue);
             }
 
         }
