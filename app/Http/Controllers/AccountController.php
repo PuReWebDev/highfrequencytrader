@@ -118,6 +118,7 @@ class AccountController extends Controller
      */
     private static function saveInitialBalanceInformation($accountId, mixed $initialBalance_value): void
     {
+        dd($initialBalance_value);
         Balance::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
@@ -330,8 +331,7 @@ class AccountController extends Controller
                     self::saveOrdersInformation($order_value['orderStrategies']);
                 }
             }
-            Log::debug('InitialBalances', $value['securitiesAccount']);
-            dd( $value['securitiesAccount']);
+
             foreach ($value['securitiesAccount']['initialBalances'] as
                      $initialBalance_key => $initialBalance_value) {
                 self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
