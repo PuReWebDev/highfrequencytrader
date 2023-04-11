@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
+use App\TDAmeritrade\MarketHours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -39,6 +40,8 @@ class DashboardController extends Controller
         }
 
         if (!empty($code['0']['refresh_token'])) {
+            $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
+            dd($marketHoursResponse);
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preferences';
             $linktext = 'Preferences';

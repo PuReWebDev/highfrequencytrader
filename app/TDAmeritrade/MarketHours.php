@@ -6,9 +6,8 @@ namespace App\TDAmeritrade;
 
 use App\Models\Token;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Exceptions\TDAmeritradeException;
-use GuzzleHttp\Exception\ClientException;
 
 class MarketHours
 {
@@ -50,14 +49,15 @@ class MarketHours
      */
     public static function getHoursForSingleMarket(string $market): array
     {
-        $accessToken = self::getAccessToken();
+//        $accessToken = self::getAccessToken();
+        $accessToken = Token::where('user_id', Auth::id())->get();
         $client = new Client();
 
         $response = $client->get(
             "https://api.tdameritrade.com/v1/marketdata/{$market}/hours",
             [
                 'headers' => [
-                    'Authorization' => "Bearer {$accessToken}",
+                    'Authorization' => "Bearer {$accessToken['0']['access_token']}",
                 ],
             ]
         );
