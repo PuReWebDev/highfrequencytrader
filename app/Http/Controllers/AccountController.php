@@ -322,6 +322,7 @@ class AccountController extends Controller
                 self::savePositionInformation($position_value, $account->accountId);
             }
 
+            dd($value['securitiesAccount']);
             foreach ($value['securitiesAccount']['orderStrategies'] as
                      $order_key => $order_value) {
                 self::saveOrdersInformation($order_value['orderStrategies']);
