@@ -330,7 +330,7 @@ class AccountController extends Controller
                     self::saveOrdersInformation($order_value['orderStrategies']);
                 }
             }
-
+            Log::debug('InitialBalances', $value['securitiesAccount']);
             foreach ($value['securitiesAccount']['initialBalances'] as
                      $initialBalance_key => $initialBalance_value) {
                 self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
