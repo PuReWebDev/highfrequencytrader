@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use App\Models\Token;
 use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -160,6 +162,24 @@ class TDAmeritrade
         }
 
         return false;
+    }
+
+    /**
+     * @param mixed $authResponse
+     */
+    public static function saveTokenInformation(mixed $authResponse): void
+    {
+        Token::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'access_token' => $authResponse['access_token'] ?? null,
+                'refresh_token' => $authResponse['refresh_token'] ?? null,
+                'scope' => $authResponse['scope'] ?? null,
+                'expires_in' => $authResponse['expires_in'] ?? null,
+                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?? null,
+                'token_type' => $authResponse['token_type'] ?? null,
+            ]
+        );
     }
 
     /**
