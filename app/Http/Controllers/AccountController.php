@@ -13,6 +13,7 @@ use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
@@ -291,6 +292,8 @@ class AccountController extends Controller
 
             // Retrieve The Account Information
             $accountResponse = Accounts::getAccounts();
+
+            Log::debug('Account Info', $accountResponse);
 
             if (!empty($accountResponse['error'])) {
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
