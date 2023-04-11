@@ -148,7 +148,7 @@ class MarketHours
     public static function isMarketOpen(string $market): bool
     {
         $hours = self::getHoursForSingleMarket($market);
-
+        Log::debug('Hours Response', $hours);
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
 
