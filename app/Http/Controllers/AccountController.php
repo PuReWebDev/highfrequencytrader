@@ -331,6 +331,7 @@ class AccountController extends Controller
                 }
             }
             Log::debug('InitialBalances', $value['securitiesAccount']);
+            dd( $value['securitiesAccount']);
             foreach ($value['securitiesAccount']['initialBalances'] as
                      $initialBalance_key => $initialBalance_value) {
                 self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
