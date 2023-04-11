@@ -149,6 +149,7 @@ class MarketHours
     {
         $hours = self::getHoursForSingleMarket($market);
         Log::debug('Hours Response', $hours);
+        dd($hours);
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
 
