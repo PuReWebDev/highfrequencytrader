@@ -45,7 +45,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($position as $position)
+                        @foreach($positions as $position)
                             <tr>
                                 <th scope="row">1</th>
                                 <td>{{ $position['symbol'] }}</td>
