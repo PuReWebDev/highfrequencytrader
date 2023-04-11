@@ -134,9 +134,9 @@ class AccountController extends Controller
         Balance::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
-                'user_id' => Auth::id() ?? null,
-                'accountId' => $accountId ?? null,
-                'balanceType' => 'initialBalances' ?? null,
+                'user_id' => Auth::id(),
+                'accountId' => $accountId,
+                'balanceType' => 'initialBalances',
                 'accruedInterest' => $initialBalance_value['accruedInterest']?? null,
                 'availableFundsNonMarginableTrade' => $initialBalance_value['availableFundsNonMarginableTrade'] ?? null,
                 'bondValue' => $initialBalance_value['bondValue'] ?? null,
@@ -327,7 +327,6 @@ class AccountController extends Controller
             dd($accountResponse);
         }
 
-
     }
 
     /**
@@ -340,7 +339,7 @@ class AccountController extends Controller
 
             if (!empty($value['securitiesAccount']['positions'])) {
                 foreach ($value['securitiesAccount']['positions'] as
-                         $position_key => $position_value) {
+                         $position_value) {
                     self::savePositionInformation($position_value, $account->accountId);
                 }
             }
