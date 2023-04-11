@@ -81,33 +81,46 @@ class AccountController extends Controller
                 'user_id' => Auth::id(),
                 'accountId' => $accountId,
                 'balanceType' => 'initialBalances',
-                'accruedInterest' => $currentBalanceValue['accruedInterest'] ?: null,
-                'cashBalance' => $currentBalanceValue['cashBalance'] ?: null,
-                'cashReceipts' => $currentBalanceValue['cashReceipts'] ?: null,
-                'longOptionMarketValue' => $currentBalanceValue['longOptionMarketValue'] ?: null,
-                'liquidationValue' => $currentBalanceValue['liquidationValue'] ?: null,
-                'longMarketValue' => $currentBalanceValue['longMarketValue'] ?: null,
-                'moneyMarketFund' => $currentBalanceValue['moneyMarketFund'] ?: null,
-                'savings' => $currentBalanceValue['savings'] ?: null,
-                'shortMarketValue' => $currentBalanceValue['shortMarketValue'] ?: null,
-                'pendingDeposits' => $currentBalanceValue['pendingDeposits'] ?: null,
-                'availableFunds' => $currentBalanceValue['availableFunds'] ?: null,
-                'availableFundsNonMarginableTrade' => $currentBalanceValue['availableFundsNonMarginableTrade'] ?: null,
-                'buyingPower' => $currentBalanceValue['buyingPower'] ?: null,
-                'buyingPowerNonMarginableTrade' => $currentBalanceValue['buyingPowerNonMarginableTrade'] ?: null,
-                'dayTradingBuyingPower' => $currentBalanceValue['dayTradingBuyingPower'] ?: null,
-                'equity' => $currentBalanceValue['equity'] ?: null,
-                'equityPercentage' => $currentBalanceValue['equityPercentage'] ?: null,
-                'longMarginValue' => $currentBalanceValue['longMarginValue'] ?: null,
-                'maintenanceCall' => $currentBalanceValue['maintenanceCall'] ?: null,
-                'maintenanceRequirement' => $currentBalanceValue['maintenanceRequirement'] ?: null,
-                'marginBalance' => $currentBalanceValue['marginBalance'] ?: null,
-                'regTCall' => $currentBalanceValue['regTCall'] ?: null,
-                'shortBalance' => $currentBalanceValue['shortBalance'] ?: null,
-                'shortMarginValue' => $currentBalanceValue['shortMarginValue'] ?: null,
-                'shortOptionMarketValue' => $currentBalanceValue['shortOptionMarketValue'] ?: null,
-                'sma' => $currentBalanceValue['sma'] ?: null,
-                'mutualFundValue' => $currentBalanceValue['mutualFundValue'] ?: null,
+                'accruedInterest' => $currentBalanceValue['accruedInterest']
+                    ?? null,
+                'cashBalance' => $currentBalanceValue['cashBalance'] ?? null,
+                'cashReceipts' => $currentBalanceValue['cashReceipts'] ?? null,
+                'longOptionMarketValue' => $currentBalanceValue['longOptionMarketValue'] ?? null,
+                'liquidationValue' =>
+                    $currentBalanceValue['liquidationValue'] ?? null,
+                'longMarketValue' => $currentBalanceValue['longMarketValue']
+                    ?? null,
+                'moneyMarketFund' => $currentBalanceValue['moneyMarketFund']
+                    ?? null,
+                'savings' => $currentBalanceValue['savings'] ?? null,
+                'shortMarketValue' =>
+                    $currentBalanceValue['shortMarketValue'] ?? null,
+                'pendingDeposits' => $currentBalanceValue['pendingDeposits']
+                    ?? null,
+                'availableFunds' => $currentBalanceValue['availableFunds'] ??
+                    null,
+                'availableFundsNonMarginableTrade' => $currentBalanceValue['availableFundsNonMarginableTrade'] ?? null,
+                'buyingPower' => $currentBalanceValue['buyingPower'] ?? null,
+                'buyingPowerNonMarginableTrade' => $currentBalanceValue['buyingPowerNonMarginableTrade'] ?? null,
+                'dayTradingBuyingPower' => $currentBalanceValue['dayTradingBuyingPower'] ?? null,
+                'equity' => $currentBalanceValue['equity'] ?? null,
+                'equityPercentage' =>
+                    $currentBalanceValue['equityPercentage'] ?? null,
+                'longMarginValue' => $currentBalanceValue['longMarginValue']
+                    ?? null,
+                'maintenanceCall' => $currentBalanceValue['maintenanceCall']
+                    ?? null,
+                'maintenanceRequirement' => $currentBalanceValue['maintenanceRequirement'] ?? null,
+                'marginBalance' => $currentBalanceValue['marginBalance'] ??
+                    null,
+                'regTCall' => $currentBalanceValue['regTCall'] ?? null,
+                'shortBalance' => $currentBalanceValue['shortBalance'] ?? null,
+                'shortMarginValue' =>
+                    $currentBalanceValue['shortMarginValue'] ?? null,
+                'shortOptionMarketValue' => $currentBalanceValue['shortOptionMarketValue'] ?? null,
+                'sma' => $currentBalanceValue['sma'] ?? null,
+                'mutualFundValue' => $currentBalanceValue['mutualFundValue']
+                    ?? null,
             ]
         );
     }
@@ -346,10 +359,11 @@ class AccountController extends Controller
 //
 //            }
 
-            foreach ($value['securitiesAccount']['currentBalances'] as
-                     $currentBalanceKey => $currentBalanceValue) {
-                self::saveCurrentBalancesInformation($account->accountId, $currentBalanceValue);
-            }
+            self::saveCurrentBalancesInformation($account->accountId, $value['securitiesAccount']['currentBalances']);
+//            foreach ($value['securitiesAccount']['currentBalances'] as
+//                     $currentBalanceKey => $currentBalanceValue) {
+//                self::saveCurrentBalancesInformation($account->accountId, $currentBalanceValue);
+//            }
 
             foreach ($value['securitiesAccount']['projectedBalances'] as
                      $projectedBalanceKey => $projectedBalancesValue) {
