@@ -14,6 +14,7 @@ use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class AccountController extends Controller
 {
@@ -237,7 +238,7 @@ class AccountController extends Controller
             [
                 'user_id' => Auth::id(),
                 'symbol' => $position_value['instrument']['symbol'],
-                'accountId' => $accountId
+                'accountId' => $accountId,
             ],
             [
                 'shortQuantity' => $position_value['shortQuantity'] ?? null,
@@ -324,7 +325,24 @@ class AccountController extends Controller
             }
 
             self::saveAccountInformation($accountResponse);
-            dd($accountResponse);
+//            dd($accountResponse);
+            $account = Account::where('user_id', Auth::id())->get();
+            $position = Position::where('user_id', Auth::id())->get();
+            $Balance = Position::where('user_id', Auth::id())->get();
+            $order = Order::where([
+                ['user_id', '=', Auth::id()],
+                ['created_at', '=', Carbon::today()],
+            ])->get();
+
+            $data = [
+                'name' => Auth::user()->name,
+                'account'  => $account,
+                'position'   => $position,
+                'balance' => $Balance,
+                'order' => $order
+            ];
+
+            return View::make('account')->with($data);
         }
 
     }
