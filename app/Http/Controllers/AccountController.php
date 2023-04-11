@@ -301,6 +301,7 @@ class AccountController extends Controller
 
             if (!empty($authResponse)) {
                 self::saveTokenInformation($authResponse);
+                return redirect('/account');
             }
         }
 
