@@ -211,6 +211,8 @@ class AccountController extends Controller
     private static function savePositionInformation(mixed $position_value,
                                                     $accountId): void
     {
+
+        Log::debug('The Position Value: ', $position_value);
         Position::updateOrCreate(
             [
                 'user_id' => Auth::id(),
