@@ -47,7 +47,7 @@
                         <tbody>
                         @foreach($positions as $position)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ $count++ }}</th>
                                 <td>{{ $position['symbol'] }}</td>
                                 <td>{{ $position['longQuantity'] }}</td>
                                 <td>{{ $position['averagePrice'] }}</td>

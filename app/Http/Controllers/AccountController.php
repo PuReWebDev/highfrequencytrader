@@ -340,7 +340,8 @@ class AccountController extends Controller
                 'account'  => $account,
                 'positions'   => $positions,
                 'balance' => $Balance,
-                'order' => $order
+                'order' => $order,
+                'count' => 0
             ];
 
             return View::make('account')->with($data);
