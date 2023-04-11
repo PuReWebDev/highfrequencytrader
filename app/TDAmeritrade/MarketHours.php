@@ -148,12 +148,10 @@ class MarketHours
     public static function isMarketOpen(string $market): bool
     {
         $hours = self::getHoursForSingleMarket($market);
-        Log::debug('Hours Response', $hours);
-        dd($hours);
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
 
-        $isOpen = $nowTimestamp >= $hours['equity']['EQ']['sessionHours']['regularMarket']['start'] && $nowTimestamp <= $hours['equity']['EQ']['sessionHours']['regularMarket']['end'];
+        $isOpen = $nowTimestamp >= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['start'] && $nowTimestamp <= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['end'];
 
         return $isOpen;
     }
