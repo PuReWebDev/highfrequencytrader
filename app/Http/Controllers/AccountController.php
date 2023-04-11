@@ -80,7 +80,7 @@ class AccountController extends Controller
             [
                 'user_id' => Auth::id(),
                 'accountId' => $accountId,
-                'balanceType' => 'initialBalances',
+                'balanceType' => 'currentBalances',
                 'accruedInterest' => $currentBalanceValue['accruedInterest']
                     ?? null,
                 'cashBalance' => $currentBalanceValue['cashBalance'] ?? null,
