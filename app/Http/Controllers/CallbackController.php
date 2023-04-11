@@ -32,11 +32,6 @@ class CallbackController extends Controller
 
         Log::debug('Request Array',$request->toArray());
 
-
-//        $authResponse = TDAmeritrade::createAccessToken(urldecode($code));
-//
-//        dd($authResponse);
-
         return redirect('/dashboard');
     }
 
