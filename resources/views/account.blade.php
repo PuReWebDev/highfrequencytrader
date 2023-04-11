@@ -24,11 +24,11 @@
                         <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>{{ $balance['accountValue'] }}</td>
-                            <td>{{  $balance['totalCash'] }}</td>
-                            <td>{{  $balance['marginBalance'] }}</td>
-                            <td>{{  $balance['cashAvailableForTrading'] }}</td>
-                            <td>{{  $balance['stockBuyingPower'] }}</td>
+                            <td>{{ $balance['0']['accountValue'] }}</td>
+                            <td>{{  $balance['0']['totalCash'] }}</td>
+                            <td>{{  $balance['0']['marginBalance'] }}</td>
+                            <td>{{  $balance['0']['cashAvailableForTrading'] }}</td>
+                            <td>{{  $balance['0']['stockBuyingPower'] }}</td>
                         </tr>
                         </tbody>
                     </table>
