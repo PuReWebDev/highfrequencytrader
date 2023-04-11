@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,13 +56,13 @@ class User extends Authenticatable
      */
     public function account(): HasOne
     {
-        return $this->hasMany(Account::class);
+        return $this->hasOne(Account::class);
     }
 
     /**
      * Get the Orders associated with the user.
      */
-    public function orders(): HasOne
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
@@ -68,7 +70,7 @@ class User extends Authenticatable
     /**
      * Get the Orders associated with the user.
      */
-    public function positions(): HasOne
+    public function positions(): HasMany
     {
         return $this->hasMany(Position::class);
     }

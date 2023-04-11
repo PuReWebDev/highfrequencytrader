@@ -59,6 +59,10 @@ class DashboardController extends Controller
             $marketMsg = $marketHoursResponse === true ? 'The Regular Market Is Currently Open For Trades' : 'The Regular Market Is Currently Closed For Trades';
         }
 
+        if (empty($marketMsg)) {
+            $marketMsg = 'Market Hours Temporarily Unavailable';
+        }
+
         return View::make('dashboard', [
             'msg' => $msg,
             'linkaddress' => $linkaddress,

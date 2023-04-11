@@ -1,8 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class PreferenceController extends Controller
 {
@@ -13,7 +18,19 @@ class PreferenceController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::where('id', Auth::id())
+            ->with('token', 'account', 'orders', 'positions', 'preferences')->get();
+
+        if (empty($user->preferences)) {
+            // Preferences not yet set
+
+        }
+
+        $data = [
+            'user' => $user,
+        ];
+
+        return View::make('preference')->with($data);
     }
 
     /**

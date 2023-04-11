@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Position extends Model
 {
@@ -41,7 +42,6 @@ class Position extends Model
         'marketValue',
         'maintenanceRequirement',
         'previousSessionLongQuantity',
-        'previousSessionLongQuantity',
     ];
 
     /**
@@ -55,9 +55,9 @@ class Position extends Model
     /**
      * The account that this position belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function account()
+    public function account(): BelongsTo
     {
         return $this->belongsTo(Account::class);
     }
