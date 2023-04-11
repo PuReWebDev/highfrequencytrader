@@ -187,7 +187,7 @@ class AccountController extends Controller
     private static function saveOrdersInformation($orderStrategies): void
     {
         Log::debug('Orders: ', $orderStrategies);
-        dd($orderStrategies['orderLegCollection'],$orderStrategies['orderLegCollection']['instrument']);
+        dd($orderStrategies['orderLegCollection']);
         Order::updateOrCreate(
             [
                 'user_id' => Auth::id(),
