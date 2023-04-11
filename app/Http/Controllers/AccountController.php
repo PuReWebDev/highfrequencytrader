@@ -310,22 +310,25 @@ class AccountController extends Controller
     }
 
     /**
-     * @param mixed $authResponse
+     * @param mixed $accountResponse
      */
     public static function saveAccountInformation(mixed $accountResponse): void
     {
         foreach ($accountResponse as $key => $value) {
             $account = self::storeAccountInfo($value['securitiesAccount']);
 
-            foreach ($value['securitiesAccount']['positions'] as
-                     $position_key => $position_value) {
-                self::savePositionInformation($position_value, $account->accountId);
+            if (!empty($value['securitiesAccount']['positions'])) {
+                foreach ($value['securitiesAccount']['positions'] as
+                         $position_key => $position_value) {
+                    self::savePositionInformation($position_value, $account->accountId);
+                }
             }
 
-            dd($value['securitiesAccount']);
-            foreach ($value['securitiesAccount']['orderStrategies'] as
-                     $order_key => $order_value) {
-                self::saveOrdersInformation($order_value['orderStrategies']);
+            if (!empty($value['securitiesAccount']['orderStrategies'])) {
+                foreach ($value['securitiesAccount']['orderStrategies'] as
+                         $order_key => $order_value) {
+                    self::saveOrdersInformation($order_value['orderStrategies']);
+                }
             }
 
             foreach ($value['securitiesAccount']['initialBalances'] as
