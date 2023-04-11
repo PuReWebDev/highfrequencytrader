@@ -334,6 +334,7 @@ class AccountController extends Controller
 
             foreach ($value['securitiesAccount']['initialBalances'] as
                      $initialBalance_key => $initialBalance_value) {
+                dd( $initialBalance_key , $initialBalance_value);
                 self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
             }
 
