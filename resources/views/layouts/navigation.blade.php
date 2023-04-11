@@ -17,7 +17,7 @@
                     </x-nav-link>
                     <x-nav-link :href="route('account')" :active="request()
                     ->routeIs('account')">
-                        {{ __('Dashboard') }}
+                        {{ __('Account') }}
                     </x-nav-link>
                 </div>
             </div>
