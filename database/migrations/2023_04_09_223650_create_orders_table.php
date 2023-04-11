@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('accountId');
-            $table->integer('orderId');
+            $table->string('orderId');
             $table->string('symbol');
             $table->string('instruction');
             $table->string('positionEffect');
