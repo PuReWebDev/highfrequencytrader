@@ -27,4 +27,8 @@ Route::get('/account', [\App\Http\Controllers\AccountController::class, 'index']
     ->middleware(['auth'])
     ->name('account');
 
+Route::get('/preference', [\App\Http\Controllers\PreferenceController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('preference');
+
 require __DIR__.'/auth.php';
