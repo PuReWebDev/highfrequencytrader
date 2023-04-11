@@ -212,8 +212,6 @@ class AccountController extends Controller
     private static function savePositionInformation(mixed $position_value,
                                                     $accountId): void
     {
-
-        Log::debug('The Position Value: ', $position_value);
         Position::updateOrCreate(
             [
                 'user_id' => Auth::id(),
@@ -332,11 +330,14 @@ class AccountController extends Controller
                 }
             }
 
-            foreach ($value['securitiesAccount']['initialBalances'] as
-                     $initialBalance_key => $initialBalance_value) {
-                dd( $initialBalance_key , $initialBalance_value);
-                self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
-            }
+            Log::debug('The Initial Balances array', $value['securitiesAccount']['initialBalances']);
+            self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
+//            foreach ($value['securitiesAccount']['initialBalances'] as
+//                     $initialBalance_key => $initialBalance_value) {
+//                dd( $initialBalance_key , $initialBalance_value);
+//                self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
+//
+//            }
 
             foreach ($value['securitiesAccount']['currentBalances'] as
                      $currentBalanceKey => $currentBalanceValue) {
