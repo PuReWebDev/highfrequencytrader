@@ -118,45 +118,52 @@ class AccountController extends Controller
      */
     private static function saveInitialBalanceInformation($accountId, mixed $initialBalance_value): void
     {
-        dd($initialBalance_value);
         Balance::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
                 'user_id' => Auth::id() ?: null,
                 'accountId' => $accountId ?: null,
                 'balanceType' => 'initialBalances' ?: null,
-                'accruedInterest' => $initialBalance_value['accruedInterest'] ?: null,
-                'availableFundsNonMarginableTrade' => $initialBalance_value['availableFundsNonMarginableTrade'] ?: null,
-                'bondValue' => $initialBalance_value['bondValue'] ?: null,
-                'buyingPower' => $initialBalance_value['buyingPower'] ?: null,
-                'cashBalance' => $initialBalance_value['cashBalance'] ?: null,
-                'cashAvailableForTrading' => $initialBalance_value['cashAvailableForTrading'] ?: null,
-                'cashReceipts' => $initialBalance_value['cashReceipts'] ?: null,
-                'dayTradingBuyingPower' => $initialBalance_value['dayTradingBuyingPower'] ?: null,
-                'dayTradingBuyingPowerCall' => $initialBalance_value['dayTradingBuyingPowerCall'] ?: null,
-                'dayTradingEquityCall' => $initialBalance_value['dayTradingEquityCall'] ?: null,
-                'equity' => $initialBalance_value['equity'] ?: null,
-                'equityPercentage' => $initialBalance_value['equityPercentage'] ?: null,
-                'liquidationValue' => $initialBalance_value['liquidationValue'] ?: null,
-                'longMarginValue' => $initialBalance_value['longMarginValue'] ?: null,
-                'longOptionMarketValue' => $initialBalance_value['longOptionMarketValue'] ?: null,
-                'longStockValue' => $initialBalance_value['longStockValue'] ?: null,
-                'maintenanceCall' => $initialBalance_value['maintenanceCall'] ?: null,
-                'maintenanceRequirement' => $initialBalance_value['maintenanceRequirement'] ?: null,
-                'margin' => $initialBalance_value['margin'] ?: null,
-                'marginEquity' => $initialBalance_value['marginEquity'] ?: null,
-                'moneyMarketFund' => $initialBalance_value['moneyMarketFund'] ?: null,
-                'mutualFundValue' => $initialBalance_value['mutualFundValue'] ?: null,
-                'regTCall' => $initialBalance_value['regTCall'] ?: null,
-                'shortMarginValue' => $initialBalance_value['shortMarginValue'] ?: null,
-                'shortOptionMarketValue' => $initialBalance_value['shortOptionMarketValue'] ?: null,
-                'shortStockValue' => $initialBalance_value['shortStockValue'] ?: null,
-                'totalCash' => $initialBalance_value['totalCash'] ?: null,
-                'isInCall' => $initialBalance_value['isInCall'] ?: null,
-                'pendingDeposits' => $initialBalance_value['pendingDeposits'] ?: null,
-                'marginBalance' => $initialBalance_value['marginBalance'] ?: null,
-                'shortBalance' => $initialBalance_value['shortBalance'] ?: null,
-                'accountValue' => $initialBalance_value['accountValue'] ?: null,
+                'accruedInterest' => $initialBalance_value['accruedInterest']?? null,
+                'availableFundsNonMarginableTrade' => $initialBalance_value['availableFundsNonMarginableTrade'] ?? null,
+                'bondValue' => $initialBalance_value['bondValue'] ?? null,
+                'buyingPower' => $initialBalance_value['buyingPower'] ?? null,
+                'cashBalance' => $initialBalance_value['cashBalance'] ?? null,
+                'cashAvailableForTrading' => $initialBalance_value['cashAvailableForTrading'] ?? null,
+                'cashReceipts' => $initialBalance_value['cashReceipts'] ?? null,
+                'dayTradingBuyingPower' => $initialBalance_value['dayTradingBuyingPower'] ?? null,
+                'dayTradingBuyingPowerCall' => $initialBalance_value['dayTradingBuyingPowerCall'] ?? null,
+                'dayTradingEquityCall' => $initialBalance_value['dayTradingEquityCall'] ?? null,
+                'equity' => $initialBalance_value['equity'] ?? null,
+                'equityPercentage' => $initialBalance_value['equityPercentage'] ?? null,
+                'liquidationValue' => $initialBalance_value['liquidationValue'] ?? null,
+                'longMarginValue' => $initialBalance_value['longMarginValue']
+                    ?? null,
+                'longOptionMarketValue' => $initialBalance_value['longOptionMarketValue'] ?? null,
+                'longStockValue' => $initialBalance_value['longStockValue']
+                    ?? null,
+                'maintenanceCall' => $initialBalance_value['maintenanceCall']
+                    ?? null,
+                'maintenanceRequirement' => $initialBalance_value['maintenanceRequirement'] ?? null,
+                'margin' => $initialBalance_value['margin'] ?? null,
+                'marginEquity' => $initialBalance_value['marginEquity'] ?? null,
+                'moneyMarketFund' => $initialBalance_value['moneyMarketFund']
+                    ?? null,
+                'mutualFundValue' => $initialBalance_value['mutualFundValue']
+                    ?? null,
+                'regTCall' => $initialBalance_value['regTCall'] ?? null,
+                'shortMarginValue' => $initialBalance_value['shortMarginValue'] ?? null,
+                'shortOptionMarketValue' => $initialBalance_value['shortOptionMarketValue'] ?? null,
+                'shortStockValue' => $initialBalance_value['shortStockValue']
+                    ?? null,
+                'totalCash' => $initialBalance_value['totalCash'] ?? null,
+                'isInCall' => $initialBalance_value['isInCall'] ?? null,
+                'pendingDeposits' => $initialBalance_value['pendingDeposits']
+                    ?? null,
+                'marginBalance' => $initialBalance_value['marginBalance'] ??
+                    null,
+                'shortBalance' => $initialBalance_value['shortBalance'] ?? null,
+                'accountValue' => $initialBalance_value['accountValue'] ?? null,
             ]
         );
     }
