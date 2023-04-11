@@ -123,7 +123,8 @@ class MarketHours
     public static function isMarketOpen(string $market): bool
     {
         $hours = self::getHoursForSingleMarket($market);
-        dd($hours);
+        $hours['equity']['EQ']['sessionHours']['regularMarket'];
+        dd($hours['equity']['EQ']['sessionHours']['regularMarket']);
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
 
