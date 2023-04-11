@@ -118,6 +118,7 @@ class AccountController extends Controller
      */
     private static function saveInitialBalanceInformation($accountId, mixed $initialBalance_value): void
     {
+        dd($initialBalance_value);
         Balance::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
