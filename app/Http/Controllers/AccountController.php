@@ -191,7 +191,7 @@ class AccountController extends Controller
             [
                 'user_id' => Auth::id(),
                 'accountId' => $orderStrategies['accountId'],
-                'orderId' => (int) $orderStrategies['orderId'],
+                'orderId' => $orderStrategies['orderId'],
             ],
             [
                 'session' => $orderStrategies['session'] ?? null,
