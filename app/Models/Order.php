@@ -7,42 +7,54 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'orders';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'account_id',
+        'accountId',
         'user_id',
-        'order_id',
+        'orderId',
         'symbol',
+        'instruction',
+        'positionEffect',
+        'orderStrategyType',
+        'assetType',
         'cusip',
         'session',
         'duration',
+        'cancelable',
+        'editable',
         'price',
-        'expected_profit',
-        'actual_profit',
+        'expectedProfit',
+        'actualProfit',
         'quantity',
-        'filled_quantity',
-        'remaining_quantity',
-        'stop_price',
-        'stop_price_link_basis',
-        'stop_price_link_type',
+        'filledQuantity',
+        'remainingQuantity',
+        'stopPrice',
+        'stopPriceLinkBasis',
+        'stopPriceLinkType',
         'session',
-        'stop_price_offset',
-        'stop_type',
-        'order_duration',
-        'order_leg_collection',
-        'cancel_time',
-        'entered_time',
-        'close_time',
-        'trailing_amount',
+        'stopPriceOffset',
+        'stopType',
+        'orderDuration',
+        'orderLegType',
+        'legId',
+        'cancelTime',
+        'enteredTime',
+        'closeTime',
+        'trailingAmount',
         'status',
-        'filled_quantity',
-        'remaining_quantity',
-        'average_price',
-        'last_fill_price',
-        'last_fill_quantity',
+        'tag',
+        'filledQuantity',
+        'remainingQuantity',
     ];
 
     /**
@@ -62,6 +74,14 @@ class Order extends Model
     public function account()
     {
         return $this->belongsTo(Account::class);
+    }
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
 

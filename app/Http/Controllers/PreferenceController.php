@@ -1,38 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers;
 
-use App\Models\Token;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
-class CallbackController extends Controller
+class PreferenceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): RedirectResponse
+    public function index()
     {
-        // Receive the provided code and base64 decode the value
-        $code = $request->input('code');
-
-        if (!empty($code)) {
-            Token::updateOrCreate(
-                ['user_id' => $request->user()->id],
-                [
-                    'code' => $code,
-                ]
-            );
-        }
-
-        Log::debug('Request Array',$request->toArray());
-
-        return redirect('/dashboard');
+        //
     }
 
     /**

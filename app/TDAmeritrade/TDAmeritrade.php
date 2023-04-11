@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use App\Models\Token;
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -18,12 +21,12 @@ use Illuminate\Support\Facades\Log;
  * @method Api\Orders orders() All orders for a specific account
  * @method Api\Price price() Historical price data for charts
  * @method Api\Transactions transactions() APIs to access transaction history on the account
- * @method string getAccessToken() Get the current access token
- * @method string getRefreshToken() Get the current Refresh Token
- * @method static string generateOAuth() Generate a OAuth Link
- * @method static \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse  redirectOAuth() Redirect to the Oauth Link
- * @method  mixed refreshToken() Refresh the current access token using the refresh token
- * @method static mixed createAccessToken(string $code = null) Allows you to create an access token using the code given from Oauth
+ * getAccessToken() Get the current access token
+ * string getRefreshToken() Get the current Refresh Token
+ * static string generateOAuth() Generate a OAuth Link
+ * static \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse  redirectOAuth() Redirect to the Oauth Link
+ * mixed refreshToken() Refresh the current access token using the refresh token
+ * static mixed createAccessToken(string $code = null) Allows you to create an access token using the code given from Oauth
  */
 
 class TDAmeritrade
@@ -148,13 +151,35 @@ class TDAmeritrade
 
     public static function isAccessTokenExpired($timestamp):bool
     {
-        if (strtotime($timestamp) < (time() -
-                (30*60))) {
+        # Create anchor time and another date time to be compared
+        $anchorTime = Carbon::createFromFormat("Y-m-d H:i:s", $timestamp);
+        $currentTime = Carbon::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:00"));
+# count difference in minutes
+        $minuteDiff = $anchorTime->diffInMinutes($currentTime);
 
+        if ($minuteDiff > 30) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * @param mixed $authResponse
+     */
+    public static function saveTokenInformation(mixed $authResponse): void
+    {
+        Token::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'access_token' => $authResponse['access_token'] ?? null,
+                'refresh_token' => $authResponse['refresh_token'] ?? null,
+                'scope' => $authResponse['scope'] ?? null,
+                'expires_in' => $authResponse['expires_in'] ?? null,
+                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?? null,
+                'token_type' => $authResponse['token_type'] ?? null,
+            ]
+        );
     }
 
     /**

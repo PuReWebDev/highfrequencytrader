@@ -18,6 +18,7 @@ class CreateTokensTable extends Migration
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('accountId')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('code');
             $table->text('access_token')->nullable();

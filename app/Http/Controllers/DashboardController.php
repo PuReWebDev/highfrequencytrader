@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
+use App\TDAmeritrade\MarketHours;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class DashboardController extends Controller
@@ -39,15 +42,28 @@ class DashboardController extends Controller
         }
 
         if (!empty($code['0']['refresh_token'])) {
+
+            if (TDAmeritrade::isAccessTokenExpired
+                ($code['0']['updated_at']) === true) {
+                // Time To Refresh The Token
+                TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken
+                ($code['0']['refresh_token']));
+                Log::info('The Token Was Refreshed During This Process');
+            }
+
+            $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
+
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preferences';
             $linktext = 'Preferences';
+            $marketMsg = $marketHoursResponse === true ? 'The Regular Market Is Currently Open For Trades' : 'The Regular Market Is Currently Closed For Trades';
         }
 
         return View::make('dashboard', [
             'msg' => $msg,
             'linkaddress' => $linkaddress,
             'linktext' => $linktext,
+            'marketMsg' => $marketMsg,
         ]);
     }
 

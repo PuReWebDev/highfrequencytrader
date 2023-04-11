@@ -15,7 +15,7 @@ class CreateAcctActivityTable extends Migration
     {
         Schema::create('acct_activities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('account_id');
+            $table->string('accountId');
             $table->timestamp('event_timestamp');
             $table->string('activity_type');
             $table->string('activity_description');

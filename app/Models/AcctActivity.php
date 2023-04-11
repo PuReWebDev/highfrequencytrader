@@ -14,7 +14,7 @@ class AcctActivity extends Model
     protected string $table = 'acct_activities';
 
     protected array $fillable = [
-        'account_id',
+        'accountId',
         'event_timestamp',
         'activity_type',
         'activity_description',

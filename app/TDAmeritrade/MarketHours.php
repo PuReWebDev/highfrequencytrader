@@ -6,9 +6,9 @@ namespace App\TDAmeritrade;
 
 use App\Models\Token;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Exceptions\TDAmeritradeException;
-use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Log;
 
 class MarketHours
 {
@@ -50,15 +50,44 @@ class MarketHours
      */
     public static function getHoursForSingleMarket(string $market): array
     {
-        // $accessToken = self::getAccessToken();
-        $apiKey = env('TDAMERITRADE_APP_KEY');
+//        $accessToken = self::getAccessToken();
+        $accessToken = Token::where('user_id', Auth::id())->get();
+        if (TDAmeritrade::isAccessTokenExpired
+            ($accessToken['0']['updated_at']) === true) {
+            // Time To Refresh The Token
+            self::saveTokenInformation(TDAmeritrade::refreshToken($accessToken['0']['refresh_token']));
+            Log::info('The Token Was Refreshed During This Process');
+        }
         $client = new Client();
         
         $response = $client->get(
-            "https://api.tdameritrade.com/v1/marketdata/$market/hours?apikey=$apiKey"
+            "https://api.tdameritrade.com/v1/marketdata/{$market}/hours",
+            [
+                'headers' => [
+                    'Authorization' => "Bearer {$accessToken['0']['access_token']}",
+                ],
+            ]
         );
 
         return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @param mixed $authResponse
+     */
+    public static function saveTokenInformation(mixed $authResponse): void
+    {
+        Token::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'access_token' => $authResponse['access_token'] ?? null,
+                'refresh_token' => $authResponse['refresh_token'] ?? null,
+                'scope' => $authResponse['scope'] ?? null,
+                'expires_in' => $authResponse['expires_in'] ?? null,
+                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?? null,
+                'token_type' => $authResponse['token_type'] ?? null,
+            ]
+        );
     }
 
     public static function saveHours(array $hours)
@@ -119,11 +148,12 @@ class MarketHours
     public static function isMarketOpen(string $market): bool
     {
         $hours = self::getHoursForSingleMarket($market);
-
         $now = new \DateTime();
         $nowTimestamp = $now->getTimestamp();
-        $marketKey = strtolower($market);
-        return (bool)$hours[$marketKey][$marketKey]["isOpen"];
+
+        $isOpen = $nowTimestamp >= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['start'] && $nowTimestamp <= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['end'];
+
+        return $isOpen;
     }
 
     /**
