@@ -47,12 +47,12 @@
                         <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>{{ $position['symbol'] }}</td>
-                            <td>{{ $position['longQuantity'] }}</td>
-                            <td>{{ $position['averagePrice'] }}</td>
-                            <td>{{ $position['marketValue'] }}</td>
-                            <td>{{ $position['cashAvailableForTrading'] }}</td>
-                            <td>{{ $position['averagePrice'] - $position['marketValue'] }}</td>
+                            <td>{{ $position['0']['symbol'] }}</td>
+                            <td>{{ $position['0']['longQuantity'] }}</td>
+                            <td>{{ $position['0']['averagePrice'] }}</td>
+                            <td>{{ $position['0']['marketValue'] }}</td>
+                            <td>{{ $position['0']['cashAvailableForTrading'] }}</td>
+                            <td>{{ $position['0']['averagePrice'] - $position['0']['marketValue'] }}</td>
                         </tr>
                         </tbody>
                     </table>
