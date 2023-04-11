@@ -23,7 +23,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{ $count }}</th>
                             <td>{{ $balance['0']['accountValue'] }}</td>
                             <td>{{  $balance['0']['totalCash'] }}</td>
                             <td>{{  $balance['0']['marginBalance'] }}</td>

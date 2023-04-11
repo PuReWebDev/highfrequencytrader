@@ -326,7 +326,7 @@ class AccountController extends Controller
             }
 
             self::saveAccountInformation($accountResponse);
-//            dd($accountResponse);
+
             $account = Account::where('user_id', Auth::id())->get();
             $positions = Position::where('user_id', Auth::id())->get();
             $Balance = Balance::where('user_id', Auth::id())->get();
@@ -341,7 +341,7 @@ class AccountController extends Controller
                 'positions'   => $positions,
                 'balance' => $Balance,
                 'order' => $order,
-                'count' => 0
+                'count' => 1
             ];
 
             return View::make('account')->with($data);
