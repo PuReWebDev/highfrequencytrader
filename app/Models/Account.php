@@ -25,7 +25,7 @@ class Account extends Model
      */
     protected $fillable = [
         'user_id',
-        'account_id',
+        'accountId',
         'type',
         'roundTrips',
         'isDayTrader',

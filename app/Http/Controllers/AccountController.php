@@ -21,20 +21,19 @@ class AccountController extends Controller
      * @param $securitiesAccount
      * @return mixed
      */
-    private static function storeAccountInfo($securitiesAccount)
+    private static function storeAccountInfo($securitiesAccount): mixed
     {
-        $account = Account::updateOrCreate(
-            ['user_id' => Auth::id(), 'account_id' => $securitiesAccount['accountId']],
+        return Account::updateOrCreate(
+            ['user_id' => Auth::id(), 'accountId' => $securitiesAccount['accountId']],
             [
                 'user_id' => Auth::id() ?: null,
-                'account_id' => $securitiesAccount['accountId'] ?: null,
+                'accountId' => $securitiesAccount['accountId'] ?: null,
                 'type' => $securitiesAccount['type'] ?: null,
                 'roundTrips' => $securitiesAccount['roundTrips'],
                 'isDayTrader' => $securitiesAccount['isDayTrader'],
                 'isClosingOnlyRestricted' => $securitiesAccount['isClosingOnlyRestricted'],
             ]
         );
-        return $account;
     }
 
     /**
@@ -46,12 +45,12 @@ class AccountController extends Controller
         Balance::updateOrCreate(
             [
                 'user_id' => Auth::id(),
-                'account_id' => $accountId,
+                'accountId' => $accountId,
                 'balanceType' => 'projectedBalances'
             ],
             [
                 'user_id' => Auth::id(),
-                'account_id' => $accountId,
+                'accountId' => $accountId,
                 'balanceType' => 'initialBalances',
                 'availableFunds' => $projectedBalancesValue['availableFunds'] ?: null,
                 'availableFundsNonMarginableTrade' => $projectedBalancesValue['availableFundsNonMarginableTrade'] ?: null,
@@ -75,12 +74,12 @@ class AccountController extends Controller
         Balance::updateOrCreate(
             [
                 'user_id' => Auth::id(),
-                'account_id' => $accountId,
+                'accountId' => $accountId,
                 'balanceType' => 'currentBalances'
             ],
             [
                 'user_id' => Auth::id(),
-                'account_id' => $accountId,
+                'accountId' => $accountId,
                 'balanceType' => 'initialBalances',
                 'accruedInterest' => $currentBalanceValue['accruedInterest'] ?: null,
                 'cashBalance' => $currentBalanceValue['cashBalance'] ?: null,
@@ -120,10 +119,10 @@ class AccountController extends Controller
     private static function saveInitialBalanceInformation($accountId, mixed $initialBalance_value): void
     {
         Balance::updateOrCreate(
-            ['user_id' => Auth::id(), 'account_id' => $accountId, 'balanceType' => 'initialBalances'],
+            ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
                 'user_id' => Auth::id() ?: null,
-                'account_id' => $accountId ?: null,
+                'accountId' => $accountId ?: null,
                 'balanceType' => 'initialBalances' ?: null,
                 'accruedInterest' => $initialBalance_value['accruedInterest'] ?: null,
                 'availableFundsNonMarginableTrade' => $initialBalance_value['availableFundsNonMarginableTrade'] ?: null,
@@ -169,7 +168,7 @@ class AccountController extends Controller
         Order::updateOrCreate(
             [
                 'user_id' => Auth::id(),
-                'account_id' => $orderStrategies['accountId'],
+                'accountId' => $orderStrategies['accountId'],
                 'orderId' => $orderStrategies['orderId'],
             ],
             [
@@ -207,15 +206,16 @@ class AccountController extends Controller
 
     /**
      * @param mixed $position_value
-     * @param $account_id
+     * @param $accountId
      */
-    private static function savePositionInformation(mixed $position_value, $account_id): void
+    private static function savePositionInformation(mixed $position_value,
+                                                    $accountId): void
     {
         Position::updateOrCreate(
             [
                 'user_id' => Auth::id(),
                 'symbol' => $position_value['instrument']['symbol'],
-                'account_id' => $account_id
+                'accountId' => $accountId
             ],
             [
                 'shortQuantity' => $position_value['shortQuantity'] ?: null,
@@ -314,10 +314,10 @@ class AccountController extends Controller
     {
         foreach ($accountResponse as $key => $value) {
             $account = self::storeAccountInfo($value['securitiesAccount']);
-
+            dd($account);
             foreach ($value['securitiesAccount']['positions'] as
                      $position_key => $position_value) {
-                self::savePositionInformation($position_value, $account['0']['account_id']);
+                self::savePositionInformation($position_value, $account->accountId);
             }
 
             foreach ($value['securitiesAccount']['orderStrategies'] as
