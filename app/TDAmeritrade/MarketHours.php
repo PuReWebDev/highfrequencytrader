@@ -59,7 +59,7 @@ class MarketHours
             Log::info('The Token Was Refreshed During This Process');
         }
         $client = new Client();
-
+        
         $response = $client->get(
             "https://api.tdameritrade.com/v1/marketdata/{$market}/hours",
             [

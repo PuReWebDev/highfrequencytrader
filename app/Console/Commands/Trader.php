@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-namespace App\Commands;
+namespace App\Console\Commands;
 
 use App\Models\Admin;
 use App\Models\Order;

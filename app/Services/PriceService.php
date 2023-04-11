@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\ClientException;
 
 class PriceService
 {
-    use HasErrorHandling, HasCaching;
+    // use HasErrorHandling, HasCaching;
 
     /**
      * The HTTP client instance.
@@ -24,18 +24,7 @@ class PriceService
      *
      * @var string
      */
-    protected $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
-
-    /**
-     * Create a new service instance.
-     *
-     * @param  \GuzzleHttp\Client  $client
-     * @return void
-     */
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
+    protected static $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
 
     /**
      * Get the current price for a given symbol.
@@ -43,22 +32,19 @@ class PriceService
      * @param  string  $symbol
      * @return \App\Models\Price
      */
-    public function getPrice(string $symbol): Price
+    public static function getPrice(string $symbol): Price
     {
-        $url = "{$this->endpoint}/{$symbol}/pricehistory";
-
-        try {
-            $response = $this->client->get($url);
-        } catch (ClientException $e) {
-            return $this->handleError($e);
-        }
+        $endpoint = self::$endpoint;
+        $apiKey = env('TDAMERITRADE_APP_KEY');
+        $url = "{$endpoint}/{$symbol}/quotes?apikey=$apiKey";
+        $client = new \GuzzleHttp\Client();
+        $response = $client->get($url);
 
         $data = json_decode($response->getBody(), true);
-
         return Price::create([
             'symbol' => $symbol,
-            'price' => $data['last']['price'],
-            'timestamp' => $data['last']['timestamp'],
+            'price' => $data[$symbol]['askPrice'],
+            'timestamp' => time(),
         ]);
     }
 }
