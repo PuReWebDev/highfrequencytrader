@@ -328,7 +328,7 @@ class AccountController extends Controller
             self::saveAccountInformation($accountResponse);
 //            dd($accountResponse);
             $account = Account::where('user_id', Auth::id())->get();
-            $position = Position::where('user_id', Auth::id())->get();
+            $positions = Position::where('user_id', Auth::id())->get();
             $Balance = Balance::where('user_id', Auth::id())->get();
             $order = Order::where([
                 ['user_id', '=', Auth::id()],
@@ -338,7 +338,7 @@ class AccountController extends Controller
             $data = [
                 'name' => Auth::user()->name,
                 'account'  => $account,
-                'position'   => $position,
+                'positions'   => $positions,
                 'balance' => $Balance,
                 'order' => $order
             ];
