@@ -43,9 +43,9 @@ class CreateOrdersTable extends Migration
             $table->string('orderDuration')->nullable();;
             $table->string('orderLegType')->nullable();;
             $table->string('legId')->nullable();;
-            $table->date('cancelTime')->nullable();;
-            $table->dateTime('enteredTime')->nullable();
-            $table->dateTime('closeTime')->nullable();;
+            $table->string('cancelTime')->nullable();;
+            $table->string('enteredTime')->nullable();
+            $table->string('closeTime')->nullable();;
             $table->decimal('trailingAmount')->nullable();
             $table->string('status');
             $table->string('tag')->nullable();
