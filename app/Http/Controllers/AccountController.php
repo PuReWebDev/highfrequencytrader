@@ -329,7 +329,7 @@ class AccountController extends Controller
 //            dd($accountResponse);
             $account = Account::where('user_id', Auth::id())->get();
             $position = Position::where('user_id', Auth::id())->get();
-            $Balance = Position::where('user_id', Auth::id())->get();
+            $Balance = Balance::where('user_id', Auth::id())->get();
             $order = Order::where([
                 ['user_id', '=', Auth::id()],
                 ['created_at', '=', Carbon::today()],
