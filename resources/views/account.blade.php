@@ -53,7 +53,7 @@
                                 <td>{{ $position['averagePrice'] }}</td>
                                 <td>{{ $position['marketValue'] }}</td>
                                 <td>{{ $position['cashAvailableForTrading'] }}</td>
-                                <td>{{ $position['averagePrice'] - $position['0']['marketValue'] }}</td>
+                                <td>{{ $position['averagePrice'] - $position['marketValue'] }}</td>
                             </tr>
                         @endforeach
 
