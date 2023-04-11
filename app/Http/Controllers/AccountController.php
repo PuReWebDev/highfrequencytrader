@@ -26,9 +26,9 @@ class AccountController extends Controller
         return Account::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $securitiesAccount['accountId']],
             [
-                'user_id' => Auth::id() ?: null,
-                'accountId' => $securitiesAccount['accountId'] ?: null,
-                'type' => $securitiesAccount['type'] ?: null,
+                'user_id' => Auth::id() ?? null,
+                'accountId' => $securitiesAccount['accountId'] ?? null,
+                'type' => $securitiesAccount['type'] ?? null,
                 'roundTrips' => $securitiesAccount['roundTrips'],
                 'isDayTrader' => $securitiesAccount['isDayTrader'],
                 'isClosingOnlyRestricted' => $securitiesAccount['isClosingOnlyRestricted'],
@@ -51,16 +51,16 @@ class AccountController extends Controller
             [
                 'user_id' => Auth::id(),
                 'accountId' => $accountId,
-                'balanceType' => 'initialBalances',
-                'availableFunds' => $projectedBalancesValue['availableFunds'] ?: null,
-                'availableFundsNonMarginableTrade' => $projectedBalancesValue['availableFundsNonMarginableTrade'] ?: null,
-                'buyingPower' => $projectedBalancesValue['buyingPower'] ?: null,
-                'dayTradingBuyingPower' => $projectedBalancesValue['dayTradingBuyingPower'] ?: null,
-                'dayTradingBuyingPowerCall' => $projectedBalancesValue['dayTradingBuyingPowerCall'] ?: null,
-                'maintenanceCall' => $projectedBalancesValue['maintenanceCall'] ?: null,
-                'regTCall' => $projectedBalancesValue['regTCall'] ?: null,
-                'isInCall' => $projectedBalancesValue['isInCall'] ?: null,
-                'stockBuyingPower' => $projectedBalancesValue['stockBuyingPower'] ?: null,
+                'balanceType' => 'projectedBalances',
+                'availableFunds' => $projectedBalancesValue['availableFunds'] ?? null,
+                'availableFundsNonMarginableTrade' => $projectedBalancesValue['availableFundsNonMarginableTrade'] ?? null,
+                'buyingPower' => $projectedBalancesValue['buyingPower'] ?? null,
+                'dayTradingBuyingPower' => $projectedBalancesValue['dayTradingBuyingPower'] ?? null,
+                'dayTradingBuyingPowerCall' => $projectedBalancesValue['dayTradingBuyingPowerCall'] ?? null,
+                'maintenanceCall' => $projectedBalancesValue['maintenanceCall'] ?? null,
+                'regTCall' => $projectedBalancesValue['regTCall'] ?? null,
+                'isInCall' => $projectedBalancesValue['isInCall'] ?? null,
+                'stockBuyingPower' => $projectedBalancesValue['stockBuyingPower'] ?? null,
             ]
         );
     }
@@ -134,9 +134,9 @@ class AccountController extends Controller
         Balance::updateOrCreate(
             ['user_id' => Auth::id(), 'accountId' => $accountId, 'balanceType' => 'initialBalances'],
             [
-                'user_id' => Auth::id() ?: null,
-                'accountId' => $accountId ?: null,
-                'balanceType' => 'initialBalances' ?: null,
+                'user_id' => Auth::id() ?? null,
+                'accountId' => $accountId ?? null,
+                'balanceType' => 'initialBalances' ?? null,
                 'accruedInterest' => $initialBalance_value['accruedInterest']?? null,
                 'availableFundsNonMarginableTrade' => $initialBalance_value['availableFundsNonMarginableTrade'] ?? null,
                 'bondValue' => $initialBalance_value['bondValue'] ?? null,
@@ -193,34 +193,34 @@ class AccountController extends Controller
                 'orderId' => $orderStrategies['orderId'],
             ],
             [
-                'session' => $orderStrategies['session'] ?: null,
-                'averagePrice' => $orderStrategies['averagePrice'] ?: null,
-                'currentDayCost' => $orderStrategies['currentDayCost'] ?: null,
-                'currentDayProfitLoss' => $orderStrategies['currentDayProfitLoss'] ?: null,
-                'duration' => $orderStrategies['duration'] ?: null,
-                'orderType' => $orderStrategies['orderType'] ?: null,
-                'cancelTime' => $orderStrategies['cancelTime'] ?: null,
-                'complexOrderStrategyType' => $orderStrategies['complexOrderStrategyType'] ?: null,
-                'quantity' => $orderStrategies['quantity'] ?: null,
-                'filledQuantity' => $orderStrategies['filledQuantity'] ?: null,
-                'remainingQuantity' => $orderStrategies['remainingQuantity'] ?: null,
-                'requestedDestination' => $orderStrategies['requestedDestination'] ?: null,
-                'destinationLinkName' => $orderStrategies['destinationLinkName'] ?: null,
-                'price' => $orderStrategies['price'] ?: null,
-                'orderLegType' => $orderStrategies['orderLegCollection']['orderLegType'] ?: null,
-                'legId' => $orderStrategies['orderLegCollection']['legId'] ?: null,
-                'cusip' => $orderStrategies['orderLegCollection']['instrument']['cusip'] ?: null,
-                'symbol' => $orderStrategies['orderLegCollection']['instrument']['symbol'] ?: null,
-                'instruction' => $orderStrategies['orderLegCollection']['instruction'] ?: null,
-                'positionEffect' => $orderStrategies['orderLegCollection']['positionEffect'] ?: null,
-                'orderStrategyType' => $orderStrategies['orderStrategyType'] ?: null,
-                'orderId' => $orderStrategies['orderId'] ?: null,
-                'cancelable' => $orderStrategies['cancelable'] ?: null,
-                'editable' => $orderStrategies['editable'] ?: null,
-                'status' => $orderStrategies['status'] ?: null,
-                'enteredTime' => $orderStrategies['enteredTime'] ?: null,
-                'tag' => $orderStrategies['tag'] ?: null,
-                'accountId' => $orderStrategies['accountId'] ?: null,
+                'session' => $orderStrategies['session'] ?? null,
+                'averagePrice' => $orderStrategies['averagePrice'] ?? null,
+                'currentDayCost' => $orderStrategies['currentDayCost'] ?? null,
+                'currentDayProfitLoss' => $orderStrategies['currentDayProfitLoss'] ?? null,
+                'duration' => $orderStrategies['duration'] ?? null,
+                'orderType' => $orderStrategies['orderType'] ?? null,
+                'cancelTime' => $orderStrategies['cancelTime'] ?? null,
+                'complexOrderStrategyType' => $orderStrategies['complexOrderStrategyType'] ?? null,
+                'quantity' => $orderStrategies['quantity'] ?? null,
+                'filledQuantity' => $orderStrategies['filledQuantity'] ?? null,
+                'remainingQuantity' => $orderStrategies['remainingQuantity'] ?? null,
+                'requestedDestination' => $orderStrategies['requestedDestination'] ?? null,
+                'destinationLinkName' => $orderStrategies['destinationLinkName'] ?? null,
+                'price' => $orderStrategies['price'] ?? null,
+                'orderLegType' => $orderStrategies['orderLegCollection']['orderLegType'] ?? null,
+                'legId' => $orderStrategies['orderLegCollection']['legId'] ?? null,
+                'cusip' => $orderStrategies['orderLegCollection']['instrument']['cusip'] ?? null,
+                'symbol' => $orderStrategies['orderLegCollection']['instrument']['symbol'] ?? null,
+                'instruction' => $orderStrategies['orderLegCollection']['instruction'] ?? null,
+                'positionEffect' => $orderStrategies['orderLegCollection']['positionEffect'] ?? null,
+                'orderStrategyType' => $orderStrategies['orderStrategyType'] ?? null,
+                'orderId' => $orderStrategies['orderId'] ?? null,
+                'cancelable' => $orderStrategies['cancelable'] ?? null,
+                'editable' => $orderStrategies['editable'] ?? null,
+                'status' => $orderStrategies['status'] ?? null,
+                'enteredTime' => $orderStrategies['enteredTime'] ?? null,
+                'tag' => $orderStrategies['tag'] ?? null,
+                'accountId' => $orderStrategies['accountId'] ?? null,
             ]
         );
     }
@@ -239,20 +239,20 @@ class AccountController extends Controller
                 'accountId' => $accountId
             ],
             [
-                'shortQuantity' => $position_value['shortQuantity'] ?: null,
-                'averagePrice' => $position_value['averagePrice'] ?: null,
-                'currentDayCost' => $position_value['currentDayCost'] ?: null,
-                'currentDayProfitLoss' => $position_value['currentDayProfitLoss'] ?: null,
-                'currentDayProfitLossPercentage' => $position_value['currentDayProfitLossPercentage'] ?: null,
-                'longQuantity' => $position_value['longQuantity'] ?: null,
-                'settledLongQuantity' => $position_value['settledLongQuantity'] ?: null,
-                'settledShortQuantity' => $position_value['settledShortQuantity'] ?: null,
-                'assetType' => $position_value['instrument']['assetType'] ?: null,
-                'cusip' => $position_value['instrument']['cusip'] ?: null,
-                'symbol' => $position_value['instrument']['symbol'] ?: null,
-                'marketValue' => $position_value['marketValue'] ?: null,
-                'maintenanceRequirement' => $position_value['maintenanceRequirement'] ?: null,
-                'previousSessionLongQuantity' => $position_value['previousSessionLongQuantity'] ?: null,
+                'shortQuantity' => $position_value['shortQuantity'] ?? null,
+                'averagePrice' => $position_value['averagePrice'] ?? null,
+                'currentDayCost' => $position_value['currentDayCost'] ?? null,
+                'currentDayProfitLoss' => $position_value['currentDayProfitLoss'] ?? null,
+                'currentDayProfitLossPercentage' => $position_value['currentDayProfitLossPercentage'] ?? null,
+                'longQuantity' => $position_value['longQuantity'] ?? null,
+                'settledLongQuantity' => $position_value['settledLongQuantity'] ?? null,
+                'settledShortQuantity' => $position_value['settledShortQuantity'] ?? null,
+                'assetType' => $position_value['instrument']['assetType'] ?? null,
+                'cusip' => $position_value['instrument']['cusip'] ?? null,
+                'symbol' => $position_value['instrument']['symbol'] ?? null,
+                'marketValue' => $position_value['marketValue'] ?? null,
+                'maintenanceRequirement' => $position_value['maintenanceRequirement'] ?? null,
+                'previousSessionLongQuantity' => $position_value['previousSessionLongQuantity'] ?? null,
             ]
         );
     }
@@ -265,12 +265,12 @@ class AccountController extends Controller
         Token::updateOrCreate(
             ['user_id' => Auth::id()],
             [
-                'access_token' => $authResponse['access_token'] ?: null,
-                'refresh_token' => $authResponse['refresh_token'] ?: null,
-                'scope' => $authResponse['scope'] ?: null,
-                'expires_in' => $authResponse['expires_in'] ?: null,
-                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?: null,
-                'token_type' => $authResponse['token_type'] ?: null,
+                'access_token' => $authResponse['access_token'] ?? null,
+                'refresh_token' => $authResponse['refresh_token'] ?? null,
+                'scope' => $authResponse['scope'] ?? null,
+                'expires_in' => $authResponse['expires_in'] ?? null,
+                'refresh_token_expires_in' => $authResponse['refresh_token_expires_in'] ?? null,
+                'token_type' => $authResponse['token_type'] ?? null,
             ]
         );
     }
@@ -350,7 +350,6 @@ class AccountController extends Controller
                 }
             }
 
-            Log::debug('The Initial Balances array', $value['securitiesAccount']['initialBalances']);
             self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
 //            foreach ($value['securitiesAccount']['initialBalances'] as
 //                     $initialBalance_key => $initialBalance_value) {
@@ -365,10 +364,11 @@ class AccountController extends Controller
 //                self::saveCurrentBalancesInformation($account->accountId, $currentBalanceValue);
 //            }
 
-            foreach ($value['securitiesAccount']['projectedBalances'] as
-                     $projectedBalanceKey => $projectedBalancesValue) {
-                self::saveProjectedBalancesInformation($account->accountId, $projectedBalancesValue);
-            }
+            self::saveProjectedBalancesInformation($account->accountId, $value['securitiesAccount']['projectedBalances']);
+//            foreach ($value['securitiesAccount']['projectedBalances'] as
+//                     $projectedBalanceKey => $projectedBalancesValue) {
+//                self::saveProjectedBalancesInformation($account->accountId, $projectedBalancesValue);
+//            }
 
         }
     }
