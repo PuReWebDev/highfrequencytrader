@@ -56,7 +56,7 @@ class DashboardController extends Controller
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preferences';
             $linktext = 'Preferences';
-            $marketMsg = $marketHoursResponse === true ? 'The Regular Market Is Currently Open For Trades' : 'The Regular Market Is Currently Close For Trades';
+            $marketMsg = $marketHoursResponse === true ? 'The Regular Market Is Currently Open For Trades' : 'The Regular Market Is Currently Closed For Trades';
         }
 
         return View::make('dashboard', [
