@@ -72,4 +72,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Position::class);
     }
+
+    /**
+     * Get the Orders associated with the user.
+     */
+    public function preferences(): HasOne
+    {
+        return $this->hasOne(Preference::class);
+    }
 }
