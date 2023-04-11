@@ -346,31 +346,14 @@ class AccountController extends Controller
 
             if (!empty($value['securitiesAccount']['orderStrategies'])) {
                 foreach ($value['securitiesAccount']['orderStrategies'] as
-                         $order_key => $order_value) {
-                    self::saveOrdersInformation($order_value['orderStrategies']);
+                         $orders) {
+                    self::saveOrdersInformation($orders);
                 }
             }
 
             self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
-//            foreach ($value['securitiesAccount']['initialBalances'] as
-//                     $initialBalance_key => $initialBalance_value) {
-//                dd( $initialBalance_key , $initialBalance_value);
-//                self::saveInitialBalanceInformation($account->accountId, $initialBalance_value);
-//
-//            }
-
             self::saveCurrentBalancesInformation($account->accountId, $value['securitiesAccount']['currentBalances']);
-//            foreach ($value['securitiesAccount']['currentBalances'] as
-//                     $currentBalanceKey => $currentBalanceValue) {
-//                self::saveCurrentBalancesInformation($account->accountId, $currentBalanceValue);
-//            }
-
             self::saveProjectedBalancesInformation($account->accountId, $value['securitiesAccount']['projectedBalances']);
-//            foreach ($value['securitiesAccount']['projectedBalances'] as
-//                     $projectedBalanceKey => $projectedBalancesValue) {
-//                self::saveProjectedBalancesInformation($account->accountId, $projectedBalancesValue);
-//            }
-
         }
     }
 
