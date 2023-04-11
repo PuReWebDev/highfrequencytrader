@@ -8,6 +8,7 @@ use App\Models\Token;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class MarketHours
 {
@@ -51,6 +52,12 @@ class MarketHours
     {
 //        $accessToken = self::getAccessToken();
         $accessToken = Token::where('user_id', Auth::id())->get();
+        if (TDAmeritrade::isAccessTokenExpired
+            ($accessToken['0']['updated_at']) === true) {
+            // Time To Refresh The Token
+            self::saveTokenInformation(TDAmeritrade::refreshToken($accessToken['0']['refresh_token']));
+            Log::info('The Token Was Refreshed During This Process');
+        }
         $client = new Client();
 
         $response = $client->get(
