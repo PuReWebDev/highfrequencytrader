@@ -88,18 +88,21 @@ class OrderService
         }
     }
 
+    /**
+     * @throws \JsonException
+     */
     public static function placeOtoOrder(string $symbol): array
     {
         // Set up the request body
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "183.20",
-	"duration": "GOOD_TILL_CANCEL",
+	"price": "103.20",
+	"duration": "DAY",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 50,
+		"quantity": 20,
 		"instrument": {
 			"symbol": "TSLA",
 			"assetType": "EQUITY"
@@ -109,7 +112,7 @@ class OrderService
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
 		"price": "186.20",
-		"duration": "GOOD_TILL_CANCEL",
+		"duration": "DAY",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
@@ -123,14 +126,9 @@ class OrderService
 }';
 
         $account = Account::where('user_id', Auth::id())->get();
-
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
-//        $response = self::sendRequest('POST', $ordersEndpointUrl, json_decode($newnew, true, 512, JSON_THROW_ON_ERROR));
-        $response = self::sendRequest($ordersEndpointUrl, $newnew);
-//        Log::debug('Order Response', $response);
-//        dd($response);
-        return $response;
-//        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+
+        return self::sendRequest($ordersEndpointUrl, $newnew);
     }
 
     /**
