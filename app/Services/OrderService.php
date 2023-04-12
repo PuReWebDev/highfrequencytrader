@@ -177,7 +177,7 @@ class OrderService
         // Send the request and get the response
 //        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
-        $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
+        $response = self::sendRequest('POST', $ordersEndpointUrl, json_decode($newnew, true, 512, JSON_THROW_ON_ERROR));
         dd($response);
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
         Log::debug('Order Response', $response);
@@ -273,7 +273,22 @@ class OrderService
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
-                'body' => json_encode($data, JSON_THROW_ON_ERROR),
+                'body' => '{
+  "orderType": "MARKET",
+  "session": "NORMAL",
+  "duration": "DAY",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Buy",
+      "quantity": 1,
+      "instrument": {
+        "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}',
             ]);
 
             dd($response);
