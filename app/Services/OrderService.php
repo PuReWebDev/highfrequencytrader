@@ -161,6 +161,7 @@ class OrderService
 //        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
         $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
+        dd($response);
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
         Log::debug('Order Response', $response);
         // Return the response as an array
