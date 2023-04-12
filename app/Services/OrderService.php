@@ -233,7 +233,7 @@ class OrderService
             'success' => true,
 //            'data' => json_decode($response->getBody(), true, 512,
 //                JSON_THROW_ON_ERROR),
-            'data' => $response->getBody(),
+            'data' => $response->getBody()->getContents(),
         ];
     }
 }
