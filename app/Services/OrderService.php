@@ -231,7 +231,7 @@ class OrderService
 
         return [
             'success' => true,
-            'data' => json_decode((string) $response->getBody(), true, 512,
+            'data' => json_decode($response->json(), true, 512,
                 JSON_THROW_ON_ERROR),
         ];
     }
