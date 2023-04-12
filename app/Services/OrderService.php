@@ -97,7 +97,7 @@ class OrderService
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "103.20",
+	"price": "101.20",
 	"duration": "DAY",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
@@ -231,9 +231,9 @@ class OrderService
 
         return [
             'success' => true,
-            'data' => json_decode($response->getBody()->getContents(), true, 512,
-                JSON_THROW_ON_ERROR),
-
+            'data' => json_decode($response->getBody()->getContents(), true, 512),
+            'status' => $response->getStatusCode(),
+            'reason' => $response->getReasonPhrase(),
         ];
     }
 }
