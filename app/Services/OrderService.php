@@ -9,6 +9,7 @@ use App\Models\Price;
 use App\Models\Token;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -125,7 +126,7 @@ class OrderService
 
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, json_decode($newnew, true, 512, JSON_THROW_ON_ERROR));
-        $response = self::sendRequest('POST', $ordersEndpointUrl, $newnew);
+        $response = self::sendRequest($ordersEndpointUrl, $newnew);
 //        Log::debug('Order Response', $response);
 //        dd($response);
         return $response;
@@ -203,19 +204,19 @@ class OrderService
     /**
      * Send a request to the TD Ameritrade API
      *
-     * @param string $method
      * @param string $url
-     * @param array $data
+     * @param string $json
      * @return array
+     * @throws \JsonException
      */
-    private static function sendRequest(string $method, string $url, string
-    $json)
+    private static function sendRequest(string $url, string
+                                                   $json): array
     {
-        $client = new \GuzzleHttp\Client();
+        $client = new Client();
         $token = Token::where('user_id', Auth::id())->get();
 
         try {
-            $response = $client->request($method, $url, [
+            $response = $client->request('POST', $url, [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
@@ -223,7 +224,7 @@ class OrderService
                 'body' => $json,
             ]);
 
-        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
+        } catch (GuzzleException $e) {
             return [
                 'success' => false,
                 'error' => $e->getMessage()
@@ -232,7 +233,8 @@ class OrderService
 
         return [
             'success' => true,
-            'data' => json_decode($response->getBody()->getContents())
+            'data' => json_decode((string) $response->getBody(), true, 512,
+                JSON_THROW_ON_ERROR),
         ];
     }
 }
