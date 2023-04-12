@@ -273,7 +273,7 @@ class OrderService
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
-                'json' => '{
+                'body' => '{
 	"orderType": "MARKET",
 	"session": "NORMAL",
 	"duration": "DAY",
