@@ -90,95 +90,15 @@ class OrderService
     public static function placeOtoOrder(string $symbol): array
     {
         // Set up the request body
-        $order = [
-            'orderType' => 'OTO',
-            'session' => 'NORMAL',
-//            'priceType' => $priceType,
-            'duration' => 'GOOD_TILL_CANCEL',
-            'complexOrderStrategyType' => 'NONE',
-            'orderLegCollection' => [
-                [
-                    'instruction' => 'BUY',
-                    'quantity' => config("tdameritrade.quantity"),
-                    'instrument' => [
-                        'symbol' => $symbol,
-                    ],
-                ],
-                [
-                    'instruction' => 'SELL',
-                    'quantity' => config("tdameritrade.quantity"),
-                    'instrument' => [
-                        'symbol' => $symbol,
-                    ],
-                    'orderLegType' => 'TRAILING_STOP',
-//                    'trailingStopPrice' => $stopPrice,
-                    'trailingStopPriceType' => 'ACTIVE_TRAIL',
-//                    'trailingPercent' => $limitPrice,
-                ],
-            ],
-        ];
-
-        // Set up the request body
-        $neworder = [
-            'orderType' => 'MARKET',
-            'session' => 'NORMAL',
-//            'priceType' => $priceType,
-            'duration' => 'GOOD_TILL_CANCEL',
-            'complexOrderStrategyType' => 'NONE',
-            'orderStrategyType' => 'TRIGGER',
-            'orderLegCollection' => [
-                'instruction' => 'BUY',
-                'quantity' => 1,
-                'instrument' => [
-                    'symbol' => $symbol,
-                ],
-            ],
-            'childOrderStrategies' => [
-                'complexOrderStrategyType' => 'NONE',
-                'orderType' => 'TRAILING_STOP',
-                'session' => 'NORMAL',
-                'stopPriceLinkBasis' => 'BID',
-                'stopPriceLinkType' => 'VALUE',
-                'stopPriceOffset' => 3.00,
-                'duration' => 'GOOD_TILL_CANCEL',
-                'orderStrategyType' => 'SINGLE',
-                // 'trailingStopPriceType' => 'ACTIVE_TRAIL',
-                'orderLegCollection' => [
-                    'instruction' => 'SELL',
-                    'quantity' => 1,
-                    'instrument' => [
-                        'symbol' => $symbol,
-                        'assetType' => 'EQUITY'
-                    ]
-                ]
-            ]
-        ];
-
-        $newnewold = '{
-  "orderType": "MARKET",
-  "session": "NORMAL",
-  "duration": "DAY",
-  "orderStrategyType": "SINGLE",
-  "orderLegCollection": [
-    {
-      "instruction": "Buy",
-      "quantity": 1,
-      "instrument": {
-        "symbol": "TSLA",
-        "assetType": "EQUITY"
-      }
-    }
-  ]
-}';
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "185.00",
+	"price": "182.88",
 	"duration": "GOOD_TILL_CANCEL",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 10,
+		"quantity": 50,
 		"instrument": {
 			"symbol": "TSLA",
 			"assetType": "EQUITY"
@@ -187,12 +107,12 @@ class OrderService
 	"childOrderStrategies": [{
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
-		"price": "190.00",
+		"price": "186.00",
 		"duration": "GOOD_TILL_CANCEL",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": 10,
+			"quantity": 50,
 			"instrument": {
 				"symbol": "TSLA",
 				"assetType": "EQUITY"
@@ -209,7 +129,7 @@ class OrderService
 //        Log::debug('Order Response', $response);
 //        dd($response);
 
-        return json_decode((string)$response, true, 512, JSON_THROW_ON_ERROR);
+        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
