@@ -29,6 +29,8 @@ class OrderController extends Controller
 
         $OrderResponse = OrderService::placeOtoOrder('TSLA');
 
+        Log::debug('Order Response', $OrderResponse);
+
         dd($OrderResponse);
     }
 
