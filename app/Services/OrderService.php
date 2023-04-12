@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class OrderService
 {
@@ -157,9 +158,9 @@ class OrderService
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
         $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
-
+        Log::debug('Order Response', $response);
         // Return the response as an array
-        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+        return json_decode((string)$response, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
