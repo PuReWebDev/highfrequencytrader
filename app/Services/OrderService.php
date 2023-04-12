@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class OrderService
 {
@@ -155,7 +154,7 @@ class OrderService
             ]
         ];
 
-        $newnew = '{
+        $newnewold = '{
   "orderType": "MARKET",
   "session": "NORMAL",
   "duration": "DAY",
@@ -171,17 +170,44 @@ class OrderService
     }
   ]
 }';
+        $newnew = '{
+	"orderType": "LIMIT",
+	"session": "SEAMLESS",
+	"price": "185.00",
+	"duration": "GOOD_TILL_CANCEL",
+	"orderStrategyType": "TRIGGER",
+	"orderLegCollection": [{
+		"instruction": "BUY",
+		"quantity": 10,
+		"instrument": {
+			"symbol": "TSLA",
+			"assetType": "EQUITY"
+		}
+	}],
+	"childOrderStrategies": [{
+		"orderType": "LIMIT",
+		"session": "SEAMLESS",
+		"price": "190.00",
+		"duration": "GOOD_TILL_CANCEL",
+		"orderStrategyType": "SINGLE",
+		"orderLegCollection": [{
+			"instruction": "SELL",
+			"quantity": 10,
+			"instrument": {
+				"symbol": "TSLA",
+				"assetType": "EQUITY"
+			}
+		}]
+	}]
+}';
 
         $account = Account::where('user_id', Auth::id())->get();
 
-        // Send the request and get the response
-//        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
         $response = self::sendRequest('POST', $ordersEndpointUrl, json_decode($newnew, true, 512, JSON_THROW_ON_ERROR));
-        dd($response);
-//        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
-        Log::debug('Order Response', $response);
-        // Return the response as an array
+//        Log::debug('Order Response', $response);
+//        dd($response);
+
         return json_decode((string)$response, true, 512, JSON_THROW_ON_ERROR);
     }
 
@@ -261,7 +287,8 @@ class OrderService
      * @param array $data
      * @return array
      */
-    private static function sendRequest(string $method, string $url, array $data = [])
+    private static function sendRequest(string $method, string $url, string
+    $json)
     {
         $client = new \GuzzleHttp\Client();
         $token = Token::where('user_id', Auth::id())->get();
@@ -269,42 +296,10 @@ class OrderService
         try {
             $response = $client->request($method, $url, [
                 'headers' => [
-//                    'Authorization' => 'Bearer ' . self::getAccessToken(),
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
-                'body' => '{
-	"orderType": "MARKET",
-	"session": "NORMAL",
-	"duration": "GOOD_TILL_CANCEL",
-	"complexOrderStrategyType": "NONE",
-	"orderStrategyType": "TRIGGER",
-	"orderLegCollection": {
-		"instruction": "BUY",
-		"quantity": 10,
-		"instrument": {
-			"symbol": "TSLA"
-		}
-	},
-	"childOrderStrategies": {
-		"complexOrderStrategyType": "NONE",
-		"orderType": "TRAILING_STOP",
-		"session": "NORMAL",
-		"stopPriceLinkBasis": "BID",
-		"stopPriceLinkType": "VALUE",
-		"stopPriceOffset": 1.01,
-		"duration": "GOOD_TILL_CANCEL",
-		"orderStrategyType": "SINGLE",
-		"orderLegCollection": {
-			"instruction": "SELL",
-			"quantity": 10,
-			"instrument": {
-				"symbol": "TSLA",
-				"assetType": "EQUITY"
-			}
-		}
-	}
-}',
+                'body' => $json,
             ]);
 
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
