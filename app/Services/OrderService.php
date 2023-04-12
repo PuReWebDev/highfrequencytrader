@@ -93,7 +93,7 @@ class OrderService
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "182.88",
+	"price": "183.20",
 	"duration": "GOOD_TILL_CANCEL",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
@@ -107,7 +107,7 @@ class OrderService
 	"childOrderStrategies": [{
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
-		"price": "186.00",
+		"price": "186.20",
 		"duration": "GOOD_TILL_CANCEL",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
@@ -128,8 +128,8 @@ class OrderService
         $response = self::sendRequest('POST', $ordersEndpointUrl, $newnew);
 //        Log::debug('Order Response', $response);
 //        dd($response);
-
-        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+        return $response;
+//        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
     }
 
     /**
