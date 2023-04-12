@@ -273,7 +273,7 @@ class OrderService
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
-                'json' => json_encode($data, JSON_THROW_ON_ERROR)
+                'json' => $data
             ]);
 
             dd($response);
