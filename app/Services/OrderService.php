@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Resources\OrderResource;
+use App\Models\Account;
 use App\Models\Order;
 use App\Models\Price;
 use App\Models\Token;
@@ -154,8 +155,11 @@ class OrderService
             ]
         ];
 
+        $account = Account::where('user_id', Auth::id())->get();
+
         // Send the request and get the response
-        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
+//        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
+        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
         $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
         Log::debug('Order Response', $response);
