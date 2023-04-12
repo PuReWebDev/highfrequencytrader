@@ -20,6 +20,7 @@ class OrderController extends Controller
     {
         $token = Token::where('user_id', Auth::id())->get();
 
+        Log::info('Trying to get the orders');
         if (TDAmeritrade::isAccessTokenExpired
             ($token['0']['updated_at']) === true) {
             // Time To Refresh The Token
