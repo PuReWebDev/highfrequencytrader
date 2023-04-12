@@ -31,4 +31,8 @@ Route::get('/preference', [\App\Http\Controllers\PreferenceController::class, 'i
     ->middleware(['auth'])
     ->name('preference');
 
+Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('order');
+
 require __DIR__.'/auth.php';
