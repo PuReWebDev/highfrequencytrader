@@ -102,7 +102,7 @@ class OrderService
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 20,
+		"quantity": 1,
 		"instrument": {
 			"symbol": "TSLA",
 			"assetType": "EQUITY"
@@ -116,7 +116,7 @@ class OrderService
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": 50,
+			"quantity": 1,
 			"instrument": {
 				"symbol": "TSLA",
 				"assetType": "EQUITY"
@@ -231,7 +231,7 @@ class OrderService
 
         return [
             'success' => true,
-            'data' => json_decode($response->json(), true, 512,
+            'data' => json_decode($response->getBody(), true, 512,
                 JSON_THROW_ON_ERROR),
         ];
     }
