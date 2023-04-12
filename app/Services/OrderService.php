@@ -155,12 +155,29 @@ class OrderService
             ]
         ];
 
+        $newnew = '{
+  "orderType": "MARKET",
+  "session": "NORMAL",
+  "duration": "DAY",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Buy",
+      "quantity": 1,
+      "instrument": {
+        "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
         $account = Account::where('user_id', Auth::id())->get();
 
         // Send the request and get the response
 //        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
-        $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
+        $response = self::sendRequest('POST', $ordersEndpointUrl, $newnew);
         dd($response);
 //        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
         Log::debug('Order Response', $response);
