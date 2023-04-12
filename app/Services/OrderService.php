@@ -273,7 +273,20 @@ class OrderService
                     'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
-                'json' => json_encode($data)
+                'json' => '{
+	"orderType": "MARKET",
+	"session": "NORMAL",
+	"duration": "DAY",
+	"orderStrategyType": "SINGLE",
+	"orderLegCollection": [{
+		"instruction": "Buy",
+		"quantity": 1,
+		"instrument": {
+			"symbol": "TSLA",
+			"assetType": "EQUITY"
+		}
+	}]
+}',
             ]);
 
             dd($response);
