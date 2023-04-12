@@ -274,20 +274,36 @@ class OrderService
                     'Content-Type' => 'application/json'
                 ],
                 'body' => '{
-  "orderType": "MARKET",
-  "session": "NORMAL",
-  "duration": "DAY",
-  "orderStrategyType": "SINGLE",
-  "orderLegCollection": [
-    {
-      "instruction": "Buy",
-      "quantity": 1,
-      "instrument": {
-        "symbol": "TSLA",
-        "assetType": "EQUITY"
-      }
-    }
-  ]
+	"orderType": "MARKET",
+	"session": "NORMAL",
+	"duration": "GOOD_TILL_CANCEL",
+	"complexOrderStrategyType": "NONE",
+	"orderStrategyType": "TRIGGER",
+	"orderLegCollection": {
+		"instruction": "BUY",
+		"quantity": 10,
+		"instrument": {
+			"symbol": "TSLA"
+		}
+	},
+	"childOrderStrategies": {
+		"complexOrderStrategyType": "NONE",
+		"orderType": "TRAILING_STOP",
+		"session": "NORMAL",
+		"stopPriceLinkBasis": "BID",
+		"stopPriceLinkType": "VALUE",
+		"stopPriceOffset": 1.01,
+		"duration": "GOOD_TILL_CANCEL",
+		"orderStrategyType": "SINGLE",
+		"orderLegCollection": {
+			"instruction": "SELL",
+			"quantity": 10,
+			"instrument": {
+				"symbol": "TSLA",
+				"assetType": "EQUITY"
+			}
+		}
+	}
 }',
             ]);
 
