@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\Price;
 use App\Models\Token;
-use App\Http\Resources\OrderResource;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class OrderService
@@ -116,9 +117,46 @@ class OrderService
             ],
         ];
 
+        // Set up the request body
+        $neworder = [
+            'orderType' => 'MARKET',
+            'session' => 'NORMAL',
+//            'priceType' => $priceType,
+            'duration' => 'GOOD_TILL_CANCEL',
+            'complexOrderStrategyType' => 'NONE',
+            'orderStrategyType' => 'TRIGGER',
+            'orderLegCollection' => [
+                'instruction' => 'BUY',
+                'quantity' => 1,
+                'instrument' => [
+                    'symbol' => $symbol,
+                ],
+            ],
+            'childOrderStrategies' => [
+                'complexOrderStrategyType' => 'NONE',
+                'orderType' => 'TRAILING_STOP',
+                'session' => 'NORMAL',
+                'stopPriceLinkBasis' => 'BID',
+                'stopPriceLinkType' => 'VALUE',
+                'stopPriceOffset' => 3.00,
+                'duration' => 'GOOD_TILL_CANCEL',
+                'orderStrategyType' => 'SINGLE',
+                // 'trailingStopPriceType' => 'ACTIVE_TRAIL',
+                'orderLegCollection' => [
+                    'instruction' => 'SELL',
+                    'quantity' => 1,
+                    'instrument' => [
+                        'symbol' => $symbol,
+                        'assetType' => 'EQUITY'
+                    ]
+                ]
+            ]
+        ];
+
         // Send the request and get the response
-        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('services.tdameritrade.account_id') . '/orders';
-        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
+        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . config('tdameritrade.client_id') . '/orders';
+        $response = self::sendRequest('POST', $ordersEndpointUrl, $neworder);
+//        $response = self::sendRequest('POST', $ordersEndpointUrl, $order);
 
         // Return the response as an array
         return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
@@ -203,10 +241,13 @@ class OrderService
     private static function sendRequest(string $method, string $url, array $data = [])
     {
         $client = new \GuzzleHttp\Client();
+        $token = Token::where('user_id', Auth::id())->get();
+
         try {
             $response = $client->request($method, $url, [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . self::getAccessToken(),
+//                    'Authorization' => 'Bearer ' . self::getAccessToken(),
+                    'Authorization' => 'Bearer ' . $token['0']['access_token'],
                     'Content-Type' => 'application/json'
                 ],
                 'json' => $data

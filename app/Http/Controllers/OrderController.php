@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Token;
+use App\Services\OrderService;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -13,7 +18,18 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $token = Token::where('user_id', Auth::id())->get();
+
+        if (TDAmeritrade::isAccessTokenExpired
+            ($token['0']['updated_at']) === true) {
+            // Time To Refresh The Token
+            self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+            Log::info('The Token Was Refreshed During This Process');
+        }
+
+        $OrderResponse = OrderService::placeOtoOrder('TSLA');
+
+        dd($OrderResponse);
     }
 
     /**
