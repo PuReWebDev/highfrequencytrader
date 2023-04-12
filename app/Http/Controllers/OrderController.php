@@ -23,7 +23,7 @@ class OrderController extends Controller
         if (TDAmeritrade::isAccessTokenExpired
             ($token['0']['updated_at']) === true) {
             // Time To Refresh The Token
-            self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+            TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
             Log::info('The Token Was Refreshed During This Process');
         }
 
