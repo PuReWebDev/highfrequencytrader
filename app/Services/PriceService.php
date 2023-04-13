@@ -60,9 +60,9 @@ class PriceService
         try {
             $response = self::$client->get($url);
         } catch (ClientException $e) {
-            return Log::debug('Exception Thrown:', $e);
+            return Log::info('Exception Thrown:'. $e->getMessage());
         } catch (GuzzleException $e) {
-            return Log::debug('Exception Thrown:', $e);
+            return Log::info('Exception Thrown:'. $e->getMessage());
         }
 
         $data = json_decode($response->getBody(), true);
