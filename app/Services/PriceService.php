@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Models\Price;
-use App\Traits\HasErrorHandling;
 use App\Traits\HasCaching;
+use App\Traits\HasErrorHandling;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -55,10 +55,16 @@ class PriceService
 
         $data = json_decode($response->getBody(), true);
 
-        return Price::create([
-            'symbol' => $symbol,
-            'price' => $data['last']['price'],
-            'timestamp' => $data['last']['timestamp'],
-        ]);
+        return Price::updateOrCreate(
+            [
+                'symbol' => $symbol,
+                'price' => $data['last']['price'],
+//                'timestamp' => $data['last']['timestamp'],
+            ],
+            [
+                'symbol' => $symbol,
+                'price' => $data['last']['price'],
+            ]
+        );
     }
 }
