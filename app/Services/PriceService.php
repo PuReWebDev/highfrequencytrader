@@ -53,6 +53,7 @@ class PriceService
      */
     public static function getPrice(string $symbol): Price
     {
+        self::setClient(new Client());
         $url = "https://api.tdameritrade.com/v1/marketdata/{$symbol}/pricehistory";
 
         try {
