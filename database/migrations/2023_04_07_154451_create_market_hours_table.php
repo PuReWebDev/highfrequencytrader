@@ -15,15 +15,10 @@ class CreateMarketHoursTable extends Migration
     {
         Schema::create('market_hours', function (Blueprint $table) {
             $table->id();
-            $table->string('category')->nullable();
-            $table->string('exchange');
-            $table->boolean('is_open')->default(false);
-            $table->string('market_type');
-            $table->string('product')->nullable();
-            $table->string('product_name')->nullable();
-            $table->string('session_hours')->nullable();
-            $table->dateTime('open_time');
-            $table->dateTime('close_time');
+            $table->string('market');
+            $table->string('date');
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

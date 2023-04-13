@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use App\Models\MarketHour;
 use App\Models\Token;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -50,8 +52,8 @@ class MarketHours
      */
     public static function getHoursForSingleMarket(string $market): array
     {
-//        $accessToken = self::getAccessToken();
         $accessToken = Token::where('user_id', Auth::id())->get();
+
         if (TDAmeritrade::isAccessTokenExpired
             ($accessToken['0']['updated_at']) === true) {
             // Time To Refresh The Token
@@ -147,15 +149,39 @@ class MarketHours
      */
     public static function isMarketOpen(string $market): bool
     {
-        $hours = self::getHoursForSingleMarket($market);
+        $dt = Carbon::now();
+        $dt->toDateString();
+        $MarketHour = MarketHour::where([
+            ['date', '=', $dt->toDateString()],
+            ['market', '=', 'regularMarket'],
+        ])->get();
 
-        Log::debug('Market Hours Response:', $hours);
-        $now = new \DateTime();
-        $nowTimestamp = $now->getTimestamp();
+        if (empty($MarketHour['0'])) {
+            Log::info('Fetching Market Hours');
 
-        $isOpen = $nowTimestamp >= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['start'] && $nowTimestamp <= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['end'];
-        Log::info('Market isOpen value' . $isOpen);
-        return $isOpen;
+            $hours = self::getHoursForSingleMarket($market);
+
+            self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
+            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
+            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
+
+            return $hours['equity']['EQ']['isOpen'];
+        }
+
+        $startHours = Carbon::createFromFormat('M d, Y', $MarketHour['0']['start'])
+            ->toDateTimeString();
+        $endHours = Carbon::createFromFormat('M d, Y', $MarketHour['0']['end'])
+            ->toDateTimeString();
+
+        if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
+            return false;
+        }
+
+        if ($dt->gt($startHours) === true && $dt->gt($endHours) === false) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -188,5 +214,25 @@ class MarketHours
         }
 
         return $accessToken;
+    }
+
+    /**
+     * @param $EQ
+     * @param string $marketType
+     */
+    private static function saveMarketHours($EQ, string $marketType): void
+    {
+        MarketHour::updateOrCreate(
+            [
+                'date' => $EQ['date'],
+                'market' => $EQ['sessionHours'][(string)$marketType],
+            ],
+            [
+                'date' => $EQ['date'],
+                'market' => $EQ['sessionHours'][(string)$marketType],
+                'start' => $EQ['sessionHours'][(string)$marketType]['0']['start'],
+                'end' => $EQ['sessionHours'][(string)$marketType]['0']['end'],
+            ]
+        );
     }
 }

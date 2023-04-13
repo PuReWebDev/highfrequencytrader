@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class MarketHour extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'market_hours';
+
     protected $fillable = [
-        'market', 'is_open', 'date'
+        'market', 'date', 'start', 'end'
     ];
 }
