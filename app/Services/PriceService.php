@@ -7,6 +7,7 @@ use App\Traits\HasCaching;
 use App\Traits\HasErrorHandling;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 
 class PriceService
 {
@@ -15,14 +16,22 @@ class PriceService
      *
      * @var \GuzzleHttp\Client
      */
-    protected $client;
+    protected static Client $client;
+
+    /**
+     * @param Client $client
+     */
+    public static function setClient(Client $client): void
+    {
+        self::$client = $client;
+    }
 
     /**
      * The API endpoint.
      *
      * @var string
      */
-    protected $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
+    protected static string $endpoint = 'https://api.tdameritrade.com/v1/marketdata';
 
     /**
      * Create a new service instance.
@@ -32,7 +41,8 @@ class PriceService
      */
     public function __construct(Client $client)
     {
-        $this->client = $client;
+        self::setClient($client);
+//        $this->client = $client;
     }
 
     /**
@@ -41,14 +51,16 @@ class PriceService
      * @param  string  $symbol
      * @return \App\Models\Price
      */
-    public function getPrice(string $symbol): Price
+    public static function getPrice(string $symbol): Price
     {
-        $url = "{$this->endpoint}/{$symbol}/pricehistory";
+        $url = "https://api.tdameritrade.com/v1/marketdata/{$symbol}/pricehistory";
 
         try {
-            $response = $this->client->get($url);
+            $response = self::$client->get($url);
         } catch (ClientException $e) {
-            return $this->handleError($e);
+            return Log::debug('Exception Thrown:', $e);
+        } catch (GuzzleException $e) {
+            return Log::debug('Exception Thrown:', $e);
         }
 
         $data = json_decode($response->getBody(), true);
