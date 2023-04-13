@@ -85,6 +85,7 @@ class PriceService
 
         $data = json_decode($response->getBody(), true);
 
+        dd($data);
         return Price::updateOrCreate(
             [
                 'symbol' => $symbol,
