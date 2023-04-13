@@ -225,13 +225,13 @@ class MarketHours
         MarketHour::updateOrCreate(
             [
                 'date' => $EQ['date'],
-                'market' => $EQ['sessionHours'][$marketType],
+                'market' => $EQ['sessionHours']["$marketType"],
             ],
             [
                 'date' => $EQ['date'],
-                'market' => $EQ['sessionHours'][$marketType],
-                'start' => $EQ['sessionHours'][$marketType]['0']['start'],
-                'end' => $EQ['sessionHours'][$marketType]['0']['end'],
+                'market' => $EQ['sessionHours']["$marketType"],
+                'start' => $EQ['sessionHours']["$marketType"]['0']['start'],
+                'end' => $EQ['sessionHours']["$marketType"]['0']['end'],
             ]
         );
     }
