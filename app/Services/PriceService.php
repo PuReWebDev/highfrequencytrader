@@ -10,8 +10,6 @@ use GuzzleHttp\Exception\ClientException;
 
 class PriceService
 {
-    use HasErrorHandling, HasCaching;
-
     /**
      * The HTTP client instance.
      *
