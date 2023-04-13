@@ -55,7 +55,7 @@ class DashboardController extends Controller
             $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
 
             $price = PriceService::getPrice('TSLA');
-            Log::debug('Price Response', $price);
+//            Log::debug('Price Response', $price);
             dd($price);
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preference';
