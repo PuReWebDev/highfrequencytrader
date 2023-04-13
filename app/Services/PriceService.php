@@ -3,11 +3,13 @@
 namespace App\Services;
 
 use App\Models\Price;
+use App\Models\Token;
 use App\Traits\HasCaching;
 use App\Traits\HasErrorHandling;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PriceService
@@ -55,10 +57,26 @@ class PriceService
     public static function getPrice(string $symbol): Price
     {
         self::setClient(new Client());
+        $token = Token::where('user_id', Auth::id())->get();
         $url = "https://api.tdameritrade.com/v1/marketdata/{$symbol}/pricehistory";
 
+        $response = self::$client->request('GET', $url, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json'
+            ],
+//            'body' => $symbol,
+        ]);
+
         try {
-            $response = self::$client->get($url);
+//            $response = self::$client->get($url);
+            $response = self::$client->request('GET', $url, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                    'Content-Type' => 'application/json'
+                ],
+//            'body' => $symbol,
+            ]);
         } catch (ClientException $e) {
             return Log::info('Exception Thrown:'. $e->getMessage());
         } catch (GuzzleException $e) {
