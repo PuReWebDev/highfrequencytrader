@@ -152,7 +152,7 @@ class MarketHours
         $nowTimestamp = $now->getTimestamp();
 
         $isOpen = $nowTimestamp >= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['start'] && $nowTimestamp <= $hours['equity']['EQ']['sessionHours']['regularMarket']['0']['end'];
-
+        Log::debug('Market isOpen value', $isOpen);
         return $isOpen;
     }
 
