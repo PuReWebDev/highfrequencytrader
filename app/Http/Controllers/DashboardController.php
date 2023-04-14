@@ -73,7 +73,7 @@ class DashboardController extends Controller
             'linkaddress' => $linkaddress,
             'linktext' => $linktext,
             'marketMsg' => $marketMsg,
-            'quote' => $quote,
+//            'quote' => $quote,
         ]);
     }
 
