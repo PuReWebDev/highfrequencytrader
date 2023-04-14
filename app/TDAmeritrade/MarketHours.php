@@ -171,10 +171,10 @@ class MarketHours
         }
 
         $startHours = Carbon::createFromFormat("yyyy-MM-dd'T'HH:mm:ss",
-            str_replace('-04:00', '',$MarketHour['0']['start']))
+            $MarketHour['0']['start'])
             ->toDateTimeString();
         $endHours = Carbon::createFromFormat("yyyy-MM-dd'T'HH:mm:ss",
-            str_replace('-04:00', '',$MarketHour['0']['end']))
+            $MarketHour['0']['end'])
             ->toDateTimeString();
 
         if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
