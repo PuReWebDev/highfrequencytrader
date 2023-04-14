@@ -188,7 +188,9 @@ class MarketHours
 //        $adate = Carbon::parse('2023-04-14 16:00:00');
 //        $check = \Carbon\Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));
 
-        return Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));;
+//        return Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));;
+        return Carbon::now()->between(Carbon::parse(str_replace('-04:00','',$MarketHour['0']['start'])),
+            Carbon::parse(str_replace('-04:00', '', $MarketHour['0']['end'])));;
     }
 
     /**
