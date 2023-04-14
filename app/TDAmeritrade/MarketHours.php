@@ -170,11 +170,9 @@ class MarketHours
             return $hours['equity']['EQ']['isOpen'];
         }
 
-        $startHours = Carbon::createFromFormat("yyyy-MM-ddTHH:mm:ss",
-            $MarketHour['0']['start'])
+        $startHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",'2023-04-14 09:30:00')
             ->toDateTimeString();
-        $endHours = Carbon::createFromFormat("yyyy-MM-ddTHH:mm:ss",
-            $MarketHour['0']['end'])
+        $endHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",'2023-04-14 16:00:00')
             ->toDateTimeString();
 
         if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
