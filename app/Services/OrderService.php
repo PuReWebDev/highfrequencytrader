@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Http\Resources\OrderResource;
 use App\Models\Account;
 use App\Models\Order;
-use App\Models\Price;
 use App\Models\Token;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -97,12 +96,12 @@ class OrderService
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "101.20",
+	"price": "182.00",
 	"duration": "DAY",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 1,
+		"quantity": 100,
 		"instrument": {
 			"symbol": "TSLA",
 			"assetType": "EQUITY"
@@ -111,12 +110,12 @@ class OrderService
 	"childOrderStrategies": [{
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
-		"price": "186.20",
+		"price": "185.00",
 		"duration": "DAY",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": 1,
+			"quantity": 100,
 			"instrument": {
 				"symbol": "TSLA",
 				"assetType": "EQUITY"
