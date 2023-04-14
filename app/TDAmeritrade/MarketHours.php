@@ -217,10 +217,10 @@ class MarketHours
     }
 
     /**
-     * @param $EQ
-     * @param $marketType
+     * @param array $EQ
+     * @param string $marketType
      */
-    private static function saveMarketHours($EQ, $marketType): void
+    private static function saveMarketHours(array $EQ, string $marketType): void
     {
         MarketHour::updateOrCreate(
             [
