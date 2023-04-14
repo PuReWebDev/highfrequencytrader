@@ -65,7 +65,11 @@ class PriceService
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json'
             ],
-//            'body' => $symbol,
+            'body' => [
+                'periodType' => 'day',
+                'period' => 1,
+                'frequencyType' => 'min'
+            ],
         ]);
 
         try {

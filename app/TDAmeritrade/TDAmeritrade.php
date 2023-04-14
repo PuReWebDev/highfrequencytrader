@@ -39,7 +39,8 @@ class TDAmeritrade
 
     public function  __construct($access_token = null, $refresh_token = null)
     {
-        $this->access_token = $access_token;
+        $token = Token::where('user_id', Auth::id())->get();
+        $this->access_token = $token['0']['access_token'];
         $this->refresh_token = $refresh_token;
     }
 
@@ -124,9 +125,10 @@ class TDAmeritrade
 
     public function getWithAuth(string $path, array $data = [])
     {
+        $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
             'base_uri' => SELF::BASE_URL,
-            'headers'  => ['Authorization' => 'Bearer ' . $this->access_token]
+            'headers'  => ['Authorization' => 'Bearer ' . $token['0']['access_token']]
         ]);
 
         try {
@@ -207,5 +209,29 @@ class TDAmeritrade
     public function get(string  $account_id)
     {
         return $this->client->getWithAuth('/accounts/' . $account_id);
+    }
+
+    /**
+     * quote
+     * Get quote for a symbol
+     * @param  mixed $symbol
+     * @return void
+     */
+    public static function quote(string $symbol)
+    {
+        return (new Client())->getWithAuth('/marketdata/' . $symbol . '/quotes');
+    }
+
+    /**
+     * quotes
+     * Get quote for one or more symbols
+     * @param  mixed $symbols
+     * @return void
+     */
+    public function quotes(array $symbols)
+    {
+        return $this->client->getWithAuth('/marketdata/quotes', [
+            'query' => ['symbol' => implode(',', $symbols)]
+        ]);
     }
 }

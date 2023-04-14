@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
-use App\Services\PriceService;
 use App\TDAmeritrade\MarketHours;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
@@ -54,9 +53,11 @@ class DashboardController extends Controller
 
             $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
 
-            $price = PriceService::getPrice('TSLA');
+//            $price = PriceService::getPrice('TSLA');
+            $quote = TDAmeritrade::quote('TSLA');
 //            Log::debug('Price Response', $price);
 //            dd($price);
+            dd($quote);
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preference';
             $linktext = 'Preferences';
@@ -72,6 +73,7 @@ class DashboardController extends Controller
             'linkaddress' => $linkaddress,
             'linktext' => $linktext,
             'marketMsg' => $marketMsg,
+            'quote' => $quote,
         ]);
     }
 

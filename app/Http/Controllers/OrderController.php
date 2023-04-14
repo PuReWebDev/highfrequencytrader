@@ -31,7 +31,7 @@ class OrderController extends Controller
 
         //Log::debug('Order Response', $OrderResponse);
 
-        dd($OrderResponse);
+        //dd($OrderResponse);
     }
 
     /**
