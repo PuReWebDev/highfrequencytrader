@@ -167,23 +167,28 @@ class MarketHours
 
             Log::info('The isOpen value is:'. $hours['equity']['EQ']['isOpen']);
 
-            return $hours['equity']['EQ']['isOpen'];
+//            return $hours['equity']['EQ']['isOpen'];
         }
 
-        $startHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",'2023-04-14 09:30:00')
-            ->toDateTimeString();
-        $endHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",'2023-04-14 16:00:00')
-            ->toDateTimeString();
+//        $startHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",
+//            $MarketHour['0']['start'])
+//            ->toDateTimeString();
+//        $endHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",
+//            $MarketHour['0']['end'])
+//            ->toDateTimeString();
+//
+//        if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
+//            return false;
+//        }
+//
+//        if ($dt->gt($startHours) === true && $dt->gt($endHours) === false) {
+//            return true;
+//        }
+//        $date = Carbon::parse('2023-04-14 09:30:00');
+//        $adate = Carbon::parse('2023-04-14 16:00:00');
+//        $check = \Carbon\Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));
 
-        if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
-            return false;
-        }
-
-        if ($dt->gt($startHours) === true && $dt->gt($endHours) === false) {
-            return true;
-        }
-
-        return false;
+        return Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));;
     }
 
     /**
