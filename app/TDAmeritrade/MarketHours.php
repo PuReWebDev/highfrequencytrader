@@ -165,6 +165,8 @@ class MarketHours
 //            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
 //            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
 
+            Log::debug('The isOpen value is:', $hours['equity']['EQ']['isOpen']);
+
             return $hours['equity']['EQ']['isOpen'];
         }
 
