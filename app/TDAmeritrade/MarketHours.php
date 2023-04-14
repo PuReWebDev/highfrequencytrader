@@ -161,9 +161,9 @@ class MarketHours
 
             $hours = self::getHoursForSingleMarket($market);
 
-            self::saveMarketHours($hours['equity']['EQ']);
-//            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
-//            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
+            self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
+            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
+            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
 
             Log::info('The isOpen value is:'. $hours['equity']['EQ']['isOpen']);
 
@@ -220,20 +220,20 @@ class MarketHours
 
     /**
      * @param array $EQ
+     * @param string $marketType
      */
-    private static function saveMarketHours(array $EQ): void
+    private static function saveMarketHours(array $EQ, string $marketType): void
     {
-        dd($EQ);
         MarketHour::updateOrCreate(
             [
                 'date' => $EQ['date'],
-                'market' => $EQ['sessionHours']['regularMarket'],
+                'market' => $marketType,
             ],
             [
                 'date' => $EQ['date'],
-                'market' => $EQ['sessionHours']['regularMarket'],
-                'start' => $EQ['sessionHours']['regularMarket']['0']['start'],
-                'end' => $EQ['sessionHours']['regularMarket']['0']['end'],
+                'market' => $marketType,
+                'start' => $EQ['sessionHours'][$marketType]['0']['start'],
+                'end' => $EQ['sessionHours'][$marketType]['0']['end'],
             ]
         );
     }
