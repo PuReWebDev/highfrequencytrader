@@ -161,9 +161,9 @@ class MarketHours
 
             $hours = self::getHoursForSingleMarket($market);
 
-            self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
-            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
-            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
+//            self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
+//            self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
+//            self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
 
             return $hours['equity']['EQ']['isOpen'];
         }
