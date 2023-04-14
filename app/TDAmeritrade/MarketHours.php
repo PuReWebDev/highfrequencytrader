@@ -170,9 +170,11 @@ class MarketHours
             return $hours['equity']['EQ']['isOpen'];
         }
 
-        $startHours = Carbon::createFromFormat('M d, Y', $MarketHour['0']['start'])
+        $startHours = Carbon::createFromFormat("yyyy-MM-dd'T'HH:mm:ss",
+            str_replace('-04:00', $MarketHour['0']['start']))
             ->toDateTimeString();
-        $endHours = Carbon::createFromFormat('M d, Y', $MarketHour['0']['end'])
+        $endHours = Carbon::createFromFormat("yyyy-MM-dd'T'HH:mm:ss",
+            str_replace('-04:00', $MarketHour['0']['end']))
             ->toDateTimeString();
 
         if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
