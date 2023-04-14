@@ -96,7 +96,7 @@ class OrderService
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "182.00",
+	"price": "182.45",
 	"duration": "DAY",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
@@ -110,7 +110,7 @@ class OrderService
 	"childOrderStrategies": [{
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
-		"price": "185.00",
+		"price": "184.00",
 		"duration": "DAY",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
