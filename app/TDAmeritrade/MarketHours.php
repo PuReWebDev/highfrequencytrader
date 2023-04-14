@@ -223,6 +223,7 @@ class MarketHours
      */
     private static function saveMarketHours(array $EQ): void
     {
+        dd($EQ);
         MarketHour::updateOrCreate(
             [
                 'date' => $EQ['date'],
