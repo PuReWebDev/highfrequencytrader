@@ -101,7 +101,7 @@ class OrderService
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 100,
+		"quantity": 95,
 		"instrument": {
 			"symbol": "TSLA",
 			"assetType": "EQUITY"
@@ -115,7 +115,7 @@ class OrderService
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": 100,
+			"quantity": 95,
 			"instrument": {
 				"symbol": "TSLA",
 				"assetType": "EQUITY"
