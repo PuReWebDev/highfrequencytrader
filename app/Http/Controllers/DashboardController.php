@@ -15,7 +15,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -54,10 +54,10 @@ class DashboardController extends Controller
             $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
 
 //            $price = PriceService::getPrice('TSLA');
-            $quote = TDAmeritrade::quote('TSLA');
+//            $quote = TDAmeritrade::quote('TSLA');
 //            Log::debug('Price Response', $price);
 //            dd($price);
-            dd($quote);
+//            dd($quote);
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preference';
             $linktext = 'Preferences';
