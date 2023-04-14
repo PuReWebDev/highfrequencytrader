@@ -151,10 +151,7 @@ class MarketHours
     {
         $dt = Carbon::now();
         $dt->toDateString();
-        $MarketHour = MarketHour::where([
-            ['date', '=', $dt->toDateString()],
-            ['market', '=', 'regularMarket'],
-        ])->get();
+        $MarketHour = self::getMarketHour($dt);
 
         if (empty($MarketHour['0'])) {
             Log::info('Fetching Market Hours');
@@ -164,31 +161,9 @@ class MarketHours
             self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
             self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
             self::saveMarketHours($hours['equity']['EQ'], 'postMarket');
-
-            Log::info('The isOpen value is:'. $hours['equity']['EQ']['isOpen']);
-
-//            return $hours['equity']['EQ']['isOpen'];
+            $MarketHour = self::getMarketHour($dt);
         }
 
-//        $startHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",
-//            $MarketHour['0']['start'])
-//            ->toDateTimeString();
-//        $endHours = Carbon::createFromFormat("yyyy-MM-dd HH:mm:ss",
-//            $MarketHour['0']['end'])
-//            ->toDateTimeString();
-//
-//        if ($dt->gt($startHours) === false || $dt->gt($endHours) === false) {
-//            return false;
-//        }
-//
-//        if ($dt->gt($startHours) === true && $dt->gt($endHours) === false) {
-//            return true;
-//        }
-//        $date = Carbon::parse('2023-04-14 09:30:00');
-//        $adate = Carbon::parse('2023-04-14 16:00:00');
-//        $check = \Carbon\Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));
-
-//        return Carbon::now()->between(Carbon::parse('2023-04-14 09:30:00'),Carbon::parse('2023-04-14 16:00:00'));;
         return Carbon::now()->between(Carbon::parse(str_replace('-04:00','',$MarketHour['0']['start'])),
             Carbon::parse(str_replace('-04:00', '', $MarketHour['0']['end'])));;
     }
@@ -243,5 +218,18 @@ class MarketHours
                 'end' => $EQ['sessionHours'][$marketType]['0']['end'],
             ]
         );
+    }
+
+    /**
+     * @param Carbon $dt
+     * @return mixed
+     */
+    private static function getMarketHour(Carbon $dt)
+    {
+        $MarketHour = MarketHour::where([
+            ['date', '=', $dt->toDateString()],
+            ['market', '=', 'regularMarket'],
+        ])->get();
+        return $MarketHour;
     }
 }
