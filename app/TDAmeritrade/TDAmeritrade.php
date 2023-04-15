@@ -240,7 +240,7 @@ class TDAmeritrade
                 'Content-Type' => 'application/json',
             ]
         ]);
-        $response = $client->getWithAuth('/marketdata/quotes', [
+        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'symbol' => implode(',', $symbols)
