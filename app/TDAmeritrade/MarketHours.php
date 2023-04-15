@@ -158,8 +158,8 @@ class MarketHours
 
             $hours = self::getHoursForSingleMarket($market);
 
-            if (!empty($hours['equity']['equity']['isOpen'])) {
-                Log::debug('isOpen', $hours['equity']['equity']['isOpen']);
+            if (!empty($hours['equity']['isOpen'])) {
+                Log::debug('isOpen', $hours['equity']['isOpen']);
             }
 
             Log::debug('Market Hours Response', $hours);
