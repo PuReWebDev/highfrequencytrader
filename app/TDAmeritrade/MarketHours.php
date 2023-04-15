@@ -158,6 +158,8 @@ class MarketHours
 
             $hours = self::getHoursForSingleMarket($market);
 
+            Log::debug('Market Hours Response', $hours);
+
             if (!empty($hours['equity']['EQ'])) {
                 self::saveMarketHours($hours['equity']['EQ'], 'regularMarket');
                 self::saveMarketHours($hours['equity']['EQ'], 'preMarket');
