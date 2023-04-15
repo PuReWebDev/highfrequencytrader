@@ -132,10 +132,10 @@ class TDAmeritrade
         ]);
 
         try {
+        } catch (GuzzleException $e) {
             $res = $client->request('get', SELF::API_VER . $path, $data);
             return json_decode((string)$res->getBody()->getContents(), true, 512,
                 JSON_THROW_ON_ERROR);
-        } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
         }
     }
@@ -234,13 +234,13 @@ class TDAmeritrade
     {
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
-//            'base_uri' => SELF::BASE_URL,
-//            'headers'  => [
-//                'Authorization' => 'Bearer ' . $token['0']['access_token'],
-//                'Content-Type' => 'application/json',
-//            ]
+            'base_uri' => SELF::BASE_URL,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ]
         ]);
-        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
+        $response = $client->getWithAuth('/marketdata/quotes', [
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'symbol' => implode(',', $symbols)
