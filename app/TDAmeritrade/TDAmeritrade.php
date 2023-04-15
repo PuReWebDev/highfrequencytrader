@@ -231,8 +231,10 @@ class TDAmeritrade
      */
     public static function quotes(array $symbols)
     {
-        $client = new Client();
-        return $client->getWithAuth('/marketdata/quotes', [
+        $client = new Client([
+            'base_uri' => SELF::BASE_URL
+        ]);
+        return $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
     }
