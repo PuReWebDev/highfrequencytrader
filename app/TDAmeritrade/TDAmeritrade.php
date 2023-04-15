@@ -159,7 +159,7 @@ class TDAmeritrade
 # count difference in minutes
         $minuteDiff = $anchorTime->diffInMinutes($currentTime);
 
-        if ($minuteDiff > 30) {
+        if ($minuteDiff > 25) {
             return true;
         }
 
