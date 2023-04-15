@@ -236,8 +236,11 @@ class TDAmeritrade
             'base_uri' => SELF::BASE_URL,
             'headers'  => ['Authorization' => 'Bearer ' . $token['0']['access_token']]
         ]);
-        return $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
+        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
+
+        return json_decode((string)$response->getBody(), true, 512,
+            JSON_THROW_ON_ERROR);
     }
 }
