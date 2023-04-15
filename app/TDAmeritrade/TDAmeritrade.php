@@ -244,6 +244,7 @@ class TDAmeritrade
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
 
+        Log::info('Token: '. $token['0']['access_token']);
         dd($response);
         return json_decode($response->getBody()->getContent(), true, 512,
             JSON_THROW_ON_ERROR);
