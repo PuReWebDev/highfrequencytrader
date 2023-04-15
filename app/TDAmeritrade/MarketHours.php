@@ -158,7 +158,7 @@ class MarketHours
 
             $hours = self::getHoursForSingleMarket($market);
 
-            if (!empty($hours['equity']['isOpen'])) {
+            if (!empty($hours['equity'])) {
                 Log::debug('isOpen', $hours['equity']['isOpen']);
             }
 
@@ -172,6 +172,10 @@ class MarketHours
             }
 
             $MarketHour = self::getMarketHour($dt);
+        }
+
+        if (empty($MarketHour['0'])) {
+            return false;
         }
 
         return Carbon::now()->between(Carbon::parse(str_replace('-04:00','',$MarketHour['0']['start'])),
