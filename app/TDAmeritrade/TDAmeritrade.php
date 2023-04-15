@@ -229,9 +229,10 @@ class TDAmeritrade
      * @param  mixed $symbols
      * @return void
      */
-    public function quotes(array $symbols)
+    public static function quotes(array $symbols)
     {
-        return $this->client->getWithAuth('/marketdata/quotes', [
+        $client = new Client();
+        return $client->getWithAuth('/marketdata/quotes', [
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
     }
