@@ -133,7 +133,8 @@ class TDAmeritrade
 
         try {
             $res = $client->request('get', SELF::API_VER . $path, $data);
-            return json_decode((string)$res->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            return json_decode((string)$res->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
         } catch (GuzzleException $e) {
             throw new Exception($e->getMessage());
         }
@@ -240,7 +241,7 @@ class TDAmeritrade
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
 
-//        dd($response);
+        dd($response);
         return json_decode($response->getBody()->getContent(), true, 512,
             JSON_THROW_ON_ERROR);
     }
