@@ -219,7 +219,8 @@ class TDAmeritrade
      */
     public static function quote(string $symbol)
     {
-        return (new Client())->getWithAuth('/marketdata/' . $symbol . '/quotes');
+        $client = new Client();
+        return $client->getWithAuth('/marketdata/' . $symbol . '/quotes');
     }
 
     /**
