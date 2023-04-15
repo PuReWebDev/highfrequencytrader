@@ -240,7 +240,7 @@ class TDAmeritrade
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
 
-        dd($response);
+//        dd($response);
         return json_decode((string)$response->getBody(), true, 512,
             JSON_THROW_ON_ERROR);
     }
