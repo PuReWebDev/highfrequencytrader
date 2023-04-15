@@ -241,7 +241,7 @@ class TDAmeritrade
         ]);
 
 //        dd($response);
-        return json_decode((string)$response, true, 512,
+        return json_decode($response->getBody()->getContent(), true, 512,
             JSON_THROW_ON_ERROR);
     }
 }
