@@ -241,7 +241,10 @@ class TDAmeritrade
             ]
         ]);
         $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
-            'query' => ['symbol' => implode(',', $symbols)]
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+                'symbol' => implode(',', $symbols)
+            ]
         ]);
 
         Log::info('Token: '. $token['0']['access_token']);
