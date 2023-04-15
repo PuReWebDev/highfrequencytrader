@@ -234,11 +234,11 @@ class TDAmeritrade
     {
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
-            'base_uri' => SELF::BASE_URL,
-            'headers'  => [
-                'Authorization' => 'Bearer ' . $token['0']['access_token'],
-                'Content-Type' => 'application/json',
-            ]
+//            'base_uri' => SELF::BASE_URL,
+//            'headers'  => [
+//                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+//                'Content-Type' => 'application/json',
+//            ]
         ]);
         $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
             'query' => [
