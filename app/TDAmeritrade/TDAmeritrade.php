@@ -241,7 +241,7 @@ class TDAmeritrade
             'query' => ['symbol' => implode(',', $symbols)]
         ]);
 
-        dd($response->getBody()->getContent());
+        dd($response->getBody());
         return json_decode($response->getBody()->getContent(), true, 512,
             JSON_THROW_ON_ERROR);
     }
