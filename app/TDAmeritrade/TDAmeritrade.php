@@ -258,8 +258,8 @@ class TDAmeritrade
             JSON_THROW_ON_ERROR);
 
         foreach ($responseData as $key => $value) {
-            Log::info('symbol: '. $key['symbol']);
-            Log::info('description: '. $key['description']);
+            Log::info('symbol: '. $value['symbol']);
+            Log::info('description: '. $value['description']);
         }
 
         return $responseData;
