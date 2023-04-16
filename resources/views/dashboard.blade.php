@@ -34,6 +34,7 @@
                                 <tr>
                                     <td>{{ $quote->symbol }}</td>
                                     <td>{{ $quote->bidPrice }}</td>
+                                    <td>{{ $quote->askPrice }}</td>
                                     <td>{{ $quote->lastPrice }}</td>
                                     <td>{{ ((int)$quote->openPrice - (int)$quote->lastPrice) }}</td>
                                     <td>{{ $quote->openPrice }}</td>
