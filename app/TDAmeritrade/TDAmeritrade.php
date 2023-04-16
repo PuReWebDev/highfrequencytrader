@@ -261,7 +261,7 @@ class TDAmeritrade
 
         Log::info('Token: '. $token['0']['access_token']);
         dd($response->getBody());
-        return json_decode($response->getBody()->getContent(), true, 512,
+        return json_decode((string) $response->getBody(), true, 512,
             JSON_THROW_ON_ERROR);
     }
 }
