@@ -235,19 +235,23 @@ class TDAmeritrade
     public static function quotes(array $symbols)
     {
         $token = Token::where('user_id', Auth::id())->get();
-        $client = new Client([
+        $client = new Client();
+
+        $data = [
             'base_uri' => SELF::BASE_URL,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
             ]
-        ]);
-        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
-            'query' => [
-                'apikey' => config('tdameritrade.api_key'),
-                'symbol' => implode(',', $symbols)
-            ]
-        ]);
+        ];
+
+        $response = $client->request('get', SELF::API_VER . '/marketdata/quotes', $data);
+//        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
+//            'query' => [
+//                'apikey' => config('tdameritrade.api_key'),
+//                'symbol' => implode(',', $symbols)
+//            ]
+//        ]);
 
         Log::info('Token: '. $token['0']['access_token']);
         dd($response);
