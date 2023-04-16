@@ -155,7 +155,7 @@ class OrderService
           "instruction": "SELL",
           "quantity": 5,
           "instrument": {
-            "symbol": "XYZ",
+            "symbol": "TSLA",
             "assetType": "EQUITY"
           }
         }
