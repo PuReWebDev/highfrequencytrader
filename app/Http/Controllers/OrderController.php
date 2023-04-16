@@ -29,10 +29,15 @@ class OrderController extends Controller
         }
 
         $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
+        $numberOfTrades = 10;
 
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
-                dd($quote);
+                $bottomPrice = $quote->lastPrice - $numberOfTrades;
+                for ($x = 0; $x <= 10; $x++) {
+                    echo $quote->lastPrice - 0.01 ."<br>";
+                }
+                dd($quote->lastPrice);
             }
         }
         dd($quotes);
