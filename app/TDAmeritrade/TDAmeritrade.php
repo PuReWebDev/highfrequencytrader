@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use App\Models\Quote;
 use App\Models\Token;
 use Carbon\Carbon;
 use Exception;
@@ -229,10 +230,12 @@ class TDAmeritrade
     /**
      * quotes
      * Get quote for one or more symbols
-     * @param  mixed $symbols
-     * @return void
+     * @param mixed $symbols
+     * @return mixed
+     * @throws GuzzleException
+     * @throws \JsonException
      */
-    public static function quotes(array $symbols)
+    public static function quotes(array $symbols): mixed
     {
         $token = Token::where('user_id', Auth::id())->get();
 
@@ -252,16 +255,53 @@ class TDAmeritrade
 
         $response = $client->request('get', SELF::API_VER . '/marketdata/quotes', $data);
 
-//        return json_decode((string) $response->getBody()->getContents(), true, 512,
-//            JSON_THROW_ON_ERROR);
         $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
 
         foreach ($responseData as $key => $value) {
-            Log::info('symbol: '. $value['symbol']);
-            Log::info('description: '. $value['description']);
+            Quote::updateOrCreate(
+                ['symbol' => $value['symbol']],
+                [
+                    'symbol' => $value['symbol'],
+                    'description' => $value['description'],
+                    'bidPrice' => $value['bidPrice'],
+                    'bidSize' => $value['bidSize'],
+                    'bidId' => $value['bidId'],
+                    'askPrice' => $value['askPrice'],
+                    'askSize' => $value['askSize'],
+                    'askId' => $value['askId'],
+                    'lastPrice' => $value['lastPrice'],
+                    'lastSize' => $value['lastSize'],
+                    'lastId' => $value['lastId'],
+                    'openPrice' => $value['openPrice'],
+                    'highPrice' => $value['highPrice'],
+                    'lowPrice' => $value['lowPrice'],
+                    'closePrice' => $value['closePrice'],
+                    'netChange' => $value['netChange'],
+                    'totalVolume' => $value['totalVolume'],
+                    'quoteTimeInLong' => $value['quoteTimeInLong'],
+                    'tradeTimeInLong' => $value['tradeTimeInLong'],
+                    'mark' => $value['mark'],
+                    'exchange' => $value['exchange'],
+                    'exchangeName' => $value['exchangeName'],
+                    'marginable' => $value['marginable'],
+                    'shortable' => $value['shortable'],
+                    'volatility' => $value['volatility'],
+                    'digits' => $value['digits'],
+                    '52WkHigh' => $value['52WkHigh'],
+                    '52WkLow' => $value['52WkLow'],
+                    'peRatio' => $value['peRatio'],
+                    'divAmount' => $value['divAmount'],
+                    'divYield' => $value['divYield'],
+                    'securityStatus' => $value['securityStatus'],
+                    'regularMarketLastPrice' => $value['regularMarketLastPrice'],
+                    'regularMarketLastSize' => $value['regularMarketLastSize'],
+                    'regularMarketNetChange' => $value['regularMarketNetChange'],
+                    'regularMarketTradeTimeInLong' => $value['regularMarketTradeTimeInLong'],
+                ]
+            );
         }
 
-        return $responseData;
+        return Quote::whereIn('symbol', $symbols)->get();
     }
 }
