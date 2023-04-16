@@ -125,6 +125,7 @@ class TDAmeritrade
 
     public function getWithAuth(string $path, array $data = [])
     {
+        dd('No call here');
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
             'base_uri' => SELF::BASE_URL,
