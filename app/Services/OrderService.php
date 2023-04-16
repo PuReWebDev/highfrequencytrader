@@ -124,6 +124,46 @@ class OrderService
 	}]
 }';
 
+        $theTrail = '{
+  "orderType": "LIMIT",
+  "session": "SEAMLESS",
+  "price": "170.45",
+  "duration": "DAY",
+  "orderStrategyType": "TRIGGER",
+  "orderLegCollection": [
+    {
+      "instruction": "BUY",
+      "quantity": 5,
+      "instrument": {
+        "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ],
+  "childOrderStrategies": [
+    {
+      "complexOrderStrategyType": "NONE",
+      "orderType": "TRAILING_STOP",
+      "session": "NORMAL",
+      "stopPriceLinkBasis": "BASE",
+      "stopPriceLinkType": "VALUE",
+      "stopPriceOffset": 1,
+      "duration": "DAY",
+      "orderStrategyType": "SINGLE",
+      "orderLegCollection": [
+        {
+          "instruction": "SELL",
+          "quantity": 5,
+          "instrument": {
+            "symbol": "XYZ",
+            "assetType": "EQUITY"
+          }
+        }
+      ]
+    }
+  ]
+}';
+
 $theChildren = '{
   "orderType": "LIMIT",
   "session": "SEAMLESS",
@@ -168,7 +208,8 @@ $theChildren = '{
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
 //        return self::sendRequest($ordersEndpointUrl, $newnew);
-        return self::sendRequest($ordersEndpointUrl, $theChildren);
+//        return self::sendRequest($ordersEndpointUrl, $theChildren);
+        return self::sendRequest($ordersEndpointUrl, $theTrail);
     }
 
     /**
