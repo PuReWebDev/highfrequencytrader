@@ -48,7 +48,7 @@ class CreateQuotesTable extends Migration
             $table->double('peRatio');
             $table->double('divAmount');
             $table->double('divYield');
-            $table->string('divDate');
+            $table->string('divDate')->nullable();
             $table->string('securityStatus');
             $table->double('regularMarketLastPrice');
             $table->bigInteger('regularMarketLastSize');
