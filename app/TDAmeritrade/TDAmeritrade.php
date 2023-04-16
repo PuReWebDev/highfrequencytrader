@@ -131,14 +131,14 @@ class TDAmeritrade
             'headers'  => ['Authorization' => 'Bearer ' . $token['0']['access_token']]
         ]);
 
-        try {
-        } catch (GuzzleException $e) {
+//        try {
+//        } catch (GuzzleException $e) {
             $res = $client->request('get', SELF::API_VER . $path, $data);
             Log::debug('Quote Response:', $res);
             return json_decode((string)$res->getBody()->getContents(), true, 512,
                 JSON_THROW_ON_ERROR);
             throw new Exception($e->getMessage());
-        }
+//        }
     }
 
     public function __call($method, $parameters)
