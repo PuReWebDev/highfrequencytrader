@@ -252,7 +252,16 @@ class TDAmeritrade
 
         $response = $client->request('get', SELF::API_VER . '/marketdata/quotes', $data);
 
-        return json_decode((string) $response->getBody()->getContents(), true, 512,
+//        return json_decode((string) $response->getBody()->getContents(), true, 512,
+//            JSON_THROW_ON_ERROR);
+        $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
+
+        foreach ($responseData as $key => $value) {
+            Log::info('symbol: '. $key['symbol']);
+            Log::info('description: '. $key['description']);
+        }
+
+        return $responseData;
     }
 }
