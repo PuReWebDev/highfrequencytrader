@@ -235,7 +235,7 @@ class TDAmeritrade
     public static function quotes(array $symbols)
     {
         $token = Token::where('user_id', Auth::id())->get();
-        $client = new Client();
+
 
         $data = [
             'base_uri' => SELF::BASE_URL,
@@ -248,6 +248,8 @@ class TDAmeritrade
                 'symbol' => implode(',', $symbols)
             ]
         ];
+
+        $client = new Client($data);
 
         $response = $client->request('get', SELF::API_VER . '/marketdata/quotes', $data);
 //        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
