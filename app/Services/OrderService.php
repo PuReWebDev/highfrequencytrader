@@ -127,13 +127,13 @@ class OrderService
         $theTrail = '{
   "orderType": "LIMIT",
   "session": "SEAMLESS",
-  "price": "170.45",
+  "price": "172.45",
   "duration": "DAY",
   "orderStrategyType": "TRIGGER",
   "orderLegCollection": [
     {
       "instruction": "BUY",
-      "quantity": 5,
+      "quantity": 50,
       "instrument": {
         "symbol": "TSLA",
         "assetType": "EQUITY"
@@ -142,62 +142,57 @@ class OrderService
   ],
   "childOrderStrategies": [
     {
-      "complexOrderStrategyType": "NONE",
-      "orderType": "TRAILING_STOP",
-      "session": "NORMAL",
-      "stopPriceLinkBasis": "BASE",
-      "stopPriceLinkType": "VALUE",
-      "stopPriceOffset": 1,
+      "orderType": "LIMIT",
+      "session": "SEAMLESS",
+      "price": "190.00",
       "duration": "DAY",
       "orderStrategyType": "SINGLE",
       "orderLegCollection": [
         {
           "instruction": "SELL",
-          "quantity": 5,
+          "quantity": 50,
           "instrument": {
             "symbol": "TSLA",
             "assetType": "EQUITY"
           }
         }
-      ]
-    }
-  ]
-}';
-
-$theChildren = '{
-  "orderType": "LIMIT",
-  "session": "SEAMLESS",
-  "price": "170.45",
-  "duration": "DAY",
-  "orderStrategyType": "TRIGGER",
-  "orderLegCollection": [
-    {
-      "instruction": "BUY",
-      "quantity": 10,
-      "instrument": {
-        "symbol": "TSLA",
-        "assetType": "EQUITY"
-      }
-    }
-  ],
-  "childOrderStrategies": [
-    {
-      "complexOrderStrategyType": "NONE",
-      "orderType": "TRAILING_STOP",
-      "session": "SEAMLESS",
-      "stopPriceLinkBasis": "BASE",
-      "stopPriceLinkType": "VALUE",
-      "stopPriceOffset": "0.21",
-      "duration": "DAY",
-      "orderStrategyType": "SINGLE",
-      "orderLegCollection": [
+      ],
+      "childOrderStrategies": [
         {
-          "instruction": "SELL",
-          "quantity": 10,
-          "instrument": {
-            "symbol": "TSLA",
-            "assetType": "EQUITY"
-          }
+          "orderType": "LIMIT",
+          "session": "SEAMLESS",
+          "price": "180.45",
+          "duration": "DAY",
+          "orderStrategyType": "TRIGGER",
+          "orderLegCollection": [
+            {
+              "instruction": "BUY",
+              "quantity": 50,
+              "instrument": {
+                "symbol": "TSLA",
+                "assetType": "EQUITY"
+              }
+            }
+          ],
+          "childOrderStrategies": [
+            {
+              "orderType": "LIMIT",
+              "session": "SEAMLESS",
+              "price": "190.45",
+              "duration": "DAY",
+              "orderStrategyType": "SINGLE",
+              "orderLegCollection": [
+                {
+                  "instruction": "SELL",
+                  "quantity": 50,
+                  "instrument": {
+                    "symbol": "TSLA",
+                    "assetType": "EQUITY"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
