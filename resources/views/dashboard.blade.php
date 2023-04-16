@@ -12,38 +12,39 @@
                     You're logged in! <br /> {{ $msg }}: <br />
                     <a href="{{ $linkaddress }}">{{ $linktext }}</a><br />
                     {{ $marketMsg }}
-                </div>
 
-                <div class="table-responsive">
-                    <table class="table" id="urls-table">
-                        <thead>
-                        <tr>
-                            <th>symbol</th>
-                            <th>Bid</th>
-                            <th>Ask</th>
-                            <th>Price</th>
-                            <th>Change</th>
-                            <th>Open</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>Volume</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($quotes as $quote)
+
+                    <div class="table-responsive">
+                        <table class="table" id="urls-table">
+                            <thead>
                             <tr>
-                                <td>{{ $quote->symbol }}</td>
-                                <td>{{ $quote->bidPrice }}</td>
-                                <td>{{ $quote->lastPrice }}</td>
-                                <td>{{ ((int)$quote->openPrice - (int)$quote->lastPrice) }}</td>
-                                <td>{{ $quote->openPrice }}</td>
-                                <td>{{ $quote->highPrice }}</td>
-                                <td>{{ $quote->lowPrice }}</td>
-                                <td>{{ $quote->totalVolume }}</td>
+                                <th>symbol</th>
+                                <th>Bid</th>
+                                <th>Ask</th>
+                                <th>Price</th>
+                                <th>Change</th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Volume</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($quotes as $quote)
+                                <tr>
+                                    <td>{{ $quote->symbol }}</td>
+                                    <td>{{ $quote->bidPrice }}</td>
+                                    <td>{{ $quote->lastPrice }}</td>
+                                    <td>{{ ((int)$quote->openPrice - (int)$quote->lastPrice) }}</td>
+                                    <td>{{ $quote->openPrice }}</td>
+                                    <td>{{ $quote->highPrice }}</td>
+                                    <td>{{ $quote->lowPrice }}</td>
+                                    <td>{{ $quote->totalVolume }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>
