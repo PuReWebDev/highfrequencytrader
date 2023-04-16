@@ -90,13 +90,14 @@ class OrderService
     /**
      * @throws \JsonException
      */
-    public static function placeOtoOrder(string $symbol): array
+    public static function placeOtoOrder($buyPrice, $sellPrice, string
+    $symbol): array
     {
         // Set up the request body
         $newnew = '{
 	"orderType": "LIMIT",
 	"session": "SEAMLESS",
-	"price": "182.45",
+	"price": "'.$buyPrice.'",
 	"duration": "DAY",
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
@@ -104,107 +105,31 @@ class OrderService
 		"quantity": 50,
 		"instrument": {
 			"symbol": "TSLA",
+			"symbol": "'.$symbol.'",
 			"assetType": "EQUITY"
 		}
 	}],
 	"childOrderStrategies": [{
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
-		"price": "184.00",
+		"price": "'.$sellPrice.'",
 		"duration": "DAY",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
 			"quantity": 50,
 			"instrument": {
-				"symbol": "TSLA",
+				"symbol": "'.$symbol.'",
 				"assetType": "EQUITY"
 			}
 		}]
 	}]
 }';
 
-        $theTrail = '{
-  "orderType": "LIMIT",
-  "session": "SEAMLESS",
-  "price": "172.45",
-  "duration": "DAY",
-  "orderStrategyType": "TRIGGER",
-  "orderLegCollection": [
-    {
-      "instruction": "BUY",
-      "quantity": 50,
-      "instrument": {
-        "symbol": "TSLA",
-        "assetType": "EQUITY"
-      }
-    }
-  ],
-  "childOrderStrategies": [
-    {
-      "orderType": "LIMIT",
-      "session": "SEAMLESS",
-      "price": "190.00",
-      "duration": "DAY",
-      "orderStrategyType": "SINGLE",
-      "orderLegCollection": [
-        {
-          "instruction": "SELL",
-          "quantity": 50,
-          "instrument": {
-            "symbol": "TSLA",
-            "assetType": "EQUITY"
-          }
-        }
-      ],
-      "childOrderStrategies": [
-        {
-          "orderType": "LIMIT",
-          "session": "SEAMLESS",
-          "price": "180.45",
-          "duration": "DAY",
-          "orderStrategyType": "TRIGGER",
-          "orderLegCollection": [
-            {
-              "instruction": "BUY",
-              "quantity": 50,
-              "instrument": {
-                "symbol": "TSLA",
-                "assetType": "EQUITY"
-              }
-            }
-          ],
-          "childOrderStrategies": [
-            {
-              "orderType": "LIMIT",
-              "session": "SEAMLESS",
-              "price": "190.45",
-              "duration": "DAY",
-              "orderStrategyType": "SINGLE",
-              "orderLegCollection": [
-                {
-                  "instruction": "SELL",
-                  "quantity": 50,
-                  "instrument": {
-                    "symbol": "TSLA",
-                    "assetType": "EQUITY"
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}';
-
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-//        return self::sendRequest($ordersEndpointUrl, $newnew);
-//        return self::sendRequest($ordersEndpointUrl, $theChildren);
-        return self::sendRequest($ordersEndpointUrl, $theTrail);
+        return self::sendRequest($ordersEndpointUrl, $newnew);
     }
 
     /**

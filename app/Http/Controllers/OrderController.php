@@ -28,7 +28,7 @@ class OrderController extends Controller
             Log::info('The Token Was Refreshed During This Process');
         }
 
-        $OrderResponse = OrderService::placeOtoOrder('TSLA');
+        $OrderResponse = OrderService::placeOtoOrder('180.00','190.00','TSLA');
 
         Log::debug('Order Response', $OrderResponse);
 
