@@ -54,7 +54,7 @@ class DashboardController extends Controller
             $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
 
 //            $price = PriceService::getPrice('TSLA');
-            $quotes = TDAmeritrade::quotes(['TSLA','AMZN']);
+            $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
 //            Log::debug('Price Response', $price);
 //            dd($price);
 //            dd($quote);
