@@ -242,6 +242,10 @@ class TDAmeritrade
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+                'symbol' => implode(',', $symbols)
             ]
         ];
 
