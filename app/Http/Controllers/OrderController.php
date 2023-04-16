@@ -30,6 +30,11 @@ class OrderController extends Controller
 
         $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
 
+        foreach ($quotes as $quote) {
+            if ($quote->symbol == 'TSLA') {
+                dd($quote);
+            }
+        }
         dd($quotes);
 
         $OrderResponse = OrderService::placeOtoOrder('180.00','190.00',
