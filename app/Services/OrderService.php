@@ -124,16 +124,16 @@ class OrderService
 	}]
 }';
 
-        $theChildren = '{
+$theChildren = '{
   "orderType": "LIMIT",
   "session": "SEAMLESS",
-  "price": "175.10",
+  "price": "170.45",
   "duration": "DAY",
   "orderStrategyType": "TRIGGER",
   "orderLegCollection": [
     {
       "instruction": "BUY",
-      "quantity": 5,
+      "quantity": 10,
       "instrument": {
         "symbol": "TSLA",
         "assetType": "EQUITY"
@@ -142,57 +142,22 @@ class OrderService
   ],
   "childOrderStrategies": [
     {
-      "orderType": "LIMIT",
+      "complexOrderStrategyType": "NONE",
+      "orderType": "TRAILING_STOP",
       "session": "SEAMLESS",
-      "price": "190.00",
+      "stopPriceLinkBasis": "BASE",
+      "stopPriceLinkType": "VALUE",
+      "stopPriceOffset": "0.21",
       "duration": "DAY",
       "orderStrategyType": "SINGLE",
       "orderLegCollection": [
         {
           "instruction": "SELL",
-          "quantity": 5,
+          "quantity": 10,
           "instrument": {
             "symbol": "TSLA",
             "assetType": "EQUITY"
           }
-        }
-      ],
-      "childOrderStrategies": [
-        {
-          "orderType": "LIMIT",
-          "session": "SEAMLESS",
-          "price": "170.00",
-          "duration": "DAY",
-          "orderStrategyType": "TRIGGER",
-          "orderLegCollection": [
-            {
-              "instruction": "BUY",
-              "quantity": 5,
-              "instrument": {
-                "symbol": "TSLA",
-                "assetType": "EQUITY"
-              }
-            }
-          ],
-          "childOrderStrategies": [
-            {
-              "orderType": "LIMIT",
-              "session": "SEAMLESS",
-              "price": "190.00",
-              "duration": "DAY",
-              "orderStrategyType": "SINGLE",
-              "orderLegCollection": [
-                {
-                  "instruction": "SELL",
-                  "quantity": 5,
-                  "instrument": {
-                    "symbol": "TSLA",
-                    "assetType": "EQUITY"
-                  }
-                }
-              ]
-            }
-          ]
         }
       ]
     }
@@ -202,8 +167,8 @@ class OrderService
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-        return self::sendRequest($ordersEndpointUrl, $newnew);
-//        return self::sendRequest($ordersEndpointUrl, $theChildren);
+//        return self::sendRequest($ordersEndpointUrl, $newnew);
+        return self::sendRequest($ordersEndpointUrl, $theChildren);
     }
 
     /**
