@@ -28,7 +28,12 @@ class OrderController extends Controller
             Log::info('The Token Was Refreshed During This Process');
         }
 
-        $OrderResponse = OrderService::placeOtoOrder('180.00','190.00','TSLA');
+        $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
+
+        dd($quotes);
+
+        $OrderResponse = OrderService::placeOtoOrder('180.00','190.00',
+            'TSLA', 5);
 
         Log::debug('Order Response', $OrderResponse);
 

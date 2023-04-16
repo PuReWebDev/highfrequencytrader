@@ -91,7 +91,7 @@ class OrderService
      * @throws \JsonException
      */
     public static function placeOtoOrder($buyPrice, $sellPrice, string
-    $symbol): array
+    $symbol, int $quantity): array
     {
         // Set up the request body
         $newnew = '{
@@ -102,7 +102,7 @@ class OrderService
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": 50,
+		"quantity": "'.$quantity.'",,
 		"instrument": {
 			"symbol": "TSLA",
 			"symbol": "'.$symbol.'",
@@ -117,7 +117,7 @@ class OrderService
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": 50,
+			"quantity": "'.$quantity.'",,
 			"instrument": {
 				"symbol": "'.$symbol.'",
 				"assetType": "EQUITY"
