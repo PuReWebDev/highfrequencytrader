@@ -236,7 +236,6 @@ class TDAmeritrade
     {
         $token = Token::where('user_id', Auth::id())->get();
 
-
         $data = [
             'base_uri' => SELF::BASE_URL,
             'headers'  => [
@@ -252,16 +251,8 @@ class TDAmeritrade
         $client = new Client($data);
 
         $response = $client->request('get', SELF::API_VER . '/marketdata/quotes', $data);
-//        $response = $client->getWithAuth(SELF::API_VER .'/marketdata/quotes', [
-//            'query' => [
-//                'apikey' => config('tdameritrade.api_key'),
-//                'symbol' => implode(',', $symbols)
-//            ]
-//        ]);
 
-        Log::info('Token: '. $token['0']['access_token']);
-        dd($response->getBody()->getContents());
-        return json_decode((string) $response->getBody(), true, 512,
+        return json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
     }
 }
