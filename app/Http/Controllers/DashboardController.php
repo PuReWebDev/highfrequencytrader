@@ -57,7 +57,7 @@ class DashboardController extends Controller
             $quote = TDAmeritrade::quotes(['TSLA','AMZN']);
 //            Log::debug('Price Response', $price);
 //            dd($price);
-            dd($quote);
+//            dd($quote);
             $msg = 'Please update your config options to begin trading';
             $linkaddress = '/preference';
             $linktext = 'Preferences';
