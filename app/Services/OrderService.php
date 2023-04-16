@@ -124,10 +124,86 @@ class OrderService
 	}]
 }';
 
+        $theChildren = '{
+  "orderType": "LIMIT",
+  "session": "SEAMLESS",
+  "price": "175.10",
+  "duration": "DAY",
+  "orderStrategyType": "TRIGGER",
+  "orderLegCollection": [
+    {
+      "instruction": "BUY",
+      "quantity": 5,
+      "instrument": {
+        "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ],
+  "childOrderStrategies": [
+    {
+      "orderType": "LIMIT",
+      "session": "SEAMLESS",
+      "price": "190.00",
+      "duration": "DAY",
+      "orderStrategyType": "SINGLE",
+      "orderLegCollection": [
+        {
+          "instruction": "SELL",
+          "quantity": 5,
+          "instrument": {
+            "symbol": "TSLA",
+            "assetType": "EQUITY"
+          }
+        }
+      ],
+      "childOrderStrategies": [
+        {
+          "orderType": "LIMIT",
+          "session": "SEAMLESS",
+          "price": "170.00",
+          "duration": "DAY",
+          "orderStrategyType": "TRIGGER",
+          "orderLegCollection": [
+            {
+              "instruction": "BUY",
+              "quantity": 5,
+              "instrument": {
+                "symbol": "TSLA",
+                "assetType": "EQUITY"
+              }
+            }
+          ],
+          "childOrderStrategies": [
+            {
+              "orderType": "LIMIT",
+              "session": "SEAMLESS",
+              "price": "190.00",
+              "duration": "DAY",
+              "orderStrategyType": "SINGLE",
+              "orderLegCollection": [
+                {
+                  "instruction": "SELL",
+                  "quantity": 5,
+                  "instrument": {
+                    "symbol": "TSLA",
+                    "assetType": "EQUITY"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}';
+
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-        return self::sendRequest($ordersEndpointUrl, $newnew);
+//        return self::sendRequest($ordersEndpointUrl, $newnew);
+        return self::sendRequest($ordersEndpointUrl, $theChildren);
     }
 
     /**
