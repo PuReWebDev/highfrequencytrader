@@ -34,8 +34,9 @@ class OrderController extends Controller
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
                 $bottomPrice = $quote->lastPrice - $numberOfTrades;
-                for ($x = 0; $x <= 10; $x++) {
-                    echo $quote->lastPrice - 0.01 ."<br>";
+                for ($x = $quote->lastPrice; $x === $quote->lastPrice - 0.10;
+                     $x--) {
+                    echo $x ."<br>";
                 }
                 dd($quote->lastPrice);
             }
