@@ -34,11 +34,17 @@ class OrderController extends Controller
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
                 $bottomPrice = $quote->lastPrice - $numberOfTrades;
-                for ($x = $quote->lastPrice; $x === ($quote->lastPrice - 0.10);
-                     $x--) {
-                    echo $x ."<br>";
+                $currentStockPrice = $quote->lastPrice;
+                $endPrice = $currentStockPrice - .10;
+                for ($x = $currentStockPrice;
+                     $x >= $endPrice;
+                     $x -= 0.01) {
+
+                    echo $x .' and '. $x +.20 ."\n";
+                    $OrderResponse = OrderService::placeOtoOrder($x,$x +.20,
+                        $quote->symbol, 1);
+                    usleep(500000);
                 }
-                dd($quote->lastPrice);
             }
         }
         dd($quotes);
