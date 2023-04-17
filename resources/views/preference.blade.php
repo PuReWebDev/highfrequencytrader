@@ -19,57 +19,7 @@
 
                         <div class="card">
                             <div class="card-body p-0">
-
-
-                                <div class="table-responsive">
-                                    <table class="table" id="urls-table">
-                                        <thead>
-                                        <tr>
-                                            <th>Trading Enabled</th>
-                                            <th>Trade Pre-Market</th>
-                                            <th>Trade Post-Market</th>
-                                            <th>Accept TOS</th>
-                                            <th>Trade Quantity</th>
-                                            <th colspan="3">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td>{{
-                                                $user->preferences->tradingEnabled }}</td>
-                                                <td>{{
-                                                $user->preferences->tradingEnabled }}</td>
-                                                <td>{{
-                                                $user->preferences->tradePreMarket }}</td>
-                                                <td>{{
-                                                $user->preferences->tradePostMarket }}</td>
-                                                <td>{{
-                                                $user->preferences->acceptTos
-                                                }}</td>
-                                                <td>{{
-                                                $user->preferences->tradeQuantity
-                                                }}</td>
-                                                <td width="120">
-                                                    {!! Form::open() !!}
-                                                    <div class='btn-group'>
-                                                        <a href="{{ route
-                                                        ('preferences
-                                                        .edit', [$user['0']->id])
-                                                         }}"
-                                                           class='btn btn-default btn-xs'>
-                                                            <i class="far fa-edit"></i>
-                                                        </a>
-                                                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                                    </div>
-                                                    {!! Form::close() !!}
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
+{{--                                @include('urls.table')--}}
 
                                 <div class="card-footer clearfix">
                                     <div class="float-right">
