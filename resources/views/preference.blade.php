@@ -37,18 +37,18 @@
 
                                             <tr>
                                                 <td>{{
-                                                $user->preference->tradingEnabled }}</td>
+                                                $user->preferences->tradingEnabled }}</td>
                                                 <td>{{
-                                                $user->preference->tradingEnabled }}</td>
+                                                $user->preferences->tradingEnabled }}</td>
                                                 <td>{{
-                                                $user->preference->tradePreMarket }}</td>
+                                                $user->preferences->tradePreMarket }}</td>
                                                 <td>{{
-                                                $user->preference->tradePostMarket }}</td>
+                                                $user->preferences->tradePostMarket }}</td>
                                                 <td>{{
-                                                $user->preference->acceptTos
+                                                $user->preferences->acceptTos
                                                 }}</td>
                                                 <td>{{
-                                                $user->preference->tradeQuantity
+                                                $user->preferences->tradeQuantity
                                                 }}</td>
                                                 <td width="120">
                                                     {!! Form::open() !!}
