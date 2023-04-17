@@ -31,32 +31,15 @@ class OrderController extends Controller
         $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
         $numberOfTrades = 10;
 
-        foreach ($quotes as $quote) {
-            if ($quote->symbol == 'TSLA') {
-                $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .10;
-                for ($x = $currentStockPrice;
-                     $x >= $endPrice;
-                     $x -= 0.01) {
-
-//                    echo $x .' and '. $x +.20 ."\n";
-                    $OrderResponse = OrderService::placeOtoOrder($x,$x +.20,
-                        $quote->symbol, 1);
-
-                    Log::debug("Order placed: Buy $x,".$x +.20.",
-                        $quote->symbol, 1", $OrderResponse);
-                    usleep(500000);
-                }
-            }
-        }
+//        $OrderResponse = $this->getOrderResponse($quotes);
         dd($quotes);
 
-        $OrderResponse = OrderService::placeOtoOrder('180.00','190.00',
-            'TSLA', 5);
+//        $OrderResponse = OrderService::placeOtoOrder('180.00','190.00',
+//            'TSLA', 5);
 
-        Log::debug('Order Response', $OrderResponse);
+//        Log::debug('Order Response', $OrderResponse);
 
-        dd($OrderResponse);
+//        dd($OrderResponse);
     }
 
     /**
@@ -123,5 +106,33 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param mixed $quotes
+     * @return array
+     * @throws \JsonException
+     */
+    private function getOrderResponse(mixed $quotes): array
+    {
+        foreach ($quotes as $quote) {
+            if ($quote->symbol == 'TSLA') {
+                $currentStockPrice = $quote->lastPrice;
+                $endPrice = $currentStockPrice - .10;
+                for ($x = $currentStockPrice;
+                     $x >= $endPrice;
+                     $x -= 0.01) {
+
+//                    echo $x .' and '. $x +.20 ."\n";
+                    $OrderResponse = OrderService::placeOtoOrder($x, $x + .20,
+                        $quote->symbol, 1);
+
+                    Log::debug("Order placed: Buy $x," . $x + .20 . ",
+                        $quote->symbol, 1", $OrderResponse);
+                    usleep(500000);
+                }
+            }
+        }
+        return $OrderResponse;
     }
 }
