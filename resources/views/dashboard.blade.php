@@ -15,7 +15,7 @@
 
 
                     <div class="table-responsive">
-                        <table class="table" id="urls-table">
+                        <table class="table" id="quote-table">
                             <thead>
                             <tr>
                                 <th>symbol</th>
