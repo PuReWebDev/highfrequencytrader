@@ -17,9 +17,9 @@
                                 <th scope="col">#</th>
                                 <th scope="col">{{ $name }} Value</th>
                                 <th scope="col">Total Cash</th>
-                                <th scope="col">Margin Balance</th>
-                                <th scope="col">Available Funds For Trading</th>
-                                <th scope="col">Stock Buying Power</th>
+                                <th scope="col">Account Type</th>
+                                <th scope="col">Round Trips</th>
+                                <th scope="col">Is Day Trader</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -27,9 +27,9 @@
                                 <th scope="row">{{ $count }}</th>
                                 <td>{{ $balance['0']['accountValue'] }}</td>
                                 <td>{{  $balance['0']['totalCash'] }}</td>
-                                <td>{{  $balance['0']['marginBalance'] }}</td>
-                                <td>{{  $balance['0']['cashAvailableForTrading'] }}</td>
-                                <td>{{  $balance['0']['stockBuyingPower'] }}</td>
+                                <td>{{  $balance['0']['type'] }}</td>
+                                <td>{{  $balance['0']['roundTrips'] }}</td>
+                                <td>{{  $balance['0']['isDayTrader'] }}</td>
                             </tr>
                             </tbody>
                         </table>
