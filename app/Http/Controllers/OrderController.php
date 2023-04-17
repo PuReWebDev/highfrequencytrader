@@ -35,7 +35,7 @@ class OrderController extends Controller
 //        dd($quotes);
 
         $OrderResponse = OrderService::placeOtoOrder('184.50','185.50',
-            'TSLA', 5);
+            'TSLA', 50);
 
         Log::debug('Order Response', $OrderResponse);
 
