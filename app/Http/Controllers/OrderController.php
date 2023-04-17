@@ -32,14 +32,14 @@ class OrderController extends Controller
         $numberOfTrades = 10;
 
 //        $OrderResponse = $this->getOrderResponse($quotes);
-//        dd($quotes);
+        dd($quotes);
 
-        $OrderResponse = OrderService::placeOtoOrder('184.50','185.50',
-            'TSLA', 40);
+//        $OrderResponse = OrderService::placeOtoOrder('184.50','185.50',
+//            'TSLA', 40);
 
-        Log::debug('Order Response', $OrderResponse);
+//        Log::debug('Order Response', $OrderResponse);
 
-        dd($OrderResponse);
+//        dd($OrderResponse);
     }
 
     /**
