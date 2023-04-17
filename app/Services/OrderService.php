@@ -104,7 +104,6 @@ class OrderService
 		"instruction": "BUY",
 		"quantity": "'.$quantity.'",,
 		"instrument": {
-			"symbol": "TSLA",
 			"symbol": "'.$symbol.'",
 			"assetType": "EQUITY"
 		}
