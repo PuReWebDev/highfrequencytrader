@@ -27,9 +27,9 @@
                                 <th scope="row">{{ $count }}</th>
                                 <td>{{ $balance['0']['accountValue'] }}</td>
                                 <td>{{  $balance['0']['totalCash'] }}</td>
-                                <td>{{  $balance['0']['type'] }}</td>
-                                <td>{{  $balance['0']['roundTrips'] }}</td>
-                                <td>{{  $balance['0']['isDayTrader'] }}</td>
+                                <td>{{  $account['0']['type'] }}</td>
+                                <td>{{  $account['0']['roundTrips'] }}</td>
+                                <td>{{  $account['0']['isDayTrader'] }}</td>
                             </tr>
                             </tbody>
                         </table>
