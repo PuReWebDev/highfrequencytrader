@@ -102,7 +102,7 @@ class OrderService
 	"orderStrategyType": "TRIGGER",
 	"orderLegCollection": [{
 		"instruction": "BUY",
-		"quantity": "'.$quantity.'",,
+		"quantity": "'.$quantity.'",
 		"instrument": {
 			"symbol": "'.$symbol.'",
 			"assetType": "EQUITY"
@@ -116,7 +116,7 @@ class OrderService
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
-			"quantity": "'.$quantity.'",,
+			"quantity": "'.$quantity.'",
 			"instrument": {
 				"symbol": "'.$symbol.'",
 				"assetType": "EQUITY"
