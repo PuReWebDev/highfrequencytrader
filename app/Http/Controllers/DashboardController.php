@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Token;
 use App\TDAmeritrade\MarketHours;
 use App\TDAmeritrade\TDAmeritrade;
@@ -68,12 +69,15 @@ class DashboardController extends Controller
             $marketMsg = 'Market Hours Temporarily Unavailable';
         }
 
+        $orders = Order::where('user_id', Auth::id())->get();
+
         return View::make('dashboard', [
             'msg' => $msg,
             'linkaddress' => $linkaddress,
             'linktext' => $linktext,
             'marketMsg' => $marketMsg,
             'quotes' => $quotes,
+            'orders' => $orders,
         ]);
     }
 
