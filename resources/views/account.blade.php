@@ -55,8 +55,8 @@
                                     <td>{{ $position['longQuantity'] }}</td>
                                     <td>{{ $position['averagePrice'] }}</td>
                                     <td>{{ $position['marketValue'] }}</td>
-                                    <td>{{ $position['cashAvailableForTrading'] }}</td>
-                                    <td>{{ $position['averagePrice'] - $position['marketValue'] }}</td>
+                                    <td>{{ $position['currentDayProfitLoss'] }}</td>
+                                    <td>{{ $position['marketValue'] }}</td>
                                 </tr>
                             @endforeach
 
