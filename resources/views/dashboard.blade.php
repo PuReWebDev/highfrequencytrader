@@ -64,6 +64,8 @@
                                 <th>Status</th>
                                 <th>Quantity</th>
                                 <th>Session</th>
+                                <th>Created At</th>
+                                <th>Last At</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -79,6 +81,8 @@
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->quantity }}</td>
                                     <td>{{ $order->session }}</td>
+                                    <td>{{ $order->created_at }}</td>
+                                    <td>{{ $order->updated_at }}</td>
 
                                 </tr>
                             @endforeach
