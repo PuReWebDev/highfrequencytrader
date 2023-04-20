@@ -124,10 +124,10 @@ class OrderController extends Controller
                      $x -= 0.01) {
 
 //                    echo $x .' and '. $x +.20 ."\n";
-                    $OrderResponse = OrderService::placeOtoOrder($x, $x + .10,
+                    $OrderResponse = OrderService::placeOtoOrder(number_format($x, 2, '.', ''), number_format($x + .10, 2, '.', ''),
                         $quote->symbol, 1);
 
-                    Log::debug("Order placed: Buy $x," . $x + .10 . ",
+                    Log::debug("Order placed: Buy ".number_format($x, 2, '.', '')."," . number_format($x + .10, 2, '.', '') . ",
                         $quote->symbol, 1", $OrderResponse);
                     usleep(500000);
                 }
