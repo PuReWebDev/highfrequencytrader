@@ -127,11 +127,11 @@ class OrderController extends Controller
                     $OrderResponse = OrderService::placeOtoOrder
                     (number_format($x, 2, '.', ''), number_format($x + .10,
                         2, '.', ''),
-                        $quote->symbol, 3);
+                        $quote->symbol, 5);
 
                     Log::debug("Order placed: Buy ".number_format($x, 2, '.',
                             '')."," . number_format($x + .10, 2, '.', '') . ",
-                        $quote->symbol, 3", $OrderResponse);
+                        $quote->symbol, 5", $OrderResponse);
                     usleep(500000);
                 }
             }
