@@ -247,6 +247,7 @@ class OrderService
             ];
         }
 
+        dd($response->getBody()->getContents());
         return [
             'success' => true,
             'data' => json_decode($response->getBody()->getContents(), true, 512),
