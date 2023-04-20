@@ -125,10 +125,28 @@ class OrderService
 	}]
 }';
 
+        $sellOut = '{
+  "orderType": "MARKET",
+  "session": "NORMAL",
+  "duration": "DAY",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Sell",
+      "quantity": 18,
+      "instrument": {
+        "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-        return self::sendRequest($ordersEndpointUrl, $newnew);
+//        return self::sendRequest($ordersEndpointUrl, $newnew);
+        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
     /**

@@ -31,11 +31,11 @@ class OrderController extends Controller
         $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
         $numberOfTrades = 10;
 
-        $OrderResponse = $this->getOrderResponse($quotes);
+//        $OrderResponse = $this->getOrderResponse($quotes);
 //        dd($quotes);
 
-//        $OrderResponse = OrderService::placeOtoOrder('170.00','180.00',
-//            'TSLA', 25);
+        $OrderResponse = OrderService::placeOtoOrder('170.00','180.00',
+            'TSLA', 25);
 
         Log::debug('Order Response', $OrderResponse);
 
