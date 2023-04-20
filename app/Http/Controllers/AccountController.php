@@ -328,7 +328,7 @@ class AccountController extends Controller
 
             self::saveAccountInformation($accountResponse);
 
-            dd($accountResponse['0']['securitiesAccount']['orderStrategies']['10']);
+//            dd($accountResponse['0']['securitiesAccount']['orderStrategies']['10']);
 
             $account = Account::where('user_id', Auth::id())->get();
             $positions = Position::where('user_id', Auth::id())->get();
