@@ -118,7 +118,7 @@ class OrderController extends Controller
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .09;
+                $endPrice = $currentStockPrice - .02;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
                      $x -= 0.01) {
@@ -127,11 +127,11 @@ class OrderController extends Controller
                     $OrderResponse = OrderService::placeOtoOrder
                     (number_format($x, 2, '.', ''), number_format($x + .10,
                         2, '.', ''),
-                        $quote->symbol, 5);
+                        $quote->symbol, 3);
 
                     Log::debug("Order placed: Buy ".number_format($x, 2, '.',
                             '')."," . number_format($x + .10, 2, '.', '') . ",
-                        $quote->symbol, 5", $OrderResponse);
+                        $quote->symbol, 3", $OrderResponse);
                     usleep(500000);
                 }
             }
