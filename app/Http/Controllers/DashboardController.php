@@ -76,7 +76,7 @@ class DashboardController extends Controller
             $marketMsg = 'Market Hours Temporarily Unavailable';
         }
 
-        $orders = Order::where('user_id', Auth::id())->get();
+        $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
 
         return View::make('dashboard', [
             'msg' => $msg,
