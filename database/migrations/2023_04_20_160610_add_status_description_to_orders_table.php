@@ -14,7 +14,7 @@ class AddStatusDescriptionToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->integer('statusDescription')->after('status');
+            $table->string('statusDescription')->after('status');
         });
     }
 
