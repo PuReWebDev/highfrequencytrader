@@ -221,6 +221,7 @@ class AccountController extends Controller
                 'cancelable' => $orderStrategies['cancelable'] ?? null,
                 'editable' => $orderStrategies['editable'] ?? null,
                 'status' => $orderStrategies['status'] ?? null,
+                'statusDescription' => $orderStrategies['statusDescription'] ?? null,
                 'enteredTime' => $orderStrategies['enteredTime'] ?? null,
                 'tag' => $orderStrategies['tag'] ?? null,
                 'accountId' => $orderStrategies['accountId'] ?? null,

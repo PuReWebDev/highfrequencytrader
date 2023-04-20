@@ -53,6 +53,7 @@ class Order extends Model
         'closeTime',
         'trailingAmount',
         'status',
+        'statusDescription',
         'tag',
         'filledQuantity',
         'remainingQuantity',
