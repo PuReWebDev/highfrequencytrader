@@ -371,6 +371,14 @@ class AccountController extends Controller
                 foreach ($value['securitiesAccount']['orderStrategies'] as
                          $orders) {
                     self::saveOrdersInformation($orders);
+
+                    if (!empty($orders['childOrderStrategies'])) {
+                        foreach ($orders['childOrderStrategies'] as
+                                 $childOrder) {
+                            self::saveOrdersInformation($childOrder);
+                        }
+                    }
+
                 }
             }
 
