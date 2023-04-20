@@ -112,7 +112,7 @@ class OrderService
 		"orderType": "LIMIT",
 		"session": "SEAMLESS",
 		"price": "'.$sellPrice.'",
-		"duration": "DAY",
+		"duration": "GOOD_TILL_CANCEL",
 		"orderStrategyType": "SINGLE",
 		"orderLegCollection": [{
 			"instruction": "SELL",
