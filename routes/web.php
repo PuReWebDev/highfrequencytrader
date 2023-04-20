@@ -35,4 +35,8 @@ Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index'])
     ->middleware(['auth'])
     ->name('order');
 
+Route::get('/watch-list', [\App\Http\Controllers\WatchListController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('order');
+
 require __DIR__.'/auth.php';
