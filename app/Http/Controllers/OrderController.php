@@ -118,20 +118,20 @@ class OrderController extends Controller
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .05;
+                $endPrice = $currentStockPrice - .09;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
                      $x -= 0.01) {
 
 //                    echo $x .' and '. $x +.20 ."\n";
                     $OrderResponse = OrderService::placeOtoOrder
-                    (number_format($x, 2, '.', ''), number_format($x + .01,
+                    (number_format($x, 2, '.', ''), number_format($x + .10,
                         2, '.', ''),
-                        $quote->symbol, 1);
+                        $quote->symbol, 5);
 
                     Log::debug("Order placed: Buy ".number_format($x, 2, '.',
-                            '')."," . number_format($x + .01, 2, '.', '') . ",
-                        $quote->symbol, 1", $OrderResponse);
+                            '')."," . number_format($x + .10, 2, '.', '') . ",
+                        $quote->symbol, 5", $OrderResponse);
                     usleep(500000);
                 }
             }
