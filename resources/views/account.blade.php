@@ -20,6 +20,8 @@
                                 <th scope="col">Account Type</th>
                                 <th scope="col">Round Trips</th>
                                 <th scope="col">Is Day Trader</th>
+                                <th scope="col">Stock Buying Power</th>
+                                <th scope="col">Liqudation Value</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,6 +32,8 @@
                                 <td>{{  $account['0']['type'] }}</td>
                                 <td>{{  $account['0']['roundTrips'] }}</td>
                                 <td>{{  $account['0']['isDayTrader'] }}</td>
+                                <td>{{  $balance['0']['stockBuyingPower'] }}</td>
+                                <td>{{  $balance['0']['liquidationValue'] }}</td>
                             </tr>
                             </tbody>
                         </table>
