@@ -31,11 +31,11 @@ class OrderController extends Controller
         $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
         $numberOfTrades = 10;
 
-//        $OrderResponse = $this->getOrderResponse($quotes);
+        $OrderResponse = $this->getOrderResponse($quotes);
 //        dd($quotes);
 
-        $OrderResponse = OrderService::placeOtoOrder('170.00','180.00',
-            'TSLA', 25);
+//        $OrderResponse = OrderService::placeOtoOrder('170.00','180.00',
+//            'TSLA', 25);
 
         Log::debug('Order Response', $OrderResponse);
 
@@ -118,16 +118,16 @@ class OrderController extends Controller
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .5;
+                $endPrice = $currentStockPrice - .05;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
                      $x -= 0.01) {
 
 //                    echo $x .' and '. $x +.20 ."\n";
-                    $OrderResponse = OrderService::placeOtoOrder($x, $x + .01,
+                    $OrderResponse = OrderService::placeOtoOrder($x, $x + .10,
                         $quote->symbol, 1);
 
-                    Log::debug("Order placed: Buy $x," . $x + .01 . ",
+                    Log::debug("Order placed: Buy $x," . $x + .10 . ",
                         $quote->symbol, 1", $OrderResponse);
                     usleep(500000);
                 }
