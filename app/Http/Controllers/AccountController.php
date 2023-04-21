@@ -213,7 +213,7 @@ class AccountController extends Controller
                 'legId' => $orderStrategies['orderLegCollection']['0']['legId']
                 ?? null,
                 'cusip' => $orderStrategies['orderLegCollection']['0']['instrument']['cusip'] ?? null,
-                'symbol' => $orderStrategies['orderLegCollection']['0']['instrument']['symbol'] ?? null,
+                'symbol' => $orderStrategies['orderLegCollection']['0']['instrument']['symbol'] ?? 'None',
                 'instruction' => $orderStrategies['orderLegCollection']['0']['instruction'] ?? null,
                 'positionEffect' => $orderStrategies['orderLegCollection']['0']['positionEffect'] ?? null,
                 'orderStrategyType' => $orderStrategies['orderStrategyType'] ?? null,
