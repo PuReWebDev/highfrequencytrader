@@ -31,7 +31,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $order)
-                                    @if ($order->status === 'WORKING')
+                                    @if ($order->status === 'FILLED')
                                         <tr>
                                             <td>{{ $order->symbol }}</td>
                                             <td>{{ $order->orderId }}</td>
