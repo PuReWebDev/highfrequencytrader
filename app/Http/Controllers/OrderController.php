@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Token;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
 {
@@ -27,7 +31,11 @@ class OrderController extends Controller
             Log::info('The Token Was Refreshed During This Process');
         }
 
-        // TODO Finish adding the rest of the Orders to be displayed to the view
+        $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+
+        return View::make('order', [
+            'orders' => $orders,
+        ]);
     }
 
     /**
