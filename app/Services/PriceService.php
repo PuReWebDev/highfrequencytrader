@@ -102,4 +102,48 @@ class PriceService
             ]
         );
     }
+
+    /**
+     * Get the current Quote for a given symbol.
+     *
+     * @param  string  $symbol
+     * @return \App\Models\Price
+     */
+    public static function getQuote(array $symbols): Price
+    {
+        try {
+            self::setClient(new Client());
+            $token = Token::where('user_id', Auth::id())->get();
+            $url = "https://api.tdameritrade.com/v1/marketdata/quotes";
+
+            $response = self::$client->request('GET', $url, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                    'Content-Type' => 'application/json'
+                ],
+                'body' => [
+                    'symbol' => 'TSLA,AMZN',
+                ],
+            ]);
+        } catch (ClientException $e) {
+            return Log::info('Exception Thrown:'. $e->getMessage());
+        } catch (GuzzleException $e) {
+            return Log::info('Exception Thrown:'. $e->getMessage());
+        }
+
+        $data = json_decode($response->getBody(), true);
+
+        dd($data);
+        return Price::updateOrCreate(
+            [
+                'symbol' => $symbol,
+                'price' => $data['last']['price'],
+//                'timestamp' => $data['last']['timestamp'],
+            ],
+            [
+                'symbol' => $symbol,
+                'price' => $data['last']['price'],
+            ]
+        );
+    }
 }
