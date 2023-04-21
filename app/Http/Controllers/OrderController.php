@@ -21,12 +21,12 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
         $workingCount = $orders->countBy(function ($item) {
             if ($item['status'] === 'WORKING') {
-                return $item['status'] ;
+                return $item['status'];
             }
         });
         $filledCount = $orders->countBy(function ($item) {
             if ($item['status'] === 'FILLED') {
-                return $item['status'] ;
+                return $item['status'];
             }
         });
 
