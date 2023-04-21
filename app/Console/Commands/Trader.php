@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Models\Admin;
 use App\Models\Order;
 use App\Models\Token;
-use App\Services\AdminService;
 use App\Services\OrderService;
-use App\Services\PriceService;
-use App\TDAmeritrade\MarketHours;
-use Illuminate\Console\Scheduling\Schedule;
+use App\TDAmeritrade\Accounts;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Console\Command;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class Trader extends Command
 {
@@ -36,51 +36,46 @@ class Trader extends Command
      */
     public function handle()
     {
-        $code = $this->argument('code');
-
-        // Ensure we are logged in
-        $authentication = collect([
-            'grant_type' => config("tdameritrade.grant_type"),
-            'access_type' => config('tdameritrade.access_type'),
-            'code' => config('tdameritrade.code'),
-            'client_id' => config('tdameritrade.client_id'),
-            'redirect_uri' => config('tdameritrade.redirect_uri')
-            ]);
-
-        $authResponse = AdminService::login($authentication->toArray());
-
-        $token = Token::updateOrCreate(
-            ['id' => 1],
-            [
-                'token' => $authResponse->token,
-                'refresh_token' => $authResponse->refresh_token
-            ]
-        );
-
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
 
+        Auth::loginUsingId(4, $remember = true);
 
-        if (MarketHours::isMarketOpen("EQUITY")) {
+//        if (MarketHours::isMarketOpen("EQUITY")) {
             // Loop until all orders have completed
             while (true) {
                 // Check for existing orders
-                $orders = OrderService::getOrders($token->access_token, $symbol);
+                $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+                list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
+                    $expiredCount) = TDAmeritrade::extracted($orders);
 
                 // If all orders have completed, place a new OTO order
-                if (empty($orders)) {
-                    // Get current price
-                    $price = PriceService::getPrice($symbol);
+                if ($workingCount > 0) {
 
-//                    dd($price);
-                    // Place OTO order
-//                    OrderService::placeOtoOrder($token->access_token, $symbol, $price);
-                    $OrderResponse = OrderService::placeOtoOrder($symbol);
+                    $token = Token::where('user_id', Auth::id())->get();
 
+                    Log::info('Trying to get the orders');
+                    if (TDAmeritrade::isAccessTokenExpired
+                        ($token['0']['updated_at']) === true) {
+                        // Time To Refresh The Token
+                        TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+                        Log::info('The Token Was Refreshed During This Process');
+                    }
+
+                    $quotes = TDAmeritrade::quotes([$symbol,'AMZN', 'GOOGL', 'VZ']);
+
+                    // Place The Trades
+                    $this->getOrderResponse($quotes);
+
+                    usleep(500000);
+                    // Retrieve The Account Information
+                    $accountResponse = Accounts::getAccounts();
+
+                    Accounts::saveAccountInformation($accountResponse);
 
                 }
             }
-        }
+//        }
 
         return 0;
     }
@@ -94,5 +89,36 @@ class Trader extends Command
     public function schedule(Schedule $schedule): void
     {
         //
+    }
+
+    /**
+     * @param mixed $quotes
+     * @return array
+     * @throws \JsonException
+     */
+    private function getOrderResponse(mixed $quotes): array
+    {
+        foreach ($quotes as $quote) {
+            if ($quote->symbol == 'TSLA') {
+                $currentStockPrice = $quote->lastPrice;
+                $endPrice = $currentStockPrice - .04;
+                for ($x = $currentStockPrice;
+                     $x >= $endPrice;
+                     $x -= 0.01) {
+
+//                    echo $x .' and '. $x +.20 ."\n";
+                    $OrderResponse = OrderService::placeOtoOrder
+                    (number_format($x, 2, '.', ''), number_format($x + .10,
+                        2, '.', ''),
+                        $quote->symbol, 1);
+
+                    Log::debug("Order placed: Buy ".number_format($x, 2, '.',
+                            '')."," . number_format($x + .10, 2, '.', '') . ",
+                        $quote->symbol, 1", $OrderResponse);
+                    usleep(500000);
+                }
+            }
+        }
+        return $OrderResponse;
     }
 }
