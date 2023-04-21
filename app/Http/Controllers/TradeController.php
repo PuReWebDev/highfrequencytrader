@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Token;
+use App\Services\OrderService;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-class OrderController extends Controller
+class TradeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,49 @@ class OrderController extends Controller
             Log::info('The Token Was Refreshed During This Process');
         }
 
-        // TODO Finish adding the rest of the Orders to be displayed to the view
+        $quotes = TDAmeritrade::quotes(['TSLA','AMZN', 'GOOGL', 'VZ']);
+        $numberOfTrades = 10;
+
+        $OrderResponse = $this->getOrderResponse($quotes);
+//        dd($quotes);
+
+//        $OrderResponse = OrderService::placeOtoOrder('170.00','180.00',
+//            'TSLA', 25);
+
+        Log::debug('Order Response', $OrderResponse);
+
+        dd($OrderResponse);
+    }
+
+    /**
+     * @param mixed $quotes
+     * @return array
+     * @throws \JsonException
+     */
+    private function getOrderResponse(mixed $quotes): array
+    {
+        foreach ($quotes as $quote) {
+            if ($quote->symbol == 'TSLA') {
+                $currentStockPrice = $quote->lastPrice;
+                $endPrice = $currentStockPrice - .02;
+                for ($x = $currentStockPrice;
+                     $x >= $endPrice;
+                     $x -= 0.01) {
+
+//                    echo $x .' and '. $x +.20 ."\n";
+                    $OrderResponse = OrderService::placeOtoOrder
+                    (number_format($x, 2, '.', ''), number_format($x + .10,
+                        2, '.', ''),
+                        $quote->symbol, 5);
+
+                    Log::debug("Order placed: Buy ".number_format($x, 2, '.',
+                            '')."," . number_format($x + .10, 2, '.', '') . ",
+                        $quote->symbol, 5", $OrderResponse);
+                    usleep(500000);
+                }
+            }
+        }
+        return $OrderResponse;
     }
 
     /**
@@ -95,6 +138,4 @@ class OrderController extends Controller
     {
         //
     }
-
-
 }

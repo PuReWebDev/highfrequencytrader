@@ -35,6 +35,10 @@ Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index'])
     ->middleware(['auth'])
     ->name('order');
 
+Route::get('/trade', [\App\Http\Controllers\TradeController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('order');
+
 Route::get('/watch-list', [\App\Http\Controllers\WatchListController::class, 'index'])
     ->middleware(['auth'])
     ->name('order');
