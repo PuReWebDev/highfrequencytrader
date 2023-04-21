@@ -37,10 +37,10 @@ Route::get('/order', [\App\Http\Controllers\OrderController::class, 'index'])
 
 Route::get('/trade', [\App\Http\Controllers\TradeController::class, 'index'])
     ->middleware(['auth'])
-    ->name('order');
+    ->name('trade');
 
 Route::get('/watch-list', [\App\Http\Controllers\WatchListController::class, 'index'])
     ->middleware(['auth'])
-    ->name('order');
+    ->name('watch-list');
 
 require __DIR__.'/auth.php';
