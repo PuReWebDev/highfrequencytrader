@@ -42,7 +42,12 @@
                                                 @empty($workingCount['WORKING'])
                                                     0
                                                 @endempty</td>
-                                            <td>{{ $workingCount['REJECTED']}}</td>
+                                            <td>@isset($workingCount)
+                                                    {{ $workingCount }}
+                                                @endisset
+                                                @empty($workingCount['REJECTED'])
+                                                    0
+                                                @endempty</td>
                                             <td>{{ $orders->count() }}</td>
                                         </tr>
                                 </tbody>
