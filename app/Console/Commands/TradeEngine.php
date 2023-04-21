@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\RequestException;
+use App\Models\Order;
+use App\Models\Token;
+use App\Services\OrderService;
+use App\TDAmeritrade\Accounts;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class TradeEngine extends Command
@@ -16,7 +20,7 @@ class TradeEngine extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'trader {symbol}';
 
     /**
      * The console command description.
@@ -42,71 +46,79 @@ class TradeEngine extends Command
      */
     public function handle()
     {
+// Get stock symbol from command argument
+        $symbol = $this->argument('symbol');
+
+        Auth::loginUsingId(4, $remember = true);
+
+//        if (MarketHours::isMarketOpen("EQUITY")) {
+        // Loop until all orders have completed
+        while (true) {
+            // Check for existing orders
+            $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+            list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
+                $expiredCount) = TDAmeritrade::extracted($orders);
+
+            // If all orders have completed, place a new OTO order
+            if ($workingCount > 0) {
+
+                $token = Token::where('user_id', Auth::id())->get();
+
+                Log::info('Trying to get the orders');
+                if (TDAmeritrade::isAccessTokenExpired
+                    ($token['0']['updated_at']) === true) {
+                    // Time To Refresh The Token
+                    TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+                    Log::info('The Token Was Refreshed During This Process');
+                }
+
+                $quotes = TDAmeritrade::quotes([$symbol,'AMZN', 'GOOGL', 'VZ']);
+
+                // Place The Trades
+                $this->getOrderResponse($quotes);
+
+                usleep(500000);
+                // Retrieve The Account Information
+                $accountResponse = Accounts::getAccounts();
+
+                Accounts::saveAccountInformation($accountResponse);
+
+            }
+        }
+//        }
 
         return 0;
     }
 
-    public function getOrdersByPath(int $accountId): bool
+    /**
+     * @param mixed $quotes
+     * @return array
+     * @throws \JsonException
+     */
+    private function getOrderResponse(mixed $quotes): array
     {
-        $retry_count = 0;
-        $response = null;
-        $type = 'account';
-        do {
-            try {
-                self::setGuzzleClient(new Client());
-                self::$log_errors['error'] = null;
-                self::$log_errors['payload'] = json_decode(
-                    $payload,
-                    false,
-                    512,
-                    JSON_THROW_ON_ERROR
-                );
+        foreach ($quotes as $quote) {
+            if ($quote->symbol == 'TSLA') {
+                $currentStockPrice = $quote->lastPrice;
+                $endPrice = $currentStockPrice - .04;
+                for ($x = $currentStockPrice;
+                     $x >= $endPrice;
+                     $x -= 0.01) {
 
-                $response = self::$guzzleClient->request(
-                    'POST',
-                    config("datadog.api_endpoints.$type.url"),
-                    [
-                        'debug' => env('APP_DEBUG') === 1,
-                        'base_uri' => config("tdameritrade.api_endpoints.$type.base_url"),
-                        'headers' => [
-                            'DD-API-KEY' => env('DD_API_KEY'),
-                            'Accept' => 'application/json',
-                            'Content-Type' => 'application/json',
-                            'cache-control' => 'no-cache',
-                        ],
-                        'body' => $payload,
-                        'timeout' => 15.00,
-                    ]
-                );
+//                    echo $x .' and '. $x +.20 ."\n";
+                    $OrderResponse = OrderService::placeOtoOrder
+                    (number_format($x, 2, '.', ''), number_format($x + .10,
+                        2, '.', ''),
+                        $quote->symbol, 1);
 
-                $response = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
-            } catch (ConnectException $e) {
-                self::sendError($e);
-                sleep(10);
-            } catch (RequestException $e) {
-                self::sendError($e);
-                sleep(10);
-            } catch (GuzzleException $e) {
-                self::sendError($e);
-            } catch (JsonException $e) {
-                self::sendError($e);
-                break;
+                    Log::debug("Order placed: Buy ".number_format($x, 2, '.',
+                            '')."," . number_format($x + .10, 2, '.', '') . ",
+                        $quote->symbol, 1", $OrderResponse);
+                    usleep(500000);
+                }
             }
-
-            if (++$retry_count === 5) {
-                self::$log_errors['error'] = 'Error: Failed To Send Payload to DataDog';
-                Log::error(self::datadogFormatter(
-                    self::getLogErrors(),
-                    'Error: Failed To Send DataDog Payload After 5 tries'
-                ));
-                break;
-            }
-        } while (! is_array($response));
-
-        if (! is_array($response)) {
-            return false;
         }
-
-        return true;
+        return $OrderResponse;
     }
+
 }
