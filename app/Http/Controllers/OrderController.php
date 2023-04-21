@@ -19,9 +19,21 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+        $workingCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'WORKING') {
+                return $item['status'] ;
+            }
+        });
+        $filledCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'FILLED') {
+                return $item['status'] ;
+            }
+        });
 
         return View::make('order', [
             'orders' => $orders,
+            'filledCount' => $filledCount,
+            'workingCount' => $workingCount,
         ]);
     }
 

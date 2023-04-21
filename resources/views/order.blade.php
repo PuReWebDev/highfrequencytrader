@@ -23,6 +23,25 @@
                                 @endforeach
                     @endif
 
+                        <div class="table-responsive">
+                            <table class="table" id="open-orders-table">
+                                <thead>
+                                <tr>
+                                    <th>Filled Orders</th>
+                                    <th>Working Orders</th>
+                                    <th>Total Orders</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>{{ $filledCount }}</td>
+                                            <td>{{ $workingCount }}</td>
+                                            <td>{{ $orders->count() }}</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         @isset($displayWorking)
                             @if ($displayWorking === true)
                                 <div class="table-responsive">
