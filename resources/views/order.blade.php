@@ -36,7 +36,13 @@
                                 </thead>
                                 <tbody>
                                         <tr>
-                                            <td>{{ $filledCount['FILLED'] }}</td>
+                                            <td>@isset($filledCount['FILLED'])
+                                                    {{ $filledCount['FILLED']}}
+                                                @endisset
+                                                @empty($filledCount['FILLED'])
+                                                    0
+                                                @endempty
+                                            </td>
                                             <td>@isset($workingCount['WORKING'])
                                                     {{ $workingCount['WORKING']}}
                                                 @endisset
