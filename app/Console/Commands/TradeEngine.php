@@ -61,6 +61,8 @@ class TradeEngine extends Command
 
             Accounts::saveAccountInformation($accountResponse);
 
+            // TODO Can user Trade??
+
             // Check for existing orders
             $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
             list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
@@ -71,7 +73,6 @@ class TradeEngine extends Command
 
                 $token = Token::where('user_id', Auth::id())->get();
 
-                Log::info('Trying to get the orders');
                 if (TDAmeritrade::isAccessTokenExpired
                     ($token['0']['updated_at']) === true) {
                     // Time To Refresh The Token
