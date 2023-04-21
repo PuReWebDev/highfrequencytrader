@@ -29,6 +29,7 @@
                                 <tr>
                                     <th>Filled Orders</th>
                                     <th>Working Orders</th>
+                                    <th>Rejected Orders</th>
                                     <th>Total Orders</th>
                                 </tr>
                                 </thead>
@@ -39,6 +40,12 @@
                                                     {{ $workingCount['WORKING']}}
                                                 @endisset
                                                 @empty($workingCount['WORKING'])
+                                                    0
+                                                @endempty</td>
+                                            <td>@isset($workingCount['REJECTED'])
+                                                    {{ $workingCount['REJECTED']}}
+                                                @endisset
+                                                @empty($workingCount['REJECTED'])
                                                     0
                                                 @endempty</td>
                                             <td>{{ $orders->count() }}</td>

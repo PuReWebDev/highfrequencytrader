@@ -29,11 +29,17 @@ class OrderController extends Controller
                 return $item['status'];
             }
         });
+        $rejectedCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'REJECTED') {
+                return $item['status'];
+            }
+        });
 
         return View::make('order', [
             'orders' => $orders,
             'filledCount' => $filledCount,
             'workingCount' => $workingCount,
+            'rejectedCount' => $rejectedCount,
         ]);
     }
 
