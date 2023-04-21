@@ -50,45 +50,56 @@
                     @endif
 
                     @if (count($orders) >= 1)
-                    <div class="table-responsive">
-                        <table class="table" id="orders-table">
-                            <thead>
-                            <tr>
-                                <th>Symbol</th>
-                                <th>Order ID</th>
-                                <th>Instruction</th>
-                                <th>Position Effect</th>
-                                <th>Order Strategy Type</th>
-                                <th>Duration</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Quantity</th>
-                                <th>Session</th>
-                                <th>Created At</th>
-                                <th>Last At</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($orders as $order)
+                        <div class="table-responsive">
+                            <table class="table" id="open-orders-table">
+                                <thead>
                                 <tr>
-                                    <td>{{ $order->symbol }}</td>
-                                    <td>{{ $order->orderId }}</td>
-                                    <td>{{ $order->instruction }}</td>
-                                    <td>{{ $order->positionEffect }}</td>
-                                    <td>{{ $order->orderStrategyType }}</td>
-                                    <td>{{ $order->duration }}</td>
-                                    <td>{{ $order->price }}</td>
-                                    <td>{{ $order->status }}</td>
-                                    <td>{{ $order->quantity }}</td>
-                                    <td>{{ $order->session }}</td>
-                                    <td>{{ $order->created_at }}</td>
-                                    <td>{{ $order->updated_at }}</td>
-
+                                    <th>Filled Orders</th>
+                                    <th>Working Orders</th>
+                                    <th>Rejected Orders</th>
+                                    <th>Cancelled Orders</th>
+                                    <th>Expired Orders</th>
+                                    <th>Total Orders</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>@isset($filledCount['FILLED'])
+                                            {{ $filledCount['FILLED']}}
+                                        @endisset
+                                        @empty($filledCount['FILLED'])
+                                            0
+                                        @endempty
+                                    </td>
+                                    <td>@isset($workingCount['WORKING'])
+                                            {{ $workingCount['WORKING']}}
+                                        @endisset
+                                        @empty($workingCount['WORKING'])
+                                            0
+                                        @endempty</td>
+                                    <td>@isset($rejectedCount['REJECTED'])
+                                            {{ $rejectedCount['REJECTED'] }}
+                                        @endisset
+                                        @empty($rejectedCount['REJECTED'])
+                                            0
+                                        @endempty</td>
+                                    <td>@isset($cancelledCount['CANCELED'])
+                                            {{ $cancelledCount['CANCELED'] }}
+                                        @endisset
+                                        @empty($cancelledCount['CANCELED'])
+                                            0
+                                        @endempty</td>
+                                    <td>@isset($expiredCount['EXPIRED'])
+                                            {{ $expiredCount['EXPIRED'] }}
+                                        @endisset
+                                        @empty($expiredCount['EXPIRED'])
+                                            0
+                                        @endempty</td>
+                                    <td>{{ $orders->count() }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     @endif
 
                 </div>

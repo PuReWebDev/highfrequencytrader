@@ -77,6 +77,8 @@ class DashboardController extends Controller
         }
 
         $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+        list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
+            $expiredCount) = TDAmeritrade::extracted($orders);
 
         return View::make('dashboard', [
             'msg' => $msg,
@@ -85,6 +87,11 @@ class DashboardController extends Controller
             'marketMsg' => $marketMsg,
             'quotes' => $quotes,
             'orders' => $orders,
+            'filledCount' => $filledCount,
+            'workingCount' => $workingCount,
+            'rejectedCount' => $rejectedCount,
+            'cancelledCount' => $cancelledCount,
+            'expiredCount' => $expiredCount,
         ]);
     }
 

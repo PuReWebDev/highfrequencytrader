@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -19,31 +20,8 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
-        $workingCount = $orders->countBy(function ($item) {
-            if ($item['status'] === 'WORKING') {
-                return $item['status'];
-            }
-        });
-        $filledCount = $orders->countBy(function ($item) {
-            if ($item['status'] === 'FILLED') {
-                return $item['status'];
-            }
-        });
-        $rejectedCount = $orders->countBy(function ($item) {
-            if ($item['status'] === 'REJECTED') {
-                return $item['status'];
-            }
-        });
-        $cancelledCount = $orders->countBy(function ($item) {
-            if ($item['status'] === 'CANCELED') {
-                return $item['status'];
-            }
-        });
-        $expiredCount = $orders->countBy(function ($item) {
-            if ($item['status'] === 'EXPIRED') {
-                return $item['status'];
-            }
-        });
+        list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
+            $expiredCount) = TDAmeritrade::extracted($orders);
 
         return View::make('order', [
             'orders' => $orders,
