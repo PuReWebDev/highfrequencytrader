@@ -304,4 +304,38 @@ class TDAmeritrade
 
         return Quote::whereIn('symbol', $symbols)->get();
     }
+
+    /**
+     * @param $orders
+     * @return array
+     */
+    public static function extracted($orders): array
+    {
+        $workingCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'WORKING') {
+                return $item['status'];
+            }
+        });
+        $filledCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'FILLED') {
+                return $item['status'];
+            }
+        });
+        $rejectedCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'REJECTED') {
+                return $item['status'];
+            }
+        });
+        $cancelledCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'CANCELED') {
+                return $item['status'];
+            }
+        });
+        $expiredCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'EXPIRED') {
+                return $item['status'];
+            }
+        });
+        return array($workingCount, $filledCount, $rejectedCount, $cancelledCount, $expiredCount);
+    }
 }
