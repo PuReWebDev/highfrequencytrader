@@ -34,8 +34,8 @@
                                 </thead>
                                 <tbody>
                                         <tr>
-                                            <td>{{ $filledCount }}</td>
-                                            <td>{{ $workingCount }}</td>
+                                            <td>{{ $filledCount['FILLED'] }}</td>
+                                            <td>@isset($workingCount['WORKING']){{ $workingCount['WORKING'] }}@endisset</td>
                                             <td>{{ $orders->count() }}</td>
                                         </tr>
                                 </tbody>
