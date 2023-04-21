@@ -76,6 +76,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the Watch Lists associated with the user.
+     */
+    public function watchlists(): HasMany
+    {
+        return $this->hasMany(WatchList::class);
+    }
+
+    /**
      * Get the Orders associated with the user.
      */
     public function preferences(): HasOne
