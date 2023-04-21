@@ -39,6 +39,11 @@ class OrderController extends Controller
                 return $item['status'];
             }
         });
+        $expiredCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'EXPIRED') {
+                return $item['status'];
+            }
+        });
 
         return View::make('order', [
             'orders' => $orders,
@@ -46,6 +51,7 @@ class OrderController extends Controller
             'workingCount' => $workingCount,
             'rejectedCount' => $rejectedCount,
             'cancelledCount' => $cancelledCount,
+            'expiredCount' => $expiredCount,
         ]);
     }
 

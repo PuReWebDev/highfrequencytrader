@@ -31,6 +31,7 @@
                                     <th>Working Orders</th>
                                     <th>Rejected Orders</th>
                                     <th>Cancelled Orders</th>
+                                    <th>Expired Orders</th>
                                     <th>Total Orders</th>
                                 </tr>
                                 </thead>
@@ -59,6 +60,12 @@
                                                     {{ $cancelledCount['CANCELED'] }}
                                                 @endisset
                                                 @empty($cancelledCount['CANCELED'])
+                                                    0
+                                                @endempty</td>
+                                            <td>@isset($expiredCount['EXPIRED'])
+                                                    {{ $expiredCount['EXPIRED'] }}
+                                                @endisset
+                                                @empty($expiredCount['EXPIRED'])
                                                     0
                                                 @endempty</td>
                                             <td>{{ $orders->count() }}</td>
