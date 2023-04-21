@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 /**
  * The Accounts class handles requests for account information.
@@ -675,6 +676,22 @@ class Accounts
             self::saveCurrentBalancesInformation($account->accountId, $value['securitiesAccount']['currentBalances']);
             self::saveProjectedBalancesInformation($account->accountId, $value['securitiesAccount']['projectedBalances']);
         }
+    }
+
+    public static function updateAccountData(): void
+    {
+        $token = Token::where('user_id', Auth::id())->get();
+
+        if (TDAmeritrade::isAccessTokenExpired
+            ($token['0']['updated_at']) === true) {
+            // Time To Refresh The Token
+            TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+            Log::info('The Token Was Refreshed During This Process');
+        }
+
+        // Retrieve The Account Information
+        $accountResponse = Accounts::getAccounts();
+        Accounts::saveAccountInformation($accountResponse);
     }
 
 }

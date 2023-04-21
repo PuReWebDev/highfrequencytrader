@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Order;
-use App\Models\Token;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -57,9 +56,7 @@ class TradeEngine extends Command
             usleep(500000);
             sleep(4);
             // Retrieve The Account Information
-            $accountResponse = Accounts::getAccounts();
-
-            Accounts::saveAccountInformation($accountResponse);
+            Accounts::updateAccountData();
 
             // TODO Can user Trade??
 
@@ -71,22 +68,11 @@ class TradeEngine extends Command
             // If all orders have completed, place a new OTO order
             if (empty($workingCount['WORKING'])) {
 
-                $token = Token::where('user_id', Auth::id())->get();
-
-                if (TDAmeritrade::isAccessTokenExpired
-                    ($token['0']['updated_at']) === true) {
-                    // Time To Refresh The Token
-                    TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
-                    Log::info('The Token Was Refreshed During This Process');
-                }
-
+                // Grab The Current Price
                 $quotes = TDAmeritrade::quotes([$symbol,'AMZN', 'GOOGL', 'VZ']);
 
                 // Place The Trades
                 $this->getOrderResponse($quotes);
-
-
-
             }
         }
 //        }
