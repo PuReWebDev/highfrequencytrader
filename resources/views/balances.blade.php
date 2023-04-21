@@ -50,7 +50,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($balances as $balance)
-                                            @if ($balance->balanceType === 'initialBalances')
+
                                                 <tr>
                                                     <td>{{ $balance->accountId }}</td>
                                                     <td>{{ $balance->balanceType }}</td>
@@ -82,7 +82,7 @@
                                                     <td>{{ $balance->stockBuyingPower }}</td>
 
                                                 </tr>
-                                            @endif
+
                                         @endforeach
                                         </tbody>
                                     </table>
