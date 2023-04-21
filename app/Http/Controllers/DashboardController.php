@@ -21,6 +21,7 @@ class DashboardController extends Controller
     public function index()
     {
 //        $link=Tdameritrade::redirectOAuth();
+        $quotes = '';
         $codeHasExpired = false;
         // Message Default, gets changed if permission isn't granted yet
         $msg = 'Your Account Has Granted Trading Permission Please Set Your Trading Options';
