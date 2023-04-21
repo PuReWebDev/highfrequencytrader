@@ -19,7 +19,8 @@ class PreferenceController extends Controller
     public function index()
     {
         $user = User::where('id', Auth::id())
-            ->with('token', 'account', 'orders', 'positions', 'preferences')->get();
+            ->with('token', 'account', 'orders', 'positions', 'preferences','watchlists')
+            ->get();
 
         if (empty($user->preferences)) {
             // Preferences not yet set
