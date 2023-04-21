@@ -43,4 +43,8 @@ Route::get('/watch-list', [\App\Http\Controllers\WatchListController::class, 'in
     ->middleware(['auth'])
     ->name('watch-list');
 
+Route::get('/balances', [\App\Http\Controllers\BalancesController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('balances');
+
 require __DIR__.'/auth.php';

@@ -21,6 +21,11 @@
                         {{ __('Orders') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('balances')" :active="request()
+                    ->routeIs('balances')">
+                        {{ __('Balances') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('preference')" :active="request()
                     ->routeIs('preference')">
                         {{ __('Preference') }}
