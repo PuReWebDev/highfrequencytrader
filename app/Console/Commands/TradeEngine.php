@@ -54,6 +54,13 @@ class TradeEngine extends Command
 //        if (MarketHours::isMarketOpen("EQUITY")) {
         // Loop until all orders have completed
         while (true) {
+            usleep(500000);
+            sleep(4);
+            // Retrieve The Account Information
+            $accountResponse = Accounts::getAccounts();
+
+            Accounts::saveAccountInformation($accountResponse);
+
             // Check for existing orders
             $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
             list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
@@ -77,12 +84,7 @@ class TradeEngine extends Command
                 // Place The Trades
                 $this->getOrderResponse($quotes);
 
-                usleep(500000);
-                sleep(4);
-                // Retrieve The Account Information
-                $accountResponse = Accounts::getAccounts();
 
-                Accounts::saveAccountInformation($accountResponse);
 
             }
         }
@@ -109,7 +111,7 @@ class TradeEngine extends Command
 //                    echo $x .' and '. $x +.20 ."\n";
                     $OrderResponse = OrderService::placeOtoOrder
                     (number_format($x, 2, '.', ''), number_format($x + .10,
-                        2, '.', ''),
+                        2, '.', ''),number_format($x - 1.00, 2, '.', ''),
                         $quote->symbol, 1);
 
                     Log::debug("Order placed: Buy ".number_format($x, 2, '.',

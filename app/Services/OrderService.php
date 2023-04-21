@@ -90,7 +90,8 @@ class OrderService
     /**
      * @throws \JsonException
      */
-    public static function placeOtoOrder($buyPrice, $sellPrice, string
+    public static function placeOtoOrder($buyPrice, $sellPrice,$stopPrice,
+                                         string
     $symbol, int $quantity): array
     {
         // Set up the request body
@@ -142,10 +143,68 @@ class OrderService
   ]
 }';
 
+        $protectedOrders = '{
+  "orderStrategyType": "TRIGGER",
+  "session": "SEAMLESS",
+  "duration": "DAY",
+  "orderType": "LIMIT",
+  "price": '.$buyPrice.',
+  "orderLegCollection": [
+    {
+      "instruction": "BUY",
+      "quantity": '.$quantity.',
+      "instrument": {
+        "assetType": "EQUITY",
+        "symbol": "'.$symbol.'"
+      }
+    }
+  ],
+  "childOrderStrategies": [
+    {
+      "orderStrategyType": "OCO",
+      "childOrderStrategies": [
+        {
+          "orderStrategyType": "SINGLE",
+          "session": "SEAMLESS",
+          "duration": "GOOD_TILL_CANCEL",
+          "orderType": "LIMIT",
+          "price": '.$sellPrice.',
+          "orderLegCollection": [
+            {
+              "instruction": "SELL",
+              "quantity": '.$quantity.',
+              "instrument": {
+                "assetType": "EQUITY",
+                "symbol": "'.$symbol.'"
+              }
+            }
+          ]
+        },
+        {
+          "orderStrategyType": "SINGLE",
+          "session": "SEAMLESS",
+          "duration": "GOOD_TILL_CANCEL",
+          "orderType": "STOP",
+          "stopPrice": '.$stopPrice.',
+          "orderLegCollection": [
+            {
+              "instruction": "SELL",
+              "quantity": '.$quantity.',
+              "instrument": {
+                "assetType": "EQUITY",
+                "symbol": "'.$symbol.'"
+               }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}';
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-        return self::sendRequest($ordersEndpointUrl, $newnew);
+        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
 //        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
