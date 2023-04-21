@@ -60,7 +60,7 @@ class TradeEngine extends Command
                 $expiredCount) = TDAmeritrade::extracted($orders);
 
             // If all orders have completed, place a new OTO order
-            if ($workingCount > 0) {
+            if ($workingCount['WORKING'] > 0) {
 
                 $token = Token::where('user_id', Auth::id())->get();
 
