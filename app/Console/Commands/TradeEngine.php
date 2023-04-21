@@ -115,8 +115,10 @@ class TradeEngine extends Command
                         $quote->symbol, 1);
 
                     Log::debug("Order placed: Buy ".number_format($x, 2, '.',
-                            '')."," . number_format($x + .10, 2, '.', '') . ",
-                        $quote->symbol, 1", $OrderResponse);
+                            '').", Sell Price: " . number_format($x + .10, 2,
+                            '.', '') . ", Stop Price: " . number_format($x -
+                            1.00, 2, '.', '') . "
+                       Symbol: $quote->symbol, 1", $OrderResponse);
                     usleep(500000);
                 }
             }
