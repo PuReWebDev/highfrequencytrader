@@ -31,6 +31,50 @@
                                 </thead>
                                 <tbody>
                                 @foreach($orders as $order)
+                                    @if ($order->status === 'WORKING')
+                                        <tr>
+                                            <td>{{ $order->symbol }}</td>
+                                            <td>{{ $order->orderId }}</td>
+                                            <td>{{ $order->instruction }}</td>
+                                            <td>{{ $order->positionEffect }}</td>
+                                            <td>{{ $order->orderStrategyType }}</td>
+                                            <td>{{ $order->duration }}</td>
+                                            <td>{{ $order->price }}</td>
+                                            <td>{{ $order->status }}</td>
+                                            <td>{{ $order->quantity }}</td>
+                                            <td>{{ $order->session }}</td>
+                                            <td>{{ $order->created_at }}</td>
+                                            <td>{{ $order->updated_at }}</td>
+
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
+
+                    @if (count($orders) >= 1)
+                        <div class="table-responsive">
+                            <table class="table" id="filled-orders-table">
+                                <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Order ID</th>
+                                    <th>Instruction</th>
+                                    <th>Position Effect</th>
+                                    <th>Order Strategy Type</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Quantity</th>
+                                    <th>Session</th>
+                                    <th>Created At</th>
+                                    <th>Last At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
                                     @if ($order->status === 'FILLED')
                                         <tr>
                                             <td>{{ $order->symbol }}</td>
