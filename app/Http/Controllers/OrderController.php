@@ -34,12 +34,18 @@ class OrderController extends Controller
                 return $item['status'];
             }
         });
+        $cancelledCount = $orders->countBy(function ($item) {
+            if ($item['status'] === 'CANCELED') {
+                return $item['status'];
+            }
+        });
 
         return View::make('order', [
             'orders' => $orders,
             'filledCount' => $filledCount,
             'workingCount' => $workingCount,
             'rejectedCount' => $rejectedCount,
+            'cancelledCount' => $cancelledCount,
         ]);
     }
 
