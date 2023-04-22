@@ -27,7 +27,8 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
-            $item['enteredTime'] = Carbon::createFromTimestamp($item['enteredTime']);
+            $dt = Carbon::parse($item['enteredTime']);
+            $item['enteredTime'] = $dt->toDateTimeString();
 
             return $item;
         });
