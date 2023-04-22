@@ -23,7 +23,7 @@ class OrderController extends Controller
         Accounts::tokenPreFlight();
         TDAmeritrade::getOrders();
 
-        $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+        $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
             $expiredCount) = TDAmeritrade::extracted($orders);
 
