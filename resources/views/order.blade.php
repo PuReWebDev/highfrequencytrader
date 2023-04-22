@@ -25,6 +25,7 @@
 
                         <div class="table-responsive">
                             <table class="table" id="open-orders-table">
+                                <caption style="text-align: center;">Total Counts</caption>
                                 <thead>
                                 <tr>
                                     <th>Filled Orders</th>
@@ -78,6 +79,7 @@
                             @if ($displayWorking === true)
                                 <div class="table-responsive">
                                     <table class="table" id="open-orders-table">
+                                        <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
                                             <th>Symbol</th>
@@ -123,6 +125,7 @@
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
                                     <table class="table" id="filled-orders-table">
+                                        <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
                                         <tr>
                                             <th>Symbol</th>
@@ -167,6 +170,8 @@
                     @if (count($orders) >= 1)
                     <div class="table-responsive">
                         <table class="table" id="orders-table">
+                            <caption style="text-align: center; ">All
+                                Orders</caption>
                             <thead>
                             <tr>
                                 <th>Symbol</th>
