@@ -27,8 +27,17 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
+            // Readable time vs raw timestamp
             $dt = Carbon::parse($item['enteredTime']);
             $item['enteredTime'] = $dt->toDateTimeString();
+
+            // Now if this is a sell order, let's grab the buy and calculate
+            // profit
+            $item['tradeProfit'] = '';
+            if (!empty($item['parentOrderId'])) {
+                $order = Order::where('orderId', $item['parentOrderId'])->get();
+                $item['tradeProfit'] = $order['0']['price'] - $item['price'];
+            }
 
             return $item;
         });

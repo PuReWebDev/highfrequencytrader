@@ -88,6 +88,7 @@
                                             <th>Order Strategy Type</th>
                                             <th>Duration</th>
                                             <th>Price</th>
+                                            <th>Trade Profit</th>
                                             <th>Status</th>
                                             <th>Quantity</th>
                                             <th>Session</th>
@@ -106,6 +107,7 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
+                                                    <td>{{ $order->tradeProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td>{{ $order->quantity }}</td>
                                                     <td>{{ $order->session }}</td>
@@ -133,6 +135,7 @@
                                             <th>Order Strategy Type</th>
                                             <th>Duration</th>
                                             <th>Price</th>
+                                            <th>Trade Profit</th>
                                             <th>Status</th>
                                             <th>Quantity</th>
                                             <th>Session</th>
@@ -151,6 +154,7 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
+                                                    <td>{{ $order->tradeProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td>{{ $order->quantity }}</td>
                                                     <td>{{ $order->session }}</td>
@@ -177,6 +181,7 @@
                                 <th>Order Strategy Type</th>
                                 <th>Duration</th>
                                 <th>Price</th>
+                                <th>Trade Profit</th>
                                 <th>Status</th>
                                 <th>Quantity</th>
                                 <th>Session</th>
@@ -194,6 +199,7 @@
                                     <td>{{ $order->orderStrategyType }}</td>
                                     <td>{{ $order->duration }}</td>
                                     <td>{{ $order->price }}</td>
+                                    <td>{{ $order->tradeProfit }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->quantity }}</td>
                                     <td>{{ $order->session }}</td>
