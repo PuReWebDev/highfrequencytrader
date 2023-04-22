@@ -20,7 +20,6 @@ class OrderController extends Controller
      */
     public function index()
     {
-//        Accounts::updateAccountData();
         Accounts::tokenPreFlight();
         TDAmeritrade::getOrders();
 
