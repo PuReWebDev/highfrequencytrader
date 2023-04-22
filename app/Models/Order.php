@@ -23,6 +23,7 @@ class Order extends Model
         'accountId',
         'user_id',
         'orderId',
+        'parentOrderId',
         'symbol',
         'instruction',
         'positionEffect',
