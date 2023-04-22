@@ -151,9 +151,9 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
-                                                    <td>{{ $order->tradeProfit }}</td>
+                                                    <td style="text-align:center">{{ $order->tradeProfit }}</td>
                                                     <td>{{ $order->status }}</td>
-                                                    <td>{{ $order->quantity }}</td>
+                                                    <td style="text-align:center">{{ $order->quantity }}</td>
                                                     <td>{{ $order->enteredTime }}</td>
                                                 </tr>
                                             @endif
@@ -194,9 +194,9 @@
                                     <td>{{ $order->orderStrategyType }}</td>
                                     <td>{{ $order->duration }}</td>
                                     <td>{{ $order->price }}</td>
-                                    <td>{{ $order->tradeProfit }}</td>
+                                    <td style="text-align:center">{{ $order->tradeProfit }}</td>
                                     <td>{{ $order->status }}</td>
-                                    <td>{{ $order->quantity }}</td>
+                                    <td style="text-align:center">{{ $order->quantity }}</td>
                                     <td>{{ $order->enteredTime }}</td>
                                 </tr>
                             @endforeach
