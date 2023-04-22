@@ -39,6 +39,18 @@ class Accounts
         }
     }
 
+    public static function tokenPreFlight(): void
+    {
+        $token = Token::where('user_id', Auth::id())->get();
+
+        if (TDAmeritrade::isAccessTokenExpired
+            ($token['0']['updated_at']) === true) {
+            // Time To Refresh The Token
+            TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
+            Log::info('The Token Was Refreshed During This Process');
+        }
+    }
+
     /**
      * Get the account information for an account.
      *
@@ -684,14 +696,7 @@ class Accounts
 
     public static function updateAccountData(): void
     {
-        $token = Token::where('user_id', Auth::id())->get();
-
-        if (TDAmeritrade::isAccessTokenExpired
-            ($token['0']['updated_at']) === true) {
-            // Time To Refresh The Token
-            TDAmeritrade::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
-            Log::info('The Token Was Refreshed During This Process');
-        }
+        self::tokenPreFlight();
 
         // Retrieve The Account Information
         $accountResponse = Accounts::getAccounts();
