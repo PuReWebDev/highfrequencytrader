@@ -24,6 +24,14 @@ class OrderController extends Controller
         TDAmeritrade::getOrders();
 
         $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
+
+        $orders->each(function (int $item, int $key) {
+            if ($key === 'enteredTime') {
+                $dt = Carbon::createFromTimestamp($item);
+                return $dt->toDateTimeString();
+            }
+        });
+
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
             $expiredCount) = TDAmeritrade::extracted($orders);
 
