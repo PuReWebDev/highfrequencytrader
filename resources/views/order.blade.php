@@ -91,7 +91,6 @@
                                             <th>Trade Profit</th>
                                             <th>Status</th>
                                             <th>Quantity</th>
-                                            <th>Session</th>
                                             <th>Entered Time</th>
                                         </tr>
                                         </thead>
@@ -110,7 +109,6 @@
                                                     <td>{{ $order->tradeProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td>{{ $order->quantity }}</td>
-                                                    <td>{{ $order->session }}</td>
                                                     <td>{{ $order->enteredTime }}</td>
                                                 </tr>
                                             @endif
@@ -138,7 +136,6 @@
                                             <th>Trade Profit</th>
                                             <th>Status</th>
                                             <th>Quantity</th>
-                                            <th>Session</th>
                                             <th>Entered Time</th>
                                         </tr>
                                         </thead>
@@ -157,7 +154,6 @@
                                                     <td>{{ $order->tradeProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td>{{ $order->quantity }}</td>
-                                                    <td>{{ $order->session }}</td>
                                                     <td>{{ $order->enteredTime }}</td>
                                                 </tr>
                                             @endif
@@ -184,7 +180,6 @@
                                 <th>Trade Profit</th>
                                 <th>Status</th>
                                 <th>Quantity</th>
-                                <th>Session</th>
                                 <th>Entered Time</th>
                             </tr>
                             </thead>
@@ -202,7 +197,6 @@
                                     <td>{{ $order->tradeProfit }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->quantity }}</td>
-                                    <td>{{ $order->session }}</td>
                                     <td>{{ $order->enteredTime }}</td>
                                 </tr>
                             @endforeach
