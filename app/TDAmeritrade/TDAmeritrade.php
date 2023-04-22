@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
+use App\Models\Account;
 use App\Models\Quote;
 use App\Models\Token;
 use Carbon\Carbon;
@@ -258,6 +259,87 @@ class TDAmeritrade
         $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
 
+        foreach ($responseData as $key => $value) {
+            Quote::updateOrCreate(
+                ['symbol' => $value['symbol']],
+                [
+                    'symbol' => $value['symbol'],
+                    'description' => $value['description'],
+                    'bidPrice' => $value['bidPrice'],
+                    'bidSize' => $value['bidSize'],
+                    'bidId' => $value['bidId'],
+                    'askPrice' => $value['askPrice'],
+                    'askSize' => $value['askSize'],
+                    'askId' => $value['askId'],
+                    'lastPrice' => $value['lastPrice'],
+                    'lastSize' => $value['lastSize'],
+                    'lastId' => $value['lastId'],
+                    'openPrice' => $value['openPrice'],
+                    'highPrice' => $value['highPrice'],
+                    'lowPrice' => $value['lowPrice'],
+                    'closePrice' => $value['closePrice'],
+                    'netChange' => $value['netChange'],
+                    'totalVolume' => $value['totalVolume'],
+                    'quoteTimeInLong' => $value['quoteTimeInLong'],
+                    'tradeTimeInLong' => $value['tradeTimeInLong'],
+                    'mark' => $value['mark'],
+                    'exchange' => $value['exchange'],
+                    'exchangeName' => $value['exchangeName'],
+                    'marginable' => $value['marginable'],
+                    'shortable' => $value['shortable'],
+                    'volatility' => $value['volatility'],
+                    'digits' => $value['digits'],
+                    '52WkHigh' => $value['52WkHigh'],
+                    '52WkLow' => $value['52WkLow'],
+                    'peRatio' => $value['peRatio'],
+                    'divAmount' => $value['divAmount'],
+                    'divYield' => $value['divYield'],
+                    'securityStatus' => $value['securityStatus'],
+                    'regularMarketLastPrice' => $value['regularMarketLastPrice'],
+                    'regularMarketLastSize' => $value['regularMarketLastSize'],
+                    'regularMarketNetChange' => $value['regularMarketNetChange'],
+                    'regularMarketTradeTimeInLong' => $value['regularMarketTradeTimeInLong'],
+                ]
+            );
+        }
+
+        return Quote::whereIn('symbol', $symbols)->get();
+    }
+
+    /**
+     * getOrders
+     * Get Orders For Account
+     * @return mixed
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public static function getOrders(): mixed
+    {
+        $token = Token::where('user_id', Auth::id())->get();
+        $account = Account::where('user_id', Auth::id())->get();
+
+        $data = [
+            'base_uri' => SELF::BASE_URL,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+                'fromEnteredTime' => '2023-04-01',
+                'toEnteredTime' => Carbon::today()->toDateString(),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        $response = $client->request('get', SELF::API_VER . '/accounts/'
+                . $account['0']['accountId'] .'/orders', $data);
+
+        $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+            JSON_THROW_ON_ERROR);
+
+        dd($responseData);
         foreach ($responseData as $key => $value) {
             Quote::updateOrCreate(
                 ['symbol' => $value['symbol']],
