@@ -38,6 +38,7 @@ class OrderController extends Controller
                 $order = Order::where('orderId', $item['parentOrderId'])->get();
                 if (!empty($item['price']) && !empty($order['0']['price'])) {
                     $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['price'], 2, '.', '');
+                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
                 }
             }
 
