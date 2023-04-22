@@ -137,7 +137,6 @@
                                             <th>Duration</th>
                                             <th>Price</th>
                                             <th>Trade Profit</th>
-                                            <th>Status</th>
                                             <th>Quantity</th>
                                             <th>Entered Time</th>
                                         </tr>
@@ -155,7 +154,6 @@
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
                                                     <td style="text-align:center">{{ $order->tradeProfit }}</td>
-                                                    <td>{{ $order->status }}</td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
                                                     <td>{{ $order->enteredTime }}</td>
                                                 </tr>
