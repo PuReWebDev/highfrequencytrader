@@ -28,10 +28,10 @@ class OrderController extends Controller
 
         $orders->each(function ($item, $key) {
             Log::info("The item is $item and the key is $key");
-            if ($key === 'enteredTime') {
-                $dt = Carbon::createFromTimestamp($item);
-                return $dt->toDateTimeString();
-            }
+
+            $item['enteredTime'] = Carbon::createFromTimestamp($item['enteredTime']);
+            return $item;
+
         });
 
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
