@@ -9,7 +9,6 @@ use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
@@ -27,11 +26,9 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
-            Log::info("The item is $item and the key is $key");
-
             $item['enteredTime'] = Carbon::createFromTimestamp($item['enteredTime']);
-            return $item;
 
+            return $item;
         });
 
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
