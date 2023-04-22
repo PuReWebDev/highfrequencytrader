@@ -309,11 +309,10 @@ class TDAmeritrade
     /**
      * getOrders
      * Get Orders For Account
-     * @return mixed
      * @throws GuzzleException
      * @throws \JsonException
      */
-    public static function getOrders(): mixed
+    public static function getOrders(): void
     {
         $token = Token::where('user_id', Auth::id())->get();
         $account = Account::where('user_id', Auth::id())->get();
@@ -339,52 +338,7 @@ class TDAmeritrade
         $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
 
-        dd($responseData);
-        foreach ($responseData as $key => $value) {
-            Quote::updateOrCreate(
-                ['symbol' => $value['symbol']],
-                [
-                    'symbol' => $value['symbol'],
-                    'description' => $value['description'],
-                    'bidPrice' => $value['bidPrice'],
-                    'bidSize' => $value['bidSize'],
-                    'bidId' => $value['bidId'],
-                    'askPrice' => $value['askPrice'],
-                    'askSize' => $value['askSize'],
-                    'askId' => $value['askId'],
-                    'lastPrice' => $value['lastPrice'],
-                    'lastSize' => $value['lastSize'],
-                    'lastId' => $value['lastId'],
-                    'openPrice' => $value['openPrice'],
-                    'highPrice' => $value['highPrice'],
-                    'lowPrice' => $value['lowPrice'],
-                    'closePrice' => $value['closePrice'],
-                    'netChange' => $value['netChange'],
-                    'totalVolume' => $value['totalVolume'],
-                    'quoteTimeInLong' => $value['quoteTimeInLong'],
-                    'tradeTimeInLong' => $value['tradeTimeInLong'],
-                    'mark' => $value['mark'],
-                    'exchange' => $value['exchange'],
-                    'exchangeName' => $value['exchangeName'],
-                    'marginable' => $value['marginable'],
-                    'shortable' => $value['shortable'],
-                    'volatility' => $value['volatility'],
-                    'digits' => $value['digits'],
-                    '52WkHigh' => $value['52WkHigh'],
-                    '52WkLow' => $value['52WkLow'],
-                    'peRatio' => $value['peRatio'],
-                    'divAmount' => $value['divAmount'],
-                    'divYield' => $value['divYield'],
-                    'securityStatus' => $value['securityStatus'],
-                    'regularMarketLastPrice' => $value['regularMarketLastPrice'],
-                    'regularMarketLastSize' => $value['regularMarketLastSize'],
-                    'regularMarketNetChange' => $value['regularMarketNetChange'],
-                    'regularMarketTradeTimeInLong' => $value['regularMarketTradeTimeInLong'],
-                ]
-            );
-        }
-
-        return Quote::whereIn('symbol', $symbols)->get();
+        Accounts::processIncomingOrders($responseData);
     }
 
     /**

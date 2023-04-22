@@ -52,6 +52,27 @@ class Accounts
     }
 
     /**
+     * @param $orderStrategies
+     */
+    public static function processIncomingOrders($orderStrategies): void
+    {
+        foreach ($orderStrategies as
+                 $orders) {
+            self::saveOrdersInformation($orders);
+
+            if (!empty($orders['childOrderStrategies'])) {
+                foreach ($orders['childOrderStrategies'] as
+                         $childOrder) {
+                    $childOrder['parentOrderId'] = $orders['orderId'];
+                    Log::info($childOrder['parentOrderId'] . ' is parentOrderId that was set and parent is' . $orders['orderId']);
+                    self::saveOrdersInformation($childOrder);
+                }
+            }
+
+        }
+    }
+
+    /**
      * Get the account information for an account.
      *
      * @param string $accountId
@@ -672,20 +693,7 @@ class Accounts
             }
 
             if (!empty($value['securitiesAccount']['orderStrategies'])) {
-                foreach ($value['securitiesAccount']['orderStrategies'] as
-                         $orders) {
-                    self::saveOrdersInformation($orders);
-
-                    if (!empty($orders['childOrderStrategies'])) {
-                        foreach ($orders['childOrderStrategies'] as
-                                 $childOrder) {
-                            $childOrder['parentOrderId'] = $orders['orderId'];
-                            Log::info($childOrder['parentOrderId'] .' is parentOrderId that was set and parent is'. $orders['orderId']);
-                            self::saveOrdersInformation($childOrder);
-                        }
-                    }
-
-                }
+                self::processIncomingOrders($value['securitiesAccount']['orderStrategies']);
             }
 
             self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
