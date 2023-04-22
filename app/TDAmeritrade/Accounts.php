@@ -64,7 +64,6 @@ class Accounts
                 foreach ($orders['childOrderStrategies'] as
                          $childOrder) {
                     $childOrder['parentOrderId'] = $orders['orderId'];
-                    Log::info($childOrder['parentOrderId'] . ' is parentOrderId that was set and parent is' . $orders['orderId']);
                     self::saveOrdersInformation($childOrder);
                 }
             }
@@ -641,7 +640,6 @@ class Accounts
                 'accountId' => $orderStrategies['accountId'] ?? null,
             ]
         );
-        Log::info('orderId: '.$orderStrategies['orderId'] .' updated');
     }
 
     /**
