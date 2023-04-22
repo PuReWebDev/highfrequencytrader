@@ -82,6 +82,7 @@
                                         <tr>
                                             <th>Symbol</th>
                                             <th>Order ID</th>
+                                            <th>Parent Order ID</th>
                                             <th>Instruction</th>
                                             <th>Position Effect</th>
                                             <th>Order Strategy Type</th>
@@ -100,6 +101,7 @@
                                                 <tr>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
+                                                    <td>{{ $order->parentOrderId}}</td>
                                                     <td>{{ $order->instruction }}</td>
                                                     <td>{{ $order->positionEffect }}</td>
                                                     <td>{{ $order->orderStrategyType }}</td>
@@ -128,6 +130,7 @@
                                         <tr>
                                             <th>Symbol</th>
                                             <th>Order ID</th>
+                                            <th>Parent Order ID</th>
                                             <th>Instruction</th>
                                             <th>Position Effect</th>
                                             <th>Order Strategy Type</th>
@@ -146,6 +149,7 @@
                                                 <tr>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
+                                                    <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
                                                     <td>{{ $order->positionEffect }}</td>
                                                     <td>{{ $order->orderStrategyType }}</td>
@@ -173,6 +177,7 @@
                             <tr>
                                 <th>Symbol</th>
                                 <th>Order ID</th>
+                                <th>Parent Order ID</th>
                                 <th>Instruction</th>
                                 <th>Position Effect</th>
                                 <th>Order Strategy Type</th>
@@ -190,6 +195,7 @@
                                 <tr>
                                     <td>{{ $order->symbol }}</td>
                                     <td>{{ $order->orderId }}</td>
+                                    <td>{{ $order->parentOrderId }}</td>
                                     <td>{{ $order->instruction }}</td>
                                     <td>{{ $order->positionEffect }}</td>
                                     <td>{{ $order->orderStrategyType }}</td>

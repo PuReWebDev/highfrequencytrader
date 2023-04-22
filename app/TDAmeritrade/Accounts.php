@@ -575,6 +575,7 @@ class Accounts
                 'orderId' => $orderStrategies['orderId'],
             ],
             [
+                'parentOrderId' => $orderStrategies['parentOrderId'] ?? null,
                 'session' => $orderStrategies['session'] ?? null,
                 'averagePrice' => $orderStrategies['averagePrice'] ?? null,
                 'currentDayCost' => $orderStrategies['currentDayCost'] ?? null,
@@ -665,6 +666,7 @@ class Accounts
                     if (!empty($orders['childOrderStrategies'])) {
                         foreach ($orders['childOrderStrategies'] as
                                  $childOrder) {
+                            $childOrder['parentOrderId'] = $orders['orderId'];
                             self::saveOrdersInformation($childOrder);
                         }
                     }
