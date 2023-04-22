@@ -608,6 +608,7 @@ class Accounts
                 'accountId' => $orderStrategies['accountId'] ?? null,
             ]
         );
+        Log::info('orderId: '.$orderStrategies['orderId'] .' updated');
     }
 
     /**
