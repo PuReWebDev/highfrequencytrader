@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class OrderController extends Controller
     public function index()
     {
 //        Accounts::updateAccountData();
-
+        Accounts::tokenPreFlight();
         TDAmeritrade::getOrders();
 
         $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
