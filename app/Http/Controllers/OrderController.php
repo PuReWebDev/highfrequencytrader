@@ -36,7 +36,7 @@ class OrderController extends Controller
             $item['tradeProfit'] = '';
             if (!empty($item['parentOrderId'])) {
                 $order = Order::where('orderId', $item['parentOrderId'])->get();
-                $item['tradeProfit'] = $item['price'] - $order['0']['price'];
+                $item['tradeProfit'] = number_format($item['price'], 2, '.', '') - number_format($order['0']['price'], 2, '.', '');
             }
 
             return $item;
