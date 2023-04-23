@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Order;
+use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
@@ -122,11 +123,11 @@ class TradeEngine extends Command
                      $x >= $endPrice;
                      $x -= 0.01) {
 
-//                    OrderService::placeOtoOrder(
-//                        number_format($x, 2, '.', ''),
-//                        number_format($x + .10,2, '.', ''),
-//                        number_format($x - 1.00, 2, '.', ''),
-//                        $quote->symbol, $sharesPerTrade);
+                    OrderService::placeOtoOrder(
+                        number_format($x, 2, '.', ''),
+                        number_format($x + .10,2, '.', ''),
+                        number_format($x - 1.00, 2, '.', ''),
+                        $quote->symbol, $sharesPerTrade);
 
                     $message = "Order placed: Buy ".number_format($x, 2, '.',
                             '').", Sell Price: " . number_format($x + .10, 2,
