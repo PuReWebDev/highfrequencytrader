@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Order;
-use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Console\Command;
@@ -45,50 +44,59 @@ class TradeEngine extends Command
      */
     public function handle()
     {
-// Get stock symbol from command argument
+        // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
+        $tradeQuantity = 5;
+        $sharesPerTrade = 2;
 
         Auth::loginUsingId(4, $remember = true);
 
-//        if (MarketHours::isMarketOpen("EQUITY")) {
+        $this->info('Trade Engine Starting');
         // Loop until all orders have completed
         while (true) {
-            usleep(500000);
             // Retrieve The Account Information
             Accounts::updateAccountData();
-
             // TODO Can user Trade??
 
             // Check for existing orders
-            $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
-            list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
-                $expiredCount, $stoppedCount) = TDAmeritrade::extracted($orders);
+            $orders = Order::where([
+                ['user_id', '=', Auth::id()],
+                ['status', '=', 'WORKING'],
+                ['tag', '=', 'AA_PuReWebDev'],
+            ])->get();
 
-            if ($stoppedCount['FILLED'] >= 5) {
+            $stoppedOrders = Order::where([
+                ['user_id', '=', Auth::id()],
+                ['status', '=', 'FILLED'],
+                ['tag', '=', 'AA_PuReWebDev'],
+                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
+            ])->whereNotNull('stopPrice')->get();
+
+            if ($stoppedOrders->count() >= 5) {
                 Log::info("We've been stopped out");
                 sleep(180);
             }
             // If all orders have completed, place a new OTO order
-            if (empty($workingCount['WORKING'])) {
+            if ($orders->count() <= $tradeQuantity) {
 
                 // Grab The Current Price
-                $quotes = TDAmeritrade::quotes([$symbol,'AMZN', 'GOOGL', 'VZ']);
+                $quotes = TDAmeritrade::quotes([$symbol,'AMZN']);
 
                 // Place The Trades
-                $this->getOrderResponse($quotes);
+                $this->getOrderResponse($quotes,$sharesPerTrade);
             }
         }
-//        }
+        $this->info('Trade Engine Gracefully Exiting');
 
         return 0;
     }
 
     /**
      * @param mixed $quotes
-     * @return array
+     * @return void
      * @throws \JsonException
      */
-    private function getOrderResponse(mixed $quotes): array
+    private function getOrderResponse(mixed $quotes,int $sharesPerTrade): void
     {
         foreach ($quotes as $quote) {
             if ($quote->symbol == 'TSLA') {
@@ -98,22 +106,24 @@ class TradeEngine extends Command
                      $x >= $endPrice;
                      $x -= 0.01) {
 
-//                    echo $x .' and '. $x +.20 ."\n";
-                    $OrderResponse = OrderService::placeOtoOrder
-                    (number_format($x, 2, '.', ''), number_format($x + .10,
-                        2, '.', ''),number_format($x - 1.00, 2, '.', ''),
-                        $quote->symbol, 1);
+//                    OrderService::placeOtoOrder(
+//                        number_format($x, 2, '.', ''),
+//                        number_format($x + .10,2, '.', ''),
+//                        number_format($x - 1.00, 2, '.', ''),
+//                        $quote->symbol, $sharesPerTrade);
 
-                    Log::debug("Order placed: Buy ".number_format($x, 2, '.',
+                    $message = "Order placed: Buy ".number_format($x, 2, '.',
                             '').", Sell Price: " . number_format($x + .10, 2,
                             '.', '') . ", Stop Price: " . number_format($x -
                             1.00, 2, '.', '') . "
-                       Symbol: $quote->symbol, 1", $OrderResponse);
+                       Symbol: $quote->symbol, $sharesPerTrade";
+
+                    Log::debug($message);
+                    $this->info($message);
                     usleep(500000);
                 }
             }
         }
-        return $OrderResponse;
     }
 
 }
