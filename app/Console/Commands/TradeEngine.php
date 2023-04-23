@@ -133,7 +133,7 @@ class TradeEngine extends Command
                             '').", Sell Price: " . number_format($x + .10, 2,
                             '.', '') . ", Stop Price: " . number_format($x -
                             1.00, 2, '.', '') . "
-                       Symbol: $quote->symbol, $sharesPerTrade";
+                       Symbol: $quote->symbol, Quantity: $sharesPerTrade";
 
                     Log::debug($message);
                     $this->info($message);
