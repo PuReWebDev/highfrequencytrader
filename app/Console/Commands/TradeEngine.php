@@ -80,6 +80,7 @@ class TradeEngine extends Command
                 $consecutiveTrades = 0;
                 Log::info("We've been stopped out. Sleeping for 180 Seconds");
                 sleep(180);
+                continue; // take it from the top
             }
             // If all orders have completed, place a new OTO order
             if ($orders->count() <= $tradeQuantity) {
