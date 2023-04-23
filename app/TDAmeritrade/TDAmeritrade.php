@@ -372,6 +372,16 @@ class TDAmeritrade
                 return $item['status'];
             }
         });
-        return array($workingCount, $filledCount, $rejectedCount, $cancelledCount, $expiredCount);
+        $stoppedCount = $orders->countBy(function ($item) {
+            if (!empty($item['stopPrice']) && $item['status'] === 'FILLED') {
+                $then = Carbon::createFromFormat('Y-m-d H:i:s', $item['created_at']);
+                if($then->diffInMinutes(Carbon::now()) < 5)
+                {
+                    return $item['status'];
+                }
+            }
+        });
+        return array($workingCount, $filledCount, $rejectedCount,
+            $cancelledCount, $expiredCount, $stoppedCount);
     }
 }
