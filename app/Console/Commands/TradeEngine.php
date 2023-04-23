@@ -54,7 +54,6 @@ class TradeEngine extends Command
         // Loop until all orders have completed
         while (true) {
             usleep(500000);
-            sleep(4);
             // Retrieve The Account Information
             Accounts::updateAccountData();
 
@@ -63,8 +62,12 @@ class TradeEngine extends Command
             // Check for existing orders
             $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
             list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
-                $expiredCount) = TDAmeritrade::extracted($orders);
+                $expiredCount, $stoppedCount) = TDAmeritrade::extracted($orders);
 
+            if ($stoppedCount['FILLED'] >= 5) {
+                Log::info("We've been stopped out");
+                sleep(180);
+            }
             // If all orders have completed, place a new OTO order
             if (empty($workingCount['WORKING'])) {
 
