@@ -82,7 +82,7 @@ class TradeEngine extends Command
             }
             // If all orders have completed, place a new OTO order
             if ($orders->count() <= $tradeQuantity) {
-
+                $this->info('We have '. count($orders) .' . $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
                 // Grab The Current Price
                 $quotes = TDAmeritrade::quotes([$symbol,'AMZN']);
 
