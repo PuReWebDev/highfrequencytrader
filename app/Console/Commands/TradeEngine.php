@@ -49,6 +49,7 @@ class TradeEngine extends Command
         $symbol = $this->argument('symbol');
         $tradeQuantity = 5;
         $sharesPerTrade = 2;
+        $consecutiveTrades = 0;
 
         Auth::loginUsingId(4, $remember = true);
 
@@ -74,7 +75,9 @@ class TradeEngine extends Command
             ])->whereNotNull('stopPrice')->get();
 
             if ($stoppedOrders->count() >= 5) {
-                Log::info("We've been stopped out");
+                $sharesPerTrade = 2; // Reset our Quantity back down
+                $consecutiveTrades = 0;
+                Log::info("We've been stopped out. Sleeping for 180 Seconds");
                 sleep(180);
             }
             // If all orders have completed, place a new OTO order
@@ -83,9 +86,21 @@ class TradeEngine extends Command
                 // Grab The Current Price
                 $quotes = TDAmeritrade::quotes([$symbol,'AMZN']);
 
+                if ($consecutiveTrades === 10) {
+                    $sharesPerTrade++;
+                    $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $sharesPerTrade);
+                    $consecutiveTrades = 0;
+
+                    if ($sharesPerTrade >= 10) {
+                        $sharesPerTrade = 10; // Fixed Quantity for now
+                    }
+
+                }
                 // Place The Trades
                 $this->getOrderResponse($quotes,$sharesPerTrade);
             }
+
+            $consecutiveTrades++;
         }
         $this->info('Trade Engine Gracefully Exiting');
 
