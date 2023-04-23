@@ -46,7 +46,7 @@ class OrderController extends Controller
         });
 
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
-            $expiredCount) = TDAmeritrade::extracted($orders);
+            $expiredCount, $stoppedCount) = TDAmeritrade::extracted($orders);
 
         return View::make('order', [
             'orders' => $orders,
@@ -55,6 +55,7 @@ class OrderController extends Controller
             'rejectedCount' => $rejectedCount,
             'cancelledCount' => $cancelledCount,
             'expiredCount' => $expiredCount,
+            'stoppedCount' => $stoppedCount,
         ]);
     }
 
