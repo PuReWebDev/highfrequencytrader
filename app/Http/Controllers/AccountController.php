@@ -376,10 +376,17 @@ class AccountController extends Controller
                         foreach ($orders['childOrderStrategies'] as
                                  $childOrder) {
                             if (isset($childOrder['childOrderStrategies'])) {
-                                Log::debug('Order Output: ',$childOrder['childOrderStrategies']);
+
+                                foreach ($childOrder['childOrderStrategies']
+                                         as $ocoOrder) {
+                                    Log::debug('Order Output: ',$ocoOrder);
+                                    self::saveOrdersInformation($ocoOrder);
+                                }
+
+
                             }
 
-                            self::saveOrdersInformation($childOrder);
+
                         }
                     }
 
