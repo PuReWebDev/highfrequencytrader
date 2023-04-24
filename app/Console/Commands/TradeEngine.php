@@ -48,7 +48,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 5;
+        $tradeQuantity = 10;
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
