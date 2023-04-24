@@ -48,7 +48,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 5;
+        $tradeQuantity = 17;
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
@@ -78,16 +78,17 @@ class TradeEngine extends Command
             if ($stoppedOrders->count() >= 5) {
                 $sharesPerTrade = 2; // Reset our Quantity back down
                 $consecutiveTrades = 0;
-                $tradeQuantity = 5;
+                $tradeQuantity = 17;
                 Log::info("We've been stopped out. Sleeping for 180 Seconds");
                 sleep(180);
                 continue; // take it from the top
             }
 
-//            $firstOrder = $orders->first();
-//            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
-//                $tradeQuantity++;
-//            }
+            $firstOrder = $orders->first();
+            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
+                Log::info('Increasing  Trade Quantity After 5 Minutes In Active');
+                $tradeQuantity++;
+            }
 
             // If all orders have completed, place a new OTO order
             if ($orders->count() <= $tradeQuantity) {
