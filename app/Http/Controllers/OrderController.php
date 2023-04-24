@@ -24,8 +24,8 @@ class OrderController extends Controller
     public function index()
     {
         Accounts::tokenPreFlight();
-//        TDAmeritrade::getOrders('WORKING');
-        TDAmeritrade::getOrders('FILLED');
+        TDAmeritrade::getOrders('WORKING');
+//        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
         $profitsTotal = 0.00;
 
