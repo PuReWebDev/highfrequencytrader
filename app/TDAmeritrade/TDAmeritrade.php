@@ -390,4 +390,34 @@ class TDAmeritrade
         return array($workingCount, $filledCount, $rejectedCount,
             $cancelledCount, $expiredCount, $stoppedCount,$stoppedTotalCount);
     }
+
+
+    /**
+     * cancelOrders
+     * Get Orders For Account
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public static function cancelOrder($orderId): void
+    {
+        $token = Token::where('user_id', Auth::id())->get();
+        $account = Account::where('user_id', Auth::id())->get();
+
+        $data = [
+            'base_uri' => SELF::BASE_URL,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        $client->request('get', SELF::API_VER . '/accounts/'
+            . $account['0']['accountId'] .'/orders'.$orderId, $data);
+
+    }
 }

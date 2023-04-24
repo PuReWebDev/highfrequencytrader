@@ -58,6 +58,19 @@ class TradeEngine extends Command
         while (true) {
             // Retrieve The Account Information
 //            Accounts::updateAccountData();
+
+            $pendingCancels = Order::where([
+                ['user_id', '=', Auth::id()],
+                ['status', '=', 'WORKING'],
+                ['tag', '=', 'AA_PuReWebDev'],
+                ['instruction', '=', 'BUY'],
+                ['created_at', '<=', Carbon::now()->subMinutes(5)->toDateTimeString()],
+            ])->get();
+
+            foreach ($pendingCancels as $pendingCancel) {
+                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+            }
+
             TDAmeritrade::getOrders();
             // TODO Can user Trade??
 
