@@ -136,7 +136,7 @@ class TradeEngine extends Command
                             1.00, 2, '.', '') . "
                        Symbol: $quote->symbol, Quantity: $sharesPerTrade";
 
-                    Log::debug($message);
+//                    Log::debug($message);
                     $this->info($message);
                     usleep(500000);
                 }
