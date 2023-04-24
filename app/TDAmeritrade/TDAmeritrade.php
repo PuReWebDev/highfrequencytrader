@@ -417,7 +417,7 @@ class TDAmeritrade
         $client = new Client($data);
 
         $client->request('get', SELF::API_VER . '/accounts/'
-            . $account['0']['accountId'] .'/orders'.$orderId, $data);
+            . $account['0']['accountId'] .'/orders/'.$orderId, $data);
 
     }
 }
