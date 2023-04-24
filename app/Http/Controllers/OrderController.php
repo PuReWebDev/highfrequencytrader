@@ -23,7 +23,7 @@ class OrderController extends Controller
     public function index()
     {
         Accounts::tokenPreFlight();
-//        TDAmeritrade::getOrders();
+        TDAmeritrade::getOrders();
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
