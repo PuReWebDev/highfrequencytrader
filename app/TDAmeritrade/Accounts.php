@@ -64,10 +64,23 @@ class Accounts
                 foreach ($orders['childOrderStrategies'] as
                          $childOrder) {
 
-                    Log::info('We are entering the child order strategies');
+                    if (!empty($childOrder['childOrderStrategies'])) {
 
-                    $childOrder['parentOrderId'] = $orders['orderId'];
-                    self::saveOrdersInformation($childOrder);
+                        foreach ($childOrder['childOrderStrategies'] as
+                                 $ocoOrder) {
+                            Log::info($ocoOrder['orderStrategyType']);
+
+                            if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
+                                $childOrder['parentOrderId'] = $orders['orderId'];
+                            }
+
+                            self::saveOrdersInformation($childOrder);
+                        }
+
+                    }
+
+
+
                 }
             }
 
