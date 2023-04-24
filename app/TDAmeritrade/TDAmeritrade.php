@@ -419,5 +419,7 @@ class TDAmeritrade
         $client->request('get', SELF::API_VER . '/accounts/'
             . $account['0']['accountId'] .'/orders/'.$orderId, $data);
 
+        Log::info('Cancelled Order ID: '. $orderId);
+
     }
 }
