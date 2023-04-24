@@ -47,7 +47,8 @@ class OrderController extends Controller
                     $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['price'], 2, '.', '');
                     $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
                     $item['tradeProfit'] = '$'.number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
-                    $this->profitsTotal = $item['tradeProfit'] + $this->profitsTotal;
+                    $this->profitsTotal = (float)$item['tradeProfit'] +
+                        $this->profitsTotal;
                 }
 
                 if (!empty($item['stopPrice']) && !empty($order['0']['price'])) {
