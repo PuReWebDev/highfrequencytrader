@@ -107,9 +107,8 @@ class TradeEngine extends Command
                 }
                 // Place The Trades
                 $this->getOrderResponse($quotes,$sharesPerTrade);
+                $consecutiveTrades++;
             }
-
-            $consecutiveTrades++;
         }
         $this->info('Trade Engine Gracefully Exiting');
 
