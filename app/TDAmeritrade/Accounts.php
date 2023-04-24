@@ -60,8 +60,8 @@ class Accounts
                  $orders) {
             self::saveOrdersInformation($orders);
 
-            if (!empty($orders['childOrderStrategies'])) {
-                foreach ($orders['childOrderStrategies'] as
+            if (!empty($orders['childOrderStrategies']['childOrderStrategies'])) {
+                foreach ($orders['childOrderStrategies']['childOrderStrategies'] as
                          $childOrder) {
                     $childOrder['parentOrderId'] = $orders['orderId'];
                     self::saveOrdersInformation($childOrder);
