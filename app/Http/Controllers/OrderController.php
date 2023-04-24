@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -51,6 +52,8 @@ class OrderController extends Controller
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
             $expiredCount, $stoppedCount) = TDAmeritrade::extracted($orders);
 
+        $Balance = Balance::where('user_id', Auth::id())->get();
+
         return View::make('order', [
             'orders' => $orders,
             'filledCount' => $filledCount,
@@ -59,6 +62,7 @@ class OrderController extends Controller
             'cancelledCount' => $cancelledCount,
             'expiredCount' => $expiredCount,
             'stoppedCount' => $stoppedCount,
+            'balance' => $Balance,
         ]);
     }
 

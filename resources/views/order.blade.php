@@ -34,7 +34,8 @@
                                     <th>Cancelled Orders</th>
                                     <th>Expired Orders</th>
                                     <th>Total Orders</th>
-                                    <th>Stopped Orders In Last 5 Minutes</th>
+                                    <th>Stopped Orders (Last 5 Minutes)</th>
+                                    <th>Account Value</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -71,12 +72,13 @@
                                                     0
                                                 @endempty</td>
                                             <td>{{ $orders->count() }}</td>
-                                            <td>@isset($stoppedCount['FILLED'])
+                                            <td style="text-align:center">@isset($stoppedCount['FILLED'])
                                                     {{ $stoppedCount['FILLED'] }}
                                                 @endisset
                                                 @empty($stoppedCount['FILLED'])
                                                     0
                                                 @endempty</td>
+                                            <td style="text-align:center">{{ $balance['0']['liquidationValue'] }}</td>
                                         </tr>
                                 </tbody>
                             </table>
