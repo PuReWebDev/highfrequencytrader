@@ -639,6 +639,12 @@ class Accounts
                 'requestedDestination' => $orderStrategies['requestedDestination'] ?? null,
                 'destinationLinkName' => $orderStrategies['destinationLinkName'] ?? null,
                 'price' => $orderStrategies['price'] ?? null,
+                'stopPrice' => $orderStrategies['stopPrice'] ?? null,
+                'stopPriceLinkBasis' => $orderStrategies['stopPriceLinkBasis'] ?? null,
+                'stopPriceLinkType' => $orderStrategies['stopPriceLinkType'] ?? null,
+                'stopPriceOffset' => $orderStrategies['stopPriceOffset'] ?? null,
+                'orderDuration' => $orderStrategies['orderDuration'] ?? null,
+                'stopType' => $orderStrategies['stopType'] ?? null,
                 'orderLegType' => $orderStrategies['orderLegCollection']['orderLegType'] ?? null,
                 'legId' => $orderStrategies['orderLegCollection']['0']['legId']
                     ?? null,
