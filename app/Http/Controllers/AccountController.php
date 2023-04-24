@@ -379,7 +379,8 @@ class AccountController extends Controller
 
                                 foreach ($childOrder['childOrderStrategies']
                                          as $ocoOrder) {
-                                    Log::debug('Order Output: ',$ocoOrder);
+                                    $ocoOrder['parentOrderId'] = $orders['orderId'];
+//                                    Log::debug('Order Output: ',$ocoOrder);
                                     self::saveOrdersInformation($ocoOrder);
                                 }
 

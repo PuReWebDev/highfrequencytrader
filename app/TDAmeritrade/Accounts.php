@@ -63,6 +63,8 @@ class Accounts
             if (!empty($orders['childOrderStrategies']['childOrderStrategies'])) {
                 foreach ($orders['childOrderStrategies']['childOrderStrategies'] as
                          $childOrder) {
+
+                    Log::info('We are entering the child order strategies');
                     $childOrder['parentOrderId'] = $orders['orderId'];
                     self::saveOrdersInformation($childOrder);
                 }
