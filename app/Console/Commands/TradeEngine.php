@@ -66,8 +66,7 @@ class TradeEngine extends Command
                 ['user_id', '=', Auth::id()],
                 ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
-                ['created_at', Carbon::today()],
-            ])->get();
+            ])->whereDate('created_at', Carbon::today())->get();
 
             $stoppedOrders = Order::where([
                 ['user_id', '=', Auth::id()],
