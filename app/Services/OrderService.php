@@ -145,7 +145,7 @@ class OrderService
 
         $protectedOrders = '{
   "orderStrategyType": "TRIGGER",
-  "session": "SEAMLESS",
+  "session": "NORMAL",
   "duration": "DAY",
   "orderType": "LIMIT",
   "price": '.$buyPrice.',
@@ -165,7 +165,7 @@ class OrderService
       "childOrderStrategies": [
         {
           "orderStrategyType": "SINGLE",
-          "session": "SEAMLESS",
+          "session": "NORMAL",
           "duration": "GOOD_TILL_CANCEL",
           "orderType": "LIMIT",
           "price": '.$sellPrice.',
@@ -182,7 +182,7 @@ class OrderService
         },
         {
           "orderStrategyType": "SINGLE",
-          "session": "SEAMLESS",
+          "session": "NORMAL",
           "duration": "GOOD_TILL_CANCEL",
           "orderType": "STOP",
           "stopPrice": '.$stopPrice.',
