@@ -24,7 +24,10 @@ class OrderController extends Controller
         Accounts::tokenPreFlight();
         TDAmeritrade::getOrders();
 
-        $orders = Order::where('user_id', Auth::id())->orderBy('orderId', 'DESC')->get();
+        $orders = Order::where([
+            ['user_id','=', Auth::id()],
+            ['tag', '=', 'AA_PuReWebDev'],
+        ])->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
             // Readable time vs raw timestamp
