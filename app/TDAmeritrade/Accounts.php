@@ -75,7 +75,7 @@ class Accounts
                                 Log::debug('OCO Sells', $ocoOrder);
                             }
 
-                            self::saveOrdersInformation($childOrder);
+                            self::saveOrdersInformation($ocoOrder);
                         }
 
                     }
