@@ -375,6 +375,7 @@ class AccountController extends Controller
                     if (!empty($orders['childOrderStrategies']['childOrderStrategies'])) {
                         foreach ($orders['childOrderStrategies']['childOrderStrategies'] as
                                  $childOrder) {
+                            Log::debug('Order Output: '.$childOrder);
                             self::saveOrdersInformation($childOrder);
                         }
                     }
