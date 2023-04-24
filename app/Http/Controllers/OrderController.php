@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\View;
 class OrderController extends Controller
 {
     private $profitsTotal = 0.00;
+    private $lossTotal = 0.00;
     /**
      * Display a listing of the resource.
      *
@@ -52,9 +53,11 @@ class OrderController extends Controller
                 }
 
                 if (!empty($item['stopPrice']) && !empty($order['0']['price'])) {
-                    $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['stopPrice'], 2, '.', '');
-                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
-                    $item['tradeProfit'] = '$'.number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
+                    $item['tradeProfit'] = (float)$item['price'] - (float)$order['0']['stopPrice'];
+//                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
+                    $item['tradeProfit'] = (float)$item['tradeProfit']  * $order['0']['quantity'];
+                    $this->lossTotal = (float) $item['tradeProfit'] +
+                        $this->lossTotal;
                 }
             }
 
@@ -77,6 +80,7 @@ class OrderController extends Controller
             'balance' => $Balance,
             'stoppedTotalCount' => $stoppedTotalCount,
             'profitsTotal' => $this->profitsTotal,
+            'lossTotal' => $this->lossTotal,
         ]);
     }
 

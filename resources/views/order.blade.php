@@ -38,6 +38,7 @@
                                     <th>Stopped Orders Total</th>
                                     <th>Account Value</th>
                                     <th>Today's Profits</th>
+                                    <th>Total Loss</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -88,6 +89,7 @@
                                                 @endempty</td>
                                             <td style="text-align:center">{{ $balance['0']['liquidationValue'] }}</td>
                                             <td style="text-align:center">${{$profitsTotal }}</td>
+                                            <td style="text-align:center">${{$lossTotal }}</td>
                                         </tr>
                                 </tbody>
                             </table>
