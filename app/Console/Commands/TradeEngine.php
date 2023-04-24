@@ -88,7 +88,7 @@ class TradeEngine extends Command
                 // Grab The Current Price
                 $quotes = TDAmeritrade::quotes([$symbol,'AMZN']);
 
-                if ($consecutiveTrades === 10) {
+                if ($consecutiveTrades >= 10) {
                     $sharesPerTrade++;
                     $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $sharesPerTrade);
                     $consecutiveTrades = 0;
