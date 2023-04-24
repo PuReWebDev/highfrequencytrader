@@ -78,10 +78,17 @@ class TradeEngine extends Command
             if ($stoppedOrders->count() >= 5) {
                 $sharesPerTrade = 2; // Reset our Quantity back down
                 $consecutiveTrades = 0;
+                $tradeQuantity = 12;
                 Log::info("We've been stopped out. Sleeping for 180 Seconds");
                 sleep(180);
                 continue; // take it from the top
             }
+
+            $firstOrder = $orders->first();
+            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
+                $tradeQuantity++;
+            }
+
             // If all orders have completed, place a new OTO order
             if ($orders->count() <= $tradeQuantity) {
                 $this->info('We have '. $orders->count() .' working orders. $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
