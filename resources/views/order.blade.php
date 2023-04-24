@@ -106,7 +106,7 @@
                                             <th>Order Strategy Type</th>
                                             <th>Duration</th>
                                             <th>Price</th>
-                                            <th>Trade Profit</th>
+                                            <th>Expected Profit</th>
                                             <th>Status</th>
                                             <th>Quantity</th>
                                             <th>Entered Time</th>
