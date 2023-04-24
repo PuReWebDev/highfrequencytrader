@@ -68,10 +68,11 @@ class Accounts
 
                         foreach ($childOrder['childOrderStrategies'] as
                                  $ocoOrder) {
-                            Log::info($ocoOrder['orderStrategyType']);
+//                            Log::info($ocoOrder['orderStrategyType']);
 
                             if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
                                 $childOrder['parentOrderId'] = $orders['orderId'];
+                                Log::debug('OCO Sells', $ocoOrder);
                             }
 
                             self::saveOrdersInformation($childOrder);
