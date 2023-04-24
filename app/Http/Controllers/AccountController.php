@@ -319,7 +319,7 @@ class AccountController extends Controller
 
             // Retrieve The Account Information
             $accountResponse = Accounts::getAccounts();
-            dd($accountResponse['0']['securitiesAccount']['orderStrategies']['223']);
+            dd($accountResponse['0']['securitiesAccount']['orderStrategies']['100']);
 
             if (!empty($accountResponse['error'])) {
                 self::saveTokenInformation(TDAmeritrade::refreshToken($token['0']['refresh_token']));
