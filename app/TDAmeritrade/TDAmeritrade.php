@@ -381,7 +381,12 @@ class TDAmeritrade
                 }
             }
         });
+        $stoppedTotalCount = $orders->countBy(function ($item) {
+            if (!empty($item['stopPrice']) && $item['status'] === 'FILLED') {
+                    return $item['status'];
+            }
+        });
         return array($workingCount, $filledCount, $rejectedCount,
-            $cancelledCount, $expiredCount, $stoppedCount);
+            $cancelledCount, $expiredCount, $stoppedCount,$stoppedTotalCount);
     }
 }

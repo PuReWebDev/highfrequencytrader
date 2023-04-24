@@ -35,6 +35,7 @@
                                     <th>Expired Orders</th>
                                     <th>Total Orders</th>
                                     <th>Stopped Orders (Last 5 Minutes)</th>
+                                    <th>Stopped Orders Total</th>
                                     <th>Account Value</th>
                                 </tr>
                                 </thead>
@@ -76,6 +77,12 @@
                                                     {{ $stoppedCount['FILLED'] }}
                                                 @endisset
                                                 @empty($stoppedCount['FILLED'])
+                                                    0
+                                                @endempty</td>
+                                            <td style="text-align:center">@isset($stoppedTotalCount['FILLED'])
+                                                    {{ $stoppedTotalCount['FILLED'] }}
+                                                @endisset
+                                                @empty($stoppedTotalCount['FILLED'])
                                                     0
                                                 @endempty</td>
                                             <td style="text-align:center">{{ $balance['0']['liquidationValue'] }}</td>

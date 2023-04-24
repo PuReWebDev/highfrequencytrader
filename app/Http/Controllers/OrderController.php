@@ -57,7 +57,7 @@ class OrderController extends Controller
         });
 
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
-            $expiredCount, $stoppedCount) = TDAmeritrade::extracted($orders);
+            $expiredCount, $stoppedCount,$stoppedTotalCount) = TDAmeritrade::extracted($orders);
 
         $Balance = Balance::where('user_id', Auth::id())->get();
 
@@ -70,6 +70,7 @@ class OrderController extends Controller
             'expiredCount' => $expiredCount,
             'stoppedCount' => $stoppedCount,
             'balance' => $Balance,
+            'stoppedTotalCount' => $stoppedTotalCount,
         ]);
     }
 
