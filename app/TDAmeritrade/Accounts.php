@@ -72,7 +72,7 @@ class Accounts
 
                             if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
                                 $ocoOrder['parentOrderId'] = $orders['orderId'];
-                                Log::debug('OCO Sells', $ocoOrder);
+//                                Log::debug('OCO Sells', $ocoOrder);
                             }
 
                             self::saveOrdersInformation($ocoOrder);
