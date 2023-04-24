@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use App\Models\Order;
 use App\Services\OrderService;
-use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -58,7 +57,8 @@ class TradeEngine extends Command
         // Loop until all orders have completed
         while (true) {
             // Retrieve The Account Information
-            Accounts::updateAccountData();
+//            Accounts::updateAccountData();
+            TDAmeritrade::getOrders();
             // TODO Can user Trade??
 
             // Check for existing orders

@@ -18,7 +18,7 @@ class BalancesController extends Controller
      */
     public function index()
     {
-//        Accounts::updateAccountData();
+        Accounts::updateAccountData();
 
         $balances = Balance::where('user_id', Auth::id())->get();
 
