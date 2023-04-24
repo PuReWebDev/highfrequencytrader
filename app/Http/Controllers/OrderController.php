@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
 {
+    private $profitsTotal = 0.00;
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +26,7 @@ class OrderController extends Controller
         Accounts::tokenPreFlight();
 //        TDAmeritrade::getOrders();
 //        Accounts::updateAccountData();
+        $profitsTotal = 0.00;
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
@@ -45,6 +47,9 @@ class OrderController extends Controller
                     $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['price'], 2, '.', '');
                     $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
                     $item['tradeProfit'] = '$'.number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
+                    $this->profitsTotal = number_format((float)
+                    $item['tradeProfit'], 2, '.', '') + number_format((float)
+                        $this->profitsTotal, 2, '.', '');
                 }
 
                 if (!empty($item['stopPrice']) && !empty($order['0']['price'])) {
@@ -72,6 +77,7 @@ class OrderController extends Controller
             'stoppedCount' => $stoppedCount,
             'balance' => $Balance,
             'stoppedTotalCount' => $stoppedTotalCount,
+            'profitsTotal' => $this->profitsTotal,
         ]);
     }
 
