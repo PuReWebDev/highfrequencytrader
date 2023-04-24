@@ -12,7 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use NumberFormatter;
 
 class OrderController extends Controller
 {
@@ -44,8 +43,7 @@ class OrderController extends Controller
                 if (!empty($item['price']) && !empty($order['0']['price'])) {
                     $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['price'], 2, '.', '');
                     $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
-                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
-                    $item['tradeProfit'] = '$'.NumberFormatter::formatCurrency($item['tradeProfit'] , 'USD');
+                    $item['tradeProfit'] = '$'.number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
                 }
             }
 
