@@ -84,11 +84,11 @@ class TradeEngine extends Command
                 continue; // take it from the top
             }
 
-            $firstOrder = $orders->first();
-            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
-                Log::info('Increasing  Trade Quantity After 5 Minutes In Active');
-                $tradeQuantity++;
-            }
+//            $firstOrder = $orders->first();
+//            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
+//                Log::info('Increasing  Trade Quantity After 5 Minutes In Active');
+//                $tradeQuantity++;
+//            }
 
             // If all orders have completed, place a new OTO order
             if ($orders->count() <= $tradeQuantity) {
