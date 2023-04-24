@@ -87,7 +87,7 @@
                                                     0
                                                 @endempty</td>
                                             <td style="text-align:center">{{ $balance['0']['liquidationValue'] }}</td>
-                                            <td style="text-align:center">{{ $profitsTotal }}</td>
+                                            <td style="text-align:center">${{$profitsTotal }}</td>
                                         </tr>
                                 </tbody>
                             </table>
