@@ -24,7 +24,7 @@ class OrderController extends Controller
     {
         Accounts::tokenPreFlight();
 //        TDAmeritrade::getOrders();
-        Accounts::updateAccountData();
+//        Accounts::updateAccountData();
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
