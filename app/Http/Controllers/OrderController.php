@@ -27,7 +27,6 @@ class OrderController extends Controller
         TDAmeritrade::getOrders();
 //        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
-        $profitsTotal = 0.00;
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
