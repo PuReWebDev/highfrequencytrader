@@ -309,10 +309,11 @@ class TDAmeritrade
     /**
      * getOrders
      * Get Orders For Account
+     * @param string $status
      * @throws GuzzleException
      * @throws \JsonException
      */
-    public static function getOrders(): void
+    public static function getOrders(string $status = ''): void
     {
         $token = Token::where('user_id', Auth::id())->get();
         $account = Account::where('user_id', Auth::id())->get();
@@ -325,11 +326,14 @@ class TDAmeritrade
             ],
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
-                'fromEnteredTime' => Carbon::today()->subHours(2)
-                    ->toDateString(),
+                'fromEnteredTime' => Carbon::today()->toDateString(),
                 'toEnteredTime' => Carbon::today()->toDateString(),
             ]
         ];
+
+        if (!empty($status)) {
+            $data['query']['status'] = $status;
+        }
 
         $client = new Client($data);
 
