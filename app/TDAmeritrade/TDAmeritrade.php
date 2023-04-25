@@ -421,7 +421,7 @@ class TDAmeritrade
 
         $client = new Client($data);
 
-        $response = $client->request('get', SELF::API_VER . '/accounts/'
+        $response = $client->request('DELETE', SELF::API_VER . '/accounts/'
             . $account['0']['accountId'] .'/orders/'.$orderId, $data);
 
         $cancelResponse = json_decode((string)$response->getBody()->getContents(),true, 512);
