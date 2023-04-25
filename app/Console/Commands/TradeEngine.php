@@ -19,7 +19,7 @@ class TradeEngine extends Command
      *
      * @var string
      */
-    protected $signature = 'trader {symbol}';
+    protected $signature = 'trader:trade {symbol}';
 
     /**
      * The console command description.
@@ -73,7 +73,7 @@ class TradeEngine extends Command
                 $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
 
-            TDAmeritrade::getOrders();
+//            TDAmeritrade::getOrders();
             // TODO Can user Trade??
 
             // Check for existing orders
