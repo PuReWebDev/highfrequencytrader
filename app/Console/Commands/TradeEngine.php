@@ -51,25 +51,6 @@ class TradeEngine extends Command
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
-
-        $now = Carbon::now();
-
-        $start = Carbon::createFromTimeString('05:00');
-        $end = Carbon::createFromTimeString('09:28');
-
-        if ($now->between($start, $end)) {
-            // ¯\_(ツ)_/¯ // Trade Premarket With Limit Orders
-            $this->info('correct time');
-        } else {
-            $this->info('wrong time');
-        }
-
-        $this->info('Trade Engine Gracefully Exiting');
-
-        return 0;
-        exit();
-
-
         Auth::loginUsingId(4, $remember = true);
 
         $this->info('Trade Engine Starting');
@@ -78,18 +59,21 @@ class TradeEngine extends Command
             // Retrieve The Account Information
 //            Accounts::updateAccountData();
 
-//            $pendingCancels = Order::where([
-//                ['user_id', '=', Auth::id()],
-//                ['status', '=', 'WORKING'],
-//                ['tag', '=', 'AA_PuReWebDev'],
-//                ['instruction', '=', 'BUY'],
-//                ['created_at', '<=', Carbon::now()->subMinutes(5)->toDateTimeString()],
-//            ])->get();
-//
-//            foreach ($pendingCancels as $pendingCancel) {
-//                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
-//                Log::info('The following Order ID should now be cancelled: '.$pendingCancel['orderId']);
-//            }
+            $pendingCancels = Order::where([
+                ['user_id', '=', Auth::id()],
+                ['status', '=', 'WORKING'],
+                ['tag', '=', 'AA_PuReWebDev'],
+                ['instruction', '=', 'BUY'],
+                ['created_at', '<=', Carbon::now()->subMinutes(5)->toDateTimeString()],
+            ])->get();
+
+            dd($pendingCancels);
+            exit();
+
+            foreach ($pendingCancels as $pendingCancel) {
+                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+                Log::info('The following Order ID should now be cancelled: '.$pendingCancel['orderId']);
+            }
 
             TDAmeritrade::getOrders();
             // TODO Can user Trade??
