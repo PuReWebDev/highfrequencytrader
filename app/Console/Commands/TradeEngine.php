@@ -61,11 +61,11 @@ class TradeEngine extends Command
 
             $pendingCancels = Order::where([
                 ['user_id', '=', Auth::id()],
-                ['status', '=', 'WORKING'],
+//                ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
                 ['instruction', '=', 'BUY'],
                 ['created_at', '<=', Carbon::now()->subMinutes(5)->toDateTimeString()],
-            ])->get();
+            ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
             dd($pendingCancels);
             exit();
