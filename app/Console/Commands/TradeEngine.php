@@ -59,19 +59,7 @@ class TradeEngine extends Command
             // Retrieve The Account Information
 //            Accounts::updateAccountData();
 
-            $pendingCancels = Order::where([
-                ['user_id', '=', Auth::id()],
-                ['tag', '=', 'AA_PuReWebDev'],
-                ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(2)
-                    ->toDateTimeString()],
-            ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
-            foreach ($pendingCancels as $pendingCancel) {
-                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
-                Log::info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
-                $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
-            }
 
 //            TDAmeritrade::getOrders();
             // TODO Can user Trade??
