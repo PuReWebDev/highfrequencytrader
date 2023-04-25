@@ -61,19 +61,15 @@ class TradeEngine extends Command
 
             $pendingCancels = Order::where([
                 ['user_id', '=', Auth::id()],
-//                ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
                 ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(5)
+                ['created_at', '<=', Carbon::now()->subMinutes(2)
                     ->toDateTimeString()],
             ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
             foreach ($pendingCancels as $pendingCancel) {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
-                Log::info('The following Order ID should now be cancelled: '.$pendingCancel['orderId']);
             }
-            dd('All Done');
-            exit();
 
             TDAmeritrade::getOrders();
             // TODO Can user Trade??
@@ -81,9 +77,8 @@ class TradeEngine extends Command
             // Check for existing orders
             $orders = Order::where([
                 ['user_id', '=', Auth::id()],
-                ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
-            ])->whereDate('created_at', Carbon::today())->get();
+            ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
 
             $stoppedOrders = Order::where([
                 ['user_id', '=', Auth::id()],
