@@ -6,6 +6,7 @@ use App\Http\Resources\OrderResource;
 use App\Models\Account;
 use App\Models\Order;
 use App\Models\Token;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
@@ -204,8 +205,18 @@ class OrderService
         $account = Account::where('user_id', Auth::id())->get();
         $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
 
-        return self::sendRequest($ordersEndpointUrl, $newnew);
-//        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+        $now = Carbon::now();
+
+        $start = Carbon::createFromTimeString('07:00');
+        $end = Carbon::createFromTimeString('09:28');
+
+        if ($now->between($start, $end)) {
+            // ¯\_(ツ)_/¯ // Trade Premarket With Limit Orders
+            return self::sendRequest($ordersEndpointUrl, $newnew);
+        } else {
+            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+        }
+
 //        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
