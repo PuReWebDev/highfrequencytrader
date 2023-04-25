@@ -398,8 +398,8 @@ class TDAmeritrade
 
 
     /**
-     * cancelOrders
-     * Get Orders For Account
+     * cancelOrder
+     * Cancel Order For Account
      * @throws GuzzleException
      * @throws \JsonException
      */
@@ -421,12 +421,7 @@ class TDAmeritrade
 
         $client = new Client($data);
 
-        $response = $client->request('DELETE', SELF::API_VER . '/accounts/'
+        $client->request('DELETE', SELF::API_VER . '/accounts/'
             . $account['0']['accountId'] .'/orders/'.$orderId, $data);
-
-        $cancelResponse = json_decode((string)$response->getBody()->getContents(),true, 512);
-        dd($cancelResponse);
-        Log::info('Cancelled Order ID: '. $orderId);
-
     }
 }
