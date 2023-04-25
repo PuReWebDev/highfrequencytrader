@@ -54,7 +54,7 @@ class TradeEngine extends Command
 
         $now = Carbon::now();
 
-        $start = Carbon::createFromTimeString('07:00');
+        $start = Carbon::createFromTimeString('05:00');
         $end = Carbon::createFromTimeString('09:28');
 
         if ($now->between($start, $end)) {
