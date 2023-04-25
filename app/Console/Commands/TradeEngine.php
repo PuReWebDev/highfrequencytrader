@@ -51,22 +51,24 @@ class TradeEngine extends Command
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
+
         $now = Carbon::now();
 
-        $start = Carbon::createFromTimeString('05:00');
-        $end = Carbon::createFromTimeString('09:28')->addDay();
+        $start = Carbon::createFromTimeString('07:00');
+        $end = Carbon::createFromTimeString('09:28');
 
         if ($now->between($start, $end)) {
-            // ¯\_(ツ)_/¯
-            $this->info('The time correctly assess we are in the right time range');
+            // ¯\_(ツ)_/¯ // Trade Premarket With Limit Orders
+            $this->info('correct time');
         } else {
-            $this->info('The time was incorrect');
+            $this->info('wrong time');
         }
 
         $this->info('Trade Engine Gracefully Exiting');
 
         return 0;
         exit();
+
 
         Auth::loginUsingId(4, $remember = true);
 
