@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use App\Models\Order;
-use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,8 +23,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        Accounts::tokenPreFlight();
-        TDAmeritrade::getOrders();
+//        Accounts::tokenPreFlight();
+//        TDAmeritrade::getOrders();
 //        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
 
