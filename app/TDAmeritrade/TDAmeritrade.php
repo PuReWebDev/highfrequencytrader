@@ -315,6 +315,7 @@ class TDAmeritrade
      */
     public static function getOrders(string $status = ''): void
     {
+        Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
         $account = Account::where('user_id', Auth::id())->get();
 
