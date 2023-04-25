@@ -96,7 +96,7 @@ class TradeEngine extends Command
             if ($orders->count() <= $tradeQuantity) {
                 $this->info('We have '. $orders->count() .' working orders. $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
                 // Grab The Current Price
-                $quotes = TDAmeritrade::quotes([$symbol,'AMZN']);
+                $quotes = TDAmeritrade::quotes([$symbol,'AMZN','CCL', 'DIS']);
 
                 if ($consecutiveTrades >= 10) {
                     $sharesPerTrade++;
@@ -126,7 +126,7 @@ class TradeEngine extends Command
     private function getOrderResponse(mixed $quotes,int $sharesPerTrade): void
     {
         foreach ($quotes as $quote) {
-            if ($quote->symbol == 'TSLA') {
+//            if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
                 $endPrice = $currentStockPrice - .04;
                 for ($x = $currentStockPrice;
@@ -136,6 +136,16 @@ class TradeEngine extends Command
                     OrderService::placeOtoOrder(
                         number_format($x, 2, '.', ''),
                         number_format($x + .10,2, '.', ''),
+                        number_format($x - 1.00, 2, '.', ''),
+                        $quote->symbol, $sharesPerTrade);
+                    OrderService::placeOtoOrder(
+                        number_format($x, 2, '.', ''),
+                        number_format($x + .05,2, '.', ''),
+                        number_format($x - 1.00, 2, '.', ''),
+                        $quote->symbol, $sharesPerTrade);
+                    OrderService::placeOtoOrder(
+                        number_format($x, 2, '.', ''),
+                        number_format($x + .01,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
                         $quote->symbol, $sharesPerTrade);
 
@@ -149,7 +159,7 @@ class TradeEngine extends Command
                     $this->info($message);
                     usleep(500000);
                 }
-            }
+//            }
         }
     }
 
