@@ -102,6 +102,7 @@
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
+                                            <th scope="col">#</th>
                                             <th>Symbol</th>
                                             <th>Order ID</th>
                                             <th>Parent Order ID</th>
@@ -120,6 +121,7 @@
                                         @foreach($orders as $order)
                                             @if ($order->status === 'WORKING')
                                                 <tr>
+                                                    <th scope="row">{{ $count }}</th>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId}}</td>
@@ -148,6 +150,7 @@
                                         <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
                                         <tr>
+                                            <th scope="col">#</th>
                                             <th>Symbol</th>
                                             <th>Order ID</th>
                                             <th>Parent Order ID</th>
@@ -165,6 +168,7 @@
                                         @foreach($orders as $order)
                                             @if ($order->status === 'FILLED')
                                                 <tr>
+                                                    <th scope="row">{{ $count }}</th>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
@@ -195,6 +199,7 @@
                                 Orders</caption>
                             <thead>
                             <tr>
+                                <th scope="col">#</th>
                                 <th>Symbol</th>
                                 <th>Order ID</th>
                                 <th>Parent Order ID</th>
@@ -212,6 +217,7 @@
                             <tbody>
                             @foreach($orders as $order)
                                 <tr>
+                                    <th scope="row">{{ $count }}</th>
                                     <td>{{ $order->symbol }}</td>
                                     <td>{{ $order->orderId }}</td>
                                     <td>{{ $order->parentOrderId }}</td>
