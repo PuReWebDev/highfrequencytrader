@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\Order;
 use App\Services\OrderService;
+use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -56,6 +57,7 @@ class TradeEngine extends Command
         $this->info('Trade Engine Starting');
         // Loop until all orders have completed
         while (true) {
+            Accounts::tokenPreFlight();
             // Retrieve The Account Information
 //            Accounts::updateAccountData();
 
