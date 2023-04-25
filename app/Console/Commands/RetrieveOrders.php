@@ -58,6 +58,9 @@ class RetrieveOrders extends Command
             $this->info($status.' Orders Retrieved. '.Carbon::now());
             usleep(500000);
 
+            if (empty($status)) {
+                $this->info('Set Sleep is ideal');
+            }
             // Splitting The Workload for basic clean up of stale orders
             $pendingCancels = Order::where([
                 ['user_id', '=', Auth::id()],
