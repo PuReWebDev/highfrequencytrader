@@ -121,7 +121,7 @@
                                         @foreach($orders as $order)
                                             @if ($order->status === 'WORKING')
                                                 <tr>
-                                                    <th scope="row">{{ $count }}</th>
+                                                    <th scope="row">{{ $loop->index }}</th>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId}}</td>
@@ -168,7 +168,7 @@
                                         @foreach($orders as $order)
                                             @if ($order->status === 'FILLED')
                                                 <tr>
-                                                    <th scope="row">{{ $count }}</th>
+                                                    <th scope="row">{{ $loop->index }}</th>
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
@@ -217,7 +217,7 @@
                             <tbody>
                             @foreach($orders as $order)
                                 <tr>
-                                    <th scope="row">{{ $count }}</th>
+                                    <th scope="row">{{ $loop->index }}</th>
                                     <td>{{ $order->symbol }}</td>
                                     <td>{{ $order->orderId }}</td>
                                     <td>{{ $order->parentOrderId }}</td>
