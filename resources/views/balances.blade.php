@@ -32,6 +32,7 @@
                                             <th>Equity</th>
                                             <th>Liquidation Value</th>
                                             <th>Long Margin Value</th>
+                                            <th>pendingDeposits</th>
                                             <th>longOptionMarketValue</th>
                                             <th>longStockValue</th>
                                             <th>maintenanceCall</th>
@@ -67,6 +68,7 @@
                                                     <td>{{ $balance->equity }}</td>
                                                     <td>{{ $balance->liquidationValue }}</td>
                                                     <td>{{ $balance->longMarginValue }}</td>
+                                                    <td>{{ $balance->pendingDeposits }}</td>
                                                     <td>{{ $balance->longOptionMarketValue }}</td>
                                                     <td>{{ $balance->longStockValue }}</td>
                                                     <td>{{ $balance->maintenanceCall }}</td>
@@ -76,7 +78,6 @@
                                                     <td>{{ $balance->regTCall }}</td>
                                                     <td>{{ $balance->totalCash }}</td>
                                                     <td>{{ $balance->isInCall }}</td>
-                                                    <td>{{ $balance->pendingDeposits }}</td>
                                                     <td>{{ $balance->marginBalance }}</td>
                                                     <td>{{ $balance->accountValue }}</td>
                                                     <td>{{ $balance->stockBuyingPower }}</td>
