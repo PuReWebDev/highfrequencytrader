@@ -69,6 +69,8 @@ class TradeEngine extends Command
 
             foreach ($pendingCancels as $pendingCancel) {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+                Log::info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
+                $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
 
             TDAmeritrade::getOrders();
