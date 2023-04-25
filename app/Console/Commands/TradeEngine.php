@@ -64,7 +64,8 @@ class TradeEngine extends Command
 //                ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
                 ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(5)->toDateTimeString()],
+                ['created_at', '<=', Carbon::now()->subMinutes(60)
+                    ->toDateTimeString()],
             ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
             dd($pendingCancels);
