@@ -64,17 +64,16 @@ class TradeEngine extends Command
 //                ['status', '=', 'WORKING'],
                 ['tag', '=', 'AA_PuReWebDev'],
                 ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(30)
+                ['created_at', '<=', Carbon::now()->subMinutes(5)
                     ->toDateTimeString()],
             ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
-
-            dd($pendingCancels);
-            exit();
 
             foreach ($pendingCancels as $pendingCancel) {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
                 Log::info('The following Order ID should now be cancelled: '.$pendingCancel['orderId']);
             }
+            dd('All Done');
+            exit();
 
             TDAmeritrade::getOrders();
             // TODO Can user Trade??
