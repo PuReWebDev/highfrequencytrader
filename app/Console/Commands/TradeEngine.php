@@ -51,6 +51,23 @@ class TradeEngine extends Command
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
+        $now = Carbon::now();
+
+        $start = Carbon::createFromTimeString('05:00');
+        $end = Carbon::createFromTimeString('09:28')->addDay();
+
+        if ($now->between($start, $end)) {
+            // ¯\_(ツ)_/¯
+            $this->info('The time correctly assess we are in the right time range');
+        } else {
+            $this->info('The time was incorrect');
+        }
+
+        $this->info('Trade Engine Gracefully Exiting');
+
+        return 0;
+        exit();
+
         Auth::loginUsingId(4, $remember = true);
 
         $this->info('Trade Engine Starting');
