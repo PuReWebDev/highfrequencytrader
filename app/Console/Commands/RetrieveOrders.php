@@ -59,7 +59,7 @@ class RetrieveOrders extends Command
             usleep(500000);
 
             if (empty($status)) {
-                $this->info('Set Sleep is ideal');
+                sleep(5);
             }
             // Splitting The Workload for basic clean up of stale orders
             $pendingCancels = Order::where([
