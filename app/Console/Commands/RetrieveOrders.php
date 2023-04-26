@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Order;
+use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -54,6 +55,7 @@ class RetrieveOrders extends Command
         }
 
         while (true) {
+            Accounts::tokenPreFlight();
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
             usleep(500000);
