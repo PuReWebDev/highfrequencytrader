@@ -449,7 +449,8 @@ class Accounts
      * @param  array  $query
      * @return array
      */
-    public static function get(string $uri, array $query = ['fields' => 'positions,orders']):
+//    public static function get(string $uri, array $query = ['fields' => 'positions,orders']):
+    public static function get(string $uri, array $query = ['fields' => 'positions']):
     array
     {
         $token = Token::where('user_id', Auth::id())->get();
