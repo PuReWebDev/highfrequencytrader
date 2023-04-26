@@ -29,7 +29,7 @@ class TradeEngine extends Command
      */
     protected $description = 'Initiate Trade Engine For Client';
 
-    protected array $tradeSymbols = ['TSLA','AMZN',];
+    protected array $tradeSymbols = ['TSLA',];
 
     /**
      * Create a new command instance.
@@ -50,7 +50,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 70;
+        $tradeQuantity = 80;
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
