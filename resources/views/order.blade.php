@@ -192,7 +192,8 @@
                             @endif
                         @endisset
 
-                    @if (count($orders) >= 1)
+{{--                    @if (count($orders) >= 1)--}}
+                    @if (count($orders) >= 1000000)
                     <div class="table-responsive">
                         <table class="table" id="orders-table">
                             <caption style="text-align: center; ">All
