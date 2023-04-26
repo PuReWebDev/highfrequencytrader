@@ -29,7 +29,7 @@ class TradeEngine extends Command
      */
     protected $description = 'Initiate Trade Engine For Client';
 
-    protected array $tradeSymbols = ['TSLA','AMZN','CCL', 'DIS'];
+    protected array $tradeSymbols = ['TSLA','AMZN',];
 
     /**
      * Create a new command instance.
