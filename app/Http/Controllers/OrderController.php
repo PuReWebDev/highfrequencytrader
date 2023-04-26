@@ -25,7 +25,7 @@ class OrderController extends Controller
     {
 //        Accounts::tokenPreFlight();
 //        TDAmeritrade::getOrders();
-        TDAmeritrade::getOrders('FILLED');
+//        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
 
         $orders = Order::where([

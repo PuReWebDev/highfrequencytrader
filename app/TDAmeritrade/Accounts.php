@@ -90,9 +90,12 @@ class Accounts
                  $ocoOrder) {
 //                            Log::info($ocoOrder['orderStrategyType']);
 
-            if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
-                $ocoOrder['parentOrderId'] = $orderId;
+            if (!empty($ocoOrder['orderStrategyType'])) {
+                if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
+                    $ocoOrder['parentOrderId'] = $orderId;
+                }
             }
+
 
             self::saveOrdersInformation($ocoOrder);
         }
