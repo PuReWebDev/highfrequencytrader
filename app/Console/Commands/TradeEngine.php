@@ -50,7 +50,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 45;
+        $tradeQuantity = 70;
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
@@ -132,7 +132,7 @@ class TradeEngine extends Command
         foreach ($quotes as $quote) {
 //            if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .01;
+                $endPrice = $currentStockPrice - .02;
 //                $endPrice = $currentStockPrice - .04;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
