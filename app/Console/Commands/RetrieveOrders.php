@@ -51,7 +51,7 @@ class RetrieveOrders extends Command
 
         Auth::loginUsingId(4, $remember = true);
 
-        if ($status === strtoupper('all')) {
+        if (strtoupper($status) === 'ALL') {
             $status = '';
         }
 
@@ -69,7 +69,7 @@ class RetrieveOrders extends Command
                 ['user_id', '=', Auth::id()],
                 ['tag', '=', 'AA_PuReWebDev'],
                 ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(2)
+                ['created_at', '<=', Carbon::now()->subMinutes(1)
                     ->toDateTimeString()],
             ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
