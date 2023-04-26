@@ -132,7 +132,8 @@ class TradeEngine extends Command
         foreach ($quotes as $quote) {
 //            if ($quote->symbol == 'TSLA') {
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .04;
+                $endPrice = $currentStockPrice - .01;
+//                $endPrice = $currentStockPrice - .04;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
                      $x -= 0.01) {
