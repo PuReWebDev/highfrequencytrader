@@ -31,7 +31,7 @@ class OrderController extends Controller
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
-        ])->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
+        ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
             // Readable time vs raw timestamp
