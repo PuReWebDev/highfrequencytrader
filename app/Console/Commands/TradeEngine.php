@@ -29,6 +29,8 @@ class TradeEngine extends Command
      */
     protected $description = 'Initiate Trade Engine For Client';
 
+    protected array $tradeSymbols = ['TSLA','AMZN','CCL', 'DIS'];
+
     /**
      * Create a new command instance.
      *
@@ -98,7 +100,7 @@ class TradeEngine extends Command
             if ($orders->count() <= $tradeQuantity) {
                 $this->info('We have '. $orders->count() .' working orders. $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
                 // Grab The Current Price
-                $quotes = TDAmeritrade::quotes([$symbol,'AMZN','CCL', 'DIS']);
+                $quotes = TDAmeritrade::quotes($this->tradeSymbols);
 
                 if ($consecutiveTrades >= 10) {
                     $sharesPerTrade++;
