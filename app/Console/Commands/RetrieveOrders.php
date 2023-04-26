@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -73,7 +74,12 @@ class RetrieveOrders extends Command
             ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
 
             foreach ($pendingCancels as $pendingCancel) {
-                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+                try {
+                    TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+                } catch (GuzzleException $e) {
+                    Log::debug('Attempted To Cancel Already Cancelled Order',['success' => false,'error' => $e->getMessage()]);
+                }
+
                 Log::info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
                 $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
