@@ -86,6 +86,13 @@ class Accounts
      */
     public static function parseChildOrders($childOrderStrategies, $orderId): void
     {
+        if (!empty($childOrderStrategies['orderStrategyType'])) {
+            if ($childOrderStrategies['orderStrategyType'] === 'SINGLE') {
+                $childOrderStrategies['parentOrderId'] = $orderId;
+            }
+            self::saveOrdersInformation($childOrderStrategies);
+        }
+
         foreach ($childOrderStrategies as
                  $ocoOrder) {
 //                            Log::info($ocoOrder['orderStrategyType']);
