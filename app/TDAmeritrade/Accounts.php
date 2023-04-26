@@ -65,25 +65,36 @@ class Accounts
                          $childOrder) {
 
                     if (!empty($childOrder['childOrderStrategies'])) {
-
-                        foreach ($childOrder['childOrderStrategies'] as
-                                 $ocoOrder) {
-//                            Log::info($ocoOrder['orderStrategyType']);
-
-                            if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
-                                $ocoOrder['parentOrderId'] = $orders['orderId'];
-                            }
-
-                            self::saveOrdersInformation($ocoOrder);
-                        }
-
+                        self::parseChildOrders($childOrder['childOrderStrategies'], $orders['orderId']);
                     }
 
-
+                    if (!empty($childOrder['orderStrategyType'])) {
+                        if ($childOrder['orderStrategyType'] === 'SINGLE') {
+                            self::parseChildOrders($childOrder, $orders['orderId']);
+                        }
+                    }
 
                 }
             }
 
+        }
+    }
+
+    /**
+     * @param $childOrderStrategies
+     * @param $orderId
+     */
+    public static function parseChildOrders($childOrderStrategies, $orderId): void
+    {
+        foreach ($childOrderStrategies as
+                 $ocoOrder) {
+//                            Log::info($ocoOrder['orderStrategyType']);
+
+            if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
+                $ocoOrder['parentOrderId'] = $orderId;
+            }
+
+            self::saveOrdersInformation($ocoOrder);
         }
     }
 

@@ -345,8 +345,6 @@ class TDAmeritrade
         $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
             JSON_THROW_ON_ERROR);
 
-        dd($responseData);
-
         Accounts::processIncomingOrders($responseData);
     }
 
