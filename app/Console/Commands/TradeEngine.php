@@ -115,6 +115,8 @@ class TradeEngine extends Command
                 // Place The Trades
                 $this->getOrderResponse($quotes,$sharesPerTrade);
                 $consecutiveTrades++;
+            } else {
+                $this->info('Skipped orders because order count is currently: '.$orders->count() .'and the maximum trade quantity is: '. $tradeQuantity);
             }
         }
         $this->info('Trade Engine Gracefully Exiting');
