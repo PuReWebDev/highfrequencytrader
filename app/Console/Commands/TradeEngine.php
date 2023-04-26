@@ -151,11 +151,6 @@ class TradeEngine extends Command
                         number_format($x + .05,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
                         $quote->symbol, $sharesPerTrade);
-                    OrderService::placeOtoOrder(
-                        number_format($x, 2, '.', ''),
-                        number_format($x + .01,2, '.', ''),
-                        number_format($x - 1.00, 2, '.', ''),
-                        $quote->symbol, $sharesPerTrade);
 
                     $message = "Order placed: Buy ".number_format($x, 2, '.',
                             '').", Sell Price: " . number_format($x + .10, 2,
