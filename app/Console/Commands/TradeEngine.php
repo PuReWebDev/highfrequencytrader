@@ -72,7 +72,7 @@ class TradeEngine extends Command
             $orders = Order::where([
                 ['user_id', '=', Auth::id()],
                 ['tag', '=', 'AA_PuReWebDev'],
-            ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
+            ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
 
             $stoppedOrders = Order::where([
                 ['user_id', '=', Auth::id()],
