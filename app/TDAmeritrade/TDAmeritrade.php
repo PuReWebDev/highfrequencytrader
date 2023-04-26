@@ -334,7 +334,7 @@ class TDAmeritrade
 
         if (!empty($status)) {
             $data['query']['status'] = $status;
-            Log::info('Fetching only orders of status: '.$status);
+//            Log::info('Fetching only orders of status: '.$status);
         }
 
         $client = new Client($data);
