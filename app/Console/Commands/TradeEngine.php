@@ -82,8 +82,8 @@ class TradeEngine extends Command
             ])->whereNotNull('stopPrice')->get();
 
             if ($stoppedOrders->count() >= 5) {
-                $sharesPerTrade = 2; // Reset our Quantity back down
-                $consecutiveTrades = 0;
+//                $sharesPerTrade = 2; // Reset our Quantity back down
+//                $consecutiveTrades = 0;
 //                $tradeQuantity = 5;
                 Log::info("We've been stopped out. Sleeping for 180 Seconds");
                 sleep(180);
