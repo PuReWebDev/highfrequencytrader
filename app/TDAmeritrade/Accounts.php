@@ -94,10 +94,9 @@ class Accounts
                 if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
                     $ocoOrder['parentOrderId'] = $orderId;
                 }
+                self::saveOrdersInformation($ocoOrder);
             }
 
-
-            self::saveOrdersInformation($ocoOrder);
         }
     }
 
