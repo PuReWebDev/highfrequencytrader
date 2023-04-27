@@ -212,12 +212,12 @@ class OrderService
 
         if ($now->between($start, $end)) {
             // ¯\_(ツ)_/¯ // Trade Premarket With Limit Orders
-//            return self::sendRequest($ordersEndpointUrl, $newnew);
+            return self::sendRequest($ordersEndpointUrl, $newnew);
         } else {
-//            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
         }
 
-        return self::sendRequest($ordersEndpointUrl, $sellOut);
+//        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
     /**
