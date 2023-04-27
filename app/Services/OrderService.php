@@ -146,15 +146,15 @@ class OrderService
         $sellOutLimit = '{
   "orderType": "LIMIT",
   "session": "SEAMLESS",
-  "price": "100.05",
+  "price": "112.42",
   "duration": "GOOD_TILL_CANCEL",
   "orderStrategyType": "SINGLE",
   "orderLegCollection": [
     {
       "instruction": "Sell",
-      "quantity": 4,
+      "quantity": 12,
       "instrument": {
-        "symbol": "DIS",
+        "symbol": "SBUX",
         "assetType": "EQUITY"
       }
     }
