@@ -28,9 +28,15 @@ class OrderController extends Controller
 //        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
 
+//        $orders = Order::where([
+//            ['user_id','=', Auth::id()],
+//            ['tag', '=', 'AA_PuReWebDev'],
+//        ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
+
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
+            ['status', '=', 'WORKING'],
         ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
