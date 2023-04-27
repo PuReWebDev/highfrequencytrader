@@ -50,7 +50,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 200;
+        $tradeQuantity = 5;
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
@@ -86,8 +86,8 @@ class TradeEngine extends Command
 //                $consecutiveTrades = 0;
 //                $tradeQuantity = 5;
                 Log::info("We've been stopped out. Sleeping for 180 Seconds");
-                sleep(180);
-                continue; // take it from the top
+//                sleep(180);
+//                continue; // take it from the top
             }
 
 //            $firstOrder = $orders->first();
@@ -143,14 +143,15 @@ class TradeEngine extends Command
 
                     OrderService::placeOtoOrder(
                         number_format($x, 2, '.', ''),
-                        number_format($x + .10,2, '.', ''),
+                        number_format($x + .05,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
                         $quote->symbol, $sharesPerTrade);
                     OrderService::placeOtoOrder(
                         number_format($x, 2, '.', ''),
-                        number_format($x + .05,2, '.', ''),
+                        number_format($x + .10,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
                         $quote->symbol, $sharesPerTrade);
+
 
                     $message = "Order placed: Buy ".number_format($x, 2, '.',
                             '').", Sell Price: " . number_format($x + .10, 2,
