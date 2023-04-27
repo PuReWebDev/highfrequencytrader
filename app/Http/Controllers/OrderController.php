@@ -28,10 +28,14 @@ class OrderController extends Controller
 //        TDAmeritrade::getOrders('FILLED');
 //        Accounts::updateAccountData();
 
+        $yesterday = Carbon::yesterday();
+        $now = Carbon::now();
+
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
-        ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
+        ])->whereNotNull('instruction')->whereNotNull('positionEffect')
+            ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
             // Readable time vs raw timestamp
