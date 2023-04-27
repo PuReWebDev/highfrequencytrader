@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Services\OrderService;
+use App\TDAmeritrade\Accounts;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 
 class SellOut extends Command
 {
@@ -38,6 +40,9 @@ class SellOut extends Command
      */
     public function handle()
     {
+        Auth::loginUsingId(4, $remember = true);
+        Accounts::tokenPreFlight();
+
         $x = 160.00;
         OrderService::placeOtoOrder(
             number_format($x, 2, '.', ''),
