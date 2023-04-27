@@ -146,7 +146,7 @@ class OrderService
         $sellOutLimit = '{
   "orderType": "LIMIT",
   "session": "SEAMLESS",
-  "price": "118.13",
+  "price": "118.30",
   "duration": "GOOD_TILL_CANCEL",
   "orderStrategyType": "SINGLE",
   "orderLegCollection": [
