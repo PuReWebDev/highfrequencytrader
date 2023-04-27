@@ -129,7 +129,7 @@ class OrderService
         $sellOut = '{
   "orderType": "MARKET",
   "session": "NORMAL",
-  "duration": "DAY",
+  "duration": "GOOD_TILL_CANCEL",
   "orderStrategyType": "SINGLE",
   "orderLegCollection": [
     {
@@ -137,6 +137,24 @@ class OrderService
       "quantity": 129,
       "instrument": {
         "symbol": "TSLA",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
+        $sellOutLimit = '{
+  "orderType": "LIMIT",
+  "session": "SEAMLESS",
+  "price": "100.20",
+  "duration": "GOOD_TILL_CANCEL",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Sell",
+      "quantity": 12,
+      "instrument": {
+        "symbol": "SBUX",
         "assetType": "EQUITY"
       }
     }
@@ -216,7 +234,8 @@ class OrderService
 //            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
 //        }
 
-        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+//        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+        return self::sendRequest($ordersEndpointUrl, $sellOutLimit);
 //        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 

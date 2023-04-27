@@ -161,7 +161,7 @@ class TradeEngine extends Command
 
 //                    Log::debug($message);
                     $this->info($message);
-                    usleep(500000);
+//                    usleep(500000);
                 }
 //            }
         }
