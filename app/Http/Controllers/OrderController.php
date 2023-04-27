@@ -36,7 +36,7 @@ class OrderController extends Controller
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
-//            ['status', '=', 'WORKING'],
+            ['status', '=', 'WORKING'],
         ])->whereNotNull('instruction')->whereNotNull('positionEffect')
             ->whereDate('created_at', Carbon::today()->subDay())->orderBy('orderId',
                 'DESC')->get();
