@@ -65,16 +65,43 @@ class Accounts
                          $childOrder) {
 
                     if (!empty($childOrder['childOrderStrategies'])) {
-                        self::parseChildOrders($childOrder['childOrderStrategies'], $orders['orderId']);
+                        self::parseChildOrders($childOrder['childOrderStrategies'], $orders);
                     }
 
                     if (!empty($childOrder['orderStrategyType'])) {
                         if ($childOrder['orderStrategyType'] === 'SINGLE') {
-                            self::parseChildOrders($childOrder, $orders['orderId']);
+                            self::parseChildOrders($childOrder, $orders);
                         }
                     }
-
                 }
+            }
+        }
+    }
+
+    /**
+     * @param $childOrderStrategies
+     * @param array $order
+     */
+    public static function parseChildOrders($childOrderStrategies,
+                                            array $order): void
+    {
+        if (!empty($childOrderStrategies['orderStrategyType'])) {
+            if ($childOrderStrategies['orderStrategyType'] === 'SINGLE') {
+                $childOrderStrategies['parentOrderId'] = $order['orderId'];
+                [$childOrderStrategies, $order] = self::calculatePL($childOrderStrategies, $order);
+            }
+            self::saveOrdersInformation($childOrderStrategies);
+        }
+
+        foreach ($childOrderStrategies as
+                 $ocoOrder) {
+
+            if (!empty($ocoOrder['orderStrategyType'])) {
+                if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
+                    $ocoOrder['parentOrderId'] = $order['orderId'];
+                    [$ocoOrder, $order] = self::calculatePL($ocoOrder, $order);
+                }
+                self::saveOrdersInformation($ocoOrder);
             }
 
         }
@@ -82,29 +109,18 @@ class Accounts
 
     /**
      * @param $childOrderStrategies
-     * @param $orderId
+     * @param array $order
+     * @return array
      */
-    public static function parseChildOrders($childOrderStrategies, $orderId): void
+    public static function calculatePL($childOrderStrategies, array $order): array
     {
-        if (!empty($childOrderStrategies['orderStrategyType'])) {
-            if ($childOrderStrategies['orderStrategyType'] === 'SINGLE') {
-                $childOrderStrategies['parentOrderId'] = $orderId;
-            }
-            self::saveOrdersInformation($childOrderStrategies);
+        if (!empty($childOrderStrategies['price']) && !empty($order['0']['price'])) {
+            $childOrderStrategies['actualProfit'] = (float)$childOrderStrategies['price'] - (float)$order['0']['price'];
         }
-
-        foreach ($childOrderStrategies as
-                 $ocoOrder) {
-//                            Log::info($ocoOrder['orderStrategyType']);
-
-            if (!empty($ocoOrder['orderStrategyType'])) {
-                if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
-                    $ocoOrder['parentOrderId'] = $orderId;
-                }
-                self::saveOrdersInformation($ocoOrder);
-            }
-
+        if (!empty($childOrderStrategies['stopPrice']) && !empty($order['0']['price'])) {
+            $childOrderStrategies['actualProfit'] = (float)$order['0']['price'] - (float)$childOrderStrategies['stopPrice'];
         }
+        return array($childOrderStrategies, $order);
     }
 
     /**
