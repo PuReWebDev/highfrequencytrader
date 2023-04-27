@@ -183,7 +183,7 @@ class OrderService
       "childOrderStrategies": [
         {
           "orderStrategyType": "SINGLE",
-          "session": "NORMAL",
+          "session": "SEAMLESS",
           "duration": "GOOD_TILL_CANCEL",
           "orderType": "LIMIT",
           "price": '.$sellPrice.',
@@ -234,8 +234,8 @@ class OrderService
 //            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
 //        }
 
-//        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
-        return self::sendRequest($ordersEndpointUrl, $sellOutLimit);
+        return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+//        return self::sendRequest($ordersEndpointUrl, $sellOutLimit);
 //        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
