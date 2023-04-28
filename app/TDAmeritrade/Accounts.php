@@ -120,7 +120,7 @@ class Accounts
             $childOrderStrategies['actualProfit'] = (float)$childOrderStrategies['price'] - (float)$order['price'];
         }
         if (!empty($childOrderStrategies['stopPrice']) && !empty($order['price'])) {
-            $childOrderStrategies['actualProfit'] = (float)$order['0']['price'] - (float)$childOrderStrategies['stopPrice'];
+            $childOrderStrategies['actualProfit'] = (float)$order['price'] - (float)$childOrderStrategies['stopPrice'];
         }
         return array($childOrderStrategies, $order);
     }
