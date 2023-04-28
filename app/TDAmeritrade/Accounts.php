@@ -675,6 +675,7 @@ class Accounts
                 'requestedDestination' => $orderStrategies['requestedDestination'] ?? null,
                 'destinationLinkName' => $orderStrategies['destinationLinkName'] ?? null,
                 'price' => $orderStrategies['price'] ?? null,
+                'actualProfit' => $orderStrategies['actualProfit'] ?? null,
                 'stopPrice' => $orderStrategies['stopPrice'] ?? null,
                 'stopPriceLinkBasis' => $orderStrategies['stopPriceLinkBasis'] ?? null,
                 'stopPriceLinkType' => $orderStrategies['stopPriceLinkType'] ?? null,
