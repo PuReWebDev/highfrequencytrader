@@ -156,16 +156,16 @@ class TradeEngine extends Command
     {
         foreach ($quotes as $quote) {
 
-            foreach ($this->consecutiveTrades as $consecutiveTrade) {
-                if ($consecutiveTrade[$quote->symbol] >= 10) {
-                    $this->shareQuantityPerTrade[$quote->symbol]++;
-                        $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $this->shareQuantityPerTrade[$quote->symbol]);
-
-                        if ($this->shareQuantityPerTrade[$quote->symbol] >= 10) {
-                            $this->shareQuantityPerTrade[$quote->symbol] = 10; // Fixed Quantity for now
-                        }
-                }
-            }
+//            foreach ($this->consecutiveTrades as $consecutiveTrade) {
+//                if ($consecutiveTrade[$quote->symbol] >= 10) {
+//                    $this->shareQuantityPerTrade[$quote->symbol]++;
+//                        $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $this->shareQuantityPerTrade[$quote->symbol]);
+//
+//                        if ($this->shareQuantityPerTrade[$quote->symbol] >= 10) {
+//                            $this->shareQuantityPerTrade[$quote->symbol] = 10; // Fixed Quantity for now
+//                        }
+//                }
+//            }
 
                 $currentStockPrice = $quote->lastPrice;
                 $endPrice = $currentStockPrice - .02;
