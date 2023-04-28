@@ -168,27 +168,37 @@ class TradeEngine extends Command
 //            }
 
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .01;
+//                $endPrice = $currentStockPrice - .01;
 //                $endPrice = $currentStockPrice - .04;
-                for ($x = $currentStockPrice;
-                     $x >= $endPrice;
-                     $x -= 0.01) {
+//                for ($x = $currentStockPrice;
+//                     $x >= $endPrice;
+//                     $x -= 0.01) {
 
+//                    OrderService::placeOtoOrder(
+//                        number_format($x, 2, '.', ''),
+//                        number_format($x + .05,2, '.', ''),
+//                        number_format($x - 1.00, 2, '.', ''),
+//                        $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+//                    OrderService::placeOtoOrder(
+//                        number_format($x, 2, '.', ''),
+//                        number_format($x + .10,2, '.', ''),
+//                        number_format($x - 1.00, 2, '.', ''),
+//                        $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
                     OrderService::placeOtoOrder(
-                        number_format($x, 2, '.', ''),
-                        number_format($x + .05,2, '.', ''),
-                        number_format($x - 1.00, 2, '.', ''),
+                        number_format($currentStockPrice, 2, '.', ''),
+                        number_format($currentStockPrice + .05,2, '.', ''),
+                        number_format($currentStockPrice - 1.00, 2, '.', ''),
                         $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
                     OrderService::placeOtoOrder(
-                        number_format($x, 2, '.', ''),
-                        number_format($x + .10,2, '.', ''),
-                        number_format($x - 1.00, 2, '.', ''),
+                        number_format($currentStockPrice, 2, '.', ''),
+                        number_format($currentStockPrice + .10,2, '.', ''),
+                        number_format($currentStockPrice - 1.00, 2, '.', ''),
                         $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
 
-                    $message = "Order placed: Buy ".number_format($x, 2, '.',
-                            '').", Sell Price: " . number_format($x + .10, 2,
-                            '.', '') . ", Stop Price: " . number_format($x -
+                    $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
+                            '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                            '.', '') . ", Stop Price: " . number_format($currentStockPrice -
                             1.00, 2, '.', '') . "
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
@@ -196,7 +206,7 @@ class TradeEngine extends Command
 //                    Log::debug($message);
                     $this->info($message);
 //                    usleep(500000);
-                }
+//                }
 //            }
         }
     }
