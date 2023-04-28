@@ -37,7 +37,7 @@
                                     <th>Stopped Orders (Last 5 Minutes)</th>
                                     <th>Stopped Orders Total</th>
                                     <th>Account Value</th>
-                                    <th>Today's Profits</th>
+                                    <th>Today's Gains</th>
                                     <th>Total Loss</th>
                                     <th>Total P/L</th>
                                 </tr>
