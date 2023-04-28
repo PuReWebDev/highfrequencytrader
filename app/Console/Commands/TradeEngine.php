@@ -29,7 +29,7 @@ class TradeEngine extends Command
      */
     protected $description = 'Initiate Trade Engine For Client';
 
-    protected array $tradeSymbols = ['TSLA',];
+    protected array $tradeSymbols = ['TSLA', 'MSFT', 'GOOGL','BA', 'CRM'];
 
     /**
      * Create a new command instance.
@@ -50,7 +50,7 @@ class TradeEngine extends Command
     {
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
-        $tradeQuantity = 5;
+
         $sharesPerTrade = 2;
         $consecutiveTrades = 0;
 
@@ -60,47 +60,58 @@ class TradeEngine extends Command
         // Loop until all orders have completed
         while (true) {
             Accounts::tokenPreFlight();
-            // Retrieve The Account Information
-//            Accounts::updateAccountData();
 
-
-
-//            TDAmeritrade::getOrders();
             // TODO Can user Trade??
+
+            $runningCounts = [];
+            $stoppedCounts = [];
+            $tradeHalted = [];
+            $goodSymbols = [];
 
             // Check for existing orders
             $orders = Order::where([
                 ['user_id', '=', Auth::id()],
                 ['tag', '=', 'AA_PuReWebDev'],
+                ['instruction', '=', 'SELL'],
             ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
 
             $stoppedOrders = Order::where([
                 ['user_id', '=', Auth::id()],
                 ['status', '=', 'FILLED'],
                 ['tag', '=', 'AA_PuReWebDev'],
-                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
-            ])->whereNotNull('stopPrice')->get();
+//                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
+            ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
 
-            if ($stoppedOrders->count() >= 5) {
-//                $sharesPerTrade = 2; // Reset our Quantity back down
-//                $consecutiveTrades = 0;
-//                $tradeQuantity = 5;
-                Log::info("We've been stopped out. Sleeping for 180 Seconds");
-//                sleep(180);
-//                continue; // take it from the top
+            foreach ($this->tradeSymbols as $tradeSymbol) {
+                $stoppedCounts[$tradeSymbol] = $stoppedOrders->where('symbol','=',$tradeSymbol)->count();
+                $runningCounts[$tradeSymbol] = $orders->where('symbol','=', $tradeSymbol)->count();
             }
 
-//            $firstOrder = $orders->first();
-//            if ($firstOrder->created_at->diffInSeconds(Carbon::now()) > 300) {
-//                Log::info('Increasing  Trade Quantity After 5 Minutes In Active');
-//                $tradeQuantity++;
-//            }
+            foreach ($this->tradeSymbols as $tradeSymbol) {
+                $tradeHalted[$tradeSymbol] = false;
+
+                if ($stoppedCounts[$tradeSymbol] >= 5) {
+                    $tradeHalted[$tradeSymbol] = true;
+                    Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
+                }
+                if ($runningCounts[$tradeSymbol] >= 5) {
+                    $tradeHalted[$tradeSymbol] = true;
+                }
+            }
+
+
+            foreach ($tradeHalted as $haltedSymbol => $haltedValue) {
+                if ($haltedValue === false) {
+                    array_push($goodSymbols, $haltedSymbol);
+                }
+            }
+
 
             // If all orders have completed, place a new OTO order
-            if ($orders->count() <= $tradeQuantity) {
+            if (count($goodSymbols) > 1) {
                 $this->info('We have '. $orders->count() .' working orders. $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
                 // Grab The Current Price
-                $quotes = TDAmeritrade::quotes($this->tradeSymbols);
+                $quotes = TDAmeritrade::quotes($goodSymbols);
 
                 if ($consecutiveTrades >= 10) {
                     $sharesPerTrade++;
