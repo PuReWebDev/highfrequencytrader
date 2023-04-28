@@ -190,7 +190,7 @@ class TradeEngine extends Command
                             '').", Sell Price: " . number_format($x + .10, 2,
                             '.', '') . ", Stop Price: " . number_format($x -
                             1.00, 2, '.', '') . "
-                       Symbol: $quote->symbol, Quantity: $this->shareQuantityPerTrade[$quote->symbol]";
+                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                     $this->consecutiveTrades[$quote->symbol]++;
 //                    Log::debug($message);
