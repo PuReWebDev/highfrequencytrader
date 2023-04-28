@@ -106,7 +106,10 @@ class TradeEngine extends Command
                 }
             }
 
-            dd($goodSymbols,$tradeHalted,$runningCounts,$stoppedCounts);
+            Log::debug('Good symbols: ', $goodSymbols);
+            Log::debug('Trading Halted: ' ,$tradeHalted);
+            Log::debug('Sales Counts: ',$runningCounts);
+            Log::debug('Stopped Counts: ',$stoppedCounts);
 
             // If all orders have completed, place a new OTO order
             if (count($goodSymbols) > 1) {
