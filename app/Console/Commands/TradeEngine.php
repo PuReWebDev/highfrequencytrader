@@ -208,7 +208,8 @@ class TradeEngine extends Command
 //                    usleep(500000);
 //                }
 //            }
-        }
+        } // end for each quote. Now take a moment
+        sleep(30);
     }
 
 }
