@@ -114,7 +114,8 @@ class Accounts
      */
     public static function calculatePL($childOrderStrategies, array $order): array
     {
-        Log::debug('The child price is'. $childOrderStrategies['price'] .' and the parent price is: ',$order);
+        Log::debug('The child order is: ', $childOrderStrategies);
+        Log::debug('The parent price is: ', $order);
         if (!empty($childOrderStrategies['price']) && !empty($order['price'])) {
             $childOrderStrategies['actualProfit'] = (float)$childOrderStrategies['price'] - (float)$order['price'];
         }
