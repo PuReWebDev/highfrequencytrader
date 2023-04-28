@@ -29,7 +29,7 @@ class TradeEngine extends Command
      */
     protected $description = 'Initiate Trade Engine For Client';
 
-    protected array $tradeSymbols = ['TSLA', 'MSFT', 'GOOGL','BA', 'CRM'];
+    protected array $tradeSymbols = ['TSLA', 'MSFT', 'GOOGL','BA', 'CRM', 'ABNB', 'DASH', 'UBER', 'AAPL'];
 
     protected array $shareQuantityPerTrade = [];
 
@@ -106,7 +106,7 @@ class TradeEngine extends Command
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
                 }
 
-                if ($stoppedCounts[$tradeSymbol] >= 5) {
+                if ($stoppedCounts[$tradeSymbol] >= 7) {
                     $tradeHalted[$tradeSymbol] = true;
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
