@@ -114,11 +114,11 @@ class Accounts
      */
     public static function calculatePL($childOrderStrategies, array $order): array
     {
-        Log::info('The child price is'. $childOrderStrategies['price'] .' and the parent price is: '.$order['0']['price']);
-        if (!empty($childOrderStrategies['price']) && !empty($order['0']['price'])) {
-            $childOrderStrategies['actualProfit'] = (float)$childOrderStrategies['price'] - (float)$order['0']['price'];
+        Log::info('The child price is'. $childOrderStrategies['price'] .' and the parent price is: '.$order['price']);
+        if (!empty($childOrderStrategies['price']) && !empty($order['price'])) {
+            $childOrderStrategies['actualProfit'] = (float)$childOrderStrategies['price'] - (float)$order['price'];
         }
-        if (!empty($childOrderStrategies['stopPrice']) && !empty($order['0']['price'])) {
+        if (!empty($childOrderStrategies['stopPrice']) && !empty($order['price'])) {
             $childOrderStrategies['actualProfit'] = (float)$order['0']['price'] - (float)$childOrderStrategies['stopPrice'];
         }
         return array($childOrderStrategies, $order);
