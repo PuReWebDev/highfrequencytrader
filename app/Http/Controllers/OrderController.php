@@ -41,7 +41,7 @@ class OrderController extends Controller
         $orders->each(function ($item, $key) {
 
             if (!empty($item['parentOrderId']) && $item['status'] === 'FILLED') {
-                if (!empty($item['actualProfit'])) {
+                if (!empty($item['actualProfit']) && empty($item['stopPrice'])) {
                     $this->profitsTotal = (float) $item['actualProfit'] +
                         $this->profitsTotal;
                 }
