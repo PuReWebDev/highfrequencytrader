@@ -119,6 +119,7 @@ class Accounts
         if (empty($order['price'])) {
             $order = Order::where('orderId', $childOrderStrategies['parentOrderId'])->get();
             $order['price'] = $order['0']['price'];
+            Log::info('The parentOrderId price is: '. $order['price']);
         }
         if (!empty($childOrderStrategies['price']) && !empty($order['price'])) {
             $childOrderStrategies['actualProfit'] = ((float)
