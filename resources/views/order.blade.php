@@ -39,6 +39,7 @@
                                     <th>Account Value</th>
                                     <th>Today's Profits</th>
                                     <th>Total Loss</th>
+                                    <th>Total P/L</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,7 +90,10 @@
                                                 @endempty</td>
                                             <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
                                             <td style="text-align:center">${{$profitsTotal }}</td>
-                                            <td style="text-align:center">${{$lossTotal }}</td>
+                                            <td
+                                                style="text-align:center">-${{$lossTotal }}</td>
+                                            <td
+                                                style="text-align:center">${{$pl }}</td>
                                         </tr>
                                 </tbody>
                             </table>

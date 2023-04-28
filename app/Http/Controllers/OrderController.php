@@ -72,6 +72,7 @@ class OrderController extends Controller
             'stoppedTotalCount' => $stoppedTotalCount,
             'profitsTotal' => $this->profitsTotal,
             'lossTotal' => $this->lossTotal,
+            'pl' => $this->profitsTotal - $this->lossTotal,
         ]);
     }
 
