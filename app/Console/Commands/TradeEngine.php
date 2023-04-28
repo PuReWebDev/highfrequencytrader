@@ -55,7 +55,7 @@ class TradeEngine extends Command
         // Get stock symbol from command argument
         $symbol = $this->argument('symbol');
 
-        $sharesPerTrade = 2;
+        $sharesPerTrade = 5;
         $consecutiveTrades = 0;
 
         Auth::loginUsingId(4, $remember = true);
@@ -94,7 +94,7 @@ class TradeEngine extends Command
 
             foreach ($this->tradeSymbols as $tradeSymbol) {
                 // Set Some Default Values
-                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                $this->shareQuantityPerTrade[$tradeSymbol] = 5;
                 $tradeHalted[$tradeSymbol] = false;
 
                 if (empty($this->consecutiveTrades[$tradeSymbol])) {
@@ -103,6 +103,7 @@ class TradeEngine extends Command
 
                 if ($stoppedCounts[$tradeSymbol] >= 1) {
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                    // TODO place a trade that recovers the loss, based onincreasing the quantity
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
                 }
 
@@ -139,7 +140,7 @@ class TradeEngine extends Command
 
             } else {
                 $this->info('Maximum Orders Placed, Waiting 10 seconds');
-                sleep(10);
+                sleep(10);// TODO event based
             }
         }
         $this->info('Trade Engine Gracefully Exiting');
@@ -209,7 +210,7 @@ class TradeEngine extends Command
 //                }
 //            }
         } // end for each quote. Now take a moment
-        sleep(30);
+        sleep(30);// TODO event based
     }
 
 }
