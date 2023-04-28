@@ -116,6 +116,10 @@ class Accounts
     {
 //        Log::debug('The child order is: ', $childOrderStrategies);
 //        Log::debug('The parent price is: ', $order);
+        if (empty($order['price'])) {
+            $order = Order::where('orderId', $childOrderStrategies['parentOrderId'])->get();
+            $order['price'] = $order['0']['price'];
+        }
         if (!empty($childOrderStrategies['price']) && !empty($order['price'])) {
             $childOrderStrategies['actualProfit'] = ((float)
                 $childOrderStrategies['price'] - (float)$order['price']) *
@@ -125,6 +129,9 @@ class Accounts
             $childOrderStrategies['actualProfit'] = ((float)$order['price'] -
                 (float)$childOrderStrategies['stopPrice']) * $order['quantity'];
         }
+
+
+
         return array($childOrderStrategies, $order);
     }
 
