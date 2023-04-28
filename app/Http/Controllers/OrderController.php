@@ -26,7 +26,7 @@ class OrderController extends Controller
 //        Accounts::tokenPreFlight();
 //        TDAmeritrade::getOrders();
 //        TDAmeritrade::getOrders('FILLED');
-//        Accounts::updateAccountData();
+        Accounts::updateAccountData();
 
         $yesterday = Carbon::yesterday();
         $now = Carbon::now();
