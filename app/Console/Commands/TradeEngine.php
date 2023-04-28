@@ -106,7 +106,7 @@ class TradeEngine extends Command
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
                 }
 
-                if ($stoppedCounts[$tradeSymbol] >= 7) {
+                if ($stoppedCounts[$tradeSymbol] >= 15) {
                     $tradeHalted[$tradeSymbol] = true;
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
