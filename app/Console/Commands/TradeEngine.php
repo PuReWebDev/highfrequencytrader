@@ -168,7 +168,7 @@ class TradeEngine extends Command
 //            }
 
                 $currentStockPrice = $quote->lastPrice;
-                $endPrice = $currentStockPrice - .02;
+                $endPrice = $currentStockPrice - .01;
 //                $endPrice = $currentStockPrice - .04;
                 for ($x = $currentStockPrice;
                      $x >= $endPrice;
