@@ -87,7 +87,7 @@
                                                 @empty($stoppedTotalCount['FILLED'])
                                                     0
                                                 @endempty</td>
-                                            <td style="text-align:center">{{ $balance['0']['liquidationValue'] }}</td>
+                                            <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
                                             <td style="text-align:center">${{$profitsTotal }}</td>
                                             <td style="text-align:center">${{$lossTotal }}</td>
                                         </tr>
