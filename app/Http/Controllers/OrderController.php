@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
 {
-    private $profitsTotal = 0.00;
-    private $lossTotal = 0.00;
+    private float $profitsTotal = 0.00;
+    private float $lossTotal = 0.00;
     /**
      * Display a listing of the resource.
      *
@@ -39,28 +39,15 @@ class OrderController extends Controller
             ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
-            // Readable time vs raw timestamp
-            $dt = Carbon::parse($item['enteredTime']);
-            $item['enteredTime'] = $dt->toDateTimeString();
 
-            // Now if this is a sell order, let's grab the buy and calculate
-            // profit
-            $item['tradeProfit'] = '';
             if (!empty($item['parentOrderId']) && $item['status'] === 'FILLED') {
-                $order = Order::where('orderId', $item['parentOrderId'])->get();
-                if (!empty($item['price']) && !empty($order['0']['price'])) {
-                    $item['tradeProfit'] = number_format((float)$item['price'], 2, '.', '') - number_format((float)$order['0']['price'], 2, '.', '');
-                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
-                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '') * $order['0']['quantity'];
-                    $this->profitsTotal = (float)$item['tradeProfit'] +
+                if (!empty($item['actualProfit'])) {
+                    $this->profitsTotal = (float) $item['actualProfit'] +
                         $this->profitsTotal;
                 }
 
-                if (!empty($item['stopPrice']) && !empty($order['0']['price'])) {
-                    $item['tradeProfit'] = (float)$item['price'] - (float)$order['0']['stopPrice'];
-//                    $item['tradeProfit'] = number_format((float)$item['tradeProfit'], 2, '.', '');
-                    $item['tradeProfit'] = (float)$item['tradeProfit']  * $order['0']['quantity'];
-                    $this->lossTotal = (float) $item['tradeProfit'] +
+                if (!empty($item['stopPrice'])) {
+                    $this->lossTotal = (float) $item['actualProfit'] +
                         $this->lossTotal;
                 }
             }

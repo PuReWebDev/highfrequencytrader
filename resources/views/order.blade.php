@@ -130,7 +130,7 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
-                                                    <td style="text-align:center">${{ $order->tradeProfit }}</td>
+                                                    <td style="text-align:center">${{ $order->actualProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
                                                     <td>{{ $order->enteredTime }}</td>
@@ -177,8 +177,8 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
                                                     <td>{{ $order->duration }}</td>
                                                     <td>{{ $order->price }}</td>
-                                                    <td style="text-align:center">@isset($order->tradeProfit)
-                                                            ${{$order->tradeProfit }}
+                                                    <td style="text-align:center">@isset($order->actualProfit)
+                                                            ${{$order->actualProfit }}
                                                         @endisset
                                                     </td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
@@ -227,7 +227,7 @@
                                     <td>{{ $order->orderStrategyType }}</td>
                                     <td>{{ $order->duration }}</td>
                                     <td>{{ $order->price }}</td>
-                                    <td style="text-align:center">{{ $order->tradeProfit }}</td>
+                                    <td style="text-align:center">{{ $order->actualProfit }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td style="text-align:center">{{ $order->quantity }}</td>
                                     <td>{{ $order->enteredTime }}</td>
