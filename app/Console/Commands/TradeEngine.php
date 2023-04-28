@@ -106,6 +106,7 @@ class TradeEngine extends Command
                 }
             }
 
+            dd($goodSymbols,$tradeHalted,$runningCounts,$stoppedCounts);
 
             // If all orders have completed, place a new OTO order
             if (count($goodSymbols) > 1) {
