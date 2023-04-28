@@ -31,6 +31,10 @@ class TradeEngine extends Command
 
     protected array $tradeSymbols = ['TSLA', 'MSFT', 'GOOGL','BA', 'CRM'];
 
+    protected array $shareQuantityPerTrade = [];
+
+    protected array $consecutiveTrades = [];
+
     /**
      * Create a new command instance.
      *
@@ -68,6 +72,7 @@ class TradeEngine extends Command
             $tradeHalted = [];
             $goodSymbols = [];
 
+
             // Check for existing orders
             $orders = Order::where([
                 ['user_id', '=', Auth::id()],
@@ -88,10 +93,22 @@ class TradeEngine extends Command
             }
 
             foreach ($this->tradeSymbols as $tradeSymbol) {
+                // Set Some Default Values
+                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = false;
+
+                if (empty($this->consecutiveTrades[$tradeSymbol])) {
+                    $this->consecutiveTrades[$tradeSymbol] = 0;
+                }
+
+                if ($stoppedCounts[$tradeSymbol] >= 1) {
+                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                    Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
+                }
 
                 if ($stoppedCounts[$tradeSymbol] >= 5) {
                     $tradeHalted[$tradeSymbol] = true;
+                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
                 }
                 if ($runningCounts[$tradeSymbol] >= 5) {
@@ -117,19 +134,9 @@ class TradeEngine extends Command
                 // Grab The Current Price
                 $quotes = TDAmeritrade::quotes($goodSymbols);
 
-                if ($consecutiveTrades >= 10) {
-                    $sharesPerTrade++;
-                    $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $sharesPerTrade);
-                    $consecutiveTrades = 0;
-
-                    if ($sharesPerTrade >= 10) {
-                        $sharesPerTrade = 10; // Fixed Quantity for now
-                    }
-
-                }
                 // Place The Trades
-                $this->getOrderResponse($quotes,$sharesPerTrade);
-                $consecutiveTrades++;
+                $this->getOrderResponse($quotes);
+
             } else {
                 $this->info('Maximum Orders Placed, Waiting 10 seconds');
                 sleep(10);
@@ -145,10 +152,21 @@ class TradeEngine extends Command
      * @return void
      * @throws \JsonException
      */
-    private function getOrderResponse(mixed $quotes,int $sharesPerTrade): void
+    private function getOrderResponse(mixed $quotes): void
     {
         foreach ($quotes as $quote) {
-//            if ($quote->symbol == 'TSLA') {
+
+            foreach ($this->consecutiveTrades as $consecutiveTrade) {
+                if ($consecutiveTrade[$quote->symbol] >= 10) {
+                    $this->shareQuantityPerTrade[$quote->symbol]++;
+                        $this->info('10 Successful Consecutive Trades, Increasing Trade Share Quantity To: '. $this->shareQuantityPerTrade[$quote->symbol]);
+
+                        if ($this->shareQuantityPerTrade[$quote->symbol] >= 10) {
+                            $this->shareQuantityPerTrade[$quote->symbol] = 10; // Fixed Quantity for now
+                        }
+                }
+            }
+
                 $currentStockPrice = $quote->lastPrice;
                 $endPrice = $currentStockPrice - .02;
 //                $endPrice = $currentStockPrice - .04;
@@ -160,20 +178,21 @@ class TradeEngine extends Command
                         number_format($x, 2, '.', ''),
                         number_format($x + .05,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
-                        $quote->symbol, $sharesPerTrade);
+                        $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
                     OrderService::placeOtoOrder(
                         number_format($x, 2, '.', ''),
                         number_format($x + .10,2, '.', ''),
                         number_format($x - 1.00, 2, '.', ''),
-                        $quote->symbol, $sharesPerTrade);
+                        $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
 
                     $message = "Order placed: Buy ".number_format($x, 2, '.',
                             '').", Sell Price: " . number_format($x + .10, 2,
                             '.', '') . ", Stop Price: " . number_format($x -
                             1.00, 2, '.', '') . "
-                       Symbol: $quote->symbol, Quantity: $sharesPerTrade";
+                       Symbol: $quote->symbol, Quantity: $this->shareQuantityPerTrade[$quote->symbol]";
 
+                    $this->consecutiveTrades[$quote->symbol]++;
 //                    Log::debug($message);
                     $this->info($message);
 //                    usleep(500000);
