@@ -327,8 +327,8 @@ class TDAmeritrade
             ],
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
-//                'fromEnteredTime' => Carbon::today()->toDateString(),
-                'fromEnteredTime' => '2023-04-14',
+                'fromEnteredTime' => Carbon::today()->toDateString(),
+//                'fromEnteredTime' => '2023-04-14',
                 'toEnteredTime' => Carbon::today()->toDateString(),
             ]
         ];
