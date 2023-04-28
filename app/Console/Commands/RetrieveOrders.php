@@ -60,6 +60,7 @@ class RetrieveOrders extends Command
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
             usleep(500000);
+            usleep(500000);
 
             if (empty($status)) {
                 sleep(5);
