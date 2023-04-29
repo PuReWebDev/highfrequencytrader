@@ -135,7 +135,7 @@
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
                                                     <td>{{ $order->orderStrategyType }}</td>
 {{--                                                    <td>{{ $order->duration }}</td>--}}
-                                                    <td>{{ $order->price }}</td>
+                                                    <td>@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td style="text-align:center">${{ $order->actualProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
@@ -182,7 +182,7 @@
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
                                                     <td>{{ $order->orderStrategyType }}</td>
 {{--                                                    <td>{{ $order->duration }}</td>--}}
-                                                    <td>{{ $order->price }}</td>
+                                                    <td>@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
                                                         style="text-align:center;@if($order->stopPrice)color:red;@endif">@isset($order->actualProfit)
                                                             @if($order->stopPrice)-@endif${{$order->actualProfit }}
