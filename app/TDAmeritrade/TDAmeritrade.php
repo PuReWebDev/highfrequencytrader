@@ -260,7 +260,7 @@ class TDAmeritrade
             JSON_THROW_ON_ERROR);
 
         foreach ($responseData as $key => $value) {
-//            Quote::updateOrCreate(
+
             Quote::create(
                 [
                     'symbol' => $value['symbol'],
@@ -302,8 +302,7 @@ class TDAmeritrade
                 ]
             );
         }
-        // TODO save quotes for longer
-//        return Quote::whereIn('symbol', $symbols)->get();
+
         return Quote::whereIn('symbol', $symbols)->where('created_at', '>',
                 Carbon::now()->subSeconds(5)->toDateTimeString())->latest()
             ->get();
