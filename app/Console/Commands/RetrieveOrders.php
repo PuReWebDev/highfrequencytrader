@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Events\OrdersProcessed;
 use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -84,6 +85,23 @@ class RetrieveOrders extends Command
                 Log::info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
                 $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
+
+//            $orders = Order::where([
+//                ['user_id', '=', Auth::id()],
+//                ['tag', '=', 'AA_PuReWebDev'],
+//                ['instruction', '=', 'SELL'],
+//            ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
+
+            $yesterday = Carbon::yesterday();
+            $now = Carbon::now();
+
+            $orders = Order::where([
+                ['user_id','=', Auth::id()],
+                ['tag', '=', 'AA_PuReWebDev'],
+            ])->whereNotNull('instruction')->whereNotNull('positionEffect')
+                ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
+
+            OrdersProcessed::dispatch($orders);
         }
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');
