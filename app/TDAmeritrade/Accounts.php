@@ -122,6 +122,10 @@ class Accounts
             $childOrderStrategies['actualProfit'] = ((float)
                 $childOrderStrategies['price'] - (float)$order['price']) *
                 $order['quantity'];
+            if (!empty($childOrderStrategies['actualProfit'])) {
+                $childOrderStrategies['expectedProfit']
+                    =$childOrderStrategies['actualProfit'];
+            }
         }
         if (!empty($childOrderStrategies['stopPrice']) && !empty($order['price'])) {
             $childOrderStrategies['actualProfit'] = ((float)$order['price'] -
