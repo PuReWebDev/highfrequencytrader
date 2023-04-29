@@ -119,7 +119,6 @@ class TradeEngineProcessor
     private function getOrderResponse(mixed $quotes): void
     {
         foreach ($quotes as $quote) {
-            Log::debug('Individual Quote', $quote->toArray());
 
             $currentStockPrice = $quote->lastPrice;
 
