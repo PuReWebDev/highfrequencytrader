@@ -93,7 +93,7 @@
                                             <td
                                                 style="text-align:center">-${{$lossTotal }}</td>
                                             <td
-                                                style="text-align:center">${{$pl }}</td>
+                                                style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
                                         </tr>
                                 </tbody>
                             </table>
