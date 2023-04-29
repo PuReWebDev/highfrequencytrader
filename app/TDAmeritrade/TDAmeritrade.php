@@ -304,7 +304,9 @@ class TDAmeritrade
         }
         // TODO save quotes for longer
 //        return Quote::whereIn('symbol', $symbols)->get();
-        return Quote::whereIn('symbol', $symbols)->latest()->get();;
+        return Quote::whereIn('symbol', $symbols)->where('updated_at', '>',
+                Carbon::now()->subSeconds(5)->toDateTimeString())->latest()
+            ->get();
     }
 
     /**
