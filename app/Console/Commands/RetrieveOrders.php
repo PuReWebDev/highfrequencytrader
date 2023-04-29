@@ -101,7 +101,7 @@ class RetrieveOrders extends Command
             ])->whereNotNull('instruction')->whereNotNull('positionEffect')
                 ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
 
-            OrdersProcessed::dispatch($orders);
+            OrdersProcessed::dispatch();
         }
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');

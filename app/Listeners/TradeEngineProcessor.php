@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\OrdersProcessed;
 use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -30,10 +29,11 @@ class TradeEngineProcessor
     /**
      * Handle the event.
      *
-     * @param  \App\Events\OrdersProcessed  $orders
      * @return void
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function handle(OrdersProcessed $orders)
+    public function handle()
     {
         Accounts::tokenPreFlight();
 
@@ -43,6 +43,13 @@ class TradeEngineProcessor
         $stoppedCounts = [];
         $tradeHalted = [];
         $goodSymbols = [];
+
+        // Check for existing orders
+        $orders = Order::where([
+            ['user_id', '=', Auth::id()],
+            ['tag', '=', 'AA_PuReWebDev'],
+            ['instruction', '=', 'SELL'],
+        ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
 
         $stoppedOrders = Order::where([
             ['user_id', '=', Auth::id()],
