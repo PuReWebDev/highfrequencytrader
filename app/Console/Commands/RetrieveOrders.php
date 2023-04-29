@@ -58,7 +58,7 @@ class RetrieveOrders extends Command
 
         while (true) {
             Accounts::tokenPreFlight();
-            $this->info('Starting To Retrieved Orders'.Carbon::now());
+            $this->info('Starting To Retrieved Orders. '.Carbon::now());
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
 
