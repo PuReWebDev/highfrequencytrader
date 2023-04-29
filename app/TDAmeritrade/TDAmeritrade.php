@@ -260,8 +260,8 @@ class TDAmeritrade
             JSON_THROW_ON_ERROR);
 
         foreach ($responseData as $key => $value) {
-            Quote::updateOrCreate(
-                ['symbol' => $value['symbol']],
+//            Quote::updateOrCreate(
+            Quote::create(
                 [
                     'symbol' => $value['symbol'],
                     'description' => $value['description'],
@@ -302,8 +302,9 @@ class TDAmeritrade
                 ]
             );
         }
-
-        return Quote::whereIn('symbol', $symbols)->get();
+        // TODO save quotes for longer
+//        return Quote::whereIn('symbol', $symbols)->get();
+        return Quote::whereIn('symbol', $symbols)->latest();
     }
 
     /**
