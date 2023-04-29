@@ -106,7 +106,7 @@
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
-                                            <th scope="col"  style="white-space: nowrap;">#</th>
+                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>
                                             <th style="white-space: nowrap;">Symbol</th>
                                             <th style="white-space: nowrap;">Order ID</th>
                                             <th style="white-space: nowrap;">Parent ID</th>
