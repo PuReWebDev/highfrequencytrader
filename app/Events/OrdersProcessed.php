@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Events;
 
-use App\Models\Order;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -20,7 +20,7 @@ class OrdersProcessed
      * @return void
      */
     public function __construct(
-        public Order $order,
+        public Collection $order,
     ) {}
 
     /**
