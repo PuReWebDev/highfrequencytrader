@@ -304,7 +304,7 @@ class TDAmeritrade
         }
         // TODO save quotes for longer
 //        return Quote::whereIn('symbol', $symbols)->get();
-        return Quote::whereIn('symbol', $symbols)->latest();
+        return Quote::whereIn('symbol', $symbols)->latest()->get();;
     }
 
     /**
