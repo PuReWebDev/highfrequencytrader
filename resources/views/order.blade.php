@@ -155,17 +155,17 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th>Symbol</th>
-                                            <th>Order ID</th>
-                                            <th>Parent Order ID</th>
-                                            <th>Instruction</th>
-                                            <th>Position Effect</th>
-                                            <th>Order Strategy Type</th>
-                                            <th>Duration</th>
-                                            <th>Price</th>
-                                            <th>Trade Profit</th>
-                                            <th>Quantity</th>
-                                            <th>Entered Time</th>
+                                            <th style="white-space:nowrap;">Symbol</th>
+                                            <th style="white-space:nowrap;">Order ID</th>
+                                            <th style="white-space:nowrap;">Parent Order ID</th>
+                                            <th style="white-space:nowrap;">Instruction</th>
+                                            <th style="white-space:nowrap;">Position Effect</th>
+                                            <th style="white-space:nowrap;">Order Strategy Type</th>
+                                            <th style="white-space:nowrap;">Duration</th>
+                                            <th style="white-space:nowrap;">Price</th>
+                                            <th style="white-space:nowrap;">Trade Profit</th>
+                                            <th style="white-space:nowrap;">Quantity</th>
+                                            <th style="white-space:nowrap;">Entered Time</th>
                                         </tr>
                                         </thead>
                                         <tbody>
