@@ -320,6 +320,11 @@ class TDAmeritrade
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
         $account = Account::where('user_id', Auth::id())->get();
+        $fromEnteredTime = Carbon::today()->toDateString();
+
+        if ($status === 'FULL') {
+            $fromEnteredTime = '2023-04-14';
+        }
 
         $data = [
             'base_uri' => SELF::BASE_URL,
@@ -329,15 +334,13 @@ class TDAmeritrade
             ],
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
-                'fromEnteredTime' => Carbon::today()->toDateString(),
-//                'fromEnteredTime' => '2023-04-14',
+                'fromEnteredTime' => $fromEnteredTime,
                 'toEnteredTime' => Carbon::today()->toDateString(),
             ]
         ];
 
         if (!empty($status)) {
             $data['query']['status'] = $status;
-//            Log::info('Fetching only orders of status: '.$status);
         }
 
         $client = new Client($data);
