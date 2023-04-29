@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\TDAmeritrade;
 
-use App\Models\Token;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Support\Facades\Auth;
 
 abstract class BaseClass
 {
@@ -34,8 +32,8 @@ abstract class BaseClass
         $this->client = new Client([
             'base_uri' => "https://api.tdameritrade.com",
         ]);
-        $token = Token::where('user_id', Auth::id())->get();
-        $this->apiKey = $token['0']['access_token'];
+
+        $this->apiKey = config('tdameritrade.api_key');
     }
 
     /**
