@@ -82,7 +82,7 @@ class RetrieveOrders extends Command
                 $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
 
-            $this->info('Dispatching To Trade Engine Processor'.Carbon::now());
+            $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
             OrdersProcessed::dispatch();
             $this->info('Trade Engine Processor Completed'.Carbon::now());
         }
