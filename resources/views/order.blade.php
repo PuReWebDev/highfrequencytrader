@@ -139,7 +139,7 @@
                                                     <td style="text-align:center">${{ $order->actualProfit }}</td>
                                                     <td>{{ $order->status }}</td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($order->enteredTime)->diffForhumans() }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
