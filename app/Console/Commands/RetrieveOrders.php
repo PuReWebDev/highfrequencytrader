@@ -58,14 +58,10 @@ class RetrieveOrders extends Command
 
         while (true) {
             Accounts::tokenPreFlight();
+            $this->info('Starting To Retrieved Orders'.Carbon::now());
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
-            usleep(500000);
-            usleep(500000);
 
-            if (empty($status)) {
-                sleep(5);
-            }
             // Splitting The Workload for basic clean up of stale orders
             $pendingCancels = Order::where([
                 ['user_id', '=', Auth::id()],
@@ -86,22 +82,9 @@ class RetrieveOrders extends Command
                 $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
             }
 
-//            $orders = Order::where([
-//                ['user_id', '=', Auth::id()],
-//                ['tag', '=', 'AA_PuReWebDev'],
-//                ['instruction', '=', 'SELL'],
-//            ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
-
-            $yesterday = Carbon::yesterday();
-            $now = Carbon::now();
-
-            $orders = Order::where([
-                ['user_id','=', Auth::id()],
-                ['tag', '=', 'AA_PuReWebDev'],
-            ])->whereNotNull('instruction')->whereNotNull('positionEffect')
-                ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
-
+            $this->info('Dispatching To Trade Engine Processor'.Carbon::now());
             OrdersProcessed::dispatch();
+            $this->info('Trade Engine Processor Completed'.Carbon::now());
         }
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');
