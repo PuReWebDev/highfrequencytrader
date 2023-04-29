@@ -111,7 +111,7 @@
                                             <th style="white-space: nowrap;">Order ID</th>
                                             <th style="white-space: nowrap;">Parent ID</th>
                                             <th style="white-space: nowrap;">Instruction</th>
-                                            <th style="white-space: nowrap;">Position Effect</th>
+{{--                                            <th style="white-space: nowrap;">Position Effect</th>--}}
                                             <th style="white-space: nowrap;">Order Strategy Type</th>
 {{--                                            <th style="white-space: nowrap;">Duration</th>--}}
                                             <th style="white-space: nowrap;">Price</th>
@@ -132,7 +132,7 @@
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId}}</td>
                                                     <td>{{ $order->instruction }}</td>
-                                                    <td>{{ $order->positionEffect }}</td>
+{{--                                                    <td>{{ $order->positionEffect }}</td>--}}
                                                     <td>{{ $order->orderStrategyType }}</td>
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>{{ $order->price }}</td>
@@ -161,7 +161,7 @@
                                             <th style="white-space:nowrap;">Order ID</th>
                                             <th style="white-space:nowrap;">Parent Order ID</th>
                                             <th style="white-space:nowrap;">Instruction</th>
-                                            <th style="white-space:nowrap;">Position Effect</th>
+{{--                                            <th style="white-space:nowrap;">Position Effect</th>--}}
                                             <th style="white-space:nowrap;">Order Strategy Type</th>
 {{--                                            <th style="white-space:nowrap;">Duration</th>--}}
                                             <th style="white-space:nowrap;">Price</th>
@@ -179,7 +179,7 @@
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
-                                                    <td>{{ $order->positionEffect }}</td>
+{{--                                                    <td>{{ $order->positionEffect }}</td>--}}
                                                     <td>{{ $order->orderStrategyType }}</td>
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>{{ $order->price }}</td>
