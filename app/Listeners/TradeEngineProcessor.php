@@ -103,16 +103,11 @@ class TradeEngineProcessor
 
         // If all orders have completed, place a new OTO order
         if (count($goodSymbols) > 1) {
-            $this->info('We have '. $orders->count() .' working orders. $consecutiveTrades is: '. $consecutiveTrades . ' and $sharesPerTrades is:'. $sharesPerTrade);
             // Grab The Current Price
             $quotes = TDAmeritrade::quotes($goodSymbols);
 
             // Place The Trades
             $this->getOrderResponse($quotes);
-
-        } else {
-            $this->info('Maximum Orders Placed, Waiting 10 seconds');
-            sleep(10);// TODO event based
         }
     }
 
