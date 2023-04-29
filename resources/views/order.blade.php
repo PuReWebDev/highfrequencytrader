@@ -188,7 +188,7 @@
                                                         @endisset
                                                     </td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
-                                                    <td>{{ $order->enteredTime }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
