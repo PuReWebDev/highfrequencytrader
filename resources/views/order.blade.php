@@ -184,7 +184,7 @@
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>{{ $order->price }}</td>
                                                     <td style="text-align:center">@isset($order->actualProfit)
-                                                            ${{$order->actualProfit }}
+                                                            @if($order->stopPrice)-@endif${{$order->actualProfit }}
                                                         @endisset
                                                     </td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
