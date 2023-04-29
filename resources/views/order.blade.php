@@ -183,7 +183,8 @@
                                                     <td>{{ $order->orderStrategyType }}</td>
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>{{ $order->price }}</td>
-                                                    <td style="text-align:center">@isset($order->actualProfit)
+                                                    <td
+                                                        style="text-align:center;@if($order->stopPrice)color:red;@endif">@isset($order->actualProfit)
                                                             @if($order->stopPrice)-@endif${{$order->actualProfit }}
                                                         @endisset
                                                     </td>
