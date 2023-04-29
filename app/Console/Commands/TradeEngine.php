@@ -108,7 +108,9 @@ class TradeEngine extends Command
                 }
 
                 if ($stoppedCounts[$tradeSymbol] >= 15) {
-                    $tradeHalted[$tradeSymbol] = true;
+                    $tradeHalted[$tradeSymbol] = true; // TODO break even -
+                    // 1:1 once recovered, restart trade quantity
+                    // trade post limits open cancel/replace
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
                 }
