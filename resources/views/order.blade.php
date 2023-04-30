@@ -106,19 +106,19 @@
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
-                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>
-                                            <th style="white-space: nowrap;">Symbol</th>
-                                            <th style="white-space: nowrap;">Order ID</th>
-                                            <th style="white-space: nowrap;">Parent ID</th>
-                                            <th style="white-space: nowrap;">Instruction</th>
+                                            <th scope="col"style="white-space: nowrap;border-style: dotted;"><strong>#</strong></th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Symbol</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Order ID</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Parent ID</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Instruction</th>
 {{--                                            <th style="white-space: nowrap;">Position Effect</th>--}}
 {{--                                            <th style="white-space: nowrap;">Order Strategy Type</th>--}}
 {{--                                            <th style="white-space: nowrap;">Duration</th>--}}
-                                            <th style="white-space: nowrap;">Price</th>
-                                            <th style="white-space: nowrap;">Expected Profit</th>
-                                            <th style="white-space: nowrap;">Status</th>
-                                            <th style="white-space: nowrap;">Quantity</th>
-                                            <th style="white-space: nowrap;">Entered Time</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Price</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Expected Profit</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Status</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Quantity</th>
+                                            <th style="white-space: nowrap;border-style: dotted;">Entered Time</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,20 +126,23 @@
                                             @if ($order->status === 'WORKING')
                                                 <tr>
                                                     <td scope="row"
-                                                        style="white-space: nowrap;">{{
+                                                        style="white-space: nowrap;border-style: dotted;">{{
                                                     $loop->index }}</td>
-                                                    <td>{{ $order->symbol }}</td>
-                                                    <td>{{ $order->orderId }}</td>
-                                                    <td>{{ $order->parentOrderId}}</td>
-                                                    <td>{{ $order->instruction }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ $order->symbol
+                                                    }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ $order->orderId }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ $order->parentOrderId}}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
 {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
 {{--                                                    <td>{{ $order->duration }}</td>--}}
-                                                    <td>@if ($order->price)$@endif{{ $order->price }}</td>
-                                                    <td style="text-align:center">${{ $order->actualProfit }}</td>
-                                                    <td>{{ $order->status }}</td>
-                                                    <td style="text-align:center">{{ $order->quantity }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">@if ($order->price)$@endif{{ $order->price }}</td>
+                                                    <td
+                                                        style="text-align:center;border-style: dotted;">${{ $order->actualProfit }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ $order->status }}</td>
+                                                    <td
+                                                        style="text-align:center;border-style: dotted;">{{ $order->quantity }}</td>
+                                                    <td style="white-space: nowrap;border-style: dotted;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
