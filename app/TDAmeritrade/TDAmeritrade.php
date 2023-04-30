@@ -313,27 +313,35 @@ class TDAmeritrade
      * Get the chart history for a symbol.
      *
      * @param string $symbol
-     * @param int $periodType
+     * @param int|string $periodType
      * @param int $period
      * @param int $frequencyType
      * @param int $frequency
      * @param int $endDate
      * @param int $startDate
-     * @param bool $extendedHours
+     * @param bool|string $extendedHours
      * @return array
      * @throws JsonException|GuzzleException
      */
     public static function getPriceHistory(string $symbol,
-                                      int $periodType = 1,
-                                      int $period = 1,
-                                      int $frequencyType = 1,
-                                      int $frequency = 1,
-                                      int $endDate = 1,
-                                      int $startDate = 1,
-                                      bool $extendedHours = true): array
+                                      string      $periodType = 'day',
+                                      int         $period = 1,
+                                      string      $frequencyType = 'minute',
+                                      int         $frequency = 1,
+                                      string      $endDate = '',
+                                      string      $startDate = '',
+                                      bool|string $extendedHours = 'true'): array
     {
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
+        $today = Carbon::today()->toDateString();
+
+        if (empty($startDate)) {
+            $startDate = $today;
+        }
+        if (empty($endDate)) {
+            $endDate = $today;
+        }
 
         $data = [
             'base_uri' => SELF::BASE_URL,
@@ -349,13 +357,20 @@ class TDAmeritrade
                 'frequency' => $frequency,
                 'endDate' => $endDate,
                 'startDate' => $startDate,
-                'extendedHours' => $extendedHours,
+                'extendedHours' => (string)$extendedHours,
             ]
         ];
 
         $client = new Client($data);
 
-        $response = $client->request('get', SELF::API_VER . '/marketdata/'.$symbol.'/pricehistory', $data);
+        try {
+            $response = $client->request('get', SELF::API_VER . '/marketdata/'.$symbol.'/pricehistory', $data);
+        } catch (GuzzleException $guzzleException) {
+            $response = [
+                'success' => false,
+                'error' => $guzzleException->getMessage(),
+            ];
+        }
 
         return json_decode((string) $response->getBody()->getContents(), true,
         512,
