@@ -25,6 +25,11 @@ class Price extends Model
      */
     protected $fillable = [
         'symbol',
-        'price',
+        'open',
+        'high',
+        'low',
+        'close',
+        'volume',
+        'datetime',
     ];
 }
