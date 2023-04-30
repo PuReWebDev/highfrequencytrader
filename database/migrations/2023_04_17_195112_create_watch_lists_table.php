@@ -19,17 +19,7 @@ class CreateWatchListsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('accountId');
-            $table->string('name')->nullable();
-            $table->string('watchlistId');
-            $table->string('status');
-            $table->integer('sequenceId');
-            $table->double('quantity');
-            $table->double('averagePrice');
-            $table->double('commission');
             $table->string('symbol');
-            $table->string('description');
-            $table->string('assetType');
             $table->timestamps();
         });
     }
