@@ -711,6 +711,7 @@ class Accounts
                 'status' => $orderStrategies['status'] ?? null,
                 'statusDescription' => $orderStrategies['statusDescription'] ?? null,
                 'enteredTime' => $orderStrategies['enteredTime'] ?? null,
+                'closeTime' => $orderStrategies['closeTime'] ?? null,
                 'tag' => $orderStrategies['tag'] ?? null,
                 'accountId' => $orderStrategies['accountId'] ?? null,
             ]
