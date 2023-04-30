@@ -129,9 +129,9 @@
                                                         style="white-space: nowrap;">{{
                                                     $loop->index }} | </td>
                                                     <td style="white-space: nowrap;">{{ $order->symbol
-                                                    }}</td>
+                                                    }} | </td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }} | </td>
-                                                    <td style="white-space: nowrap;">{{ $order->parentOrderId}}</td>
+                                                    <td style="white-space: nowrap;">{{ $order->parentOrderId}} | </td>
                                                     <td style="white-space: nowrap;">{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
 {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
