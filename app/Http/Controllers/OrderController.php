@@ -24,8 +24,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $prices = TDAmeritrade::getPriceHistory('TSLA');
-        dd($prices);
+//        $prices = TDAmeritrade::getPriceHistory('TSLA');
+//        dd($prices);
 
 //        Accounts::tokenPreFlight();
 //        TDAmeritrade::getOrders();
