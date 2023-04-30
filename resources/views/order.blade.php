@@ -119,6 +119,7 @@
                                             <th style="white-space: nowrap;">Status</th>
                                             <th style="white-space: nowrap;">Quantity</th>
                                             <th style="white-space: nowrap;">Entered Time</th>
+                                            <th style="white-space: nowrap;">Elapsed Time</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -143,6 +144,10 @@
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
                                                     <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
+                                                    <td>{{ gmdate('H:i:s',
+                                                    \Carbon\Carbon::parse
+                                                    ($order->enteredTime)
+                                                    ->diffInSeconds(\Carbon\Carbon::now())) }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach
