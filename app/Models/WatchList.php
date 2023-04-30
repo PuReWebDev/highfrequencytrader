@@ -25,54 +25,9 @@ class WatchList extends Model
      * @var array
      */
     protected $fillable = [
-        'accountId',
         'user_id',
-        'orderId',
         'symbol',
-        'instruction',
-        'positionEffect',
-        'orderStrategyType',
-        'assetType',
-        'cusip',
-        'session',
-        'duration',
-        'cancelable',
-        'editable',
-        'price',
-        'expectedProfit',
-        'actualProfit',
-        'quantity',
-        'filledQuantity',
-        'remainingQuantity',
-        'stopPrice',
-        'stopPriceLinkBasis',
-        'stopPriceLinkType',
-        'session',
-        'stopPriceOffset',
-        'stopType',
-        'orderDuration',
-        'orderLegType',
-        'legId',
-        'cancelTime',
-        'enteredTime',
-        'closeTime',
-        'trailingAmount',
-        'status',
-        'statusDescription',
-        'tag',
-        'filledQuantity',
-        'remainingQuantity',
     ];
-
-    /**
-     * The account that this order belongs to.
-     *
-     * @return BelongsTo
-     */
-    public function account(): BelongsTo
-    {
-        return $this->belongsTo(Account::class);
-    }
 
     /**
      * Get the user that owns the phone.
