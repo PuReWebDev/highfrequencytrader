@@ -404,7 +404,7 @@ class TDAmeritrade
             'datetime' => $candle['datetime'],
         ],[
             'symbol' => $candle['symbol'],
-            'open' => $candle['symbol'],
+            'open' => $candle['open'],
             'high' => $candle['high'],
             'low' => $candle['low'],
             'close' => $candle['close'],
