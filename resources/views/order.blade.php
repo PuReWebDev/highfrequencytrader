@@ -143,7 +143,7 @@
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
-                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
+                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }} | </td>
                                                     <td>{{ gmdate('H:i:s',
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
