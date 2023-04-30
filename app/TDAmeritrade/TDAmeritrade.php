@@ -366,7 +366,7 @@ class TDAmeritrade
         try {
             $response = $client->request('get', SELF::API_VER . '/marketdata/'.$symbol.'/pricehistory', $data);
         } catch (GuzzleException $guzzleException) {
-            $response = [
+            return [
                 'success' => false,
                 'error' => $guzzleException->getMessage(),
             ];
