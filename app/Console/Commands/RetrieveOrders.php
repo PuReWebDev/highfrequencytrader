@@ -58,29 +58,11 @@ class RetrieveOrders extends Command
 
         while (true) {
             Accounts::tokenPreFlight();
+            $this->cancelStaleOrders();
+
             $this->info('Starting To Retrieved Orders. '.Carbon::now());
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
-
-            // Splitting The Workload for basic clean up of stale orders
-            $pendingCancels = Order::where([
-                ['user_id', '=', Auth::id()],
-                ['tag', '=', 'AA_PuReWebDev'],
-                ['instruction', '=', 'BUY'],
-                ['created_at', '<=', Carbon::now()->subMinutes(2)
-                    ->toDateTimeString()],
-            ])->whereIn('status',['WORKING','PENDING_ACTIVATION'])->get();
-
-            foreach ($pendingCancels as $pendingCancel) {
-                try {
-                    TDAmeritrade::cancelOrder($pendingCancel['orderId']);
-                } catch (GuzzleException $e) {
-                    Log::debug('Attempted To Cancel Already Cancelled Order',['success' => false,'error' => $e->getMessage()]);
-                }
-
-                Log::info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
-                $this->info('Stale Buy Order Cancelled: '.$pendingCancel['orderId']);
-            }
 
             $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
             OrdersProcessed::dispatch();
@@ -89,5 +71,32 @@ class RetrieveOrders extends Command
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');
         return 0;
+    }
+
+    /**
+     * cancelStaleOrders
+     * Cancel Stale Buy Orders
+     * @throws \JsonException
+     */
+    public function cancelStaleOrders(): void
+    {
+        $pendingCancels = Order::where([
+            ['user_id', '=', Auth::id()],
+            ['tag', '=', 'AA_PuReWebDev'],
+            ['instruction', '=', 'BUY'],
+            ['created_at', '<=', Carbon::now()->subMinutes(2)
+                ->toDateTimeString()],
+        ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
+
+        foreach ($pendingCancels as $pendingCancel) {
+            try {
+                TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+            } catch (GuzzleException $e) {
+                Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
+            }
+
+            Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
+            $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
+        }
     }
 }
