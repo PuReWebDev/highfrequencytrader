@@ -451,13 +451,19 @@ class TDAmeritrade
 
         $client = new Client($data);
 
-        $response = $client->request('get', SELF::API_VER . '/accounts/'
+        try {
+            $response = $client->request('get', SELF::API_VER . '/accounts/'
                 . $account['0']['accountId'] .'/orders', $data);
 
-        $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
-            JSON_THROW_ON_ERROR);
+            $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
 
-        Accounts::processIncomingOrders($responseData);
+            Accounts::processIncomingOrders($responseData);
+        } catch (GuzzleException $guzzleException) {
+            Log::debug('Failed To Retrieve Orders', ['errors' =>
+                $guzzleException->getMessage()]);
+        }
+
     }
 
     /**
