@@ -23,7 +23,7 @@ class CreatePricesTable extends Migration
             $table->double('low');
             $table->double('close');
             $table->integer('volume');
-            $table->dateTime('datetime');
+            $table->timestamp('datetime');
             $table->timestamps();
         });
     }
