@@ -427,7 +427,7 @@ class TDAmeritrade
         $account = Account::where('user_id', Auth::id())->get();
         $fromEnteredTime = Carbon::today()->toDateString();
 
-        if ($status === 'FULL') {
+        if (strtoupper($status) === 'FULL') {
             $fromEnteredTime = '2023-04-14';
             $status = '';
         }
