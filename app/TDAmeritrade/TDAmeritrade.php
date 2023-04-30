@@ -387,7 +387,8 @@ class TDAmeritrade
     $symbol):void
     {
         foreach ($prices['candles'] as $candle) {
-            self::savePriceData($candle, $symbol);
+            $candle['symbol'] = $symbol;
+            self::savePriceData($candle);
         }
     }
 
@@ -395,12 +396,11 @@ class TDAmeritrade
      * savePriceData
      * Saves The Price Data To Database
      * @param array $candle
-     * @param string $symbol
      */
-    private static function savePriceData(array $candle, string $symbol):void
+    private static function savePriceData(array $candle):void
     {
         Price::updateOrCreate([
-            'symbol' => $symbol,
+            'symbol' => $candle['symbol'],
             'datetime' => $candle['datetime'],
         ],[
             'symbol' => $candle['symbol'],
