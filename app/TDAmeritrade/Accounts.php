@@ -791,7 +791,10 @@ class Accounts
 
         // Retrieve The Account Information
         $accountResponse = Accounts::getAccounts();
-        Accounts::saveAccountInformation($accountResponse);
+
+        if (is_array($accountResponse)) {
+            Accounts::saveAccountInformation($accountResponse);
+        }
     }
 
 }
