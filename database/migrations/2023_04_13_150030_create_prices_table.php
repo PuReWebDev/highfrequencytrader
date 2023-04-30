@@ -15,10 +15,15 @@ class CreatePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prices', function (Blueprint $table) {
+        Schema::create('prices', static function (Blueprint $table) {
             $table->id();
             $table->string('symbol');
-            $table->double('price');
+            $table->double('close');
+            $table->double('high');
+            $table->double('low');
+            $table->double('open');
+            $table->integer('volume');
+            $table->dateTime('datetime');
             $table->timestamps();
         });
     }
