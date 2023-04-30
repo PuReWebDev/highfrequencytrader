@@ -127,7 +127,7 @@
                                                 <tr>
                                                     <td scope="row"
                                                         style="white-space: nowrap;">{{
-                                                    $loop->index }}</td>
+                                                    $loop->index }} | </td>
                                                     <td style="white-space: nowrap;">{{ $order->symbol
                                                     }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }} | </td>
