@@ -378,22 +378,29 @@ class TDAmeritrade
         512,
             JSON_THROW_ON_ERROR);
 
-        self::processIncomingPrices($responseData);
+        self::processIncomingPrices($responseData, $symbol);
 
         return $responseData;
     }
 
-    private static function processIncomingPrices(array $prices):void
+    private static function processIncomingPrices(array $prices, string
+    $symbol):void
     {
         foreach ($prices['candles'] as $candle) {
-            self::savePriceData($candle);
+            self::savePriceData($candle, $symbol);
         }
     }
 
-    private static function savePriceData(array $candle):void
+    /**
+     * savePriceData
+     * Saves The Price Data To Database
+     * @param array $candle
+     * @param string $symbol
+     */
+    private static function savePriceData(array $candle, string $symbol):void
     {
         Price::updateOrCreate([
-            'symbol' => $candle['symbol'],
+            'symbol' => $symbol,
             'datetime' => $candle['datetime'],
         ],[
             'symbol' => $candle['symbol'],
