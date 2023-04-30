@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\TDAmeritrade;
 
 use App\Models\Account;
+use App\Models\Price;
 use App\Models\Quote;
 use App\Models\Token;
 use Carbon\Carbon;
@@ -372,9 +373,37 @@ class TDAmeritrade
             ];
         }
 
-        return json_decode((string) $response->getBody()->getContents(), true,
+        $responseData = json_decode((string) $response->getBody()->getContents
+    (), true,
         512,
             JSON_THROW_ON_ERROR);
+
+        self::processIncomingPrices($responseData);
+
+        return $responseData;
+    }
+
+    private static function processIncomingPrices(array $prices):void
+    {
+        foreach ($prices['candles'] as $candle) {
+            self::savePriceData($candle);
+        }
+    }
+
+    private static function savePriceData(array $candle):void
+    {
+        Price::updateOrCreate([
+            'symbol' => $candle['symbol'],
+            'datetime' => $candle['datetime'],
+        ],[
+            'symbol' => $candle['symbol'],
+            'open' => $candle['symbol'],
+            'high' => $candle['high'],
+            'low' => $candle['low'],
+            'close' => $candle['close'],
+            'volume' => $candle['volume'],
+            'datetime' => $candle['datetime'],
+        ]);
     }
 
     /**
