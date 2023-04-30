@@ -112,7 +112,7 @@
                                             <th style="white-space: nowrap;">Parent ID</th>
                                             <th style="white-space: nowrap;">Instruction</th>
 {{--                                            <th style="white-space: nowrap;">Position Effect</th>--}}
-                                            <th style="white-space: nowrap;">Order Strategy Type</th>
+{{--                                            <th style="white-space: nowrap;">Order Strategy Type</th>--}}
 {{--                                            <th style="white-space: nowrap;">Duration</th>--}}
                                             <th style="white-space: nowrap;">Price</th>
                                             <th style="white-space: nowrap;">Expected Profit</th>
@@ -133,7 +133,7 @@
                                                     <td>{{ $order->parentOrderId}}</td>
                                                     <td>{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
-                                                    <td>{{ $order->orderStrategyType }}</td>
+{{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td style="text-align:center">${{ $order->actualProfit }}</td>
@@ -162,7 +162,7 @@
                                             <th style="white-space:nowrap;">Parent Order ID</th>
                                             <th style="white-space:nowrap;">Instruction</th>
 {{--                                            <th style="white-space:nowrap;">Position Effect</th>--}}
-                                            <th style="white-space:nowrap;">Order Strategy Type</th>
+{{--                                            <th style="white-space:nowrap;">Order Strategy Type</th>--}}
 {{--                                            <th style="white-space:nowrap;">Duration</th>--}}
                                             <th style="white-space:nowrap;">Price</th>
                                             <th style="white-space:nowrap;">Trade Profit</th>
@@ -182,7 +182,7 @@
                                                     <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
-                                                    <td>{{ $order->orderStrategyType }}</td>
+{{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td>@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
