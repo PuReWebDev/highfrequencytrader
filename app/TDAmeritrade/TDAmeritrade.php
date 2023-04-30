@@ -429,6 +429,7 @@ class TDAmeritrade
 
         if ($status === 'FULL') {
             $fromEnteredTime = '2023-04-14';
+            $status = '';
         }
 
         $data = [
