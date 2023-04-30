@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use JsonException;
 
 /**
  * @method Api\Accounts accounts() Account balances, positions, and orders for all linked accounts.
@@ -234,7 +235,7 @@ class TDAmeritrade
      * @param mixed $symbols
      * @return mixed
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function quotes(array $symbols): mixed
     {
@@ -309,11 +310,64 @@ class TDAmeritrade
     }
 
     /**
+     * Get the chart history for a symbol.
+     *
+     * @param string $symbol
+     * @param int $periodType
+     * @param int $period
+     * @param int $frequencyType
+     * @param int $frequency
+     * @param int $endDate
+     * @param int $startDate
+     * @param bool $extendedHours
+     * @return array
+     * @throws JsonException|GuzzleException
+     */
+    public static function getPriceHistory(string $symbol,
+                                      int $periodType = 1,
+                                      int $period = 1,
+                                      int $frequencyType = 1,
+                                      int $frequency = 1,
+                                      int $endDate = 1,
+                                      int $startDate = 1,
+                                      bool $extendedHours = true): array
+    {
+        Accounts::tokenPreFlight();
+        $token = Token::where('user_id', Auth::id())->get();
+
+        $data = [
+            'base_uri' => SELF::BASE_URL,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+                'periodType' => $periodType,
+                'period' => $period,
+                'frequencyType' => $frequencyType,
+                'frequency' => $frequency,
+                'endDate' => $endDate,
+                'startDate' => $startDate,
+                'extendedHours' => $extendedHours,
+            ]
+        ];
+
+        $client = new Client($data);
+
+        $response = $client->request('get', SELF::API_VER . '/marketdata/'.$symbol.'/pricehistory', $data);
+
+        return json_decode((string) $response->getBody()->getContents(), true,
+        512,
+            JSON_THROW_ON_ERROR);
+    }
+
+    /**
      * getOrders
      * Get Orders For Account
      * @param string $status
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function getOrders(string $status = ''): void
     {
@@ -408,7 +462,7 @@ class TDAmeritrade
      * cancelOrder
      * Cancel Order For Account
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function cancelOrder($orderId): void
     {
