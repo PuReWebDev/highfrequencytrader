@@ -27,6 +27,7 @@ class WatchList extends Model
     protected $fillable = [
         'user_id',
         'symbol',
+        'enabled'
     ];
 
     /**
