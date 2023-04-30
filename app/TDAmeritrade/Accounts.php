@@ -11,6 +11,7 @@ use App\Models\Position;
 use App\Models\Token;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -466,6 +467,12 @@ class Accounts
             $data = [
                 'success' => false,
                 'error' => $e->getMessage(),
+            ];
+        } catch (ServerException $serverException) {
+            // handle the error if the request fails
+            $data = [
+                'success' => false,
+                'error' => $serverException->getMessage(),
             ];
         }
 
