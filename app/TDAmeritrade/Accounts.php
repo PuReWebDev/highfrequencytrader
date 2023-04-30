@@ -792,7 +792,7 @@ class Accounts
         // Retrieve The Account Information
         $accountResponse = Accounts::getAccounts();
 
-        if (is_array($accountResponse)) {
+        if (is_array($accountResponse) && empty($accountResponse['error'])) {
             Accounts::saveAccountInformation($accountResponse);
         }
     }
