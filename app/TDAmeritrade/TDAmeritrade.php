@@ -355,8 +355,8 @@ class TDAmeritrade
                 'period' => $period,
                 'frequencyType' => $frequencyType,
                 'frequency' => $frequency,
-                'endDate' => $endDate,
-                'startDate' => $startDate,
+//                'endDate' => $endDate,
+//                'startDate' => $startDate,
                 'extendedHours' => (string)$extendedHours,
             ]
         ];
