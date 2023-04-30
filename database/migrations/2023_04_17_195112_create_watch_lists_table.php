@@ -20,6 +20,7 @@ class CreateWatchListsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('symbol');
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
