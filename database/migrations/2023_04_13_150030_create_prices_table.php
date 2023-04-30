@@ -18,10 +18,10 @@ class CreatePricesTable extends Migration
         Schema::create('prices', static function (Blueprint $table) {
             $table->id();
             $table->string('symbol');
-            $table->double('close');
+            $table->double('open');
             $table->double('high');
             $table->double('low');
-            $table->double('open');
+            $table->double('close');
             $table->integer('volume');
             $table->dateTime('datetime');
             $table->timestamps();
