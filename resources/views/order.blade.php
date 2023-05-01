@@ -140,7 +140,7 @@
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td style="white-space: nowrap;">@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
-                                                        style="text-align:center;">$@if ($order->quantity === 5){{ $order->quantity * .10 }}@endif @if ($order->quantity === 10){{ $order->quantity * .05 }}@endif</td>
+                                                        style="text-align:center;">$@if ($order->quantity === 5){{ $order->quantity * .10 }}@endif@if ($order->quantity === 10){{ $order->quantity * .05 }}@endif</td>
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
