@@ -125,6 +125,7 @@
                                         <tbody>
                                         @foreach($orders as $order)
                                             @if ($order->status === 'WORKING')
+                                                @if ($order->price)
                                                 <tr>
                                                     <td scope="row"
                                                         style="white-space: nowrap;">{{
@@ -149,6 +150,7 @@
                                                     ($order->enteredTime)
                                                     ->diffInSeconds(\Carbon\Carbon::now())) }}</td>
                                                 </tr>
+                                                @endif{{ $order->price }}
                                             @endif
                                         @endforeach
                                         </tbody>
