@@ -139,7 +139,7 @@
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td style="white-space: nowrap;">@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
-                                                        style="text-align:center;">${{ $order->actualProfit }}</td>
+                                                        style="text-align:center;">${{ $order->expectedProfit }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
