@@ -32,8 +32,8 @@ class OrderController extends Controller
 //        TDAmeritrade::getOrders('FILLED');
         Accounts::updateAccountData();
 
-//        $yesterday = Carbon::yesterday();
-        $yesterday = Carbon::now()->subDays(2);
+        $yesterday = Carbon::yesterday();
+//        $yesterday = Carbon::now()->subDays(2);
         $now = Carbon::now();
 
         $orders = Order::where([
