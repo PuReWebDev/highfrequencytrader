@@ -78,7 +78,7 @@ class TradeEngineProcessor
             if ($stoppedCounts[$tradeSymbol] >= 1) {
 
                 if ($stoppedCounts[$tradeSymbol] >= 12) {
-                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+//                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 }
 
                 // TODO place a trade that recovers the loss, based onincreasing the quantity
@@ -132,13 +132,13 @@ class TradeEngineProcessor
             OrderService::placeOtoOrder(
                 number_format($currentStockPrice, 2, '.', ''),
                 number_format($currentStockPrice + .05,2, '.', ''),
-                number_format($currentStockPrice - 1.00, 2, '.', ''),
+                number_format($currentStockPrice - 1.25, 2, '.', ''),
                 $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]
                 * 2);
             OrderService::placeOtoOrder(
                 number_format($currentStockPrice, 2, '.', ''),
                 number_format($currentStockPrice + .10,2, '.', ''),
-                number_format($currentStockPrice - 1.00, 2, '.', ''),
+                number_format($currentStockPrice - 1.25, 2, '.', ''),
                 $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
 
