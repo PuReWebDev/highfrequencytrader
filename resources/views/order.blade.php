@@ -150,7 +150,7 @@
                                                     ($order->enteredTime)
                                                     ->diffInSeconds(\Carbon\Carbon::now())) }}</td>
                                                 </tr>
-                                                @endif{{ $order->price }}
+                                                @endif
                                             @endif
                                         @endforeach
                                         </tbody>
