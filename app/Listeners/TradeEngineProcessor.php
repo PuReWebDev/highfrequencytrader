@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use App\Models\Order;
+use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
@@ -124,17 +125,17 @@ class TradeEngineProcessor
 
             $currentStockPrice = $quote->lastPrice;
 
-//            OrderService::placeOtoOrder(
-//                number_format($currentStockPrice, 2, '.', ''),
-//                number_format($currentStockPrice + .05,2, '.', ''),
-//                number_format($currentStockPrice - 1.00, 2, '.', ''),
-//                $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]
-//                * 2);
-//            OrderService::placeOtoOrder(
-//                number_format($currentStockPrice, 2, '.', ''),
-//                number_format($currentStockPrice + .10,2, '.', ''),
-//                number_format($currentStockPrice - 1.00, 2, '.', ''),
-//                $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            OrderService::placeOtoOrder(
+                number_format($currentStockPrice, 2, '.', ''),
+                number_format($currentStockPrice + .05,2, '.', ''),
+                number_format($currentStockPrice - 1.00, 2, '.', ''),
+                $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]
+                * 2);
+            OrderService::placeOtoOrder(
+                number_format($currentStockPrice, 2, '.', ''),
+                number_format($currentStockPrice + .10,2, '.', ''),
+                number_format($currentStockPrice - 1.00, 2, '.', ''),
+                $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
 
             $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
