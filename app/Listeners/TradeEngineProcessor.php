@@ -141,6 +141,8 @@ class TradeEngineProcessor
                 number_format($currentStockPrice - 1.00, 2, '.', ''),
                 $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
+            usleep(500000);
+
 
             $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
                     '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
