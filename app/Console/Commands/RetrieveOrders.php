@@ -65,11 +65,12 @@ class RetrieveOrders extends Command
 
             if ($status === 'WORKING') {
                 $this->cancelStaleOrders();
-            }
 
-            $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
-            OrdersProcessed::dispatch();
-            $this->info('Trade Engine Processor Completed'.Carbon::now());
+
+                $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
+                OrdersProcessed::dispatch();
+                $this->info('Trade Engine Processor Completed'.Carbon::now());
+            }
         }
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');
