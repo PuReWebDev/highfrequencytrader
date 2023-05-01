@@ -95,6 +95,8 @@ class RetrieveOrders extends Command
             try {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
                 sleep(2);
+                usleep(500000);
+                usleep(500000);
             } catch (GuzzleException $e) {
                 Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
             }
