@@ -59,13 +59,13 @@ class RetrieveOrders extends Command
         while (true) {
             Accounts::tokenPreFlight();
 
-            if ($status === 'WORKING') {
-                $this->cancelStaleOrders();
-            }
-
             $this->info('Starting To Retrieved Orders. '.Carbon::now());
             TDAmeritrade::getOrders($status);
             $this->info($status.' Orders Retrieved. '.Carbon::now());
+
+            if ($status === 'WORKING') {
+                $this->cancelStaleOrders();
+            }
 
             $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
             OrdersProcessed::dispatch();
