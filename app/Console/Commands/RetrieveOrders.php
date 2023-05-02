@@ -73,7 +73,7 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'FILLED' || empty($status)) {
-                self::getCandleSticks();
+//                self::getCandleSticks();
             }
         }
 
