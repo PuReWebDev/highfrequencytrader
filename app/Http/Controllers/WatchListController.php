@@ -18,9 +18,7 @@ class WatchListController extends Controller
      */
     public function index()
     {
-        $watchList = WatchList::where('id', Auth::id())
-            ->with('user')
-            ->get();
+        $watchList = WatchList::where('id', Auth::id())->get();
 
         if (empty($watchList)) {
             // WatchList not yet created
