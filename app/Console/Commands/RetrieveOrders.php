@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Events\OrdersProcessed;
 use App\Models\Order;
+use App\Models\WatchList;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
@@ -51,6 +52,12 @@ class RetrieveOrders extends Command
         $status = $this->argument('status');
 
         Auth::loginUsingId(4, $remember = true);
+
+        $symbols = WatchList::where('user_id', Auth::id())->get();
+
+        foreach ($symbols as $symbol) {
+            dd($symbol['symbol']);
+        }
 
         if (strtoupper($status) === 'ALL') {
             $status = '';
