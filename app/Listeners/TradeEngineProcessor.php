@@ -78,15 +78,13 @@ class TradeEngineProcessor
 
             if ($stoppedCounts[$tradeSymbol] >= 1) {
 
-                if ($stoppedCounts[$tradeSymbol] >= 5) {
-                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
-                }
+                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
 
                 // TODO place a trade that recovers the loss, based onincreasing the quantity
                 Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
             }
 
-            if ($stoppedCounts[$tradeSymbol] >= 16) {
+            if ($stoppedCounts[$tradeSymbol] >= 3) {
                 $tradeHalted[$tradeSymbol] = true; // TODO break even -
                 // 1:1 once recovered, restart trade quantity
                 // trade post limits open cancel/replace
