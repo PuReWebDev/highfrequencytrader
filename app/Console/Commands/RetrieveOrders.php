@@ -53,12 +53,6 @@ class RetrieveOrders extends Command
 
         Auth::loginUsingId(4, $remember = true);
 
-        $symbols = WatchList::where('user_id', Auth::id())->get();
-
-        foreach ($symbols as $symbol) {
-            dd($symbol['symbol']);
-        }
-
         if (strtoupper($status) === 'ALL') {
             $status = '';
         }
@@ -76,6 +70,10 @@ class RetrieveOrders extends Command
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
                 OrdersProcessed::dispatch();
                 $this->info('Trade Engine Processor Completed'.Carbon::now());
+            }
+
+            if ($status === 'FILLED' || empty($status)) {
+                self::getCandleSticks();
             }
         }
 
@@ -110,6 +108,23 @@ class RetrieveOrders extends Command
 
             Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
             $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
+        }
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public static function getCandleSticks(): void
+    {
+        $symbols = WatchList::where([
+            ['user_id','=', Auth::id()],
+            ['enabled','=', 1],
+        ])->get();
+
+        foreach ($symbols as $symbol) {
+            TDAmeritrade::getPriceHistory($symbol['symbol']);
+            usleep(500000);
         }
     }
 }
