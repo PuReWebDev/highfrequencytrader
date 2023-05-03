@@ -48,10 +48,10 @@ class SellOut extends Command
         $symbols = [
 
 
-            ['symbol' => 'AAPL', 'longQuantity' => 5],
-            ['symbol' => 'GD', 'longQuantity' => 2],
-            ['symbol' => 'DIS', 'longQuantity' => 5],
-            ['symbol' => 'MSFT', 'longQuantity' => 2],
+//            ['symbol' => 'AAPL', 'longQuantity' => 5],
+//            ['symbol' => 'GD', 'longQuantity' => 2],
+//            ['symbol' => 'DIS', 'longQuantity' => 5],
+//            ['symbol' => 'MSFT', 'longQuantity' => 2],
 
 
             ['symbol' => 'AMZN', 'longQuantity' => 5],
