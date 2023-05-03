@@ -32,16 +32,16 @@ class OrderController extends Controller
 //        TDAmeritrade::getOrders('FILLED');
         Accounts::updateAccountData();
 
-        $yesterday = Carbon::yesterday();
-//        $yesterday = Carbon::now()->subDays(2);
+//        $yesterday = Carbon::yesterday();
+        $yesterday = Carbon::now()->subDays(2);
         $now = Carbon::now();
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
         ])->whereNotNull('instruction')->whereNotNull('positionEffect')
-//            ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
-            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
+            ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
+//            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
 
