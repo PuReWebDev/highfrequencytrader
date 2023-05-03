@@ -162,7 +162,8 @@
                         @isset($displayFilled)
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
-                                    <table class="table" id="filled-orders-table">
+                                    <table class="table table-striped"
+                                           id="filled-orders-table">
                                         <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
                                         <tr>
