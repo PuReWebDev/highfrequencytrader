@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Position;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SellOut extends Command
 {
@@ -43,12 +46,40 @@ class SellOut extends Command
         Auth::loginUsingId(4, $remember = true);
         Accounts::tokenPreFlight();
 
-        $x = 160.00;
-        OrderService::placeOtoOrder(
-            number_format($x, 2, '.', ''),
-            number_format($x + .10,2, '.', ''),
-            number_format($x - 1.00, 2, '.', ''),
-            'TSLA', 129);
+
+
+        $symbols = Position::where([
+            ['user_id','=', Auth::id()],
+            ['enabled','=', 1],
+        ])->get();
+
+        foreach ($symbols as $symbol) {
+            $symbolGroup = [];
+//            TDAmeritrade::getPriceHistory($symbol['symbol']);
+
+            array_push($symbolGroup, $symbol['symbol']);
+
+            $quotes = TDAmeritrade::quotes($symbolGroup);
+
+            foreach ($quotes as $quote) {
+
+                $currentStockPrice = $quote->lastPrice;
+
+                OrderService::sellOutMarket($quote->symbol, $symbol['longQuantity']);
+
+//                usleep(500000);
+
+
+                $message = "Order placed: Sell Out ".number_format
+                    ($currentStockPrice, 2, '.',
+                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                        '.', '') . ", Symbol: $quote->symbol, Quantity: ".$symbol['longQuantity'];
+
+                Log::debug($message);
+
+                sleep(5);
+            }
+        }
 
         $this->info('Trade Completed');
         return 0;

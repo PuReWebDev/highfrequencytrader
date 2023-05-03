@@ -126,41 +126,6 @@ class OrderService
 	}]
 }';
 
-        $sellOut = '{
-  "orderType": "MARKET",
-  "session": "NORMAL",
-  "duration": "GOOD_TILL_CANCEL",
-  "orderStrategyType": "SINGLE",
-  "orderLegCollection": [
-    {
-      "instruction": "Sell",
-      "quantity": 129,
-      "instrument": {
-        "symbol": "TSLA",
-        "assetType": "EQUITY"
-      }
-    }
-  ]
-}';
-
-        $sellOutLimit = '{
-  "orderType": "LIMIT",
-  "session": "SEAMLESS",
-  "price": "8.84",
-  "duration": "GOOD_TILL_CANCEL",
-  "orderStrategyType": "SINGLE",
-  "orderLegCollection": [
-    {
-      "instruction": "Sell",
-      "quantity": 4,
-      "instrument": {
-        "symbol": "CCL",
-        "assetType": "EQUITY"
-      }
-    }
-  ]
-}';
-
         $protectedOrders = '{
   "orderStrategyType": "TRIGGER",
   "session": "NORMAL",
@@ -235,8 +200,68 @@ class OrderService
 //        }
 
         return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    public static function sellOutMarket(string $symbol, int $quantity): array
+    {
+        // Set up the request body
+
+        $sellOut = '{
+  "orderType": "MARKET",
+  "session": "NORMAL",
+  "duration": "GOOD_TILL_CANCEL",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Sell",
+      "quantity": '.$quantity.',
+      "instrument": {
+        "symbol": "'.$symbol.'",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
+        $sellOutLimit = '{
+  "orderType": "LIMIT",
+  "session": "SEAMLESS",
+  "price": "8.84",
+  "duration": "GOOD_TILL_CANCEL",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Sell",
+      "quantity": 4,
+      "instrument": {
+        "symbol": "CCL",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
+
+        $account = Account::where('user_id', Auth::id())->get();
+        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
+
+//        $now = Carbon::now();
+//
+//        $start = Carbon::createFromTimeString('07:00');
+//        $end = Carbon::createFromTimeString('09:28');
+
+//        if ($now->between($start, $end)) {
+            // ¯\_(ツ)_/¯ // Trade Premarket With Limit Orders
+//            return self::sendRequest($ordersEndpointUrl, $newnew);
+//        } else {
+//            return self::sendRequest($ordersEndpointUrl, $protectedOrders);
+//        }
+
 //        return self::sendRequest($ordersEndpointUrl, $sellOutLimit);
-//        return self::sendRequest($ordersEndpointUrl, $sellOut);
+        return self::sendRequest($ordersEndpointUrl, $sellOut);
     }
 
     /**
