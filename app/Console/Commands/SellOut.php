@@ -68,7 +68,7 @@ class SellOut extends Command
 
             foreach ($quotes as $quote) {
 
-                OrderService::sellOutLimit($symbol['symbol'], $symbol['longQuantity'], $quote->lastPrice);
+                OrderService::sellOutLimit($quote->symbol, $symbol['longQuantity'], $quote->lastPrice);
 
                 $message = "Order placed: Sell Out Symbol: ".$symbol['symbol'].",
             Quantity: ".$symbol['longQuantity']. " Stop Price: $quote->lastPrice";
