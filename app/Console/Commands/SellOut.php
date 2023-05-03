@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Position;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use Illuminate\Console\Command;
@@ -40,14 +39,25 @@ class SellOut extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         Auth::loginUsingId(4, $remember = true);
         Accounts::tokenPreFlight();
 
-        $symbols = Position::where([
-            ['user_id','=', Auth::id()],
-        ])->get();
+        $symbols = [
+            ['symbol' => 'RTX', 'longQuantity' => 4],
+            ['symbol' => 'AMZN', 'longQuantity' => 5],
+            ['symbol' => 'GOOGL', 'longQuantity' => 5],
+            ['symbol' => 'BA', 'longQuantity' => 5],
+            ['symbol' => 'CRM', 'longQuantity' => 10],
+            ['symbol' => 'ABNB', 'longQuantity' => 2],
+            ['symbol' => 'UBER', 'longQuantity' => 5],
+            ['symbol' => 'AAPL', 'longQuantity' => 5],
+            ['symbol' => 'GD', 'longQuantity' => 2],
+            ['symbol' => 'DIS', 'longQuantity' => 5],
+            ['symbol' => 'MSFT', 'longQuantity' => 2],
+            ['symbol' => 'NFLX', 'longQuantity' => 4],
+        ];
 
         foreach ($symbols as $symbol) {
 
