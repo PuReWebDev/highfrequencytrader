@@ -24,7 +24,8 @@
                     @endif
 
                         <div class="table-responsive">
-                            <table class="table" id="open-orders-table caption-top">
+                            <table class="table table-striped caption-top"
+                                   id="open-orders-table">
                                 <caption style="text-align: center;">Total Counts</caption>
                                 <thead>
                                 <tr>
@@ -163,7 +164,7 @@
                         @isset($displayFilled)
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
-                                    <table class="table table-striped"
+                                    <table class="table table-striped caption-top"
                                            id="filled-orders-table">
                                         <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
