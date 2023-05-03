@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -59,15 +60,28 @@ class SellOut extends Command
         ];
 
         foreach ($symbols as $symbol) {
+            $goodSymbols = [];
 
-            OrderService::sellOutMarket($symbol['symbol'], $symbol['longQuantity']);
+            array_push($goodSymbols, $symbol['symbol']);
 
-            $message = "Order placed: Sell Out Symbol: ".$symbol['symbol'].",
-            Quantity: ".$symbol['longQuantity'];
+            $quotes = TDAmeritrade::quotes($goodSymbols);
 
-            Log::debug($message);
+            foreach ($quotes as $quote) {
 
-            sleep(5);
+                OrderService::sellOutLimit($symbol['symbol'], $symbol['longQuantity'], $quote->lastPrice);
+
+                $message = "Order placed: Sell Out Symbol: ".$symbol['symbol'].",
+            Quantity: ".$symbol['longQuantity']. " Stop Price: $quote->lastPrice";
+
+                Log::debug($message);
+
+                sleep(5);
+
+            }
+//            OrderService::sellOutMarket($symbol['symbol'], $symbol['longQuantity']);
+//            OrderService::sellOutMarket($symbol['symbol'], $symbol['longQuantity'], $quote->price);
+
+
         }
 
         $this->info('Trade Completed');

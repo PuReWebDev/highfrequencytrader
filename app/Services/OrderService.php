@@ -265,6 +265,38 @@ class OrderService
     }
 
     /**
+     * @throws \JsonException
+     */
+    public static function sellOutLimit(string $symbol, int $quantity,
+                                        $limitPrice): array
+    {
+        // Set up the request body
+
+        $sellOutLimit = '{
+  "orderType": "LIMIT",
+  "session": "SEAMLESS",
+  "price": "'.$limitPrice.'",
+  "duration": "GOOD_TILL_CANCEL",
+  "orderStrategyType": "SINGLE",
+  "orderLegCollection": [
+    {
+      "instruction": "Sell",
+      "quantity": '.$quantity.',
+      "instrument": {
+        "symbol": "'.$symbol.'",
+        "assetType": "EQUITY"
+      }
+    }
+  ]
+}';
+
+        $account = Account::where('user_id', Auth::id())->get();
+        $ordersEndpointUrl = config('tdameritrade.base_url') . '/v1/accounts/' . $account['0']['accountId'] . '/orders';
+
+        return self::sendRequest($ordersEndpointUrl, $sellOutLimit);
+    }
+
+    /**
      * Cancel an order.
      *
      * @param Order $order
