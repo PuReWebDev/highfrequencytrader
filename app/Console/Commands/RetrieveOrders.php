@@ -60,16 +60,16 @@ class RetrieveOrders extends Command
         while (true) {
             Accounts::tokenPreFlight();
 
-            $this->info('Starting To Retrieved Orders. '.Carbon::now());
+            $this->info('Starting To Retrieved Orders. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
             TDAmeritrade::getOrders($status);
-            $this->info($status.' Orders Retrieved. '.Carbon::now());
+            $this->info($status.' Orders Retrieved. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
 
             if ($status === 'WORKING') {
                 $this->cancelStaleOrders();
 
-                $this->info('Dispatching To Trade Engine Processor '.Carbon::now());
+                $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                 OrdersProcessed::dispatch();
-                $this->info('Trade Engine Processor Completed'.Carbon::now());
+                $this->info('Trade Engine Processor Completed'.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
             }
 
             if ($status === 'FILLED' || empty($status)) {
@@ -92,7 +92,7 @@ class RetrieveOrders extends Command
             ['user_id', '=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
             ['instruction', '=', 'BUY'],
-            ['created_at', '<=', Carbon::now()->subMinutes(3)
+            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)
                 ->toDateTimeString()],
         ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
 

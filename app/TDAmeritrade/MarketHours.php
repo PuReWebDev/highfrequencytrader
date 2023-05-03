@@ -149,7 +149,7 @@ class MarketHours
      */
     public static function isMarketOpen(string $market): bool
     {
-        $dt = Carbon::now();
+        $dt = Carbon::now()->setTimezone('America/New_York');
         $dt->toDateString();
         $MarketHour = self::getMarketHour($dt);
 
