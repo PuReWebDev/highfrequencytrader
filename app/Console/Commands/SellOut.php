@@ -45,9 +45,7 @@ class SellOut extends Command
         Accounts::tokenPreFlight();
 
         $symbols = [
-            ['symbol' => 'RTX', 'longQuantity' => 4],
-            ['symbol' => 'AMZN', 'longQuantity' => 5],
-            ['symbol' => 'GOOGL', 'longQuantity' => 5],
+
             ['symbol' => 'ABNB', 'longQuantity' => 2],
             ['symbol' => 'UBER', 'longQuantity' => 5],
             ['symbol' => 'AAPL', 'longQuantity' => 5],
@@ -55,6 +53,9 @@ class SellOut extends Command
             ['symbol' => 'DIS', 'longQuantity' => 5],
             ['symbol' => 'MSFT', 'longQuantity' => 2],
             ['symbol' => 'NFLX', 'longQuantity' => 4],
+            ['symbol' => 'RTX', 'longQuantity' => 4],
+            ['symbol' => 'AMZN', 'longQuantity' => 5],
+            ['symbol' => 'GOOGL', 'longQuantity' => 5],
         ];
 
         foreach ($symbols as $symbol) {
