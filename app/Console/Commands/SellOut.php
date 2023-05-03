@@ -50,7 +50,6 @@ class SellOut extends Command
 
         $symbols = Position::where([
             ['user_id','=', Auth::id()],
-            ['enabled','=', 1],
         ])->get();
 
         foreach ($symbols as $symbol) {
