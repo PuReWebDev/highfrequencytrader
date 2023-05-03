@@ -182,8 +182,9 @@
                                             <th style="white-space:nowrap;">Quantity</th>
                                             <th style="white-space:nowrap;">Entered Time</th>
                                             <th style="white-space:nowrap;">Close Time</th>
-                                            <th style="white-space:nowrap;
-                                            text-align:right;">Elapsed Time</th>
+                                            <th>Elapsed Time</th>
+                                            {{--<th style="white-space:nowrap;--}}
+                                            {{--text-align:right;">Elapsed Time</th>--}}
                                         </tr>
                                         </thead>
                                         <tbody style=".table-striped">
