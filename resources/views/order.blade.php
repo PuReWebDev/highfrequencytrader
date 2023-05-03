@@ -129,11 +129,11 @@
                                                 <tr>
                                                     <td scope="row"
                                                         style="white-space: nowrap;">{{
-                                                    $loop->index }} | </td>
+                                                    $loop->index }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->symbol
                                                     }}</td>
-                                                    <td style="white-space: nowrap;">{{ $order->orderId }} | </td>
-                                                    <td style="white-space: nowrap;">{{ $order->parentOrderId}} | </td>
+                                                    <td style="white-space: nowrap;">{{ $order->orderId }}</td>
+                                                    <td style="white-space: nowrap;">{{ $order->parentOrderId}}</td>
                                                     <td style="white-space: nowrap;">{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
 {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
@@ -144,7 +144,7 @@
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
-                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }} | </td>
+                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>
                                                     <td>{{ gmdate('H:i:s',
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
@@ -189,7 +189,7 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->index }}</th>
                                                     <td>{{ $order->symbol }}</td>
-                                                    <td>{{ $order->orderId }} | </td>
+                                                    <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
@@ -205,8 +205,8 @@
                                                     <td>{{
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
-                                                    ->toDateTimeString() }} | </td>
-                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }} | </td>
+                                                    ->toDateTimeString() }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>
                                                     <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>
 
                                                 </tr>
