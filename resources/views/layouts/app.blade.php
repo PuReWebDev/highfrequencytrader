@@ -38,33 +38,69 @@
                     <div class="col-6 col-md-2 mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="/"
+                                                         class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="/dashboard"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Dashboard</a></li>
+                            <li class="nav-item mb-2"><a href="/orders"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Orders</a></li>
+                            <li class="nav-item mb-2"><a href="/balances"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Balances</a></li>
+                            <li class="nav-item mb-2"><a href="/preference"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Preferences</a></li>
+                            <li class="nav-item mb-2"><a href="/account"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Account</a></li>
                         </ul>
                     </div>
 
                     <div class="col-6 col-md-2 mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="/"
+                                                         class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="/dashboard"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Dashboard</a></li>
+                            <li class="nav-item mb-2"><a href="/orders"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Orders</a></li>
+                            <li class="nav-item mb-2"><a href="/balances"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Balances</a></li>
+                            <li class="nav-item mb-2"><a href="/preference"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Preferences</a></li>
+                            <li class="nav-item mb-2"><a href="/account"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Account</a></li>
                         </ul>
                     </div>
 
                     <div class="col-6 col-md-2 mb-3">
                         <h5>Section</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                            <li class="nav-item mb-2"><a href="/"
+                                                         class="nav-link p-0 text-body-secondary">Home</a></li>
+                            <li class="nav-item mb-2"><a href="/dashboard"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Dashboard</a></li>
+                            <li class="nav-item mb-2"><a href="/orders"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Orders</a></li>
+                            <li class="nav-item mb-2"><a href="/balances"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Balances</a></li>
+                            <li class="nav-item mb-2"><a href="/preference"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Preferences</a></li>
+                            <li class="nav-item mb-2"><a href="/account"
+                                                         class="nav-link p-0
+                                                         text-body-secondary">Account</a></li>
                         </ul>
                     </div>
 
