@@ -208,9 +208,10 @@
                                                     <td>{{
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
-                                                    ->toDateTimeString() }}</td>
+                                                    ->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->format('g:i:s a') }}</td>--}}
-                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('g:i A') }}</td>
+                                                    <td>{{
+                                                    \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>--}}
 
                                                     <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>
