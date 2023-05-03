@@ -183,7 +183,7 @@
                                             text-align:right;">Elapsed Time</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style=".table-striped">
                                         @foreach($orders as $order)
                                             @if ($order->status === 'FILLED')
                                                 <tr>
