@@ -102,7 +102,8 @@
                         @isset($displayWorking)
                             @if ($displayWorking === true)
                                 <div class="table-responsive">
-                                    <table class="table" id="open-orders-table">
+                                    <table class="table table-striped"
+                                           id="open-orders-table">
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
