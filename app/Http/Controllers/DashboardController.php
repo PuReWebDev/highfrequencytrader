@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Token;
 use App\TDAmeritrade\MarketHours;
 use App\TDAmeritrade\TDAmeritrade;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -77,7 +78,8 @@ class DashboardController extends Controller
             $marketMsg = 'Market Hours Temporarily Unavailable';
         }
 
-        $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')->get();
+        $orders = Order::where('user_id', Auth::id())->orderBy('enteredTime', 'DESC')
+            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
         list($workingCount, $filledCount, $rejectedCount, $cancelledCount,
             $expiredCount) = TDAmeritrade::extracted($orders);
 
