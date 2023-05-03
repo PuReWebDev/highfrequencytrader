@@ -48,8 +48,6 @@ class SellOut extends Command
             ['symbol' => 'RTX', 'longQuantity' => 4],
             ['symbol' => 'AMZN', 'longQuantity' => 5],
             ['symbol' => 'GOOGL', 'longQuantity' => 5],
-            ['symbol' => 'BA', 'longQuantity' => 5],
-            ['symbol' => 'CRM', 'longQuantity' => 10],
             ['symbol' => 'ABNB', 'longQuantity' => 2],
             ['symbol' => 'UBER', 'longQuantity' => 5],
             ['symbol' => 'AAPL', 'longQuantity' => 5],
