@@ -331,8 +331,14 @@ class AccountController extends Controller
 //            dd($accountResponse['0']['securitiesAccount']['orderStrategies']['10']);
 
             $account = Account::where('user_id', Auth::id())->get();
-            $positions = Position::where('user_id', Auth::id())->get();
+
+            $positions = Position::where([
+                ['user_id', Auth::id()],
+                ['updated_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
+            ])->get();
+
             $Balance = Balance::where('user_id', Auth::id())->get();
+
             $order = Order::where([
                 ['user_id', '=', Auth::id()],
                 ['created_at', '=', Carbon::today()],
