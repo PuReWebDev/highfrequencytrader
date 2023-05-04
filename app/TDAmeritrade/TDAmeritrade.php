@@ -390,7 +390,7 @@ class TDAmeritrade
      * @return array
      * @throws JsonException
      */
-    public static function getMovers(string $exchange = '$COMPX'): array
+    public static function getMovers(string $exchange): array
     {
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
