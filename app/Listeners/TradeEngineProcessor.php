@@ -69,7 +69,7 @@ class TradeEngineProcessor
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             // Set Some Default Values
-            $this->shareQuantityPerTrade[$tradeSymbol] = 10;
+            $this->shareQuantityPerTrade[$tradeSymbol] = 15;
             $tradeHalted[$tradeSymbol] = false;
 
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
@@ -78,7 +78,7 @@ class TradeEngineProcessor
 
             if ($stoppedCounts[$tradeSymbol] >= 1) {
 
-//                $this->shareQuantityPerTrade[$tradeSymbol] = 5;
+                $this->shareQuantityPerTrade[$tradeSymbol] = 10;
 
                 // TODO place a trade that recovers the loss, based onincreasing the quantity
                 Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
