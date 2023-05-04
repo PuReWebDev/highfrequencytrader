@@ -93,7 +93,7 @@ class RetrieveOrders extends Command
             ['tag', '=', 'AA_PuReWebDev'],
             ['instruction', '=', 'BUY'],
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
-            ['created_at', '>=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
+            ['created_at', '>=', Carbon::now()->subMinutes(15)
                 ->toDateTimeString()],
         ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
 
