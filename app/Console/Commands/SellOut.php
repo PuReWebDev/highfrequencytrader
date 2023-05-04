@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Position;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -45,7 +46,7 @@ class SellOut extends Command
         Auth::loginUsingId(4, $remember = true);
         Accounts::tokenPreFlight();
 
-        $symbols = [
+//        $symbols = [
 
 
 //            ['symbol' => 'AAPL', 'longQuantity' => 5],
@@ -54,10 +55,12 @@ class SellOut extends Command
 //            ['symbol' => 'MSFT', 'longQuantity' => 2],
 
 
-            ['symbol' => 'AMZN', 'longQuantity' => 5],
-            ['symbol' => 'GOOGL', 'longQuantity' => 5],
-            ['symbol' => 'UBER', 'longQuantity' => 5],
-        ];
+//            ['symbol' => 'AMZN', 'longQuantity' => 5],
+//            ['symbol' => 'GOOGL', 'longQuantity' => 5],
+//            ['symbol' => 'UBER', 'longQuantity' => 5],
+//        ];
+
+        $symbols = Position::where('user_id', Auth::id())->get();
 
         foreach ($symbols as $symbol) {
             $goodSymbols = [];
