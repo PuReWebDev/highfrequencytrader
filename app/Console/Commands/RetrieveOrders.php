@@ -65,7 +65,7 @@ class RetrieveOrders extends Command
             $this->info($status.' Orders Retrieved. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
 
             if ($status === 'WORKING') {
-                $this->cancelStaleOrders();
+//                $this->cancelStaleOrders();
 
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                 OrdersProcessed::dispatch();
