@@ -92,16 +92,16 @@ class RetrieveOrders extends Command
             ['user_id', '=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
             ['instruction', '=', 'BUY'],
-            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)
+            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(10)
                 ->toDateTimeString()],
         ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
 
         foreach ($pendingCancels as $pendingCancel) {
             try {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
-                sleep(2);
-                usleep(500000);
-                usleep(500000);
+                sleep(5);
+//                usleep(500000);
+//                usleep(500000);
             } catch (GuzzleException $e) {
                 Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
             }
