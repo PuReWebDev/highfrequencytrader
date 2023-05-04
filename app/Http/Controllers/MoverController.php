@@ -18,8 +18,15 @@ class MoverController extends Controller
             self::saveMovers($mover);
         }
 
+        usleep(500000);
+        $spxMovers = TDAmeritrade::getMovers('$SPX.X');
+        foreach ($spxMovers as $spxMover) {
+            self::saveMovers($spxMover);
+        }
+
+        $movers = Mover::whereDate('created_at', Carbon::today())->get();
+
         dd($movers);
-//        $movers = TDAmeritrade::getMovers('$SPX.X');
     }
 
     private static function saveMovers(array $data)
