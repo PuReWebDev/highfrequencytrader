@@ -31,6 +31,11 @@
                         {{ __('Preference') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('movers')" :active="request()
+                    ->routeIs('movers')">
+                        {{ __('Movers') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('account')" :active="request()
                     ->routeIs('account')">
                         {{ __('Account') }}

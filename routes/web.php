@@ -47,4 +47,8 @@ Route::get('/balances', [\App\Http\Controllers\BalancesController::class, 'index
     ->middleware(['auth'])
     ->name('balances');
 
+Route::get('/movers', [\App\Http\Controllers\MoverController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('movers');
+
 require __DIR__.'/auth.php';

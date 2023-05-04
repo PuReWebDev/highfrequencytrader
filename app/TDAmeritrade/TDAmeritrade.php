@@ -383,6 +383,52 @@ class TDAmeritrade
         return $responseData;
     }
 
+    /**
+     * Get Movers.
+     *
+     * @param string $exchange
+     * @return array
+     * @throws JsonException
+     */
+    public static function getMovers(string $exchange = '$COMPX'): array
+    {
+        Accounts::tokenPreFlight();
+        $token = Token::where('user_id', Auth::id())->get();
+
+        $data = [
+            'base_uri' => SELF::BASE_URL,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+                'direction' => 'up',
+                'change' => 'value',
+            ]
+        ];
+
+        $client = new Client($data);
+
+        try {
+            $response = $client->request('get', SELF::API_VER . '/marketdata/'.$exchange.'/movers', $data);
+        } catch (GuzzleException $guzzleException) {
+            return [
+                'success' => false,
+                'error' => $guzzleException->getMessage(),
+            ];
+        }
+
+        $responseData = json_decode((string) $response->getBody()->getContents
+    (), true,
+        512,
+            JSON_THROW_ON_ERROR);
+
+        dd($responseData);
+
+        return $responseData;
+    }
+
     private static function processIncomingPrices(array $prices, string
     $symbol):void
     {
