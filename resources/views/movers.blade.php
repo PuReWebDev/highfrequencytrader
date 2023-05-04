@@ -32,6 +32,9 @@
                             <tbody>
                             @foreach($movers as $mover)
                                 <tr>
+                                    <td scope="row"
+                                        style="white-space: nowrap;">{{
+                                                    $loop->index }}</td>
                                     <td style="white-space:
                                                     nowrap;">{{$mover->symbol }}</td>
                                     <td style="white-space: nowrap;">{{ $mover->description}}</td>
