@@ -129,14 +129,15 @@ class TradeEngineProcessor
 
             OrderService::placeOtoOrder(
                 number_format($currentStockPrice, 2, '.', ''),
-                number_format($currentStockPrice + .05,2, '.', ''),
-                number_format($currentStockPrice - 1.00, 2, '.', ''),
-                $quote->symbol, 2);
-            OrderService::placeOtoOrder(
-                number_format($currentStockPrice, 2, '.', ''),
                 number_format($currentStockPrice + .10,2, '.', ''),
                 number_format($currentStockPrice - 1.00, 2, '.', ''),
                 $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+//            OrderService::placeOtoOrder(
+//                number_format($currentStockPrice, 2, '.', ''),
+//                number_format($currentStockPrice + .05,2, '.', ''),
+//                number_format($currentStockPrice - 1.00, 2, '.', ''),
+//                $quote->symbol, 2);
+
 
             usleep(500000);
 
