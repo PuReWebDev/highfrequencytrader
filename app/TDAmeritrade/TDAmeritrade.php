@@ -419,14 +419,10 @@ class TDAmeritrade
             ];
         }
 
-        $responseData = json_decode((string) $response->getBody()->getContents
+        return json_decode((string) $response->getBody()->getContents
     (), true,
         512,
             JSON_THROW_ON_ERROR);
-
-        dd($responseData);
-
-        return $responseData;
     }
 
     private static function processIncomingPrices(array $prices, string
