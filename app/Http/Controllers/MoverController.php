@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mover;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\View;
 
 class MoverController extends Controller
 {
@@ -27,7 +28,9 @@ class MoverController extends Controller
 
         $movers = Mover::whereDate('created_at', Carbon::today())->get();
 
-        dd($movers);
+        return View::make('movers', [
+            'movers' => $movers,
+        ]);
     }
 
     private static function saveMovers(array $data)
