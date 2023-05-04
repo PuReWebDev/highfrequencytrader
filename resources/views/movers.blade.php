@@ -39,7 +39,8 @@
                                                     nowrap;">{{$mover->symbol }}</td>
                                     <td style="white-space: nowrap;">{{ $mover->description}}</td>
                                     <td style="white-space: nowrap;">{{ $mover->last }}</td>
-                                    <td style="white-space: nowrap;">{{ $mover->change }}</td>
+                                    <td style="white-space: nowrap;">+${{
+                                    $mover->change }}</td>
                                     <td style="white-space: nowrap;">{{ $mover->totalVolume }}</td>
 
                                 </tr>
