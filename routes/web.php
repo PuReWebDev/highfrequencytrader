@@ -31,7 +31,7 @@ Route::get('/preference', [\App\Http\Controllers\PreferenceController::class, 'i
     ->middleware(['auth'])
     ->name('preference');
 
-Route::resource('/orders', [\App\Http\Controllers\OrderController::class, 'index'])
+Route::resource('orders', [\App\Http\Controllers\OrderController::class, 'index'])
     ->middleware(['auth'])
     ->name('orders');
 
