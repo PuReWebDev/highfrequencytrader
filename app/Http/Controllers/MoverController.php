@@ -14,16 +14,17 @@ class MoverController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        $movers = TDAmeritrade::getMovers('$COMPX');
-        foreach ($movers as $mover) {
-            self::saveMovers($mover);
-        }
-
-        usleep(500000);
-        $spxMovers = TDAmeritrade::getMovers('$SPX.X');
-        foreach ($spxMovers as $spxMover) {
-            self::saveMovers($spxMover);
-        }
+//        $movers = TDAmeritrade::getMovers('$COMPX');
+//        foreach ($movers as $mover) {
+//            self::saveMovers($mover);
+//        }
+//
+//        usleep(500000);
+//        $spxMovers = TDAmeritrade::getMovers('$SPX.X');
+//        foreach ($spxMovers as $spxMover) {
+//            self::saveMovers($spxMover);
+//        }
+        TDAmeritrade::updateMovers();
 
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->get();

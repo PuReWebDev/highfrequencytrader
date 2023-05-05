@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\TDAmeritrade;
 
 use App\Models\Account;
+use App\Models\Mover;
 use App\Models\Price;
 use App\Models\Quote;
 use App\Models\Token;
@@ -584,5 +585,33 @@ class TDAmeritrade
 
         $client->request('DELETE', SELF::API_VER . '/accounts/'
             . $account['0']['accountId'] .'/orders/'.$orderId, $data);
+    }
+
+    public static function updateMovers(): void
+    {
+        $movers = self::getMovers('$COMPX');
+        foreach ($movers as $mover) {
+            self::saveMovers($mover);
+        }
+
+        usleep(500000);
+        $spxMovers = self::getMovers('$SPX.X');
+        foreach ($spxMovers as $spxMover) {
+            self::saveMovers($spxMover);
+        }
+    }
+
+    private static function saveMovers(array $data): void
+    {
+        Mover::updateOrCreate([
+            'symbol' => $data['symbol'],
+        ],[
+            'change' => $data['change'],
+            'description' => $data['description'],
+            'direction' => $data['direction'],
+            'last' => $data['last'],
+            'symbol' => $data['symbol'],
+            'totalVolume' => $data['totalVolume'],
+        ]);
     }
 }

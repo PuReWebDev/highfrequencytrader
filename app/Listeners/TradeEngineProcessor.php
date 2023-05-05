@@ -63,6 +63,8 @@ class TradeEngineProcessor
 //                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
         ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
 
+        TDAmeritrade::updateMovers();
+
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->limit('10')->get();
 
