@@ -65,7 +65,7 @@
                                 <h2 class="mb-4">Submit Once You've
                                     Selected Your Date Ranges</h2>
                                 <button class="btn btn-primary"
-                                        type="button">Submit</button>
+                                        type="submit">Submit</button>
                             </div>
                         </div>
 
