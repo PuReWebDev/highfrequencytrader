@@ -37,6 +37,7 @@ class MoverController extends Controller
             array_unshift($this->tradeSymbols, $mover['symbol']);
         }
 
+        $this->tradeSymbols = array_unique($this->tradeSymbols);
         dd($this->tradeSymbols);
 
         return View::make('movers', [
