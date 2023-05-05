@@ -9,13 +9,10 @@ use Illuminate\Support\Facades\View;
 
 class MoverController extends Controller
 {
-    protected array $tradeSymbols = ['UBER','SPOT', 'PG', 'CLX','TSLA', 'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
-
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \JsonException
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $movers = TDAmeritrade::getMovers('$COMPX');
         foreach ($movers as $mover) {
@@ -30,15 +27,6 @@ class MoverController extends Controller
 
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->get();
-
-        $symbols = [];
-
-        foreach ($movers as $mover) {
-            array_unshift($this->tradeSymbols, $mover['symbol']);
-        }
-
-        $this->tradeSymbols = array_unique($this->tradeSymbols);
-        dd($this->tradeSymbols);
 
         return View::make('movers', [
             'movers' => $movers,
