@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use App\Models\Mover;
 use App\Models\Order;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -61,6 +62,15 @@ class TradeEngineProcessor
             ['tag', '=', 'AA_PuReWebDev'],
 //                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
         ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
+
+        $movers = Mover::whereDate('created_at', Carbon::today())
+            ->orderBy('change', 'desc')->get();
+
+        foreach ($movers as $mover) {
+            array_unshift($this->tradeSymbols, $mover['symbol']);
+        }
+
+        $this->tradeSymbols = array_unique($this->tradeSymbols);
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             $stoppedCounts[$tradeSymbol] = $stoppedOrders->where('symbol','=',$tradeSymbol)->count();
