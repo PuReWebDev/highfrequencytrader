@@ -29,6 +29,14 @@ class MoverController extends Controller
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->get();
 
+        $symbols = [];
+
+        foreach ($movers as $mover) {
+            array_push($symbols, $mover['symbol']);
+        }
+
+        dd($symbols);
+
         return View::make('movers', [
             'movers' => $movers,
         ]);
