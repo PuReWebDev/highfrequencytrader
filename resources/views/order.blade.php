@@ -89,7 +89,7 @@
 
                         <div class="table-responsive">
                             <table class="table table-striped caption-top"
-                                   id="open-orders-table">
+                                   id="summary-table">
                                 <caption style="text-align: center;">Total Counts</caption>
                                 <thead>
                                 <tr>
