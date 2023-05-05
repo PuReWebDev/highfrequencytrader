@@ -167,7 +167,8 @@
                         @isset($displayWorking)
                             @if ($displayWorking === true)
                                 <div class="table-responsive">
-                                    <table class="table table-striped caption-top"
+                                    <table data-order='[[ 2, "desc" ]]'
+                                           class="table table-striped caption-top"
                                            id="open-orders-table">
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
