@@ -185,7 +185,7 @@
                                             <th style="white-space: nowrap;">Status</th>
                                             <th style="white-space: nowrap;">Quantity</th>
                                             <th style="white-space: nowrap;">Entered Time</th>
-                                            <th style="white-space: nowrap;">Elapsed Time</th>
+                                            <th style="white-space: nowrap;">Elapsed</th>
                                         </tr>
                                         </thead>
                                         <tbody>
