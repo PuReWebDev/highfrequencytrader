@@ -232,7 +232,8 @@
                         @isset($displayFilled)
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
-                                    <table class="table table-striped caption-top"
+                                    <table data-order='[[ 2, "desc" ]]'
+                                           class="table table-striped caption-top"
                                            id="filled-orders-table">
                                         <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
