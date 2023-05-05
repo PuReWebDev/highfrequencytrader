@@ -36,8 +36,8 @@ class OrderController extends Controller
         $to_date = $request->input('to_date');
 
         if (empty($from_date)) {
-            $from_date = Carbon::yesterday();
-//            $from_date = Carbon::today();
+//            $from_date = Carbon::yesterday();
+            $from_date = Carbon::today();
         }
 
         if (empty($to_date)) {
