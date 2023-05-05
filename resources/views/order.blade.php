@@ -10,6 +10,45 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+
+
+                    <div class="container text-center">
+                        <div class="row align-items-start">
+                            <div class="col">
+
+                                <h2 class="mb-4">Select A Date To View Orders From</h2>
+                                <div class="form-group">
+                                    <div class='input-group date'
+                                         id='fromdatetimepicker'>
+                                        <input type='text' class="form-control" />
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col">
+
+                                <h2 class="mb-4">Select A Date To View Orders From</h2>
+                                <div class="form-group">
+                                    <div class='input-group date'
+                                         id='todatetimepicker'>
+                                        <input type='text' class="form-control" />
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                One of three columns
+                            </div>
+                        </div>
+                    </div>
+
+
                     <h2 class="mb-4">Select A Date To View Orders From</h2>
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker'>
@@ -290,7 +329,10 @@
     </div>
 
     <script type="text/javascript">
-        $('#datetimepicker').datepicker({
+        $('#fromdatetimepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+        $('#todatetimepicker').datepicker({
             format: 'dd-mm-yyyy'
         });
     </script>
