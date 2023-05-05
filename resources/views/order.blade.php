@@ -258,7 +258,6 @@
                                         <tbody style=".table-striped">
                                         @foreach($orders as $order)
                                             @if ($order->status === 'FILLED')
-                                                @isset($order->actualProfit)
                                                 <tr>
 {{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
                                                     <td>{{ $order->symbol }}</td>
@@ -288,7 +287,6 @@
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)->format('g:i:s a') }}</td>--}}
 
                                                 </tr>
-                                                @endisset
                                             @endif
                                         @endforeach
                                         </tbody>
