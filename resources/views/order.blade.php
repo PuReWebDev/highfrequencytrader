@@ -354,13 +354,13 @@
             format: 'yyyy-mm-dd',
             // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday'],
-            orientation: 'auto bottom'
+            orientation: 'bottom'
         });
         $('#todatetimepicker').datepicker({
             format: 'yyyy-mm-dd',
             // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday']
-            orientation: 'auto bottom'
+            orientation: 'bottom'
         });
         let table = new DataTable('#open-orders-table');
         let tableTwo = new DataTable('#filled-orders-table');
