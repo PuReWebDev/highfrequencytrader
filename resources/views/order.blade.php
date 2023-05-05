@@ -14,9 +14,9 @@
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker'>
                             <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-            </span>
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
                         </div>
                     </div>
 
@@ -289,6 +289,11 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $('#datetimepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+    </script>
 
 
 </x-app-layout>
