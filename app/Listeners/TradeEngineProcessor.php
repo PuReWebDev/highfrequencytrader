@@ -66,7 +66,7 @@ class TradeEngineProcessor
         TDAmeritrade::updateMovers();
 
         $movers = Mover::whereDate('created_at', Carbon::today())
-            ->orderBy('change', 'desc')->limit('10')->get();
+            ->orderBy('change', 'desc')->limit('15')->get();
 
         foreach ($movers as $mover) {
             array_unshift($this->tradeSymbols, $mover['symbol']);
