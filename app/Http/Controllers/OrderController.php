@@ -22,7 +22,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
 //        $prices = TDAmeritrade::getPriceHistory('TSLA');
 //        dd($prices);
@@ -32,16 +32,25 @@ class OrderController extends Controller
 //        TDAmeritrade::getOrders('FILLED');
         Accounts::updateAccountData();
 
-        $yesterday = Carbon::yesterday();
-//        $yesterday = Carbon::now()->subDays(2);
-        $now = Carbon::now();
+        $from_date = $request->input('from_date');
+        $to_date = $request->input('to_date');
+
+        if (empty($from_date)) {
+//            $from_date = Carbon::yesterday();
+            $from_date = Carbon::now();
+        }
+
+        if (empty($to_date)) {
+            $to_date = Carbon::now();
+        }
+
 
         $orders = Order::where([
             ['user_id','=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
         ])->whereNotNull('instruction')->whereNotNull('positionEffect')
-//            ->whereBetween('created_at', [$yesterday, $now])->orderBy('orderId', 'DESC')->get();
-            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
+            ->whereBetween('created_at', [$from_date, $to_date])->orderBy('orderId', 'DESC')->get();
+//            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
 
