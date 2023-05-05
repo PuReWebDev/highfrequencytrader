@@ -167,7 +167,7 @@
                         @isset($displayWorking)
                             @if ($displayWorking === true)
                                 <div class="table-responsive">
-                                    <table data-order='[[ 2, "desc" ]]'
+                                    <table data-order='[[ 1, "desc" ]]'
                                            class="table table-striped caption-top"
                                            id="open-orders-table">
                                         <caption style="text-align: center;">Working Orders</caption>
@@ -233,7 +233,7 @@
                         @isset($displayFilled)
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
-                                    <table data-order='[[ 2, "desc" ]]'
+                                    <table data-order='[[ 1, "desc" ]]'
                                            class="table table-striped caption-top"
                                            id="filled-orders-table">
                                         <caption style="text-align: center;">Filled Orders</caption>
