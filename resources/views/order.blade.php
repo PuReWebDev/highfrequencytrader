@@ -336,10 +336,14 @@
 
     <script type="text/javascript">
         $('#fromdatetimepicker').datepicker({
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            defaultViewDate: 'today',
+            daysOfWeekDisabled: ['saturday', 'sunday']
         });
         $('#todatetimepicker').datepicker({
-            format: 'yyyy-mm-dd'
+            format: 'yyyy-mm-dd',
+            defaultViewDate: 'today',
+            daysOfWeekDisabled: ['saturday', 'sunday']
         });
     </script>
 
