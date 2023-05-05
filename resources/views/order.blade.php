@@ -13,11 +13,16 @@
 
 
                     <div class="container text-center">
+
+                        <form method="post" action="/orders"
+                              enctype="multipart/form-data">
+                            {{ csrf_field() }}
                         <div class="row align-items-start">
                             <div class="col">
 
                                 <h2 class="mb-4">Select A Start Date To View
                                     Orders From</h2>
+
                                 <div class="form-group">
                                     <div class='input-group date'
                                          id='fromdatetimepicker'>
@@ -63,6 +68,8 @@
                                         type="button">Submit</button>
                             </div>
                         </div>
+
+                        </form>
                     </div>
 
                     @if (count($orders) >= 1)
