@@ -344,12 +344,12 @@
     <script type="text/javascript">
         $('#fromdatetimepicker').datepicker({
             format: 'yyyy-mm-dd',
-            defaultViewDate: 'today',
+            // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday']
         });
         $('#todatetimepicker').datepicker({
             format: 'yyyy-mm-dd',
-            defaultViewDate: 'today',
+            // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday']
         });
     </script>
