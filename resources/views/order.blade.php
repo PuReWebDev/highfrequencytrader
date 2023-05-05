@@ -358,7 +358,7 @@
             daysOfWeekDisabled: ['saturday', 'sunday']
         });
         let table = new DataTable('#open-orders-table');
-        let table = new DataTable('#filled-orders-table');
+        let tableTwo = new DataTable('#filled-orders-table');
     </script>
 
 
