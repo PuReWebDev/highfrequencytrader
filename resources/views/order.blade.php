@@ -226,6 +226,8 @@
                             @endif
                         @endisset
 
+                    <hr class="hr" />
+
                         @isset($displayFilled)
                             @if ($displayFilled === true)
                                 <div class="table-responsive">
