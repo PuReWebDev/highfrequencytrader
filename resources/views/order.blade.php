@@ -226,8 +226,8 @@
                             @endif
                         @endisset
 
-                    <hr class="hr" style="margin-top: 15px;margin-bottom:
-                    15px;"/>
+                    <hr class="hr" style="margin-top: 25px;margin-bottom:
+                    25px;"/>
 
                         @isset($displayFilled)
                             @if ($displayFilled === true)
