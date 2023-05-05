@@ -359,7 +359,7 @@
         $('#todatetimepicker').datepicker({
             format: 'yyyy-mm-dd',
             // defaultViewDate: 'today',
-            daysOfWeekDisabled: ['saturday', 'sunday']
+            daysOfWeekDisabled: ['saturday', 'sunday'],
             orientation: 'bottom'
         });
         let table = new DataTable('#open-orders-table');
