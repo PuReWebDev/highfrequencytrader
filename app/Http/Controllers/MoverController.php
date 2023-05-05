@@ -26,7 +26,8 @@ class MoverController extends Controller
             self::saveMovers($spxMover);
         }
 
-        $movers = Mover::whereDate('created_at', Carbon::today())->get();
+        $movers = Mover::whereDate('created_at', Carbon::today())
+            ->orderBy('change', 'desc')->get();
 
         return View::make('movers', [
             'movers' => $movers,
