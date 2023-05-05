@@ -45,6 +45,8 @@
 
                             </div>
                             <div class="col">
+                                <h2 class="mb-4">Click Submit Once You've
+                                    Selected Your Date Ranges</h2>
                                 <button class="btn btn-primary"
                                         type="button">Submit</button>
                             </div>
