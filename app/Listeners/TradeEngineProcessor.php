@@ -53,8 +53,8 @@ class TradeEngineProcessor
         $orders = Order::where([
             ['user_id', '=', Auth::id()],
             ['tag', '=', 'AA_PuReWebDev'],
-            ['instruction', '=', 'SELL'],
-        ])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
+//            ['instruction', '=', 'SELL'],
+        ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING','PENDING_ACTIVATION'])->whereDate('created_at', Carbon::today())->get();
 
         $stoppedOrders = Order::where([
             ['user_id', '=', Auth::id()],
