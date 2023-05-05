@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\View;
 
 class MoverController extends Controller
 {
+    protected array $tradeSymbols = ['UBER','SPOT', 'PG', 'CLX','TSLA', 'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
+
     /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \JsonException
@@ -32,10 +34,10 @@ class MoverController extends Controller
         $symbols = [];
 
         foreach ($movers as $mover) {
-            array_push($symbols, $mover['symbol']);
+            array_unshift($this->tradeSymbols, $mover['symbol']);
         }
 
-        dd($symbols);
+        dd($this->tradeSymbols);
 
         return View::make('movers', [
             'movers' => $movers,
