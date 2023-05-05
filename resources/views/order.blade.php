@@ -45,18 +45,8 @@
 
                             </div>
                             <div class="col">
-                                One of three columns
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <h2 class="mb-4">Select A Date To View Orders From</h2>
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker'>
-                            <input type='text' class="form-control" />
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
+                                <button class="btn btn-primary"
+                                        type="button">Submit</button>
                             </div>
                         </div>
                     </div>
