@@ -26,7 +26,8 @@
                                 <div class="form-group">
                                     <div class='input-group date'
                                          id='fromdatetimepicker'>
-                                        <input type='text' class="form-control" />
+                                        <input name="fromdate" type='text'
+                                               class="form-control" />
                                         <div class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
@@ -47,7 +48,8 @@
                                 <div class="form-group">
                                     <div class='input-group date'
                                          id='todatetimepicker'>
-                                        <input type='text' class="form-control" />
+                                        <input name="todate" type='text'
+                                               class="form-control" />
                                         <div class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
