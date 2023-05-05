@@ -255,7 +255,7 @@
                                         <tbody style=".table-striped">
                                         @foreach($orders as $order)
                                             @if ($order->status === 'FILLED')
-                                                @isset($order->price)
+                                                @isset($order->actualProfit)
                                                 <tr>
                                                     <th scope="row">{{ $loop->index }}</th>
                                                     <td>{{ $order->symbol }}</td>
