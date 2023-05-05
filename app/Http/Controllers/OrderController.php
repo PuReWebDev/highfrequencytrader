@@ -37,10 +37,7 @@ class OrderController extends Controller
 
         if (empty($from_date)) {
             $from_date = Carbon::yesterday();
-            dd('Created inside the empty condition '. $from_date);
 //            $from_date = Carbon::today()->toDateString();
-        } else {
-            dd($from_date);
         }
 
         if (empty($to_date)) {
