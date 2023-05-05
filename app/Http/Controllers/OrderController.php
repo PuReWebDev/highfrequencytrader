@@ -37,11 +37,11 @@ class OrderController extends Controller
 
         if (empty($from_date)) {
 //            $from_date = Carbon::yesterday();
-            $from_date = Carbon::today();
+            $from_date = Carbon::today()->toDateString();
         }
 
         if (empty($to_date)) {
-            $to_date = Carbon::today();
+            $to_date = Carbon::today()->toDateString();
         }
 
 
