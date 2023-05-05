@@ -38,6 +38,8 @@ class OrderController extends Controller
         if (empty($from_date)) {
             $from_date = Carbon::yesterday();
 //            $from_date = Carbon::today()->toDateString();
+        } else {
+            dd($from_date);
         }
 
         if (empty($to_date)) {
