@@ -234,7 +234,7 @@
                                         <caption style="text-align: center;">Filled Orders</caption>
                                         <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+{{--                                            <th scope="col">#</th>--}}
                                             <th style="white-space:nowrap;">Symbol</th>
                                             <th style="white-space:nowrap;">Order ID</th>
                                             <th style="white-space:nowrap;">Parent Order ID</th>
@@ -257,7 +257,7 @@
                                             @if ($order->status === 'FILLED')
                                                 @isset($order->actualProfit)
                                                 <tr>
-                                                    <th scope="row">{{ $loop->index }}</th>
+{{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
                                                     <td>{{ $order->symbol }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
