@@ -355,6 +355,7 @@
             // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday']
         });
+        let table = new DataTable('#filled-orders-table');
     </script>
 
 
