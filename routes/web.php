@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CallbackController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,8 @@ Route::get('/preference', [\App\Http\Controllers\PreferenceController::class, 'i
     ->middleware(['auth'])
     ->name('preference');
 
-Route::resource('orders', [\App\Http\Controllers\OrderController::class, 'index'])
+//Route::resource('orders', [\App\Http\Controllers\OrderController::class, 'index'])
+Route::resource('orders', OrderController::class)
     ->middleware(['auth'])
     ->name('orders');
 
