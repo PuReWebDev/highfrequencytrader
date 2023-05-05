@@ -64,7 +64,7 @@ class TradeEngineProcessor
         ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
 
         $movers = Mover::whereDate('created_at', Carbon::today())
-            ->orderBy('change', 'desc')->get();
+            ->orderBy('change', 'desc')->limit('10')->get();
 
         foreach ($movers as $mover) {
             array_unshift($this->tradeSymbols, $mover['symbol']);
