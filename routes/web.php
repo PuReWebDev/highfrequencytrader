@@ -33,8 +33,11 @@ Route::get('/preference', [\App\Http\Controllers\PreferenceController::class, 'i
     ->name('preference');
 
 //Route::resource('orders', [\App\Http\Controllers\OrderController::class, 'index'])
-Route::resource('orders', OrderController::class)
+Route::get('/orders', [OrderController::class, 'index'])
     ->middleware(['auth'])
+    ->name('orders');
+
+Route::post('/orders', [OrderController::class, 'index'])->middleware(['auth'])
     ->name('orders');
 
 Route::get('/trade', [\App\Http\Controllers\TradeController::class, 'index'])
