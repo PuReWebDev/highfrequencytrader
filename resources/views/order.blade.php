@@ -16,7 +16,8 @@
                         <div class="row align-items-start">
                             <div class="col">
 
-                                <h2 class="mb-4">Select A Date To View Orders From</h2>
+                                <h2 class="mb-4">Select A Start Date To View
+                                    Orders From</h2>
                                 <div class="form-group">
                                     <div class='input-group date'
                                          id='fromdatetimepicker'>
@@ -30,7 +31,8 @@
                             </div>
                             <div class="col">
 
-                                <h2 class="mb-4">Select A Date To View Orders From</h2>
+                                <h2 class="mb-4">Select A To Date To View
+                                    Orders From</h2>
                                 <div class="form-group">
                                     <div class='input-group date'
                                          id='todatetimepicker'>
@@ -330,10 +332,10 @@
 
     <script type="text/javascript">
         $('#fromdatetimepicker').datepicker({
-            format: 'dd-mm-yyyy'
+            format: 'yyyy-mm-dd'
         });
         $('#todatetimepicker').datepicker({
-            format: 'dd-mm-yyyy'
+            format: 'yyyy-mm-dd'
         });
     </script>
 
