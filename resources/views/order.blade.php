@@ -172,7 +172,7 @@
                                         <caption style="text-align: center;">Working Orders</caption>
                                         <thead>
                                         <tr>
-                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>
+{{--                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>--}}
                                             <th style="white-space: nowrap;">Symbol</th>
                                             <th style="white-space: nowrap;">Order ID</th>
                                             <th style="white-space: nowrap;">Parent ID</th>
@@ -193,9 +193,9 @@
                                             @if ($order->status === 'WORKING')
                                                 @if ($order->price)
                                                 <tr>
-                                                    <td scope="row"
-                                                        style="white-space: nowrap;">{{
-                                                    $loop->index }}</td>
+{{--                                                    <td scope="row"--}}
+{{--                                                        style="white-space: nowrap;">{{--}}
+{{--                                                    $loop->index }}</td>--}}
                                                     <td style="white-space: nowrap;">{{ $order->symbol
                                                     }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }}</td>
@@ -357,6 +357,7 @@
             // defaultViewDate: 'today',
             daysOfWeekDisabled: ['saturday', 'sunday']
         });
+        let table = new DataTable('#open-orders-table');
         let table = new DataTable('#filled-orders-table');
     </script>
 
