@@ -32,8 +32,8 @@ class CreateSymbolsTable extends Migration
             $table->date('LatestQuarter');
             $table->bigInteger('MarketCapitalization');
             $table->bigInteger('EBITDA');
-            $table->float('PERatio');
-            $table->float('PEGRatio');
+            $table->string('PERatio');
+            $table->string('PEGRatio');
             $table->double('BookValue');
             $table->string('DividendPerShare');
             $table->string('DividendYield');
