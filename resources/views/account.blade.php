@@ -55,7 +55,10 @@
                             @foreach($positions as $position)
                                 <tr>
                                     <th scope="row">{{ $count++ }}</th>
-                                    <td>{{ $position['symbol'] }}</td>
+                                    <td><a href="{{url
+                                                    ('symbol',
+                                                    [$position['symbol']])
+                                                    }}">{{ $position['symbol']}}</a></td>
                                     <td>{{ $position['longQuantity'] }}</td>
                                     <td>{{ $position['averagePrice'] }}</td>
                                     <td>{{ $position['marketValue'] }}</td>
