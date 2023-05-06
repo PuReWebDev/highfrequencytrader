@@ -101,15 +101,22 @@
                                 <div class="row align-items-start">
                                     <div class="col">
 
-                                        <ul class="list-group list-group-horizontal">
-                                            <li class="list-group-item">Prev
-                                                Close
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A list item
+                                                <span class="">More
+                                                    Content</span>
                                             </li>
-                                            <li class="list-group-item">$xx.xx</li>
-                                        </ul>
-                                        <ul class="list-group list-group-horizontal-sm">
-                                            <li class="list-group-item">Today's Open</li>
-                                            <li class="list-group-item">$xx.xx</li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A second list item
+                                                <span class="">More
+                                                    Content</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A third list item
+                                                <span class="">More
+                                                    Content</span>
+                                            </li>
                                         </ul>
 
                                     </div>
