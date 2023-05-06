@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Symbol;
+use App\TDAmeritrade\TDAmeritrade;
 use Illuminate\Http\Request;
 
 class SymbolController extends Controller
@@ -45,7 +47,20 @@ class SymbolController extends Controller
      */
     public function show(string $symbol)
     {
-        dd($symbol);
+        $Symbol = Symbol::where([
+            ['symbol', '=', $symbol],
+            ['updated_at', '<', Carbon::now()->subHours(5)]
+        ])->get();
+
+        if (empty($Symbol)) {
+            TDAmeritrade::getSymbol($symbol);
+            dd('We ain\'t got nada, look at this empty thang: '. $Symbol);
+            $Symbol = Symbol::where([
+                ['symbol', '=', $symbol],
+                ['updated_at', '<', Carbon::now()->subHours(5)]
+            ])->get();
+        }
+        dd($Symbol);
     }
 
     /**
