@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Mover;
 use App\Models\Price;
 use App\Models\Quote;
+use App\Models\Symbol;
 use App\Models\Token;
 use Carbon\Carbon;
 use Exception;
@@ -519,7 +520,6 @@ class TDAmeritrade
      */
     public static function getSymbol(string $symbol): void
     {
-
         $data = [
             'base_uri' => SELF::BASE_URL_AV,
             'headers'  => [
@@ -539,12 +539,65 @@ class TDAmeritrade
             $responseData = json_decode($response->getBody()->getContents(), true, 512,
                 JSON_THROW_ON_ERROR);
 
-            dd($responseData);
+            self::processIncomingSymbol($responseData);
         } catch (GuzzleException $guzzleException) {
             Log::debug('Failed To Retrieve Symbol', ['errors' =>
                 $guzzleException->getMessage()]);
         }
+    }
 
+    private static function processIncomingSymbol(array $symbol): void
+    {
+        Symbol::updateOrCreate([
+            'symbol' => $symbol['Symbol'],
+        ],[
+            'symbol' => $symbol['Symbol'],
+            'AssetType' => $symbol['AssetType'],
+            'Name' => $symbol['Name'],
+            'Description' => $symbol['Description'],
+            'CIK' => $symbol['CIK'],
+            'Exchange' => $symbol['Exchange'],
+            'Currency' => $symbol['Currency'],
+            'Country' => $symbol['Country'],
+            'Sector' => $symbol['Sector'],
+            'Industry' => $symbol['Industry'],
+            'Address' => $symbol['Address'],
+            'FiscalYearEnd' => $symbol['FiscalYearEnd'],
+            'LatestQuarter' => $symbol['LatestQuarter'],
+            'MarketCapitalization' => $symbol['MarketCapitalization'],
+            'EBITDA' => $symbol['EBITDA'],
+            'PERatio' => $symbol['PERatio'],
+            'PEGRatio' => $symbol['PEGRatio'],
+            'BookValue' => $symbol['BookValue'],
+            'DividendPerShare' => $symbol['DividendPerShare'],
+            'DividendYield' => $symbol['DividendYield'],
+            'EPS' => $symbol['EPS'],
+            'RevenuePerShareTTM' => $symbol['RevenuePerShareTTM'],
+            'ProfitMargin' => $symbol['ProfitMargin'],
+            'OperatingMarginTTM' => $symbol['OperatingMarginTTM'],
+            'ReturnOnAssetsTTM' => $symbol['ReturnOnAssetsTTM'],
+            'ReturnOnEquityTTM' => $symbol['ReturnOnEquityTTM'],
+            'RevenueTTM' => $symbol['RevenueTTM'],
+            'GrossProfitTTM' => $symbol['GrossProfitTTM'],
+            'DilutedEPSTTM' => $symbol['DilutedEPSTTM'],
+            'QuarterlyEarningsGrowthYOY' => $symbol['QuarterlyEarningsGrowthYOY'],
+            'QuarterlyRevenueGrowthYOY' => $symbol['QuarterlyRevenueGrowthYOY'],
+            'AnalystTargetPrice' => $symbol['AnalystTargetPrice'],
+            'TrailingPE' => $symbol['TrailingPE'],
+            'ForwardPE' => $symbol['ForwardPE'],
+            'PriceToSalesRatioTTM' => $symbol['PriceToSalesRatioTTM'],
+            'PriceToBookRatio' => $symbol['PriceToBookRatio'],
+            'EVToRevenue' => $symbol['EVToRevenue'],
+            'EVToEBITDA' => $symbol['EVToEBITDA'],
+            'Beta' => $symbol['Beta'],
+            '52WeekHigh' => $symbol['52WeekHigh'],
+            '52WeekLow' => $symbol['52WeekLow'],
+            '50DayMovingAverage' => $symbol['50DayMovingAverage'],
+            '200DayMovingAverage' => $symbol['200DayMovingAverage'],
+            'SharesOutstanding' => $symbol['SharesOutstanding'],
+            'DividendDate' => $symbol['DividendDate'],
+            'ExDividendDate' => $symbol['ExDividendDate'],
+        ]);
     }
 
     /**
