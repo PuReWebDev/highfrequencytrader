@@ -95,7 +95,37 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">{{ $symbol['0']['Description']}}</div>
+                        <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
+
+                            <div class="container text-center">
+                                <div class="row align-items-start">
+                                    <div class="col">
+                                        <li>
+                                            <dt>Prev Close</dt>
+                                            <dd>$xx.xx</dd>
+                                        </li>
+                                        <li>
+                                            <dt>Today's Open</dt>
+                                            <dd>$xx.xx</dd>
+                                        </li>
+                                    </div>
+                                    <div class="col">
+                                        <li>
+                                            <dt>Market Cap</dt>
+                                            <dd>$xx.xx</dd>
+                                        </li>
+                                        <li>
+                                            <dt>Shares Outstanding</dt>
+                                            <dd>$xx.xx</dd>
+                                        </li>
+                                    </div>
+                                    <div class="col">
+                                        Financial Chart Here
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="tab-pane fade" id="news-tab-pane"
                              role="tabpanel" aria-labelledby="news-tab"
                              tabindex="0">{{ $symbol['0']['symbol'] }}
