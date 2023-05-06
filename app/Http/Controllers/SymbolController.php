@@ -49,18 +49,18 @@ class SymbolController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \JsonException
      */
-    public function show(Request $request)
+    public function show(string $symbol)
     {
-        $validator = $request->validate([
-            'symbol' => 'required|alpha:ascii|max:5',
-        ]);
-
-        $errors = $validator->errors();
-
-        dd($errors->all());
-        foreach ($errors->all() as $message) {
-
-        }
+//        $validator = $request->validate([
+//            'symbol' => 'required|alpha:ascii|max:5',
+//        ]);
+//
+//        $errors = $validator->errors();
+//
+//        dd($errors->all());
+//        foreach ($errors->all() as $message) {
+//
+//        }
 
 //        if ($validator->fails()) {
 //            return redirect('/dashboard')
@@ -69,25 +69,25 @@ class SymbolController extends Controller
 //        }
 
         // Retrieve the validated input...
-        $validated = $validator->validated();
+//        $validated = $validator->validated();
 
         $Symbol = Symbol::where([
-            ['symbol', '=', $validated['symbol']],
+            ['symbol', '=', $symbol],
             ['updated_at', '<', Carbon::now()->subHours(5)]
         ])->get();
 
         if (count($Symbol) < 1) {
             Log::info('Performing API Call To Retrieve Fundamentals For: '
-                .$validated['symbol']. ' '.Carbon::now());
-            TDAmeritrade::getSymbol(strtoupper($validated['symbol']));
+                .$symbol. ' '.Carbon::now());
+            TDAmeritrade::getSymbol(strtoupper($symbol));
 
             $Symbol = Symbol::where([
-                ['symbol', '=', $validated['symbol']],
+                ['symbol', '=', $symbol],
                 ['updated_at', '<', Carbon::now()->subHours(5)]
             ])->get();
         }
 
-//        dd($Symbol);
+        dd($Symbol);
         return View::make('symbol', [
             'symbol' => $Symbol,
         ]);
