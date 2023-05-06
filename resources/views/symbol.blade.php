@@ -93,9 +93,6 @@
                                     aria-controls="sec-filings-tab-pane"
                                     aria-selected="false">Sec Filings</button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
-                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">{{ $symbol['0']['Description']}}</div>
