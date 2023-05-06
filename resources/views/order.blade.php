@@ -197,8 +197,9 @@
 {{--                                                    <td scope="row"--}}
 {{--                                                        style="white-space: nowrap;">{{--}}
 {{--                                                    $loop->index }}</td>--}}
-                                                    <td style="white-space: nowrap;">{{ $order->symbol
-                                                    }}</td>
+                                                    <td style="white-space: nowrap;"><a href="{{url
+                                                    ('symbol',[$order->symbol])}}">{{ $order->symbol
+                                                    }}</a></td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->parentOrderId}}</td>
                                                     <td style="white-space: nowrap;">{{ $order->instruction }}</td>
@@ -262,8 +263,9 @@
                                             @if ($order->status === 'FILLED')
                                                 <tr>
 {{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
-                                                    <td>{{url('symbol',[$order->symbol])}}{{ $order->symbol
-                                                    }}</td>
+                                                    <td><a href="{{url
+                                                    ('symbol',[$order->symbol])}}">{{ $order->symbol
+                                                    }}</a></td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
