@@ -53,7 +53,7 @@ class SymbolController extends Controller
             ['updated_at', '<', Carbon::now()->subHours(5)]
         ])->get();
 
-        if (count($Symbol) >= 1) {
+        if (count($Symbol) < 1) {
             TDAmeritrade::getSymbol($symbol);
             dd('We ain\'t got nada, look at this empty thang: '. $Symbol);
             $Symbol = Symbol::where([
