@@ -108,9 +108,8 @@
 
                                                 <ul class="list-group">
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Open Price
+                                                        <span class="">{{ $quote['0']['openPrice'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         A second list item
