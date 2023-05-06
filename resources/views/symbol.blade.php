@@ -111,25 +111,28 @@
                                             <li class="list-group-item">Today's Open</li>
                                             <li class="list-group-item">$xx.xx</li>
                                         </ul>
-                                        <ul class="list-group list-group-horizontal-md">
-                                            <li class="list-group-item">An item</li>
-                                            <li class="list-group-item">A second item</li>
-                                        </ul>
-                                        <ul class="list-group list-group-horizontal-lg">
-                                            <li class="list-group-item">An item</li>
-                                            <li class="list-group-item">A second item</li>
-                                        </ul>
 
                                     </div>
                                     <div class="col">
-                                        <ul class="list-group list-group-horizontal-md">
-                                            <li class="list-group-item">An item</li>
-                                            <li class="list-group-item">A second item</li>
+
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A list item
+                                                <span class="">More
+                                                    Content</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A second list item
+                                                <span class="">More
+                                                    Content</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                A third list item
+                                                <span class="">More
+                                                    Content</span>
+                                            </li>
                                         </ul>
-                                        <ul class="list-group list-group-horizontal-lg">
-                                            <li class="list-group-item">An item</li>
-                                            <li class="list-group-item">A second item</li>
-                                        </ul>
+
                                     </div>
                                     <div class="col">
                                         Financial Chart Here
