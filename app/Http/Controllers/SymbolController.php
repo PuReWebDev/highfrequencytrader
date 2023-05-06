@@ -7,6 +7,7 @@ use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\View;
 
 class SymbolController extends Controller
 {
@@ -45,7 +46,7 @@ class SymbolController extends Controller
      * Display the specified resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      * @throws \JsonException
      */
     public function show(Request $request)
@@ -86,7 +87,10 @@ class SymbolController extends Controller
             ])->get();
         }
 
-        dd($Symbol);
+//        dd($Symbol);
+        return View::make('symbol', [
+            'symbol' => $Symbol,
+        ]);
     }
 
     /**
