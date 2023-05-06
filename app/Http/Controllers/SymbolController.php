@@ -54,22 +54,23 @@ class SymbolController extends Controller
 //        $validator = $request->validate([
 //            'symbol' => 'required|alpha:ascii|max:5',
 //        ]);
-//
-//        $errors = $validator->errors();
-//
-//        dd($errors->all());
-//        foreach ($errors->all() as $message) {
-//
-//        }
+        $validator = Validator::make($symbol, ['symbol' => 'required|alpha:ascii|max:5']);
 
-//        if ($validator->fails()) {
-//            return redirect('/dashboard')
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
+        $errors = $validator->errors();
 
-        // Retrieve the validated input...
-//        $validated = $validator->validated();
+        dd($errors->all());
+        foreach ($errors->all() as $message) {
+
+        }
+
+        if ($validator->fails()) {
+            return redirect('/dashboard')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+//         Retrieve the validated input...
+        $validated = $validator->validated();
 
         $Symbol = Symbol::where([
             ['symbol', '=', $symbol],
@@ -87,7 +88,6 @@ class SymbolController extends Controller
             ])->get();
         }
 
-        dd($Symbol);
         return View::make('symbol', [
             'symbol' => $Symbol,
         ]);
