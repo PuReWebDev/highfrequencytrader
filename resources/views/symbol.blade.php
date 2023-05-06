@@ -36,6 +36,64 @@
                                     aria-selected="false">Charts</button>
                         </li>
                         <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="earnings-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#earnings-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="earnings-tab-pane"
+                                    aria-selected="false">Earnings</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="fundamentals-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#fundamentals-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="fundamentals-tab-pane"
+                                    aria-selected="false">Fundamentals</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="valuation-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#valuation-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="valuation-tab-pane"
+                                    aria-selected="false">Valuation</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="calendar-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#calendar-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="calendar-tab-pane"
+                                    aria-selected="false">Calendar</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="analyst-reports-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#analyst-reports-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="analyst-reports-tab-pane"
+                                    aria-selected="false">Analyst
+                                Reports</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="peer-comparison-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#peer-comparison-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="peer-comparison-tab-pane"
+                                    aria-selected="false">Peer
+                                Comparison</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="sec-filings-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#sec-filings-tab-pane"
+                                    type="button" role="tab"
+                                    aria-controls="sec-filings-tab-pane"
+                                    aria-selected="false">Sec Filings</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
                         </li>
                     </ul>
@@ -46,7 +104,27 @@
                              tabindex="0">{{ $symbol['0']['symbol'] }}
                             News</div>
                         <div class="tab-pane fade" id="chart-tab-pane" role="tabpanel" aria-labelledby="chart-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="earnings-tab-pane"
+                             role="tabpanel" aria-labelledby="earnings-tab"
+                             tabindex="0">Earnings Here</div>
+                        <div class="tab-pane fade" id="fundamentals-tab-pane"
+                             role="tabpanel" aria-labelledby="fundamentals-tab"
+                             tabindex="0">Fundamentals Here</div>
+                        <div class="tab-pane fade" id="valuation-tab-pane"
+                             role="tabpanel" aria-labelledby="valuation-tab"
+                             tabindex="0">Valuation Here</div>
+                        <div class="tab-pane fade" id="calendar-tab-pane"
+                             role="tabpanel" aria-labelledby="calendar-tab"
+                             tabindex="0">Calendar Here</div>
+                        <div class="tab-pane fade" id="analyst-reports-tab-pane"
+                             role="tabpanel" aria-labelledby="analyst-reports-tab"
+                             tabindex="0">Analyst Reports Here</div>
+                        <div class="tab-pane fade" id="peer-comparison-tab-pane"
+                             role="tabpanel" aria-labelledby="peer-comparison-tab"
+                             tabindex="0">Peer Comparison Here</div>
+                        <div class="tab-pane fade" id="sec-filings-tab-pane"
+                             role="tabpanel" aria-labelledby="sec-filings-tab"
+                             tabindex="0">Sec Filings Here</div>
                     </div>
 
                     <div class="table-responsive">
