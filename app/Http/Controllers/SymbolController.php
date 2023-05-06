@@ -54,6 +54,13 @@ class SymbolController extends Controller
             'symbol' => 'required|alpha:ascii|max:5',
         ]);
 
+        $errors = $validator->errors();
+
+        dd($errors->all());
+        foreach ($errors->all() as $message) {
+
+        }
+
         if ($validator->fails()) {
             return redirect('/dashboard')
                 ->withErrors($validator)
