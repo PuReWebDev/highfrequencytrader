@@ -49,8 +49,8 @@ class CreateSymbolsTable extends Migration
             $table->float('QuarterlyEarningsGrowthYOY');
             $table->float('QuarterlyRevenueGrowthYOY');
             $table->decimal('AnalystTargetPrice');
-            $table->decimal('TrailingPE');
-            $table->decimal('ForwardPE');
+            $table->string('TrailingPE');
+            $table->string('ForwardPE');
             $table->double('PriceToSalesRatioTTM');
             $table->decimal('PriceToBookRatio');
             $table->decimal('EVToRevenue');
