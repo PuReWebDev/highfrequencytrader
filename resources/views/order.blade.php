@@ -262,7 +262,8 @@
                                             @if ($order->status === 'FILLED')
                                                 <tr>
 {{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
-                                                    <td>{{ $order->symbol }}</td>
+                                                    <td>{{url('symbol',[$order->symbol])}}{{ $order->symbol
+                                                    }}</td>
                                                     <td>{{ $order->orderId }}</td>
                                                     <td>{{ $order->parentOrderId }}</td>
                                                     <td>{{ $order->instruction }}</td>
