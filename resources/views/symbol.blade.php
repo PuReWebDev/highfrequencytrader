@@ -17,14 +17,14 @@
                             <thead>
                             <tr>
                                 <th style="white-space: nowrap;">Symbol</th>
-                                <th style="white-space: nowrap;">Description</th>
+                                <th style="">Description</th>
                             </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td style="white-space:
                                                     nowrap;">{{ $symbol['0']['symbol'] }}</td>
-                                    <td style="white-space: nowrap;">{{ $symbol['0']['Description']}}</td>
+                                    <td style="">{{ $symbol['0']['Description']}}</td>
                                 </tr>
                             </tbody>
                         </table>
