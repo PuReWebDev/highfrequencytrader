@@ -16,10 +16,8 @@
                             <caption style="text-align: center;">Symbol Detail</caption>
                             <thead>
                             <tr>
-                                <th scope="col" style="white-space: nowrap;">
                                 <th style="white-space: nowrap;">Symbol</th>
                                 <th style="white-space: nowrap;">Description</th>
-                                </th>
                             </tr>
                             </thead>
                             <tbody>
