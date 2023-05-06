@@ -57,13 +57,6 @@ class SymbolController extends Controller
 //        ]);
         $validator = Validator::make(['symbol' => $symbol], ['symbol' => 'required|alpha:ascii|max:5']);
 
-        $errors = $validator->errors();
-
-        dd($errors->all());
-        foreach ($errors->all() as $message) {
-
-        }
-
         if ($validator->fails()) {
             return redirect('/dashboard')
                 ->withErrors($validator)
@@ -72,7 +65,7 @@ class SymbolController extends Controller
 
 //         Retrieve the validated input...
         $validated = $validator->validated();
-
+        dd($validated);
         $Symbol = Symbol::where([
             ['symbol', '=', $symbol],
             ['updated_at', '>', Carbon::now()->subHours(5)]
