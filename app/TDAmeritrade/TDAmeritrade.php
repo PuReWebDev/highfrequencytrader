@@ -244,6 +244,8 @@ class TDAmeritrade
      */
     public static function quotes(array $symbols): mixed
     {
+        Accounts::tokenPreFlight();
+
         $token = Token::where('user_id', Auth::id())->get();
 
         $data = [
