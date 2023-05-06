@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Validation\ValidationException;
 
 class SymbolController extends Controller
 {
@@ -46,15 +47,13 @@ class SymbolController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Request $request
+     * @param string $symbol
      * @return \Illuminate\Contracts\View\View
+     * @throws ValidationException
      * @throws \JsonException
      */
     public function show(string $symbol)
     {
-//        $validator = $request->validate([
-//            'symbol' => 'required|alpha:ascii|max:5',
-//        ]);
         $validator = Validator::make(['symbol' => $symbol], ['symbol' => 'required|alpha:ascii|max:5']);
 
         if ($validator->fails()) {
@@ -63,21 +62,22 @@ class SymbolController extends Controller
                 ->withInput();
         }
 
-//         Retrieve the validated input...
+        // Retrieve the validated input...
         $validated = $validator->validated();
-        dd($validated);
+
         $Symbol = Symbol::where([
-            ['symbol', '=', $symbol],
+            ['symbol', '=', $validated['symbol']],
             ['updated_at', '>', Carbon::now()->subHours(5)]
         ])->get();
 
         if (count($Symbol) < 1) {
             Log::info('Performing API Call To Retrieve Fundamentals For: '
                 .$symbol. ' '.Carbon::now());
-            TDAmeritrade::getSymbol(strtoupper($symbol));
+
+            TDAmeritrade::getSymbol(strtoupper($validated['symbol']));
 
             $Symbol = Symbol::where([
-                ['symbol', '=', $symbol],
+                ['symbol', '=', $validated['symbol']],
                 ['updated_at', '>', Carbon::now()->subHours(5)]
             ])->get();
         }
