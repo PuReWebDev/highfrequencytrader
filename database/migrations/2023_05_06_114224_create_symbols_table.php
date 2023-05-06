@@ -52,9 +52,9 @@ class CreateSymbolsTable extends Migration
             $table->string('TrailingPE');
             $table->string('ForwardPE');
             $table->double('PriceToSalesRatioTTM');
-            $table->decimal('PriceToBookRatio');
-            $table->decimal('EVToRevenue');
-            $table->decimal('EVToEBITDA');
+            $table->string('PriceToBookRatio');
+            $table->string('EVToRevenue');
+            $table->string('EVToEBITDA');
             $table->float('Beta');
             $table->decimal('52WeekHigh');
             $table->decimal('52WeekLow');
