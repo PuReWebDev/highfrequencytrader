@@ -55,7 +55,7 @@ class SymbolController extends Controller
 //        $validator = $request->validate([
 //            'symbol' => 'required|alpha:ascii|max:5',
 //        ]);
-        $validator = Validator::make($symbol, ['symbol' => 'required|alpha:ascii|max:5']);
+        $validator = Validator::make(['symbol' => $symbol], ['symbol' => 'required|alpha:ascii|max:5']);
 
         $errors = $validator->errors();
 
