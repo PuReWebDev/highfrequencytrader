@@ -100,7 +100,9 @@
                              role="tabpanel" aria-labelledby="news-tab"
                              tabindex="0">{{ $symbol['0']['symbol'] }}
                             News</div>
-                        <div class="tab-pane fade" id="chart-tab-pane" role="tabpanel" aria-labelledby="chart-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="chart-tab-pane"
+                             role="tabpanel" aria-labelledby="chart-tab"
+                             tabindex="0">Charts Here</div>
                         <div class="tab-pane fade" id="earnings-tab-pane"
                              role="tabpanel" aria-labelledby="earnings-tab"
                              tabindex="0">Earnings Here</div>
