@@ -55,7 +55,7 @@ class SymbolController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('dashboard')
+            return redirect('/dashboard')
                 ->withErrors($validator)
                 ->withInput();
         }
