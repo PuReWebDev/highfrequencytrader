@@ -97,55 +97,65 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
 
-                            <div class="container text-center">
-                                <div class="row align-items-start">
-                                    <div class="col">
 
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A second list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A third list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                        </ul>
+                            <div class="card">
+                                <div class="card-body">
 
+
+                                    <div class="container text-center">
+                                        <div class="row align-items-start">
+                                            <div class="col">
+
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A second list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A third list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                            <div class="col">
+
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A second list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        A third list item
+                                                        <span class="">More
+                                                    Content</span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                            <div class="col">
+                                                Financial Chart Here
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
 
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A second list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                A third list item
-                                                <span class="">More
-                                                    Content</span>
-                                            </li>
-                                        </ul>
 
-                                    </div>
-                                    <div class="col">
-                                        Financial Chart Here
-                                    </div>
                                 </div>
                             </div>
+
 
                         </div>
                         <div class="tab-pane fade" id="news-tab-pane"
