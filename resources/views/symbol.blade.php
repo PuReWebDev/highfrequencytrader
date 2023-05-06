@@ -112,9 +112,8 @@
                                                         <span class="">{{ $quote['0']['openPrice'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A second list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Close Price
+                                                        <span class="">{{ $quote['0']['closePrice'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         A third list item
