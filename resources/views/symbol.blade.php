@@ -100,24 +100,36 @@
                             <div class="container text-center">
                                 <div class="row align-items-start">
                                     <div class="col">
-                                        <li>
-                                            <dt>Prev Close</dt>
-                                            <dd>$xx.xx</dd>
-                                        </li>
-                                        <li>
-                                            <dt>Today's Open</dt>
-                                            <dd>$xx.xx</dd>
-                                        </li>
+
+                                        <ul class="list-group list-group-horizontal">
+                                            <li class="list-group-item">Prev
+                                                Close
+                                            </li>
+                                            <li class="list-group-item">$xx.xx</li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal-sm">
+                                            <li class="list-group-item">Today's Open</li>
+                                            <li class="list-group-item">$xx.xx</li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal-md">
+                                            <li class="list-group-item">An item</li>
+                                            <li class="list-group-item">A second item</li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal-lg">
+                                            <li class="list-group-item">An item</li>
+                                            <li class="list-group-item">A second item</li>
+                                        </ul>
+
                                     </div>
                                     <div class="col">
-                                        <li>
-                                            <dt>Market Cap</dt>
-                                            <dd>$xx.xx</dd>
-                                        </li>
-                                        <li>
-                                            <dt>Shares Outstanding</dt>
-                                            <dd>$xx.xx</dd>
-                                        </li>
+                                        <ul class="list-group list-group-horizontal-md">
+                                            <li class="list-group-item">An item</li>
+                                            <li class="list-group-item">A second item</li>
+                                        </ul>
+                                        <ul class="list-group list-group-horizontal-lg">
+                                            <li class="list-group-item">An item</li>
+                                            <li class="list-group-item">A second item</li>
+                                        </ul>
                                     </div>
                                     <div class="col">
                                         Financial Chart Here
