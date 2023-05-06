@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Symbol;
 use App\TDAmeritrade\TDAmeritrade;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SymbolController extends Controller
