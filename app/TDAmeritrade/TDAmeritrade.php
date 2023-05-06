@@ -36,8 +36,10 @@ use JsonException;
 
 class TDAmeritrade
 {
-    const BASE_URL = "https://api.tdameritrade.com";
-    const API_VER = "v1";
+    public const BASE_URL_TD = "https://api.tdameritrade.com";
+    public const API_VER = "v1";
+    public const BASE_URL_AV = 'https://www.alphavantage.co';
+
 
     protected $access_token;
     protected $refresh_token;
@@ -101,7 +103,7 @@ class TDAmeritrade
     public static function post(string $path, array $data = [])
     {
         $client = new Client([
-            'base_uri' => SELF::BASE_URL
+            'base_uri' => SELF::BASE_URL_TD
         ]);
 
         try {
@@ -116,7 +118,7 @@ class TDAmeritrade
     public function postWithAuth(string $path, array $data = [])
     {
         $client = new Client([
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => ['Authorization' => 'Bearer ' . $this->access_token]
         ]);
 
@@ -133,7 +135,7 @@ class TDAmeritrade
         dd('No call here');
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => ['Authorization' => 'Bearer ' . $token['0']['access_token']]
         ]);
 
@@ -201,7 +203,7 @@ class TDAmeritrade
     public static function list(string $fields = 'positions,orders')
     {
         return (new Client([
-            'base_uri' => SELF::BASE_URL
+            'base_uri' => SELF::BASE_URL_TD
         ]))->getWithAuth('/accounts', [
             'query' => ['fields' => $fields]
         ]);
@@ -244,7 +246,7 @@ class TDAmeritrade
         $token = Token::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -346,7 +348,7 @@ class TDAmeritrade
         }
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -397,7 +399,7 @@ class TDAmeritrade
         $token = Token::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -476,7 +478,7 @@ class TDAmeritrade
         }
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -504,6 +506,42 @@ class TDAmeritrade
             Accounts::processIncomingOrders($responseData);
         } catch (GuzzleException $guzzleException) {
             Log::debug('Failed To Retrieve Orders', ['errors' =>
+                $guzzleException->getMessage()]);
+        }
+
+    }
+
+    /**
+     * getSymbol
+     * Get Symbol Fundamentals
+     * @param string $symbol
+     * @throws JsonException
+     */
+    public static function getSymbol(string $symbol): void
+    {
+
+        $data = [
+            'base_uri' => SELF::BASE_URL_AV,
+            'headers'  => [
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'function' => 'OVERVIEW',
+                'symbol' => $symbol,
+                'apikey' => config('tdameritrade.api_key_av'),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        try {
+            $response = $client->request('get','/query', $data);
+            $responseData = json_decode($response->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
+
+            dd($responseData);
+        } catch (GuzzleException $guzzleException) {
+            Log::debug('Failed To Retrieve Symbol', ['errors' =>
                 $guzzleException->getMessage()]);
         }
 
@@ -571,7 +609,7 @@ class TDAmeritrade
         $account = Account::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
