@@ -13,9 +13,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped caption-top"
                                id="symbol-detail-table">
-                            <caption style="text-align: center;">Today's
-                                Symbol Detail
-                            </caption>
+                            <caption style="text-align: center;">Symbol Detail</caption>
                             <thead>
                             <tr>
                                 <th scope="col" style="white-space: nowrap;">
@@ -27,10 +25,8 @@
                             <tbody>
                                 <tr>
                                     <td style="white-space:
-                                                    nowrap;">{{
-                                                    $symbol['0']['symbol']
-                                                    }}</td>
-                                    <td style="white-space: nowrap;">{{ $symbol['0']['description']}}</td>
+                                                    nowrap;">{{ $symbol['0']['symbol'] }}</td>
+                                    <td style="white-space: nowrap;">{{ $symbol['0']['Description']}}</td>
                                 </tr>
                             </tbody>
                         </table>
