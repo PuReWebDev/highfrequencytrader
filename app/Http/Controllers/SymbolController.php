@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Symbol;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,7 @@ class SymbolController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws ValidationException
      * @throws \JsonException
+     * @throws GuzzleException
      */
     public function show(string $symbol)
     {
@@ -82,8 +84,11 @@ class SymbolController extends Controller
             ])->get();
         }
 
+        $quote = TDAmeritrade::quotes([$validated['symbol']]);
+
         return View::make('symbol', [
             'symbol' => $Symbol,
+            'quote' => $quote,
         ]);
     }
 
