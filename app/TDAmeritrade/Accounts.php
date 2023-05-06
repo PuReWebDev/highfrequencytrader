@@ -773,11 +773,9 @@ class Accounts
                 }
             }
 
-            Log::info('Starting To Process Incoming Orders');
             if (!empty($value['securitiesAccount']['orderStrategies'])) {
                 self::processIncomingOrders($value['securitiesAccount']['orderStrategies']);
             }
-            Log::info('Finished Processing Incoming Orders');
 
             self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
             self::saveCurrentBalancesInformation($account->accountId, $value['securitiesAccount']['currentBalances']);
