@@ -61,11 +61,11 @@ class SymbolController extends Controller
 
         }
 
-        if ($validator->fails()) {
-            return redirect('/dashboard')
-                ->withErrors($validator)
-                ->withInput();
-        }
+//        if ($validator->fails()) {
+//            return redirect('/dashboard')
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
 
         // Retrieve the validated input...
         $validated = $validator->validated();
