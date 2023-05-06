@@ -27,8 +27,8 @@
                             <tbody>
                                 <tr>
                                     <td style="white-space:
-                                                    nowrap;">{{ $symbol->symbol }}</td>
-                                    <td style="white-space: nowrap;">{{ $symbol->description}}</td>
+                                                    nowrap;">{{ $symbol['symbol'] }}</td>
+                                    <td style="white-space: nowrap;">{{ $symbol['description']}}</td>
                                 </tr>
                             </tbody>
                         </table>
