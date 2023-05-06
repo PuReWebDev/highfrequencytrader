@@ -73,7 +73,7 @@ class SymbolController extends Controller
 
         $Symbol = Symbol::where([
             ['symbol', '=', $symbol],
-            ['updated_at', '<', Carbon::now()->subHours(5)]
+            ['updated_at', '>', Carbon::now()->subHours(5)]
         ])->get();
 
         if (count($Symbol) < 1) {
@@ -83,7 +83,7 @@ class SymbolController extends Controller
 
             $Symbol = Symbol::where([
                 ['symbol', '=', $symbol],
-                ['updated_at', '<', Carbon::now()->subHours(5)]
+                ['updated_at', '>', Carbon::now()->subHours(5)]
             ])->get();
         }
 
