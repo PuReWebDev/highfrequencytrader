@@ -106,7 +106,7 @@ class SymbolController extends Controller
         if (count($candles) < 1) {
             TDAmeritrade::getPriceHistory($validated['symbol'],
                                       'day',
-                                      3,
+                                      1,
                                       'minute',
                                       1,
                                       '',
