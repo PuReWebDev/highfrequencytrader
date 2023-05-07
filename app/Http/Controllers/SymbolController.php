@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
 use App\Models\Symbol;
+use App\TDAmeritrade\MarketHours;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
@@ -14,6 +16,26 @@ use Illuminate\Validation\ValidationException;
 
 class SymbolController extends Controller
 {
+    /**
+     * @param bool $marketHoursResponse
+     * @param $symbol1
+     * @return mixed
+     */
+    public static function conditionalChartHistory(bool $marketHoursResponse, $symbol1): mixed
+    {
+        if ($marketHoursResponse === true) {
+            $chartHistory = Price::where([
+                ['symbol', '=', $symbol1],
+                ['updated_at', '>', Carbon::now()->subMinute(1)]
+            ])->whereDate('created_at', Carbon::today())->get();
+        } else {
+            $chartHistory = Price::where([
+                ['symbol', '=', $symbol1],
+            ])->whereDate('created_at', Carbon::today())->get();
+        }
+        return $chartHistory;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -72,6 +94,23 @@ class SymbolController extends Controller
             ['updated_at', '>', Carbon::now()->subHours(5)]
         ])->get();
 
+        $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
+
+        $candles = self::conditionalChartHistory($marketHoursResponse, $validated['symbol']);
+
+        if (count($candles) < 1) {
+            TDAmeritrade::getPriceHistory($validated['symbol'],
+                                      'day',
+                                      1,
+                                      'minute',
+                                      1,
+                                      '',
+                                      '',
+                                      'true');
+
+            $candles = self::conditionalChartHistory($marketHoursResponse, $validated['symbol']);
+        }
+
         if (count($Symbol) < 1) {
             Log::info('Performing API Call To Retrieve Fundamentals For: '
                 .$symbol. ' '.Carbon::now());
@@ -89,6 +128,7 @@ class SymbolController extends Controller
         return View::make('symbol', [
             'symbol' => $Symbol,
             'quote' => $quote,
+            'candles' => $candles,
         ]);
     }
 
