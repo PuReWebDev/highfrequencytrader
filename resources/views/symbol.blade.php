@@ -273,11 +273,11 @@
         chart: {
             type: 'candlestick',
             height: 350,
-            zoom: {
-                enabled: true,
-                type: 'x',
-                autoScaleYaxis: true
-            }
+            // zoom: {
+            //     enabled: true,
+            //     type: 'x',
+            //     autoScaleYaxis: true
+            // }
         },
         title: {
             text: 'CandleStick Chart',
