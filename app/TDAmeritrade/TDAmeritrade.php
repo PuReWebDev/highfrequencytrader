@@ -352,6 +352,7 @@ class TDAmeritrade
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'periodType' => $periodType,
+                'period' => $period,
                 'frequencyType' => $frequencyType,
                 'frequency' => $frequency,
                 'extendedHours' => (string)$extendedHours,
