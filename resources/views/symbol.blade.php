@@ -101,95 +101,87 @@
                                 <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
 
 
-                                    <div class="card">
-                                        <div class="card-body">
+                                    <div class="container text-center">
+                                        <div class="row align-items-start">
+                                            <div class="col">
 
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Open Price
+                                                        <span class="">{{ $quote['0']['openPrice'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Close Price
+                                                        <span class="">{{ $quote['0']['closePrice'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Day's Range
+                                                        <span class="">{{ $quote['0']['lowPrice'] }} - {{ $quote['0']['highPrice'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        52-Wk Range
+                                                        <span class="">{{ $quote['0']['52WkLow'] }} - {{ $quote['0']['52WkHigh'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Volatility
+                                                        <span class="">{{ $quote['0']['volatility'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        EPS
+                                                        <span class="">{{ $symbol['0']['EPS'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Latest Quarter
+                                                        <span class="">{{ $symbol['0']['LatestQuarter'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Fiscal Year End
+                                                        <span class="">{{ $symbol['0']['FiscalYearEnd'] }}</span>
+                                                    </li>
+                                                </ul>
 
-                                            <div class="container text-center">
-                                                <div class="row align-items-start">
-                                                    <div class="col">
-
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Open Price
-                                                                <span class="">{{ $quote['0']['openPrice'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Close Price
-                                                                <span class="">{{ $quote['0']['closePrice'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Day's Range
-                                                                <span class="">{{ $quote['0']['lowPrice'] }} - {{ $quote['0']['highPrice'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                52-Wk Range
-                                                                <span class="">{{ $quote['0']['52WkLow'] }} - {{ $quote['0']['52WkHigh'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Volatility
-                                                                <span class="">{{ $quote['0']['volatility'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                EPS
-                                                                <span class="">{{ $symbol['0']['EPS'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Latest Quarter
-                                                                <span class="">{{ $symbol['0']['LatestQuarter'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Fiscal Year End
-                                                                <span class="">{{ $symbol['0']['FiscalYearEnd'] }}</span>
-                                                            </li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="col">
-
-                                                        <ul class="list-group">
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Market Cap
-                                                                <span class="">{{ $symbol['0']['MarketCapitalization'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Shares Outstanding
-                                                                <span class="">{{ $symbol['0']['SharesOutstanding'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Ex-dividend Date
-                                                                <span class="">{{ $symbol['0']['ExDividendDate'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Dividend Pay Date
-                                                                <span class="">{{ $symbol['0']['DividendDate'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Beta
-                                                                <span class="">{{ $symbol['0']['Beta'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Exchange
-                                                                <span class="">{{ $symbol['0']['Exchange'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Sector
-                                                                <span class="">{{ $symbol['0']['Sector'] }}</span>
-                                                            </li>
-                                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                Industry
-                                                                <span class=""><small>{{ $symbol['0']['Industry'] }}</small></span>
-                                                            </li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="col">
-                                                        <div id="chart"></div>
-                                                    </div>
-                                                </div>
                                             </div>
+                                            <div class="col">
 
+                                                <ul class="list-group">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Market Cap
+                                                        <span class="">{{ $symbol['0']['MarketCapitalization'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Shares Outstanding
+                                                        <span class="">{{ $symbol['0']['SharesOutstanding'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Ex-dividend Date
+                                                        <span class="">{{ $symbol['0']['ExDividendDate'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Dividend Pay Date
+                                                        <span class="">{{ $symbol['0']['DividendDate'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Beta
+                                                        <span class="">{{ $symbol['0']['Beta'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Exchange
+                                                        <span class="">{{ $symbol['0']['Exchange'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Sector
+                                                        <span class="">{{ $symbol['0']['Sector'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Industry
+                                                        <span class=""><small>{{ $symbol['0']['Industry'] }}</small></span>
+                                                    </li>
+                                                </ul>
 
+                                            </div>
+                                            <div class="col">
+                                                <div id="chart"></div>
+                                            </div>
                                         </div>
                                     </div>
 
