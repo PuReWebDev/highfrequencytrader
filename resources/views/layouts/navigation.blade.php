@@ -23,7 +23,7 @@
 
                     <x-nav-link :href="route('balances')" :active="request()
                     ->routeIs('balances')">
-                        {{ __('Balances') }} <i class="bi bi-cash"></i>
+                        {{ __('Balances') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('preference')" :active="request()
