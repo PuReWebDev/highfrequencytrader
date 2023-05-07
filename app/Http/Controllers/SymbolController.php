@@ -30,16 +30,16 @@ class SymbolController extends Controller
             ])->whereDate('created_at', Carbon::today())->get();
         } else {
             $dt = Carbon::now();
-            if ($dt->isWeekend() === true) {
-                return Price::where([
-                    ['symbol', '=', $symbol],
-                    ['datetime', '>=', Carbon::parse('last Friday')->setTimezone('America/New_York')->getPreciseTimestamp(3)],])->get();
-//                ])->whereDate('created_at', Carbon::today()->setTimezone('America/New_York'))->get();
-            }
+//            if ($dt->isWeekend() === true) {
+//                return Price::where([
+//                    ['symbol', '=', $symbol],
+//                    ['datetime', '>=', Carbon::parse('last Friday')->setTimezone('America/New_York')->getPreciseTimestamp(3)],])->get();
+////                ])->whereDate('created_at', Carbon::today()->setTimezone('America/New_York'))->get();
+//            }
             return Price::where([
                 ['symbol', '=', $symbol],
-//                ['datetime', '>=', $symbol],
-            ])->whereDate('created_at', Carbon::today()->setTimezone('America/New_York'))->get();
+                ['datetime', '>=', Carbon::now()->setTimezone('America/New_York')->getPreciseTimestamp(3)],])->get();
+//            ])->whereDate('created_at', Carbon::today()->setTimezone('America/New_York'))->get();
         }
     }
 
