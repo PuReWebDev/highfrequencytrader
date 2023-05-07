@@ -272,7 +272,12 @@
         }],
         chart: {
             type: 'candlestick',
-            height: 350
+            height: 350,
+            zoom: {
+                enabled: true,
+                type: 'x',
+                autoScaleYaxis: false
+            }
         },
         title: {
             text: 'CandleStick Chart',
