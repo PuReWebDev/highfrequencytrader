@@ -213,7 +213,10 @@
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
 {{--                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>--}}
-                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    <td style="white-space:
+                                                    nowrap;">{{
+                                                    \Carbon\Carbon::parse
+                                                    ($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
                                                     <td>{{ gmdate('H:i:s',
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
@@ -282,10 +285,10 @@
                                                     <td nowrap>{{
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
-                                                    ->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    ->setTimezone('America/New_York')->format('Y-m-d g:i:ss A') }}</td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->format('g:i:s a') }}</td>--}}
                                                     <td nowrap>{{
-                                                    \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i:ss A') }}</td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>--}}
 
                                                     <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>
