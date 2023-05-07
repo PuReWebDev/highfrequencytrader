@@ -215,13 +215,13 @@
     var options = {
         series: [{
             data: [
-            @@foreach($candles as $candle)
+            @foreach($candles as $candle)
                 {
                 x: new Date({{ $candle['datetime'] }}),
                 y: [{{ $candle['open'] }}, {{ $candle['high'] }}, {{
                 $candle['low'] }}, {{ $candle['close'] }}]
             },
-            @@endforeach
+            @endforeach
             ]
         }],
         chart: {
