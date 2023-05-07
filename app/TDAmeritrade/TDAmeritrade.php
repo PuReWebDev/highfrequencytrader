@@ -320,15 +320,15 @@ class TDAmeritrade
      * Get the chart history for a symbol.
      *
      * @param string $symbol
-     * @param int|string $periodType
+     * @param string $periodType
      * @param int $period
-     * @param int $frequencyType
+     * @param string $frequencyType
      * @param int $frequency
-     * @param int $endDate
-     * @param int $startDate
+     * @param string $endDate
+     * @param string $startDate
      * @param bool|string $extendedHours
      * @return array
-     * @throws JsonException|GuzzleException
+     * @throws JsonException
      */
     public static function getPriceHistory(string $symbol,
                                       string      $periodType = 'day',
