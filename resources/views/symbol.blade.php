@@ -202,7 +202,7 @@
                                     News</div>
                                 <div class="tab-pane fade" id="chart-tab-pane"
                                      role="tabpanel" aria-labelledby="chart-tab"
-                                     tabindex="0">Charts Here
+                                     tabindex="0">
                                     <div id="large-chart"></div>
                                 </div>
                                 <div class="tab-pane fade" id="earnings-tab-pane"
