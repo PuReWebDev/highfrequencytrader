@@ -116,9 +116,15 @@
                                                         <span class="">{{ $quote['0']['closePrice'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A third list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Day's Range
+                                                        <span class="">{{ $quote['0']['lowPrice'] }} - {{ $quote['0']['highPrice'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        52-Wk Range
+                                                        <span class="">{{ $quote['0']['52WkLow'] }} - {{ $quote['0']['52WkHigh'] }}</span>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Volatility
+                                                        <span class="">{{ $quote['0']['volatility'] }}</span>
                                                     </li>
                                                 </ul>
 
@@ -131,14 +137,20 @@
                                                         <span class="">{{ $symbol['0']['MarketCapitalization'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A second list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Shares Outstanding
+                                                        <span class="">{{ $symbol['0']['SharesOutstanding'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A third list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Ex-dividend Date
+                                                        <span class="">{{ $symbol['0']['ExDividendDate'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Dividend Pay Date
+                                                        <span class="">{{ $symbol['0']['DividendDate'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Beta
+                                                        <span class="">{{ $symbol['0']['Beta'] }}</span>
                                                     </li>
                                                 </ul>
 
