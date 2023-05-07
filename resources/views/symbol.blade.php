@@ -222,24 +222,31 @@
                              tabindex="0">Sec Filings Here</div>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped caption-top"
-                               id="symbol-detail-table">
-                            <caption style="text-align: center;">Symbol Detail</caption>
-                            <thead>
-                            <tr>
-                                <th style="white-space: nowrap;">Symbol</th>
-                                <th style="">Description</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="white-space:
+
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped caption-top"
+                                       id="symbol-detail-table">
+                                    <caption style="text-align: center;">Symbol Detail</caption>
+                                    <thead>
+                                    <tr>
+                                        <th style="white-space: nowrap;">Symbol</th>
+                                        <th style="">Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="white-space:
                                                     nowrap;">{{ $symbol['0']['symbol'] }}</td>
-                                    <td style="">{{ $symbol['0']['Description']}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <td style="">{{ $symbol['0']['Description']}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
