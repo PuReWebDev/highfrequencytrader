@@ -175,7 +175,7 @@
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         Industry
-                                                        <span class="">{{ $symbol['0']['Industry'] }}</span>
+                                                        <span class="small">{{ $symbol['0']['Industry'] }}</span>
                                                     </li>
                                                 </ul>
 
