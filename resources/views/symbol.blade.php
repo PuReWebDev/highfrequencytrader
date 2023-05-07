@@ -276,7 +276,7 @@
             zoom: {
                 enabled: true,
                 type: 'x',
-                autoScaleYaxis: false
+                autoScaleYaxis: true
             }
         },
         title: {
