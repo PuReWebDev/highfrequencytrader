@@ -352,7 +352,7 @@ class TDAmeritrade
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'periodType' => $periodType,
-                'period' => $period,
+//                'period' => $period,
                 'frequencyType' => $frequencyType,
                 'frequency' => $frequency,
                 'extendedHours' => (string)$extendedHours,
@@ -362,10 +362,10 @@ class TDAmeritrade
         if (empty($period)) {
             if (empty($startDate)) {
                 $data['query']['startDate'] = Carbon::now()->subHours(24)
-                    ->getPreciseTimestamp(3);
+                    ->timestamp;
             }
             if (empty($endDate)) {
-                $data['query']['endDate'] = Carbon::now()->getPreciseTimestamp(3);
+                $data['query']['endDate'] = Carbon::now()->timestamp;
             }
         } else {
             $data['query']['period'] = $period;
