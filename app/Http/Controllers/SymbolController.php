@@ -78,7 +78,8 @@ class SymbolController extends Controller
      */
     public function show(string $symbol)
     {
-        dd(Carbon::isWeekend());
+        $dt = Carbon::now();
+        dd($dt->isWeekend());
         $validator = Validator::make(['symbol' => $symbol], ['symbol' => 'required|alpha:ascii|max:5']);
 
         if ($validator->fails()) {
