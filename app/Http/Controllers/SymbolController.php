@@ -29,12 +29,12 @@ class SymbolController extends Controller
                 ['updated_at', '>', Carbon::now()->subMinute(1)]
             ])->whereDate('created_at', Carbon::today())->get();
         } else {
-//            $dt = Carbon::now();
-//            if ($dt->isWeekend() === true) {
-//                return Price::where([
-//                    ['symbol', '=', $symbol],
-//                ])->whereDate('created_at', Carbon::parse('last Friday'))->get();
-//            }
+            $dt = Carbon::now();
+            if ($dt->isWeekend() === true) {
+                return Price::where([
+                    ['symbol', '=', $symbol],
+                ])->whereDate('created_at', Carbon::parse('last Friday')->toDateTimeString())->get();
+            }
             return Price::where([
                 ['symbol', '=', $symbol],
             ])->whereDate('created_at', Carbon::today())->get();
