@@ -21,22 +21,22 @@ class SymbolController extends Controller
      * @param $symbol1
      * @return mixed
      */
-    public static function conditionalChartHistory(bool $marketHoursResponse, $symbol1): mixed
+    public static function conditionalChartHistory(bool $marketHoursResponse, $symbol): mixed
     {
         if ($marketHoursResponse === true) {
             return Price::where([
-                ['symbol', '=', $symbol1],
+                ['symbol', '=', $symbol],
                 ['updated_at', '>', Carbon::now()->subMinute(1)]
             ])->whereDate('created_at', Carbon::today())->get();
         } else {
             $dt = Carbon::now();
-            if ($dt->isWeekend()) {
+            if ($dt->isWeekend() === true) {
                 return Price::where([
-                    ['symbol', '=', $symbol1],
+                    ['symbol', '=', $symbol],
                 ])->whereDate('created_at', Carbon::parse('last Friday'))->get();
             }
             return Price::where([
-                ['symbol', '=', $symbol1],
+                ['symbol', '=', $symbol],
             ])->whereDate('created_at', Carbon::today())->get();
         }
     }
@@ -115,6 +115,8 @@ class SymbolController extends Controller
 
             $candles = self::conditionalChartHistory($marketHoursResponse, $validated['symbol']);
         }
+
+        dd($candles);
 
         if (count($Symbol) < 1) {
             Log::info('Performing API Call To Retrieve Fundamentals For: '
