@@ -33,7 +33,7 @@ class SymbolController extends Controller
             if ($dt->isWeekend() === true) {
                 return Price::where([
                     ['symbol', '=', $symbol],
-                    ['datetime', '>=', Carbon::parse('last Friday')->timestamp],
+                    ['datetime', '>=', Carbon::now()->subHours(48)->timestamp],
                 ])->get();
             }
             return Price::where([
