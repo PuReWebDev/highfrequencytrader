@@ -91,15 +91,6 @@
                                             aria-selected="false">Peer
                                         Comparison <i class="bi bi-person-vcard-fill"></i></button>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="sec-filings-tab"
-                                            data-bs-toggle="tab"
-                                            data-bs-target="#sec-filings-tab-pane"
-                                            type="button" role="tab"
-                                            aria-controls="sec-filings-tab-pane"
-                                            aria-selected="false">Sec Filings
-                                        <i class="bi bi-currency-exchange"></i></button>
-                                </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel" aria-labelledby="summary-tab" tabindex="0">
@@ -227,9 +218,6 @@
                                 <div class="tab-pane fade" id="peer-comparison-tab-pane"
                                      role="tabpanel" aria-labelledby="peer-comparison-tab"
                                      tabindex="0">Peer Comparison Here</div>
-                                <div class="tab-pane fade" id="sec-filings-tab-pane"
-                                     role="tabpanel" aria-labelledby="sec-filings-tab"
-                                     tabindex="0">Sec Filings Here</div>
                             </div>
 
                             <div class="card">
