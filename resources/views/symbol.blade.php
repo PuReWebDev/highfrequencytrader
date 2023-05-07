@@ -145,7 +145,7 @@
 
                                             </div>
                                             <div class="col">
-                                                Financial Chart Here
+                                                <div id="chart"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -211,6 +211,39 @@
         </div>
     </div>
 
+<script type="text/javascript">
+    var options = {
+        series: [{
+            data: [
+            @@foreach($candles as $candle)
+                {
+                x: new Date({{ $candle['datetime'] }}),
+                y: [{{ $candle['open'] }}, {{ $candle['high'] }}, {{
+                $candle['low'] }}, {{ $candle['close'] }}]
+            },
+            @@endforeach
+            ]
+        }],
+        chart: {
+            type: 'candlestick',
+            height: 350
+        },
+        title: {
+            text: 'CandleStick Chart',
+            align: 'left'
+        },
+        xaxis: {
+            type: 'datetime'
+        },
+        yaxis: {
+            tooltip: {
+                enabled: true
+            }
+        }
+    };
 
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
 
 </x-app-layout>
