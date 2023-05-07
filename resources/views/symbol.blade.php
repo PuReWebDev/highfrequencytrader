@@ -122,9 +122,22 @@
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         52-Wk Range
                                                         <span class="">{{ $quote['0']['52WkLow'] }} - {{ $quote['0']['52WkHigh'] }}</span>
+                                                    </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         Volatility
                                                         <span class="">{{ $quote['0']['volatility'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        EPS
+                                                        <span class="">{{ $symbol['0']['EPS'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Latest Quarter
+                                                        <span class="">{{ $symbol['0']['LatestQuarter'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Fiscal Year End
+                                                        <span class="">{{ $symbol['0']['FiscalYearEnd'] }}</span>
                                                     </li>
                                                 </ul>
 
@@ -151,6 +164,18 @@
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         Beta
                                                         <span class="">{{ $symbol['0']['Beta'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Exchange
+                                                        <span class="">{{ $symbol['0']['Exchange'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Sector
+                                                        <span class="">{{ $symbol['0']['Sector'] }}</span>
+                                                    </li>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        Industry
+                                                        <span class="">{{ $symbol['0']['Industry'] }}</span>
                                                     </li>
                                                 </ul>
 
