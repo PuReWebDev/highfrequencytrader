@@ -36,7 +36,8 @@
                                             data-bs-target="#chart-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="chart-tab-pane"
-                                            aria-selected="false">Charts</button>
+                                            aria-selected="false">Charts <i class="bi bi-bar-chart"></i>
+                                    </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="earnings-tab"
