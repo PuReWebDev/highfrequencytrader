@@ -62,7 +62,8 @@
                                             data-bs-target="#valuation-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="valuation-tab-pane"
-                                            aria-selected="false">Valuation</button>
+                                            aria-selected="false">Valuation <i class="bi bi-currency-exchange"></i>
+                                    </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="calendar-tab"
