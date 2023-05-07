@@ -28,7 +28,7 @@
                                             data-bs-target="#news-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="news-tab-pane"
-                                            aria-selected="false">News</button>
+                                            aria-selected="false">News <i class="bi bi-newspaper"></i></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="chart-tab"
@@ -45,7 +45,8 @@
                                             data-bs-target="#earnings-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="earnings-tab-pane"
-                                            aria-selected="false">Earnings</button>
+                                            aria-selected="false">Earnings <i class="bi bi-cash-coin"></i>
+                                    </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="fundamentals-tab"
@@ -69,7 +70,8 @@
                                             data-bs-target="#calendar-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="calendar-tab-pane"
-                                            aria-selected="false">Calendar</button>
+                                            aria-selected="false">Calendar <i class="bi bi-calendar-week"></i>
+                                    </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="analyst-reports-tab"
@@ -78,7 +80,7 @@
                                             type="button" role="tab"
                                             aria-controls="analyst-reports-tab-pane"
                                             aria-selected="false">Analyst
-                                        Reports</button>
+                                        Reports <i class="bi bi-file-earmark-bar-graph-fill"></i></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="peer-comparison-tab"
@@ -87,7 +89,7 @@
                                             type="button" role="tab"
                                             aria-controls="peer-comparison-tab-pane"
                                             aria-selected="false">Peer
-                                        Comparison</button>
+                                        Comparison <i class="bi bi-person-vcard-fill"></i></button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="sec-filings-tab"
@@ -95,7 +97,8 @@
                                             data-bs-target="#sec-filings-tab-pane"
                                             type="button" role="tab"
                                             aria-controls="sec-filings-tab-pane"
-                                            aria-selected="false">Sec Filings</button>
+                                            aria-selected="false">Sec Filings
+                                        <i class="bi bi-currency-exchange"></i></button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
