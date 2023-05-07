@@ -202,7 +202,9 @@
                                     News</div>
                                 <div class="tab-pane fade" id="chart-tab-pane"
                                      role="tabpanel" aria-labelledby="chart-tab"
-                                     tabindex="0">Charts Here</div>
+                                     tabindex="0">Charts Here
+                                    <div id="large-chart"></div>
+                                </div>
                                 <div class="tab-pane fade" id="earnings-tab-pane"
                                      role="tabpanel" aria-labelledby="earnings-tab"
                                      tabindex="0">Earnings Here</div>
@@ -322,6 +324,10 @@
 
     var chart = new ApexCharts(document.querySelector("#chart"), options);
     chart.render();
+
+    var chartTab = new ApexCharts(document.querySelector("#large-chart"),
+        options);
+    chartTab.render();
 </script>
 
 </x-app-layout>
