@@ -14,6 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use JsonException;
 
 class RetrieveOrders extends Command
 {
@@ -77,6 +78,15 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'FULL') {
+                try {
+                    self::getCandleSticks();
+                } catch (GuzzleException $e) {
+                    Log::error('Guzzle Exception Thrown', ['error' =>
+                    $e->getMessage()]);
+                } catch (JsonException $e) {
+                    Log::error('Json Exception Thrown', ['error' =>
+                        $e->getMessage()]);
+                }
                 break;
             }
         }
@@ -88,7 +98,7 @@ class RetrieveOrders extends Command
     /**
      * cancelStaleOrders
      * Cancel Stale Buy Orders
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function cancelStaleOrders(): void
     {
@@ -118,7 +128,7 @@ class RetrieveOrders extends Command
 
     /**
      * @throws GuzzleException
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function getCandleSticks(): void
     {
@@ -128,6 +138,7 @@ class RetrieveOrders extends Command
         ])->get();
 
         foreach ($symbols as $symbol) {
+            Log::info('Fetching Candle for: '. $symbol['symbol']);
             TDAmeritrade::getPriceHistory($symbol['symbol']);
             usleep(500000);
         }
