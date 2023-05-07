@@ -75,6 +75,10 @@ class RetrieveOrders extends Command
             if ($status === 'FILLED' || empty($status)) {
 //                self::getCandleSticks();
             }
+
+            if ($status === 'FULL') {
+                break;
+            }
         }
 
         $this->info('Trade Orders Retrieval Gracefully Exiting');
