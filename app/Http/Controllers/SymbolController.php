@@ -24,16 +24,22 @@ class SymbolController extends Controller
     public static function conditionalChartHistory(bool $marketHoursResponse, $symbol1): mixed
     {
         if ($marketHoursResponse === true) {
-            $chartHistory = Price::where([
+            return Price::where([
                 ['symbol', '=', $symbol1],
                 ['updated_at', '>', Carbon::now()->subMinute(1)]
             ])->whereDate('created_at', Carbon::today())->get();
         } else {
-            $chartHistory = Price::where([
+            $dt = Carbon::now();
+            if ($dt->isWeekend()) {
+                return Price::where([
+                    ['symbol', '=', $symbol1],
+                ])->whereDate('created_at', Carbon::createFromTimeStamp
+                (strtotime("last Friday", $dt->timestamp)))->get();
+            }
+            return Price::where([
                 ['symbol', '=', $symbol1],
             ])->whereDate('created_at', Carbon::today())->get();
         }
-        return $chartHistory;
     }
 
     /**
@@ -78,8 +84,6 @@ class SymbolController extends Controller
      */
     public function show(string $symbol)
     {
-        $dt = Carbon::now();
-        dd($dt->isWeekend());
         $validator = Validator::make(['symbol' => $symbol], ['symbol' => 'required|alpha:ascii|max:5']);
 
         if ($validator->fails()) {
@@ -103,7 +107,7 @@ class SymbolController extends Controller
         if (count($candles) < 1) {
             TDAmeritrade::getPriceHistory($validated['symbol'],
                                       'day',
-                                      1,
+                                      3,
                                       'minute',
                                       1,
                                       '',

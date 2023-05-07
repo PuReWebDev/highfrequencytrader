@@ -330,25 +330,18 @@ class TDAmeritrade
      * @return array
      * @throws JsonException
      */
-    public static function getPriceHistory(string $symbol,
-                                      string      $periodType = 'day',
-                                      int         $period = 1,
-                                      string      $frequencyType = 'minute',
-                                      int         $frequency = 1,
-                                      string      $endDate = '',
-                                      string      $startDate = '',
-                                      bool|string $extendedHours = 'true'): array
+    public static function getPriceHistory(
+        string      $symbol,
+        string      $periodType = 'day',
+        int         $period = 1,
+        string      $frequencyType = 'minute',
+        int         $frequency = 1,
+        string      $endDate = '',
+        string      $startDate = '',
+        bool|string $extendedHours = 'true'): array
     {
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
-        $today = Carbon::today()->toDateString();
-
-        if (empty($startDate)) {
-            $startDate = $today;
-        }
-        if (empty($endDate)) {
-            $endDate = $today;
-        }
 
         $data = [
             'base_uri' => SELF::BASE_URL_TD,
@@ -359,14 +352,23 @@ class TDAmeritrade
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'periodType' => $periodType,
-                'period' => $period,
                 'frequencyType' => $frequencyType,
                 'frequency' => $frequency,
-//                'endDate' => $endDate,
-//                'startDate' => $startDate,
                 'extendedHours' => (string)$extendedHours,
             ]
         ];
+
+        if (empty($period)) {
+            if (empty($startDate)) {
+                $data['query']['startDate'] = Carbon::now()->subHours(72)
+                    ->getPreciseTimestamp(3);
+            }
+            if (empty($endDate)) {
+                $data['query']['endDate'] = Carbon::now()->getPreciseTimestamp(3);
+            }
+        } else {
+            $data['query']['period'] = $period;
+        }
 
         $client = new Client($data);
 
