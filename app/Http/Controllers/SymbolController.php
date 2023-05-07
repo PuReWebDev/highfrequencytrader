@@ -38,7 +38,7 @@ class SymbolController extends Controller
 //            }
             return Price::where([
                 ['symbol', '=', $symbol],
-                ['datetime', '>=', Carbon::now()->setTimezone('America/New_York')->getPreciseTimestamp(3)],])->get();
+                ['datetime', '>=', Carbon::today()->setTimezone('America/New_York')->getPreciseTimestamp(3)],])->get();
 //            ])->whereDate('created_at', Carbon::today()->setTimezone('America/New_York'))->get();
         }
     }
