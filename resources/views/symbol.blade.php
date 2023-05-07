@@ -244,11 +244,24 @@
             align: 'left'
         },
         xaxis: {
-            type: 'datetime'
+            type: 'datetime',
+            labels: {
+                datetimeFormatter: {
+                    year: 'yyyy',
+                    month: 'MMM \'yy',
+                    day: 'dd MMM',
+                    hour: 'hh:mm'
+                }
+            }
         },
         yaxis: {
             tooltip: {
                 enabled: true
+            },
+            labels: {
+                formatter: function (value) {
+                    return value + "$";
+                }
             }
         }
     };
