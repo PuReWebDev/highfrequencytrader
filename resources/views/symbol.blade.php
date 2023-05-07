@@ -75,15 +75,6 @@
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="analyst-reports-tab"
-                                            data-bs-toggle="tab"
-                                            data-bs-target="#analyst-reports-tab-pane"
-                                            type="button" role="tab"
-                                            aria-controls="analyst-reports-tab-pane"
-                                            aria-selected="false">Analyst
-                                        Reports <i class="bi bi-file-earmark-bar-graph-fill"></i></button>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="peer-comparison-tab"
                                             data-bs-toggle="tab"
                                             data-bs-target="#peer-comparison-tab-pane"
@@ -213,9 +204,6 @@
                                 <div class="tab-pane fade" id="calendar-tab-pane"
                                      role="tabpanel" aria-labelledby="calendar-tab"
                                      tabindex="0">Calendar Here</div>
-                                <div class="tab-pane fade" id="analyst-reports-tab-pane"
-                                     role="tabpanel" aria-labelledby="analyst-reports-tab"
-                                     tabindex="0">Analyst Reports Here</div>
                                 <div class="tab-pane fade" id="peer-comparison-tab-pane"
                                      role="tabpanel" aria-labelledby="peer-comparison-tab"
                                      tabindex="0">Peer Comparison Here</div>
