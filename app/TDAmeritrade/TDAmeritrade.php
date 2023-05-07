@@ -360,7 +360,7 @@ class TDAmeritrade
 
         if (empty($period)) {
             if (empty($startDate)) {
-                $data['query']['startDate'] = Carbon::now()->subHours(72)
+                $data['query']['startDate'] = Carbon::now()->subHours(24)
                     ->getPreciseTimestamp(3);
             }
             if (empty($endDate)) {
