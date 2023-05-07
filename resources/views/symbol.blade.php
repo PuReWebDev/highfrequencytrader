@@ -127,9 +127,8 @@
 
                                                 <ul class="list-group">
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        A list item
-                                                        <span class="">More
-                                                    Content</span>
+                                                        Market Cap
+                                                        <span class="">{{ $symbol['0']['MarketCapitalization'] }}</span>
                                                     </li>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         A second list item
