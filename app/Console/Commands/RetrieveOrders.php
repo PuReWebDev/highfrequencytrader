@@ -122,6 +122,7 @@ class RetrieveOrders extends Command
         foreach ($pendingCancels as $pendingCancel) {
             try {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
+                // TODO perform an order update of this order. Boom!!
                 sleep(5);
 //                usleep(500000);
                 usleep(5000000);
