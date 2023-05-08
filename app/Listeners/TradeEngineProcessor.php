@@ -197,7 +197,7 @@ class TradeEngineProcessor
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                 Log::debug($message);
-
+                usleep(500000);
             } else {
                 Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
@@ -216,7 +216,7 @@ class TradeEngineProcessor
 
             self::updateWatchList($quote);
 
-            usleep(500000);
+
 
 
 //            $this->consecutiveTrades[$quote->symbol]++;
