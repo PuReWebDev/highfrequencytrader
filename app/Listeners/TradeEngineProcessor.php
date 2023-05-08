@@ -180,7 +180,7 @@ class TradeEngineProcessor
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + 1.00,2, '.', ''),
                     number_format($currentStockPrice - 3.00, 2, '.', ''),
-                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+                    $quote->symbol, 5);
 
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
                         '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
