@@ -174,24 +174,24 @@ class TradeEngineProcessor
 
 
 
-//            if (($quote->highPrice - 1.00) > ($currentStockPrice + 1.00)) {
-//                OrderService::placeOtoOrder(
-//                    number_format($currentStockPrice, 2, '.', ''),
-//                    number_format($currentStockPrice + 1.00,2, '.', ''),
-//                    number_format($currentStockPrice - 2.00, 2, '.', ''),
-//                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
-//
-//                $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
-//                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
-//                        '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-//                        2.00, 2, '.', '') . "
-//                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
-//
-//                Log::debug($message);
-//
-//            } else {
-//                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
-//            }
+            if (($quote->highPrice - 1.00) > ($currentStockPrice + 1.00)) {
+                OrderService::placeOtoOrder(
+                    number_format($currentStockPrice, 2, '.', ''),
+                    number_format($currentStockPrice + 1.00,2, '.', ''),
+                    number_format($currentStockPrice - 2.00, 2, '.', ''),
+                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+
+                $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
+                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                        '.', '') . ", Stop Price: " . number_format($currentStockPrice -
+                        2.00, 2, '.', '') . "
+                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
+
+                Log::debug($message);
+
+            } else {
+                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
+            }
 
             if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
