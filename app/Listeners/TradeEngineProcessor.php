@@ -162,19 +162,21 @@ class TradeEngineProcessor
                 continue;
             }
 
-            if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
-                OrderService::placeOtoOrder(
-                    number_format($currentStockPrice, 2, '.', ''),
-                    number_format($currentStockPrice + .10,2, '.', ''),
-                    number_format($currentStockPrice - 0.80, 2, '.', ''),
-                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
-            }
+
 
             if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + 1.00,2, '.', ''),
                     number_format($currentStockPrice - 2.00, 2, '.', ''),
+                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            }
+
+            if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
+                OrderService::placeOtoOrder(
+                    number_format($currentStockPrice, 2, '.', ''),
+                    number_format($currentStockPrice + .10,2, '.', ''),
+                    number_format($currentStockPrice - 0.80, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
             }
 
