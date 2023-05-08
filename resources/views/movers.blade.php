@@ -36,7 +36,9 @@
                                         style="white-space: nowrap;">{{
                                                     $loop->index }}</td>
                                     <td style="white-space:
-                                                    nowrap;">{{$mover->symbol }}</td>
+                                                    nowrap;"><a href="{{url
+                                                    ('symbol',[$mover->symbol])}}">{{ $mover->symbol
+                                                    }}</a></td>
                                     <td style="white-space: nowrap;">{{ $mover->description}}</td>
                                     <td style="white-space: nowrap;">{{ $mover->last }}</td>
                                     <td style="white-space: nowrap;">+${{
