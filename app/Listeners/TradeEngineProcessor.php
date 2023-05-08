@@ -6,6 +6,7 @@ namespace App\Listeners;
 
 use App\Models\Mover;
 use App\Models\Order;
+use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -29,6 +30,21 @@ class TradeEngineProcessor
     public function __construct()
     {
         Auth::loginUsingId(4, $remember = true);
+    }
+
+    /**
+     * @param mixed $quote
+     */
+    private static function updateWatchList(mixed $quote): void
+    {
+        WatchList::updateOrCreate([
+            'user_id' => Auth::id(),
+            'symbol' => $quote->symbol
+        ], [
+            'user_id' => Auth::id(),
+            'symbol' => $quote->symbol,
+            'enabled' => true,
+        ]);
     }
 
     /**
@@ -126,7 +142,7 @@ class TradeEngineProcessor
             $quotes = TDAmeritrade::quotes($goodSymbols);
 
             // Place The Trades
-            $this->getOrderResponse($quotes);
+            $this->getOrderResponse($quotes, $movers);
         }
     }
 
@@ -135,26 +151,40 @@ class TradeEngineProcessor
      * @return void
      * @throws \JsonException
      */
-    private function getOrderResponse(mixed $quotes): void
+    private function getOrderResponse(mixed $quotes, $movers): void
     {
         foreach ($quotes as $quote) {
 
             $currentStockPrice = $quote->lastPrice;
 
-            OrderService::placeOtoOrder(
-                number_format($currentStockPrice, 2, '.', ''),
-                number_format($currentStockPrice + .10,2, '.', ''),
-                number_format($currentStockPrice - 0.80, 2, '.', ''),
-                $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
-//            OrderService::placeOtoOrder(
-//                number_format($currentStockPrice, 2, '.', ''),
-//                number_format($currentStockPrice + .05,2, '.', ''),
-//                number_format($currentStockPrice - 1.00, 2, '.', ''),
-//                $quote->symbol, 2);
-//            sleep(2);
+            if ($currentStockPrice > 600) {
+                Log::info('Stock Symbol'. $quote->symbol .' Too Expensive Right Now At:'. $quote->lastPrice . ' Skipping Orders');
+                continue;
+            }
+
+            if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
+                OrderService::placeOtoOrder(
+                    number_format($currentStockPrice, 2, '.', ''),
+                    number_format($currentStockPrice + .10,2, '.', ''),
+                    number_format($currentStockPrice - 0.80, 2, '.', ''),
+                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            }
+
+            foreach ($movers as $mover) {
+                if ($quote->symbol === $mover['symbol']) {
+                    if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
+                        OrderService::placeOtoOrder(
+                            number_format($currentStockPrice, 2, '.', ''),
+                            number_format($currentStockPrice + 1.00,2, '.', ''),
+                            number_format($currentStockPrice - 2.00, 2, '.', ''),
+                            $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+                    }
+                }
+            }
+
+            self::updateWatchList($quote);
 
             usleep(500000);
-
 
             $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
                     '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
