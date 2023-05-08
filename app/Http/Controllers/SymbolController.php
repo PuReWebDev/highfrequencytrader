@@ -108,6 +108,8 @@ class SymbolController extends Controller
         $candles = self::conditionalChartHistory($marketHoursResponse, $validated['symbol']);
 
         if (count($candles) < 1) {
+            Log::info('Symbol Detail Page: Fetching Prices for '.$validated['symbol']);
+
             TDAmeritrade::getPriceHistory($validated['symbol'],
                                       'day',
                                       2,
