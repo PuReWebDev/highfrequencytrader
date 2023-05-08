@@ -179,7 +179,7 @@ class TradeEngineProcessor
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + 1.00,2, '.', ''),
-                    number_format($currentStockPrice - 2.00, 2, '.', ''),
+                    number_format($currentStockPrice - 3.00, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
