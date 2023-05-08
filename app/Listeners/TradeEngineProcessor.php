@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Log;
 
 class TradeEngineProcessor
 {
-//    protected array $tradeSymbols = ['UBER','SPOT', 'PG', 'CLX','TSLA', 'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
-    protected array $tradeSymbols = [];
+    protected array $tradeSymbols = ['UBER','SPOT', 'PG', 'CLX','TSLA', 'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
+//    protected array $tradeSymbols = [];
 
     protected array $shareQuantityPerTrade = [];
 
