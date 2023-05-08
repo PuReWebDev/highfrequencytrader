@@ -158,7 +158,7 @@ class TradeEngineProcessor
             $currentStockPrice = $quote->lastPrice;
 
             if ($currentStockPrice > 600) {
-                Log::info('Stock Symbol'. $quote->symbol .' Too Expensive Right Now At:'. $quote->lastPrice . ' Skipping Orders');
+                Log::info('Stock Symbol '. $quote->symbol .' Too Expensive Right Now At:'. $quote->lastPrice . ' Skipping Orders');
                 continue;
             }
 
