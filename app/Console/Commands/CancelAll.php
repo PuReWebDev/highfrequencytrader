@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
+use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,7 @@ class CancelAll extends Command
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
 //            ['created_at', '>=', Carbon::now()->subMinutes(15)
 //                ->toDateTimeString()],
-        ])->whereIn('status', ['WORKING'])->get();
+        ])->whereIn('status', ['WORKING'])->whereDate('created_at', Carbon::today())->get()->get();
 
         foreach ($pendingCancels as $pendingCancel) {
             try {
