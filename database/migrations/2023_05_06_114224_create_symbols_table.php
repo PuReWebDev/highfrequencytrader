@@ -55,7 +55,7 @@ class CreateSymbolsTable extends Migration
             $table->string('PriceToBookRatio');
             $table->string('EVToRevenue');
             $table->string('EVToEBITDA');
-            $table->float('Beta');
+            $table->string('Beta');
             $table->decimal('52WeekHigh');
             $table->decimal('52WeekLow');
             $table->decimal('50DayMovingAverage');
