@@ -185,7 +185,7 @@ class TradeEngineProcessor
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
                         '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
                         '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-                        2.00, 2, '.', '') . "
+                        3.00, 2, '.', '') . "
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                 Log::debug($message);
