@@ -183,7 +183,7 @@ class TradeEngineProcessor
 //                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
 //            }
 
-            if (($quote->highPrice - 1.00) > ($currentStockPrice + .10)) {
+            if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
