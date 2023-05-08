@@ -170,15 +170,23 @@ class TradeEngineProcessor
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
             }
 
+            if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
+                OrderService::placeOtoOrder(
+                    number_format($currentStockPrice, 2, '.', ''),
+                    number_format($currentStockPrice + 1.00,2, '.', ''),
+                    number_format($currentStockPrice - 2.00, 2, '.', ''),
+                    $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            }
+
             foreach ($movers as $mover) {
                 if ($quote->symbol === $mover['symbol']) {
-                    if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
-                        OrderService::placeOtoOrder(
-                            number_format($currentStockPrice, 2, '.', ''),
-                            number_format($currentStockPrice + 1.00,2, '.', ''),
-                            number_format($currentStockPrice - 2.00, 2, '.', ''),
-                            $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
-                    }
+//                    if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
+//                        OrderService::placeOtoOrder(
+//                            number_format($currentStockPrice, 2, '.', ''),
+//                            number_format($currentStockPrice + 1.00,2, '.', ''),
+//                            number_format($currentStockPrice - 2.00, 2, '.', ''),
+//                            $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+//                    }
                 }
             }
 
