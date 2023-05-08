@@ -252,7 +252,7 @@
 {{--                                            <th style="white-space:nowrap;">Order Strategy Type</th>--}}
 {{--                                            <th style="white-space:nowrap;">Duration</th>--}}
                                             <th style="white-space:nowrap;">Price</th>
-                                            <th style="white-space:nowrap;">Trade Profit</th>
+                                            <th style="white-space:nowrap;">P/L</th>
                                             <th style="">Quantity</th>
                                             <th style="white-space:nowrap;">Entered Time</th>
                                             <th style="white-space:nowrap;">Close Time</th>
