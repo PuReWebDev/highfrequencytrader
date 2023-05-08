@@ -170,6 +170,8 @@ class TradeEngineProcessor
                     number_format($currentStockPrice + 1.00,2, '.', ''),
                     number_format($currentStockPrice - 2.00, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            } else {
+                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
 
             if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
@@ -178,6 +180,8 @@ class TradeEngineProcessor
                     number_format($currentStockPrice + .10,2, '.', ''),
                     number_format($currentStockPrice - 0.80, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+            } else {
+                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
 
             foreach ($movers as $mover) {
