@@ -74,15 +74,15 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'FILLED' || empty($status)) {
-                try {
-                    self::getCandleSticks();
-                } catch (GuzzleException $e) {
-                    Log::error('Guzzle Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                } catch (JsonException $e) {
-                    Log::error('Json Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                }
+//                try {
+//                    self::getCandleSticks();
+//                } catch (GuzzleException $e) {
+//                    Log::error('Guzzle Exception Thrown', ['error' =>
+//                        $e->getMessage()]);
+//                } catch (JsonException $e) {
+//                    Log::error('Json Exception Thrown', ['error' =>
+//                        $e->getMessage()]);
+//                }
             }
 
             if ($status === 'FULL') {
