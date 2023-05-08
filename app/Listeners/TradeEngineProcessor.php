@@ -170,6 +170,15 @@ class TradeEngineProcessor
                     number_format($currentStockPrice + 1.00,2, '.', ''),
                     number_format($currentStockPrice - 2.00, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+
+                $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
+                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                        '.', '') . ", Stop Price: " . number_format($currentStockPrice -
+                        2.00, 2, '.', '') . "
+                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
+
+                Log::debug($message);
+
             } else {
                 Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
@@ -180,6 +189,15 @@ class TradeEngineProcessor
                     number_format($currentStockPrice + .10,2, '.', ''),
                     number_format($currentStockPrice - 0.80, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
+
+                $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
+                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                        '.', '') . ", Stop Price: " . number_format($currentStockPrice -
+                        0.80, 2, '.', '') . "
+                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
+
+                Log::debug($message);
+
             } else {
                 Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
@@ -200,14 +218,9 @@ class TradeEngineProcessor
 
             usleep(500000);
 
-            $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
-                    '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
-                    '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-                    0.80, 2, '.', '') . "
-                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
-            $this->consecutiveTrades[$quote->symbol]++;
-                    Log::debug($message);
+//            $this->consecutiveTrades[$quote->symbol]++;
+
 
         } // end for each quote. Now take a moment
     }
