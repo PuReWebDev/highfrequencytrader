@@ -151,9 +151,9 @@ class TradeEngineProcessor
 //                number_format($currentStockPrice + .05,2, '.', ''),
 //                number_format($currentStockPrice - 1.00, 2, '.', ''),
 //                $quote->symbol, 2);
-            sleep(2);
+//            sleep(2);
 
-//            usleep(500000);
+            usleep(500000);
 
 
             $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
