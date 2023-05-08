@@ -59,7 +59,7 @@ class CancelAll extends Command
             try {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
                 sleep(5);
-//                usleep(500000);
+                usleep(5000000);
                 usleep(5000000);
             } catch (GuzzleException $e) {
                 Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
