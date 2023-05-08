@@ -5,6 +5,10 @@ namespace App\Services;
 class MathService 
 {
     /**
+     * Takes in an array of ticks and returns three components
+     * the high and low of the ticks range based on the most avarage prices
+     * and a direction based on the general direction of the array
+     * 
      * @param Array collection of ticks
      * @return Array range of high frequency values
      */
@@ -20,8 +24,12 @@ class MathService
 
         $direction = $direction <=> 0;
         $frequencies = array_count_values($prices);
-        $frequencies = array_filter($frequencies, function($value) {
-            return $value >= 3;
+        $frequencyHigh = max(array_values($frequencies));
+        $frequencyLow = min(array_values($frequencies));
+        $frequencyRange = range($frequencyHigh, $frequencyLow);
+        $frequencyFilter = array_splice($frequencyRange, floor(count($frequencyRange) / 2))[0];
+        $frequencies = array_filter($frequencies, function($value) use($frequencyFilter) {
+            return $value >= $frequencyFilter;
         });
         krsort($frequencies);
         $high = number_format(array_keys($frequencies)[0], 2, '.', ',');
