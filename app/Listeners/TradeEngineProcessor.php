@@ -6,6 +6,7 @@ namespace App\Listeners;
 
 use App\Models\Mover;
 use App\Models\Order;
+use App\Models\Position;
 use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -83,6 +84,15 @@ class TradeEngineProcessor
 
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->get();
+
+        $stockPositions = Position::where([
+            ['user_id', '=', Auth::id()],
+            ['currentDayProfitLoss', '>', 0],
+        ])->get();
+
+        foreach ($stockPositions as $stockPosition) {
+            array_unshift($this->tradeSymbols, $stockPosition['symbol']);
+        }
 
         foreach ($movers as $mover) {
             array_unshift($this->tradeSymbols, $mover['symbol']);
