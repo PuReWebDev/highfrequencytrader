@@ -269,8 +269,11 @@
                                                     <td><a href="{{url
                                                     ('symbol',[$order->symbol])}}">{{ $order->symbol
                                                     }}</a></td>
-                                                    <td>{{ $order->orderId }}</td>
-                                                    <td>{{ $order->parentOrderId }}</td>
+                                                    <td><small>{{
+                                                    $order->orderId
+                                                    }}</small></td>
+                                                    <td><small>{{
+                                                    $order->parentOrderId }}</small></td>
                                                     <td>{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
 {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
