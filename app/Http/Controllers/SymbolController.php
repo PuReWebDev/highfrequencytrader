@@ -112,7 +112,7 @@ class SymbolController extends Controller
 
             TDAmeritrade::getPriceHistory($validated['symbol'],
                                       'day',
-                                      2,
+                                      1,
                                       'minute',
                                       1,
                                       '',
