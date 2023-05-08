@@ -335,7 +335,7 @@ class AccountController extends Controller
             $positions = Position::where([
                 ['user_id', Auth::id()],
 //                ['updated_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
-                ['updated_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
+                ['updated_at', '>=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
             ])->get();
 
             $Balance = Balance::where('user_id', Auth::id())->get();
