@@ -112,7 +112,7 @@ class TradeEngineProcessor
                 Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
             }
 
-            if ($stoppedCounts[$tradeSymbol] >= 4) {
+            if ($stoppedCounts[$tradeSymbol] >= 1) {
                 $tradeHalted[$tradeSymbol] = true; // TODO break even -
                 // 1:1 once recovered, restart trade quantity
                 // trade post limits open cancel/replace
@@ -120,7 +120,7 @@ class TradeEngineProcessor
                 Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
             }
 //            if ($runningCounts[$tradeSymbol] >= 5) {
-            if ($runningCounts[$tradeSymbol] >= 2) {
+            if ($runningCounts[$tradeSymbol] >= 3) {
                 $tradeHalted[$tradeSymbol] = true;
             }
         }
