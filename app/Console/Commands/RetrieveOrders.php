@@ -66,7 +66,7 @@ class RetrieveOrders extends Command
             $this->info($status.' Orders Retrieved. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
 
             if ($status === 'WORKING') {
-                $this->cancelStaleOrders();
+//                $this->cancelStaleOrders();
 
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                 OrdersProcessed::dispatch();
@@ -115,9 +115,9 @@ class RetrieveOrders extends Command
             ['tag', '=', 'AA_PuReWebDev'],
             ['instruction', '=', 'BUY'],
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
-            ['created_at', '>=', Carbon::now()->subMinutes(5)
+            ['created_at', '<=', Carbon::now()->subMinutes(5)
                 ->toDateTimeString()],
-        ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
+        ])->whereIn('status', ['WORKING'])->get();
 
         foreach ($pendingCancels as $pendingCancel) {
             try {
