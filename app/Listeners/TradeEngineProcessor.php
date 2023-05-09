@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Log;
 
 class TradeEngineProcessor
 {
-//    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
-//        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
-    protected array $tradeSymbols = [];
+    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
+        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
+//    protected array $tradeSymbols = [];
 
     protected array $shareQuantityPerTrade = [];
 
@@ -202,7 +202,7 @@ class TradeEngineProcessor
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
-                    number_format($currentStockPrice - 0.80, 2, '.', ''),
+                    number_format($currentStockPrice - 1.00, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
