@@ -160,7 +160,7 @@ class TradeEngineProcessor
             $quotes = TDAmeritrade::quotes($goodSymbols);
 
             // Place The Trades
-            $this->getOrderResponse($quotes, $movers);
+            $this->getOrderResponse($quotes);
         }
     }
 
@@ -169,7 +169,7 @@ class TradeEngineProcessor
      * @return void
      * @throws \JsonException
      */
-    private function getOrderResponse(mixed $quotes, $movers): void
+    private function getOrderResponse(mixed $quotes): void
     {
         foreach ($quotes as $quote) {
 
