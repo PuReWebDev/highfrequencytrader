@@ -112,7 +112,7 @@ class RetrieveOrders extends Command
     public function cancelStaleOrders(): void
     {
         $date = new DateTime;
-        $date->modify('-10 minutes');
+        $date->modify('-3 minutes');
         $formatted = $date->format('Y-m-d H:i:s');
 
 
