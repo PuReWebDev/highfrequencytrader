@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Log;
 
 class TradeEngineProcessor
 {
-    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
-        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
-//    protected array $tradeSymbols = [];
+//    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
+//        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
+    protected array $tradeSymbols = [];
 
     protected array $shareQuantityPerTrade = [];
 
@@ -174,8 +174,8 @@ class TradeEngineProcessor
                 continue;
             }
 
-            foreach ($movers as $mover) {
-                if ($quote->symbol === $mover['symbol']) {
+//            foreach ($movers as $mover) {
+//                if ($quote->symbol === $mover['symbol']) {
                     if (($quote->highPrice - 1.00) > ($currentStockPrice + 1.00)) {
 
                         OrderService::placeOtoOrder(
@@ -197,8 +197,8 @@ class TradeEngineProcessor
                     } else {
                         Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
                     }
-                }
-            }
+//                }
+//            }
 
             if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
