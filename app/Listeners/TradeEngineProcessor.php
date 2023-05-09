@@ -134,7 +134,12 @@ class TradeEngineProcessor
                 Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
             }
 //            if ($runningCounts[$tradeSymbol] >= 5) {
-            if ($runningCounts[$tradeSymbol] >= 1) {
+            if ($runningCounts[$tradeSymbol] >= 3) {
+                $this->shareQuantityPerTrade[$tradeSymbol] = 5;
+//                $tradeHalted[$tradeSymbol] = true;
+            }
+            if ($runningCounts[$tradeSymbol] >= 5) {
+                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = true;
             }
         }
