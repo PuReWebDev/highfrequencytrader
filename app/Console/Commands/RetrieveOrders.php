@@ -10,6 +10,7 @@ use App\Models\WatchList;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
+use DateTime;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
