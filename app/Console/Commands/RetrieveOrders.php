@@ -63,9 +63,11 @@ class RetrieveOrders extends Command
         while (true) {
             Accounts::tokenPreFlight();
 
-            $this->info('Starting To Retrieved Orders. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
-            TDAmeritrade::getOrders($status);
-            $this->info($status.' Orders Retrieved. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
+            if ($status != 'INDIVIDUAL') {
+                $this->info('Starting To Retrieved Orders. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
+                TDAmeritrade::getOrders($status);
+                $this->info($status.' Orders Retrieved. '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
+            }
 
             if ($status === 'WORKING') {
                 $this->cancelStaleOrders();
