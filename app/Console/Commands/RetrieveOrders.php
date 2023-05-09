@@ -74,6 +74,22 @@ class RetrieveOrders extends Command
                 OrdersProcessed::dispatch();
                 $this->info('Trade Engine Processor Completed'.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
 
+//                $orders = Order::where([
+//                    ['user_id', '=', Auth::id()],
+//                    ['tag', '=', 'AA_PuReWebDev'],
+////            ['instruction', '=', 'SELL'],
+//                ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING'])->whereDate('created_at', Carbon::today())->get();
+//
+//                foreach ($orders as $order) {
+//                    TDAmeritrade::getOrder($order['orderId']);
+//                    Log::info('Individual Order Retrieved and Updated: '. $order['orderId']);
+//                    usleep(5000000);
+//                }
+
+            }
+
+            if ($status === 'INDIVIDUAL' || empty($status)) {
+
                 $orders = Order::where([
                     ['user_id', '=', Auth::id()],
                     ['tag', '=', 'AA_PuReWebDev'],
@@ -85,7 +101,6 @@ class RetrieveOrders extends Command
                     Log::info('Individual Order Retrieved and Updated: '. $order['orderId']);
                     usleep(5000000);
                 }
-
             }
 
             if ($status === 'FILLED' || empty($status)) {
