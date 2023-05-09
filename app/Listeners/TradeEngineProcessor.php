@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Log;
 
 class TradeEngineProcessor
 {
-    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
-        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
-//    protected array $tradeSymbols = [];
+//    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
+//        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO', ];
+    protected array $tradeSymbols = ['NFLX','PGNY','NEO','TEAM','LOW','DVA','CRM'];
 //    protected array $tradeSymbols = ['RBLX', 'XOM', 'WMT', 'WMG','JPM', 'ARKK','UBER','SPOT','PG','CLX','TSLA','CVX','CSX','COIN','TEAM','META',
 //        'DASH', 'SBUX', 'SQ', 'AAPL', 'V','CRM', 'CSCO', 'LOW', 'Z', 'GIS', 'VZ','MSFT', 'AMZN', 'GOOGL','BA', 'ABNB', 'GD', 'NVDA', 'DIS', 'BIDU', 'UPS','MCD', 'MMM', 'CSCO', 'CVS', 'WM', 'NFLX', 'SPG', 'FDX', 'BAH', 'VWM', 'RTX', 'KO','AMD', 'ADBE', 'ABNB', 'ALGN', 'AMZN', 'AMGN', 'AEP', 'ADI', 'ANSS', 'AAPL', 'AMAT', 'ASML', 'TEAM', 'ADSK', 'ATVI', 'ADP', 'AZN', 'BKR', 'AVGO', 'BIIB', 'BMRN', 'BKNG', 'CDNS', 'CHTR', 'CPRT', 'CSGP', 'CRWD', 'CTAS', 'CSCO', 'CMCSA', 'COST', 'CSX', 'CTSH', 'DDOG', 'DXCM', 'FANG', 'DLTR', 'EA', 'EBAY', 'ENPH', 'EXC', 'FAST', 'GFS', 'META', 'FISV', 'FTNT', 'GILD', 'GOOG', 'GOOGL', 'HON', 'ILMN', 'INTC', 'INTU', 'ISRG', 'MRVL', 'IDXX', 'JD', 'KDP', 'KLAC', 'KHC', 'LRCX', 'LCID', 'LULU', 'MELI', 'MAR', 'MCHP', 'MDLZ', 'MRNA', 'MNST', 'MSFT', 'MU', 'NFLX', 'NVDA', 'NXPI', 'ODFL', 'ORLY', 'PCAR', 'PANW', 'PAYX', 'PDD', 'PYPL', 'PEP', 'QCOM', 'REGN', 'RIVN', 'ROST', 'SIRI', 'SGEN', 'SBUX', 'SNPS', 'TSLA', 'TXN', 'TMUS', 'VRSK', 'VRTX', 'WBA', 'WBD', 'WDAY', 'XEL', 'ZM', 'ZS',];
 
