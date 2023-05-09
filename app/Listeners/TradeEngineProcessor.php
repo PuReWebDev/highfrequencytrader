@@ -176,7 +176,7 @@ class TradeEngineProcessor
 
 //            foreach ($movers as $mover) {
 //                if ($quote->symbol === $mover['symbol']) {
-                    if (($quote->highPrice - 1.00) > ($currentStockPrice + 1.00)) {
+                    if (($quote->highPrice - 0.75) > ($currentStockPrice + 1.00)) {
 
                         OrderService::placeOtoOrder(
                             number_format($currentStockPrice, 2, '.', ''),
@@ -194,13 +194,11 @@ class TradeEngineProcessor
                         Log::debug($message);
                         usleep(500000);
 
-                    } else {
-                        Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
                     }
 //                }
 //            }
 
-            if (($quote->highPrice - .60) > ($currentStockPrice + .10)) {
+            if (($quote->highPrice - .50) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
@@ -215,8 +213,6 @@ class TradeEngineProcessor
 
                 Log::debug($message);
                 usleep(500000);
-            } else {
-                Log::info('Order for Symbol: '.$quote->symbol.' Prevented From Being Placed At The High of : '.$quote->highPrice .' The current Price is: '.$currentStockPrice);
             }
 
 //            foreach ($movers as $mover) {
