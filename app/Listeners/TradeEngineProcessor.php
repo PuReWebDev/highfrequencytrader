@@ -194,7 +194,7 @@ class TradeEngineProcessor
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                         Log::debug($message);
-                        usleep(500000);
+//                        usleep(500000);
 
                     }
 //                }
@@ -214,7 +214,7 @@ class TradeEngineProcessor
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                 Log::debug($message);
-                usleep(500000);
+//                usleep(500000);
             }
 
 //            foreach ($movers as $mover) {
