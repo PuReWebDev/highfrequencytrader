@@ -183,25 +183,25 @@ class TradeEngineProcessor
 
 //            foreach ($movers as $mover) {
 //                if ($quote->symbol === $mover['symbol']) {
-                    if (($quote->highPrice - 0.50) > ($currentStockPrice + 1.00)) {
-
-                        OrderService::placeOtoOrder(
-                            number_format($currentStockPrice, 2, '.', ''),
-                            number_format($currentStockPrice + 1.00,2, '.', ''),
-                            number_format($currentStockPrice - 3.00, 2, '.', ''),
-                            $quote->symbol, 5);
-
-                        $message = "Mover Order placed: Buy ".number_format
-                            ($currentStockPrice, 2, '.',
-                                '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
-                                '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-                                3.00, 2, '.', '') . "
-                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
-
-                        Log::debug($message);
-//                        usleep(500000);
-
-                    }
+//                    if (($quote->highPrice - 0.50) > ($currentStockPrice + 1.00)) {
+//
+//                        OrderService::placeOtoOrder(
+//                            number_format($currentStockPrice, 2, '.', ''),
+//                            number_format($currentStockPrice + 1.00,2, '.', ''),
+//                            number_format($currentStockPrice - 3.00, 2, '.', ''),
+//                            $quote->symbol, 5);
+//
+//                        $message = "Mover Order placed: Buy ".number_format
+//                            ($currentStockPrice, 2, '.',
+//                                '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+//                                '.', '') . ", Stop Price: " . number_format($currentStockPrice -
+//                                3.00, 2, '.', '') . "
+//                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
+//
+//                        Log::debug($message);
+////                        usleep(500000);
+//
+//                    }
 //                }
 //            }
 
