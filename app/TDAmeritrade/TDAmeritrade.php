@@ -518,6 +518,47 @@ class TDAmeritrade
     }
 
     /**
+     * getOrder
+     * Get Orders For Account
+     * @param string $orderId
+     * @throws JsonException
+     */
+    public static function getOrder(string $orderId): void
+    {
+        Accounts::tokenPreFlight();
+        $token = Token::where('user_id', Auth::id())->get();
+        $account = Account::where('user_id', Auth::id())->get();
+
+
+        $data = [
+            'base_uri' => SELF::BASE_URL_TD,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        try {
+            $response = $client->request('get', SELF::API_VER . '/accounts/'
+                . $account['0']['accountId'] .'/orders/'.$orderId, $data);
+
+            $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
+
+            Accounts::saveOrdersInformation($responseData);
+        } catch (GuzzleException $guzzleException) {
+            Log::debug('Failed To Retrieve Order', ['errors' =>
+                $guzzleException->getMessage()]);
+        }
+
+    }
+
+    /**
      * getSymbol
      * Get Symbol Fundamentals
      * @param string $symbol

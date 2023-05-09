@@ -680,7 +680,7 @@ class Accounts
     /**
      * @param $orderStrategies
      */
-    private static function saveOrdersInformation($orderStrategies): void
+    public static function saveOrdersInformation($orderStrategies): void
     {
         Order::updateOrCreate(
             [
