@@ -178,7 +178,7 @@ class TradeEngineProcessor
 
 //            foreach ($movers as $mover) {
 //                if ($quote->symbol === $mover['symbol']) {
-                    if (($quote->highPrice - 0.75) > ($currentStockPrice + 1.00)) {
+                    if (($quote->highPrice - 0.50) > ($currentStockPrice + 1.00)) {
 
                         OrderService::placeOtoOrder(
                             number_format($currentStockPrice, 2, '.', ''),
@@ -200,7 +200,7 @@ class TradeEngineProcessor
 //                }
 //            }
 
-            if (($quote->highPrice - .50) > ($currentStockPrice + .10)) {
+            if (($quote->highPrice - .30) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
