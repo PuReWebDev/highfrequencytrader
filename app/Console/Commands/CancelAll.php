@@ -66,8 +66,8 @@ class CancelAll extends Command
                 Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
             }
 
-            Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
-            $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
+            Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId'] .' '. Carbon::now());
+            $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId'] .' '. Carbon::now());
         }
         return 0;
     }
