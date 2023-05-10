@@ -90,7 +90,7 @@ class RetrieveOrders extends Command
 
             }
 
-            if ($status === 'INDIVIDUAL' || empty($status)) {
+            if ($status === 'INDIVIDUAL' && empty($status)) {
 
                 $orders = Order::where([
                     ['user_id', '=', Auth::id()],
