@@ -96,7 +96,8 @@ class RetrieveOrders extends Command
                     ['user_id', '=', Auth::id()],
                     ['tag', '=', 'AA_PuReWebDev'],
 //            ['instruction', '=', 'SELL'],
-                ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING'])->whereDate('created_at', Carbon::today())->get();
+//                ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING'])->whereDate('created_at', Carbon::today())->get();
+                ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereIn('status',['WORKING'])->get();
 
                 foreach ($orders as $order) {
                     TDAmeritrade::getOrder($order['orderId']);
