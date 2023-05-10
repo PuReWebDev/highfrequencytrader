@@ -99,9 +99,13 @@ class RetrieveOrders extends Command
 //                ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereNotNull('price')->whereIn('status',['WORKING'])->whereDate('created_at', Carbon::today())->get();
                 ])->whereIn('instruction',['SELL','BUY'])->whereNotNull('instruction')->whereNotNull('positionEffect')->whereIn('status',['WORKING'])->get();
 
+                $count = $orders->count();
+                Log::info('Start With Total Count of: '. $count);
                 foreach ($orders as $order) {
                     TDAmeritrade::getOrder($order['orderId']);
                     Log::info('Individual Order Retrieved and Updated: '. $order['orderId']);
+                    $this->info('Individual Order Retrieved and Updated: '.
+                        $order['orderId']. ' And '. $count-- .' remaining');
                     usleep(5000000);
                 }
             }
