@@ -107,6 +107,9 @@ class RetrieveOrders extends Command
                     $this->info('Individual Order Retrieved and Updated: '.
                         $order['orderId']. ' And '. $count-- .' remaining');
                     usleep(5000000);
+                    if ($count === 1) {
+                        break;
+                    }
                 }
             }
 
