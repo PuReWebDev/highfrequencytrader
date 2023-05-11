@@ -110,7 +110,7 @@ class RetrieveOrders extends Command
 
                 }
 
-                break;
+//                break;
             }
 
             if ($status === 'FILLED' || empty($status)) {
