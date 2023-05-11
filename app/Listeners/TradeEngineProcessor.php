@@ -114,6 +114,11 @@ class TradeEngineProcessor
             $this->shareQuantityPerTrade[$tradeSymbol] = 2;
             $tradeHalted[$tradeSymbol] = false;
 
+            $this->shareQuantityPerTrade['MSFT'] = 10;
+            $this->shareQuantityPerTrade['MCD'] = 10;
+            $this->shareQuantityPerTrade['ABNB'] = 10;
+
+
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
                 $this->consecutiveTrades[$tradeSymbol] = 0;
             }
