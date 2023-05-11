@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use App\Models\Order;
+use App\Models\Quote;
 use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -173,6 +174,8 @@ class TradeEngineProcessor
         foreach ($quotes as $quote) {
 
             $currentStockPrice = $quote->lastPrice;
+
+            $previousQuote = Quote::where('symbol', $quote->symbol)->orderBy('id', 'desc')->first();
 
             if ($currentStockPrice > 600) {
                 Log::info('Stock Symbol '. $quote->symbol .' Too Expensive Right Now At: '. $quote->lastPrice . ' Skipping Orders');

@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 
 use App\Events\OrdersProcessed;
 use App\Models\Order;
+use App\Models\Quote;
 use App\Models\WatchList;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
@@ -53,6 +54,11 @@ class RetrieveOrders extends Command
     {
         // Get stock symbol from command argument
         $status = $this->argument('status');
+
+        $previousQuote = Quote::where('symbol', 'TSLA')->orderBy('id', 'desc')
+            ->first();
+
+        dd($previousQuote);
 
         Auth::loginUsingId(4, $remember = true);
 
