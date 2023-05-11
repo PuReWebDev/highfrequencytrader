@@ -6,6 +6,7 @@ namespace App\Listeners;
 
 use App\Models\Mover;
 use App\Models\Order;
+use App\Models\Position;
 use App\Models\Quote;
 use App\Models\WatchList;
 use App\Services\OrderService;
