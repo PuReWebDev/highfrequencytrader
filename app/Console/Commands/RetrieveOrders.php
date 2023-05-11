@@ -103,9 +103,10 @@ class RetrieveOrders extends Command
                 Log::info('Start With Total Count of: '. $count);
                 foreach ($orders as $order) {
                     TDAmeritrade::getOrder($order['orderId']);
-                    Log::info('Individual Order Retrieved and Updated: '. $order['orderId']);
+                    Log::info('Individual Order Retrieved and Updated: '.
+                        $order['orderId'] .' '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                     $this->info('Individual Order Retrieved and Updated: '.
-                        $order['orderId']. ' And '. $count-- .' remaining');
+                        $order['orderId']. ' And '. $count-- .' remaining '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                     usleep(5000000);
 
                 }
