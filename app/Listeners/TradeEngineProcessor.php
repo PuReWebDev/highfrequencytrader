@@ -175,7 +175,15 @@ class TradeEngineProcessor
 
             $currentStockPrice = $quote->lastPrice;
 
-            $previousQuote = Quote::where('symbol', $quote->symbol)->orderBy('id', 'desc')->first();
+            $previousQuote = Quote::where('symbol', $quote->symbol)->orderBy('id', 'desc')
+                ->first();
+
+            if ($currentStockPrice < $previousQuote['lastPrice']) {
+                // Only buy when he price is otw up
+                Log::info('Skipping Buy of'. $quote->symbol .' Previous Price of '
+                    .$previousQuote['lastPrice'].' is Higher Than Current Price: '. $currentStockPrice);
+                continue;
+            }
 
             if ($currentStockPrice > 600) {
                 Log::info('Stock Symbol '. $quote->symbol .' Too Expensive Right Now At: '. $quote->lastPrice . ' Skipping Orders');
