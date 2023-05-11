@@ -119,6 +119,8 @@ class TradeEngineProcessor
             $this->shareQuantityPerTrade['ABNB'] = 10;
             $this->shareQuantityPerTrade['META'] = 10;
             $this->shareQuantityPerTrade['GOOGL'] = 10;
+            $this->shareQuantityPerTrade['BIDU'] = 10;
+            $this->shareQuantityPerTrade['AMZN'] = 10;
 
 
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
