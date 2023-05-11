@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use App\Models\Mover;
 use App\Models\Order;
 use App\Models\Quote;
 use App\Models\WatchList;
@@ -83,7 +84,7 @@ class TradeEngineProcessor
 //                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
         ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
 
-//        TDAmeritrade::updateMovers();
+        TDAmeritrade::updateMovers();
 //
         $movers = Mover::whereDate('created_at', Carbon::today())
             ->orderBy('change', 'desc')->limit(1)->get();
