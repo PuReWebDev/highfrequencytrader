@@ -58,7 +58,7 @@ class RetrieveOrders extends Command
         $previousQuote = Quote::where('symbol', 'TSLA')->orderBy('id', 'desc')
             ->first();
 
-        dd($previousQuote);
+        dd($previousQuote['lastPrice']);
 
         Auth::loginUsingId(4, $remember = true);
 
