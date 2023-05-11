@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
-use App\Models\Mover;
 use App\Models\Order;
 use App\Models\Position;
 use App\Models\Quote;
@@ -85,10 +84,10 @@ class TradeEngineProcessor
 //                ['created_at', '>=', Carbon::now()->subMinutes(5)->toDateTimeString()],
         ])->whereDate('created_at', Carbon::today())->whereNotNull('stopPrice')->get();
 
-        TDAmeritrade::updateMovers();
+//        TDAmeritrade::updateMovers();
 //
-        $movers = Mover::whereDate('created_at', Carbon::today())
-            ->orderBy('change', 'desc')->limit(1)->get();
+//        $movers = Mover::whereDate('created_at', Carbon::today())
+//            ->orderBy('change', 'desc')->limit(1)->get();
 
         $stockPositions = Position::where([
             ['user_id', '=', Auth::id()],
@@ -99,9 +98,9 @@ class TradeEngineProcessor
             array_unshift($this->tradeSymbols, $stockPosition['symbol']);
         }
 
-        foreach ($movers as $mover) {
-            array_unshift($this->tradeSymbols, $mover['symbol']);
-        }
+//        foreach ($movers as $mover) {
+//            array_unshift($this->tradeSymbols, $mover['symbol']);
+//        }
 
         $this->tradeSymbols = array_unique($this->tradeSymbols);
 
