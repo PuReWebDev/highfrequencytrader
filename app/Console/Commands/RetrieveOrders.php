@@ -104,10 +104,14 @@ class RetrieveOrders extends Command
                 foreach ($orders as $order) {
                     TDAmeritrade::getOrder($order['orderId']);
                     Log::info('Individual Order Retrieved and Updated: '.
-                        $order['orderId'] .' '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
+                        $order['orderId'] .' for symbol '.$order['symbol'].' '
+                        .Carbon::now()
+                            ->setTimezone
+                    ('America/New_York')->format('Y-m-d g:i A'));
                     $this->info('Individual Order Retrieved and Updated: '.
                         $order['orderId']. ' And '. $count-- .' remaining '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                     usleep(2500000);
+                    Log::info('Fetching Price History For '. $order['symbol']);
                     TDAmeritrade::getPriceHistory($order['symbol']);
                     usleep(2500000);
 
