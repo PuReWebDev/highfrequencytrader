@@ -89,6 +89,10 @@ class Accounts
         if (!empty($childOrderStrategies['orderStrategyType'])) {
             if ($childOrderStrategies['orderStrategyType'] === 'SINGLE') {
                 $childOrderStrategies['parentOrderId'] = $order['orderId'];
+                if (!empty($order['closeTime'])) {
+                    $childOrderStrategies['enteredTime'] = $order['closeTime'];
+                }
+
                 [$childOrderStrategies, $order] = self::calculatePL($childOrderStrategies, $order);
             }
             self::saveOrdersInformation($childOrderStrategies);
@@ -100,6 +104,10 @@ class Accounts
             if (!empty($ocoOrder['orderStrategyType'])) {
                 if ($ocoOrder['orderStrategyType'] === 'SINGLE') {
                     $ocoOrder['parentOrderId'] = $order['orderId'];
+                    if (!empty($order['closeTime'])) {
+                        $ocoOrder['enteredTime'] = $order['closeTime'];
+                    }
+
                     [$ocoOrder, $order] = self::calculatePL($ocoOrder, $order);
                 }
                 self::saveOrdersInformation($ocoOrder);
@@ -672,7 +680,7 @@ class Accounts
     /**
      * @param $orderStrategies
      */
-    private static function saveOrdersInformation($orderStrategies): void
+    public static function saveOrdersInformation($orderStrategies): void
     {
         Order::updateOrCreate(
             [
@@ -773,11 +781,9 @@ class Accounts
                 }
             }
 
-            Log::info('Starting To Process Incoming Orders');
             if (!empty($value['securitiesAccount']['orderStrategies'])) {
                 self::processIncomingOrders($value['securitiesAccount']['orderStrategies']);
             }
-            Log::info('Finished Processing Incoming Orders');
 
             self::saveInitialBalanceInformation($account->accountId, $value['securitiesAccount']['initialBalances']);
             self::saveCurrentBalancesInformation($account->accountId, $value['securitiesAccount']['currentBalances']);

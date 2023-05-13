@@ -28,7 +28,7 @@
                                          id='fromdatetimepicker'>
                                         <input name="from_date" type='text'
                                                class="form-control" autocomplete="off" />
-                                        <div class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
                                                  height="33"
@@ -36,7 +36,7 @@
                                                 <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
                                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                                             </svg>
-                                        </div>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -50,7 +50,7 @@
                                          id='todatetimepicker'>
                                         <input name="to_date" type='text'
                                                class="form-control" autocomplete="off" />
-                                        <div class="input-group-addon">
+                                        <span class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
                                                  height="33"
@@ -58,7 +58,7 @@
                                                 <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
                                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                                             </svg>
-                                        </div>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -197,8 +197,9 @@
 {{--                                                    <td scope="row"--}}
 {{--                                                        style="white-space: nowrap;">{{--}}
 {{--                                                    $loop->index }}</td>--}}
-                                                    <td style="white-space: nowrap;">{{ $order->symbol
-                                                    }}</td>
+                                                    <td style="white-space: nowrap;"><a href="{{url
+                                                    ('symbol',[$order->symbol])}}">{{ $order->symbol
+                                                    }}</a></td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->parentOrderId}}</td>
                                                     <td style="white-space: nowrap;">{{ $order->instruction }}</td>
@@ -207,12 +208,15 @@
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td style="white-space: nowrap;">@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
-                                                        style="text-align:center;">$@if ($order->quantity === 10){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * .10,2,'.',',') }}@endif</td>
+                                                        style="text-align:center;">$@if ($order->quantity === 15){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * 1.00,2,'.',',') }}@endif</td>
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
 {{--                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>--}}
-                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    <td style="white-space:
+                                                    nowrap;"><small>{{
+                                                    \Carbon\Carbon::parse
+                                                    ($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i:s A') }}</small></td>
                                                     <td>{{ gmdate('H:i:s',
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
@@ -248,8 +252,8 @@
 {{--                                            <th style="white-space:nowrap;">Order Strategy Type</th>--}}
 {{--                                            <th style="white-space:nowrap;">Duration</th>--}}
                                             <th style="white-space:nowrap;">Price</th>
-                                            <th style="white-space:nowrap;">Trade Profit</th>
-                                            <th style="white-space:nowrap;">Quantity</th>
+                                            <th style="white-space:nowrap;">P/L</th>
+                                            <th style="">Quantity</th>
                                             <th style="white-space:nowrap;">Entered Time</th>
                                             <th style="white-space:nowrap;">Close Time</th>
                                             <th>Elapsed</th>
@@ -262,9 +266,14 @@
                                             @if ($order->status === 'FILLED')
                                                 <tr>
 {{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
-                                                    <td>{{ $order->symbol }}</td>
-                                                    <td>{{ $order->orderId }}</td>
-                                                    <td>{{ $order->parentOrderId }}</td>
+                                                    <td><a href="{{url
+                                                    ('symbol',[$order->symbol])}}">{{ $order->symbol
+                                                    }}</a></td>
+                                                    <td><small>{{
+                                                    $order->orderId
+                                                    }}</small></td>
+                                                    <td><small>{{
+                                                    $order->parentOrderId }}</small></td>
                                                     <td>{{ $order->instruction }}</td>
 {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
 {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
@@ -276,13 +285,13 @@
                                                         @endisset
                                                     </td>
                                                     <td style="text-align:center">{{ $order->quantity }}</td>
-                                                    <td nowrap>{{
+                                                    <td nowrap><small>{{
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
-                                                    ->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    ->setTimezone('America/New_York')->format('Y-m-d g:i:s') }}</small></td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->format('g:i:s a') }}</td>--}}
-                                                    <td nowrap>{{
-                                                    \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i A') }}</td>
+                                                    <td nowrap><small>{{
+                                                    \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i:s') }}</small></td>
 {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>--}}
 
                                                     <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>

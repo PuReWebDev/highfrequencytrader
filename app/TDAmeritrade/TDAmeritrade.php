@@ -8,6 +8,7 @@ use App\Models\Account;
 use App\Models\Mover;
 use App\Models\Price;
 use App\Models\Quote;
+use App\Models\Symbol;
 use App\Models\Token;
 use Carbon\Carbon;
 use Exception;
@@ -36,8 +37,10 @@ use JsonException;
 
 class TDAmeritrade
 {
-    const BASE_URL = "https://api.tdameritrade.com";
-    const API_VER = "v1";
+    public const BASE_URL_TD = "https://api.tdameritrade.com";
+    public const API_VER = "v1";
+    public const BASE_URL_AV = 'https://www.alphavantage.co';
+
 
     protected $access_token;
     protected $refresh_token;
@@ -101,7 +104,7 @@ class TDAmeritrade
     public static function post(string $path, array $data = [])
     {
         $client = new Client([
-            'base_uri' => SELF::BASE_URL
+            'base_uri' => SELF::BASE_URL_TD
         ]);
 
         try {
@@ -116,7 +119,7 @@ class TDAmeritrade
     public function postWithAuth(string $path, array $data = [])
     {
         $client = new Client([
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => ['Authorization' => 'Bearer ' . $this->access_token]
         ]);
 
@@ -133,7 +136,7 @@ class TDAmeritrade
         dd('No call here');
         $token = Token::where('user_id', Auth::id())->get();
         $client = new Client([
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => ['Authorization' => 'Bearer ' . $token['0']['access_token']]
         ]);
 
@@ -201,7 +204,7 @@ class TDAmeritrade
     public static function list(string $fields = 'positions,orders')
     {
         return (new Client([
-            'base_uri' => SELF::BASE_URL
+            'base_uri' => SELF::BASE_URL_TD
         ]))->getWithAuth('/accounts', [
             'query' => ['fields' => $fields]
         ]);
@@ -241,10 +244,12 @@ class TDAmeritrade
      */
     public static function quotes(array $symbols): mixed
     {
+        Accounts::tokenPreFlight();
+
         $token = Token::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -315,38 +320,31 @@ class TDAmeritrade
      * Get the chart history for a symbol.
      *
      * @param string $symbol
-     * @param int|string $periodType
+     * @param string $periodType
      * @param int $period
-     * @param int $frequencyType
+     * @param string $frequencyType
      * @param int $frequency
-     * @param int $endDate
-     * @param int $startDate
+     * @param string $endDate
+     * @param string $startDate
      * @param bool|string $extendedHours
      * @return array
-     * @throws JsonException|GuzzleException
+     * @throws JsonException
      */
-    public static function getPriceHistory(string $symbol,
-                                      string      $periodType = 'day',
-                                      int         $period = 1,
-                                      string      $frequencyType = 'minute',
-                                      int         $frequency = 1,
-                                      string      $endDate = '',
-                                      string      $startDate = '',
-                                      bool|string $extendedHours = 'true'): array
+    public static function getPriceHistory(
+        string      $symbol,
+        string      $periodType = 'day',
+        int         $period = 1,
+        string      $frequencyType = 'minute',
+        int         $frequency = 1,
+        string      $endDate = '',
+        string      $startDate = '',
+        bool|string $extendedHours = 'true'): array
     {
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
-        $today = Carbon::today()->toDateString();
-
-        if (empty($startDate)) {
-            $startDate = $today;
-        }
-        if (empty($endDate)) {
-            $endDate = $today;
-        }
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -354,14 +352,24 @@ class TDAmeritrade
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'periodType' => $periodType,
-                'period' => $period,
+//                'period' => $period,
                 'frequencyType' => $frequencyType,
                 'frequency' => $frequency,
-//                'endDate' => $endDate,
-//                'startDate' => $startDate,
                 'extendedHours' => (string)$extendedHours,
             ]
         ];
+
+        if (empty($period)) {
+            if (empty($startDate)) {
+                $data['query']['startDate'] = Carbon::now()->subHours(24)
+                    ->timestamp;
+            }
+            if (empty($endDate)) {
+                $data['query']['endDate'] = Carbon::now()->timestamp;
+            }
+        } else {
+            $data['query']['period'] = $period;
+        }
 
         $client = new Client($data);
 
@@ -397,7 +405,7 @@ class TDAmeritrade
         $token = Token::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -476,7 +484,7 @@ class TDAmeritrade
         }
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',
@@ -507,6 +515,135 @@ class TDAmeritrade
                 $guzzleException->getMessage()]);
         }
 
+    }
+
+    /**
+     * getOrder
+     * Get Orders For Account
+     * @param string $orderId
+     * @throws JsonException
+     */
+    public static function getOrder(string $orderId): void
+    {
+        Accounts::tokenPreFlight();
+        $token = Token::where('user_id', Auth::id())->get();
+        $account = Account::where('user_id', Auth::id())->get();
+
+
+        $data = [
+            'base_uri' => SELF::BASE_URL_TD,
+            'headers'  => [
+                'Authorization' => 'Bearer ' . $token['0']['access_token'],
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'apikey' => config('tdameritrade.api_key'),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        try {
+            $response = $client->request('get', SELF::API_VER . '/accounts/'
+                . $account['0']['accountId'] .'/orders/'.$orderId, $data);
+
+            $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
+
+            Accounts::saveOrdersInformation($responseData);
+        } catch (GuzzleException $guzzleException) {
+            Log::debug('Failed To Retrieve Order', ['errors' =>
+                $guzzleException->getMessage()]);
+        }
+
+    }
+
+    /**
+     * getSymbol
+     * Get Symbol Fundamentals
+     * @param string $symbol
+     * @throws JsonException
+     */
+    public static function getSymbol(string $symbol): void
+    {
+        $data = [
+            'base_uri' => SELF::BASE_URL_AV,
+            'headers'  => [
+                'Content-Type' => 'application/json',
+            ],
+            'query' => [
+                'function' => 'OVERVIEW',
+                'symbol' => $symbol,
+                'apikey' => config('tdameritrade.api_key_av'),
+            ]
+        ];
+
+        $client = new Client($data);
+
+        try {
+            $response = $client->request('get','/query', $data);
+            $responseData = json_decode($response->getBody()->getContents(), true, 512,
+                JSON_THROW_ON_ERROR);
+
+            self::processIncomingSymbol($responseData);
+        } catch (GuzzleException $guzzleException) {
+            Log::debug('Failed To Retrieve Symbol', ['errors' =>
+                $guzzleException->getMessage()]);
+        }
+    }
+
+    private static function processIncomingSymbol(array $symbol): void
+    {
+        Symbol::updateOrCreate([
+            'symbol' => $symbol['Symbol'],
+        ],[
+            'symbol' => $symbol['Symbol'],
+            'AssetType' => $symbol['AssetType'],
+            'Name' => $symbol['Name'],
+            'Description' => $symbol['Description'],
+            'CIK' => $symbol['CIK'],
+            'Exchange' => $symbol['Exchange'],
+            'Currency' => $symbol['Currency'],
+            'Country' => $symbol['Country'],
+            'Sector' => $symbol['Sector'],
+            'Industry' => $symbol['Industry'],
+            'Address' => $symbol['Address'],
+            'FiscalYearEnd' => $symbol['FiscalYearEnd'],
+            'LatestQuarter' => $symbol['LatestQuarter'],
+            'MarketCapitalization' => $symbol['MarketCapitalization'],
+            'EBITDA' => $symbol['EBITDA'],
+            'PERatio' => $symbol['PERatio'],
+            'PEGRatio' => $symbol['PEGRatio'],
+            'BookValue' => $symbol['BookValue'],
+            'DividendPerShare' => $symbol['DividendPerShare'],
+            'DividendYield' => $symbol['DividendYield'],
+            'EPS' => $symbol['EPS'],
+            'RevenuePerShareTTM' => $symbol['RevenuePerShareTTM'],
+            'ProfitMargin' => $symbol['ProfitMargin'],
+            'OperatingMarginTTM' => $symbol['OperatingMarginTTM'],
+            'ReturnOnAssetsTTM' => $symbol['ReturnOnAssetsTTM'],
+            'ReturnOnEquityTTM' => $symbol['ReturnOnEquityTTM'],
+            'RevenueTTM' => $symbol['RevenueTTM'],
+            'GrossProfitTTM' => $symbol['GrossProfitTTM'],
+            'DilutedEPSTTM' => $symbol['DilutedEPSTTM'],
+            'QuarterlyEarningsGrowthYOY' => $symbol['QuarterlyEarningsGrowthYOY'],
+            'QuarterlyRevenueGrowthYOY' => $symbol['QuarterlyRevenueGrowthYOY'],
+            'AnalystTargetPrice' => $symbol['AnalystTargetPrice'],
+            'TrailingPE' => $symbol['TrailingPE'],
+            'ForwardPE' => $symbol['ForwardPE'],
+            'PriceToSalesRatioTTM' => $symbol['PriceToSalesRatioTTM'],
+            'PriceToBookRatio' => $symbol['PriceToBookRatio'],
+            'EVToRevenue' => $symbol['EVToRevenue'],
+            'EVToEBITDA' => $symbol['EVToEBITDA'],
+            'Beta' => $symbol['Beta'],
+            '52WeekHigh' => $symbol['52WeekHigh'],
+            '52WeekLow' => $symbol['52WeekLow'],
+            '50DayMovingAverage' => $symbol['50DayMovingAverage'],
+            '200DayMovingAverage' => $symbol['200DayMovingAverage'],
+            'SharesOutstanding' => $symbol['SharesOutstanding'],
+            'DividendDate' => $symbol['DividendDate'],
+            'ExDividendDate' => $symbol['ExDividendDate'],
+        ]);
     }
 
     /**
@@ -571,7 +708,7 @@ class TDAmeritrade
         $account = Account::where('user_id', Auth::id())->get();
 
         $data = [
-            'base_uri' => SELF::BASE_URL,
+            'base_uri' => SELF::BASE_URL_TD,
             'headers'  => [
                 'Authorization' => 'Bearer ' . $token['0']['access_token'],
                 'Content-Type' => 'application/json',

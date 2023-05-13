@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
+use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
@@ -53,20 +54,20 @@ class CancelAll extends Command
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
 //            ['created_at', '>=', Carbon::now()->subMinutes(15)
 //                ->toDateTimeString()],
-        ])->whereIn('status', ['WORKING', 'PENDING_ACTIVATION'])->get();
+        ])->whereIn('status', ['WORKING'])->get();
 
         foreach ($pendingCancels as $pendingCancel) {
             try {
                 TDAmeritrade::cancelOrder($pendingCancel['orderId']);
                 sleep(5);
-//                usleep(500000);
+                usleep(5000000);
                 usleep(5000000);
             } catch (GuzzleException $e) {
                 Log::debug('Attempted To Cancel Already Cancelled Order', ['success' => false, 'error' => $e->getMessage()]);
             }
 
-            Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
-            $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId']);
+            Log::info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId'] .' '. Carbon::now());
+            $this->info('Stale Buy Order Cancelled: ' . $pendingCancel['orderId'] .' '. Carbon::now());
         }
         return 0;
     }

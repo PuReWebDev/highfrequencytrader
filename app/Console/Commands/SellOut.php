@@ -72,15 +72,18 @@ class SellOut extends Command
             foreach ($quotes as $quote) {
 
 //                OrderService::sellOutLimit($quote->symbol, $symbol['longQuantity'], $quote->lastPrice);
-                OrderService::sellOutMarket($quote->symbol, $symbol['longQuantity'],
-                    $quote->lastPrice);
+                if ($quote->symbol !== 'EATR') {
+                    OrderService::sellOutMarket($quote->symbol, $symbol['longQuantity'],
+                        $quote->lastPrice);
 
-                $message = "Order placed: Sell Out Symbol: ".$symbol['symbol'].",
+                    $message = "Order placed: Sell Out Symbol: ".$symbol['symbol'].",
             Quantity: ".$symbol['longQuantity']. " Stop Price: $quote->lastPrice";
 
-                Log::debug($message);
+                    Log::debug($message);
 
-                sleep(5);
+                    sleep(5);
+                }
+
 
             }
 //            OrderService::sellOutMarket($symbol['symbol'], $symbol['longQuantity']);

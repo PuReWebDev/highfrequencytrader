@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SymbolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,5 +56,9 @@ Route::get('/balances', [\App\Http\Controllers\BalancesController::class, 'index
 Route::get('/movers', [\App\Http\Controllers\MoverController::class, 'index'])
     ->middleware(['auth'])
     ->name('movers');
+
+Route::resource('symbol', SymbolController::class)->parameters([
+    'symbol' => 'symbol'
+])->middleware(['auth']);
 
 require __DIR__.'/auth.php';

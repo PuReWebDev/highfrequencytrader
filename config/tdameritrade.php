@@ -19,6 +19,7 @@ return [
         ],
     ],
     'api_key' => env('TD_API_CLIENT_ID'),
+    'api_key_av' => env('AV_API_CLIENT_ID'),
     'auth_url' => 'https://api.tdameritrade.com/v1/oauth2/token',
     'base_url' => 'https://api.tdameritrade.com',
     'account_id' => 12345,
