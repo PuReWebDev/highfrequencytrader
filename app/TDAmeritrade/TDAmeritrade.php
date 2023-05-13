@@ -338,7 +338,7 @@ class TDAmeritrade
         int         $frequency = 1,
         string      $endDate = '',
         string      $startDate = '',
-        bool|string $extendedHours = 'true'): array
+        bool|string $extendedHours = 'false'): array
     {
         Accounts::tokenPreFlight();
         $token = Token::where('user_id', Auth::id())->get();
