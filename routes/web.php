@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StrategyController;
 use App\Http\Controllers\SymbolController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,20 @@ Route::get('/orders', [OrderController::class, 'index'])
 
 Route::post('/orders', [OrderController::class, 'index'])->middleware(['auth'])
     ->name('orders');
+
+Route::get('/strategies', [StrategyController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('strategies');
+
+Route::get('/strategy/create', [StrategyController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('strategies');
+
+Route::post('/strategies', [StrategyController::class, 'store'])->middleware(['auth'])
+    ->name('strategies');
+
+Route::get('/strategy-editor/{id}', [StrategyController::class, 'show'])
+    ->middleware(['auth'])->name('strategy-editor');
 
 Route::get('/trade', [\App\Http\Controllers\TradeController::class, 'index'])
     ->middleware(['auth'])
