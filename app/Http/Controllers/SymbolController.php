@@ -102,7 +102,7 @@ class SymbolController extends Controller
 
         $Symbol = Symbol::where([
             ['symbol', '=', $validated['symbol']],
-            ['updated_at', '>', Carbon::now()->subHours(5)]
+            ['updated_at', '<', Carbon::now()->subHours(10)]
         ])->get();
 
         $marketHoursResponse = MarketHours::isMarketOpen("EQUITY");
