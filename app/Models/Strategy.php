@@ -26,7 +26,7 @@ class Strategy extends Model
         'number_of_trades',
         'running_counts',
         'max_stock_price',
-        'stops_allowed',
+        'max_stops_allowed',
         'change_quantity_after_stops',
         'quantity_after_stop',
         'stop_price',
