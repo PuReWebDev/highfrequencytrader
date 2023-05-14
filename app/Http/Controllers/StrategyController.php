@@ -25,7 +25,7 @@ class StrategyController extends Controller
      * Show the form for creating a new resource.
      * @return View
      */
-    public function create(): View
+    public function create()
     {
         $symbols = WatchList::where('user_id', Auth::id())->get();
 
