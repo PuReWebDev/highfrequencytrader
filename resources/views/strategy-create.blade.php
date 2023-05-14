@@ -329,7 +329,7 @@
     <script type="text/javascript">
         // ------------step-wizard-------------
         $(document).ready(function () {
-            $('.nav-tabs > li a[title]').tooltip();
+            // $('.nav-tabs > li a[title]').tooltip();
 
             //Wizard
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
