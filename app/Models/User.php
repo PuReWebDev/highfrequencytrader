@@ -92,4 +92,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Preference::class);
     }
+
+    /**
+     * Get the Strategies associated with the user.
+     */
+    public function strategies(): HasMany
+    {
+        return $this->hasMany(Strategy::class);
+    }
 }
