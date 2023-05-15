@@ -34,12 +34,6 @@
                             <li class="nav-item">
                                 <a class="nav-link " href="#step-4">
                                     <span class="num">4</span>
-                                    Trade Symbols
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="#step-5">
-                                    <span class="num">5</span>
                                     Confirm Trade
                                 </a>
                             </li>
@@ -401,59 +395,6 @@
                             <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
 
                                 <form id="form-4" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
-                                    <div class="form-group row">
-                                        <label class="col-4">Symbols To Trade</label>
-                                        <div class="col-8">
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_0" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="TSLA">
-                                                <label for="symbols_0" class="custom-control-label">TSLA</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_1" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="MSFT">
-                                                <label for="symbols_1" class="custom-control-label">MSFT</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_2" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="DASH">
-                                                <label for="symbols_2" class="custom-control-label">DASH</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_3" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="GOOGL">
-                                                <label for="symbols_3" class="custom-control-label">GOOGL</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_4" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="AMZN">
-                                                <label for="symbols_4" class="custom-control-label">AMZN</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_5" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="NFLX">
-                                                <label for="symbols_5" class="custom-control-label">NFLX</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_6" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="SBUX">
-                                                <label for="symbols_6" class="custom-control-label">SBUX</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_7" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="AAPL">
-                                                <label for="symbols_7" class="custom-control-label">AAPL</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_8" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="UBER">
-                                                <label for="symbols_8" class="custom-control-label">UBER</label>
-                                            </div>
-                                            <div class="custom-control custom-checkbox custom-control-inline">
-                                                <input name="symbols" id="symbols_9" type="checkbox" aria-describedby="symbolsHelpBlock" required="required" class="custom-control-input" value="SPOT">
-                                                <label for="symbols_9" class="custom-control-label">SPOT</label>
-                                            </div>
-                                            <span id="symbolsHelpBlock" class="form-text text-muted">Please Select All The Symbols That Should Use This Strategy</span>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div id="step-5" class="tab-pane" role="tabpanel"
-                                 aria-labelledby="step-5">
-
-                                <form id="form-5" class="row row-cols-1 ms-5
-                                me-5 needs-validation" novalidate>
                                     <div class="col">
                                         <div class="mb-3 text-muted">Please
                                             Review Your Trade Strategy</div>
@@ -475,8 +416,11 @@
                                         </div>
                                     </div>
                                 </form>
-                            </div>
 
+
+
+                            </div>
+                            </form>
                         </div>
 
                         <div class="progress">
@@ -526,11 +470,10 @@
             document.getElementById("form-2").reset();
             document.getElementById("form-3").reset();
             document.getElementById("form-4").reset();
-            document.getElementById("form-5").reset();
         }
 
         function onConfirm() {
-            let form = document.getElementById('form-5');
+            let form = document.getElementById('form-4');
             if (form) {
                 if (!form.checkValidity()) {
                     form.classList.add('was-validated');
@@ -554,7 +497,6 @@
                     "limit_price_offset": $('#limit_price_offset').val(),
                     "high_price_buffer": $('#high_price_buffer').val(),
                     "profit": $('#profit').val(),
-                    "symbols": $("input[name='symbols']").val()
                 };
 
                 $.ajaxSetup({
@@ -587,7 +529,6 @@
             document.getElementById("form-2").reset();
             document.getElementById("form-3").reset();
             document.getElementById("form-4").reset();
-            document.getElementById("form-5").reset();
 
             myModal.hide();
         }
