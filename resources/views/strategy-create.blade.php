@@ -270,17 +270,17 @@
                                                     <div class="input-group-text">-</div>
                                                 </div>
                                                 <input id="stop_price" name="stop_price" placeholder="0.80" type="text" class="form-control" aria-describedby="stop_priceHelpBlock" required="required">
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please Specify a Stop Price
-                                                </div>
                                                 <div class="input-group-append">
                                                     <div
                                                         class="input-group-text" style="display: inline-table">
                                                         <i class="fa fa-hand-stop-o"></i>
                                                     </div>
+                                                </div>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify a Stop Price
                                                 </div>
                                             </div>
                                             <span id="stop_priceHelpBlock" class="form-text text-muted">Stop Price - The price in a stop order that triggers the creation of a market order. In the case of a Sell on Stop order, a market sell order is triggered when the market price reaches or falls below the stop price.</span>
