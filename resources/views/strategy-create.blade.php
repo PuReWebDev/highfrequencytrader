@@ -171,19 +171,119 @@
                             </div>
                             <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                 <form id="form-2" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
-                                    <div class="col-md-6">
-                                        <label for="validationCustom04" class="form-label">Product</label>
-                                        <select class="form-select" id="sel-products" multiple required>
-                                            <option value="Apple iPhone 13">Apple iPhone 13</option>
-                                            <option value="Apple iPhone 12">Apple iPhone 12</option>
-                                            <option value="Samsung Galaxy S10">Samsung Galaxy S10</option>
-                                            <option value="Motorola G5">Motorola G5</option>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
+                                    <div class="form-group row">
+                                        <label for="max_stock_price" class="col-4 col-form-label">Max Stock Price</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div
+                                                        class="input-group-text" style="display: inline-table">
+                                                        <i class="fa fa-money"></i>
+                                                    </div>
+                                                </div>
+                                                <input id="max_stock_price" name="max_stock_price" placeholder="500.00" type="text" class="form-control" required="required">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify a Maximum
+                                                    Price To Pay Per Share.
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            Please select product.
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="max_stops_allowed" class="col-4 col-form-label">Stops Allowed</label>
+                                        <div class="col-8">
+                                            <select id="max_stops_allowed" name="max_stops_allowed" aria-describedby="max_stops_allowedHelpBlock" required="required" class="custom-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Specify The Maximum
+                                                Number of Stops Per Symbol
+                                            </div>
+                                            <span id="max_stops_allowedHelpBlock" class="form-text text-muted">The Number of Stops Allowed Before Trading Is Halted On This Symbol</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="change_quantity_after_stops" class="col-4 col-form-label">Change Quantity After Stops</label>
+                                        <div class="col-8">
+                                            <select id="change_quantity_after_stops" name="change_quantity_after_stops" aria-describedby="change_quantity_after_stopsHelpBlock" required="required" class="custom-select">
+                                                <option value="true">Yes</option>
+                                                <option value="false">No</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Specify If You Would
+                                                Like To Change The
+                                                Share Quantity
+                                                After Getting Stopped
+                                            </div>
+                                            <span id="change_quantity_after_stopsHelpBlock" class="form-text text-muted">Do You Want To Change Trade Quantity If You Get Stopped Out?</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="quantity_after_stop" class="col-4 col-form-label">Quantity of Shares After Stop</label>
+                                        <div class="col-8">
+                                            <select id="quantity_after_stop" name="quantity_after_stop" aria-describedby="quantity_after_stopHelpBlock" required="required" class="custom-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Specify What Quantity
+                                                To Trade Once You've Been
+                                                Stopped
+                                            </div>
+                                            <span id="quantity_after_stopHelpBlock" class="form-text text-muted">The Quantity of Shares To Trade With If You Have Been Stopped Out</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="stop_price" class="col-4 col-form-label">Stop Price</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">-</div>
+                                                </div>
+                                                <input id="stop_price" name="stop_price" placeholder="0.80" type="text" class="form-control" aria-describedby="stop_priceHelpBlock" required="required">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify a Stop Price
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <div
+                                                        class="input-group-text" style="display: inline-table">
+                                                        <i class="fa fa-hand-stop-o"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span id="stop_priceHelpBlock" class="form-text text-muted">Stop Price - The price in a stop order that triggers the creation of a market order. In the case of a Sell on Stop order, a market sell order is triggered when the market price reaches or falls below the stop price.</span>
                                         </div>
                                     </div>
                                 </form>
@@ -191,33 +291,90 @@
                             </div>
                             <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
                                 <form id="form-3" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
-                                    <div class="col">
-                                        <label for="address" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
-                                        <div class="invalid-feedback">
-                                            Please enter your shipping address.
+                                    <div class="form-group row">
+                                        <label for="limit_price" class="col-4 col-form-label">Limit Price</label>
+                                        <div class="col-8">
+                                            <select id="limit_price" name="limit_price" class="custom-select" aria-describedby="limit_priceHelpBlock">
+                                                <option value="lastPrice">Last Price</option>
+                                                <option value="bidPrice">Bid Price</option>
+                                                <option value="askPrice">Ask Price</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select Which Price To
+                                                Use As Your Price Basis
+                                            </div>
+                                            <span id="limit_priceHelpBlock" class="form-text text-muted">What Part Of The Quote Do You Want To Base Your Limit Price</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <label for="validationCustom04" class="form-label">State</label>
-                                        <select class="form-select" id="state" required>
-                                            <option selected disabled value="">Choose...</option>
-                                            <option>State 1</option>
-                                            <option>State 2</option>
-                                            <option>State 3</option>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please select a valid state.
+                                    <div class="form-group row">
+                                        <label for="limit_price_offset" class="col-4 col-form-label">Limit Price Offset</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div
+                                                        class="input-group-text" style="display: inline-table">
+                                                        <i class="fa fa-money"></i>
+                                                    </div>
+                                                </div>
+                                                <input id="limit_price_offset" name="limit_price_offset" placeholder="0.25" type="text" aria-describedby="limit_price_offsetHelpBlock" required="required" class="form-control">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify An Offset
+                                                    Amount. If You Don't Want
+                                                    An Offset Enter: 0.00
+                                                </div>
+                                            </div>
+                                            <span id="limit_price_offsetHelpBlock" class="form-text text-muted">Limit Price Offset</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <label for="validationCustom05" class="form-label">Zip</label>
-                                        <input type="text" class="form-control" id="zip" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid zip.
+                                    <div class="form-group row">
+                                        <label for="high_price_buffer" class="col-4 col-form-label">High Price Buffer</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div
+                                                        class="input-group-text" style="display: inline-table">
+                                                        <i class="fa fa-hand-stop-o"></i>
+                                                    </div>
+                                                </div>
+                                                <input id="high_price_buffer" name="high_price_buffer" placeholder="0.50" type="text" class="form-control" aria-describedby="high_price_bufferHelpBlock">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify A Buffer
+                                                    Amount or 0.00 For No Buffer
+                                                </div>
+                                            </div>
+                                            <span id="high_price_bufferHelpBlock" class="form-text text-muted">Buffer From The High Price of The Day That Engine Should Not Place Trades At. Your Profit Target Must Be Less Than This Amount: HighPrice + Buffer > Limit Price + Profit</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="profit" class="col-4 col-form-label">Profit Amount</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div
+                                                        class="input-group-text" style="display: inline-table">
+                                                        <i class="fa fa-money"></i>
+                                                    </div>
+                                                </div>
+                                                <input id="profit" name="profit" placeholder="0.10" type="text" class="form-control" aria-describedby="profitHelpBlock">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Specify How Much
+                                                    Profit Per Share You Are
+                                                    Targeting
+                                                </div>
+                                            </div>
+                                            <span id="profitHelpBlock" class="form-text text-muted">How Much Profit To Per Share Before</span>
                                         </div>
                                     </div>
                                 </form>
@@ -227,7 +384,8 @@
 
                                 <form id="form-4" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
                                     <div class="col">
-                                        <div class="mb-3 text-muted">Please confirm your order details</div>
+                                        <div class="mb-3 text-muted">Please
+                                            confirm your trade details</div>
 
                                         <div id="trade-summary"></div>
 
@@ -312,7 +470,38 @@
                     return false;
                 }
 
-                myModal.show();
+                var dataToSend = {
+                    "strategy_name": $('#strategy_name').val(),
+                    "enabled": $('#enabled').val(),
+                    "trade_quantity": $('#trade_quantity').val(),
+                    "number_of_trades": $('#number_of_trades').val(),
+                    "running_counts": $('#running_counts').val(),
+                    "max_stock_price": $('#max_stock_price').val(),
+                    "max_stops_allowed": $('#max_stops_allowed').val(),
+                    "change_quantity_after_stops": $('#change_quantity_after_stops').val(),
+                    "quantity_after_stop": $('#quantity_after_stop').val(),
+                    "stop_price": $('#stop_price').val(),
+                    "limit_price": $('#limit_price').val(),
+                    "limit_price_offset": $('#limit_price_offset').val(),
+                    "high_price_buffer": $('#high_price_buffer').val(),
+                    "profit": $('#profit').val(),
+                };
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                    }
+                });
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "/strategies",
+                    data: JSON.stringify(dataToSend),
+                    dataType: "json",
+                    success: function(data){ window.location.replace("https://highfrequencytradingservices.com/strategies"); }
+                });
+
+                // myModal.show();
             }
         }
 
@@ -355,8 +544,7 @@
             const strategy_name = $('#strategy_name').val();
             const trade_quantity = $('#trade_quantity').val();
             const enabled = $('#enabled').val();
-            const products = $('#sel-products').val();
-            const shipping = $('#address').val() + ' ' + $('#state').val() + ' ' + $('#zip').val();
+
             let html = `<h4 class="mb-3-">Trade Details</h4>
                   <hr class="my-2">
                   <div class="row g-3 align-items-center">
@@ -462,16 +650,6 @@
                     unDoneOnBackNavigation: true, // While navigate back, done state will be cleared
                     enableDoneStateNavigation: true // Enable/Disable the done state navigation
                 },
-            });
-
-            $("#state_selector").on("change", function() {
-                $('#smartwizard').smartWizard("setState", [$('#step_to_style').val()], $(this).val(), !$('#is_reset').prop("checked"));
-                return true;
-            });
-
-            $("#style_selector").on("change", function() {
-                $('#smartwizard').smartWizard("setStyle", [$('#step_to_style').val()], $(this).val(), !$('#is_reset').prop("checked"));
-                return true;
             });
 
         });
