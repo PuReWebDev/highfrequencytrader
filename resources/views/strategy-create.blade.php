@@ -87,7 +87,7 @@
                                     <div class="form-group row">
                                         <label for="trade_quantity" class="col-4 col-form-label">Quantity of Shares Per Trade</label>
                                         <div class="col-8">
-                                            <select id="trade_quantity" name="trade_quantity" class="custom-select" aria-describedby="trade_quantityHelpBlock" required="required">
+                                            <select id="trade_quantity" name="trade_quantity" class="form-select" aria-describedby="trade_quantityHelpBlock" required="required">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -112,7 +112,7 @@
                                     <div class="form-group row">
                                         <label for="number_of_trades" class="col-4 col-form-label">How Many Trades To Perform</label>
                                         <div class="col-8">
-                                            <select id="number_of_trades" name="number_of_trades" class="custom-select" aria-describedby="number_of_tradesHelpBlock" required="required">
+                                            <select id="number_of_trades" name="number_of_trades" class="form-select" aria-describedby="number_of_tradesHelpBlock" required="required">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -145,7 +145,7 @@
                                     <div class="form-group row">
                                         <label for="running_counts" class="col-4 col-form-label">Number Of Concurrent Trades</label>
                                         <div class="col-8">
-                                            <select id="running_counts" name="running_counts" class="custom-select" aria-describedby="running_countsHelpBlock">
+                                            <select id="running_counts" name="running_counts" class="form-select" aria-describedby="running_countsHelpBlock">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
