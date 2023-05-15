@@ -181,7 +181,10 @@
                                                         <i class="fa fa-money"></i>
                                                     </div>
                                                 </div>
-                                                <input id="max_stock_price" name="max_stock_price" placeholder="500.00" type="text" class="form-control" required="required">
+                                                <input id="max_stock_price"
+                                                       name="max_stock_price"
+                                                       placeholder="500.00"
+                                                       type="number" class="form-control" required="required">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
