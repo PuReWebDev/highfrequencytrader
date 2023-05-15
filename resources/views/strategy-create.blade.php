@@ -71,7 +71,7 @@
                                     <div class="form-group row">
                                         <label for="enabled" class="col-4 col-form-label">Enabled For Trading</label>
                                         <div class="col-8">
-                                            <select id="enabled" name="enabled" class="custom-select" aria-describedby="enabledHelpBlock" required="required">
+                                            <select id="enabled" name="enabled" class="form-select" aria-describedby="enabledHelpBlock" required="required">
                                                 <option value="true">Enabled</option>
                                                 <option value="false">Disbled</option>
                                             </select>
