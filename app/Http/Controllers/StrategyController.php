@@ -77,6 +77,7 @@ class StrategyController extends Controller
             'profit' => $profit,
         ];
         Log::debug('New Strategy Posted', json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR));
+        Log::debug('New Strategy Posted', $data);
         return response()->json([
             'success' => true,
             'data' => $request->toArray(),

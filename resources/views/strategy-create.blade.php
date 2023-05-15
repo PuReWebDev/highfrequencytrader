@@ -507,7 +507,9 @@
                     type: 'POST',
                     url: "/strategies",
                     data: JSON.stringify(dataToSend),
-                    dataType: "json",
+                    // dataType: "json",
+                    contentType: "json",
+                    processData: false,
                     success: function(data){ window.location.replace("https://highfrequencytradingservices.com/strategies"); }
                 });
 
