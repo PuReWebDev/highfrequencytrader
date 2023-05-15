@@ -254,7 +254,18 @@
 
         function closeModal() {
             // Reset wizard
-            $("#form-1").submit();
+            var dataToSend = {
+                name: $('#first-name').val(),
+                lastname: $('#last-name').val(),
+            };
+
+            jQuery.ajax({
+                type: 'POST',
+                url: "/strategies",
+                data: JSON.stringify(dataToSend),
+                dataType: "json",
+                success: function(data){ alert(data); }
+            });
             // $("form").submit();
             $('#smartwizard').smartWizard("reset");
 
