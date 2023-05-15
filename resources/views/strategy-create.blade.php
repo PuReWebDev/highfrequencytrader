@@ -321,7 +321,9 @@
             var dataToSend = {
                 "strategy_name": $('#strategy_name').val(),
                 "enabled": $('#enabled').val(),
-                "trade_quantity": $('#trade_quantity').val()
+                "trade_quantity": $('#trade_quantity').val(),
+                "number_of_trades": $('#number_of_trades').val(),
+                "running_counts": $('#running_counts').val()
             };
 
             $.ajaxSetup({
