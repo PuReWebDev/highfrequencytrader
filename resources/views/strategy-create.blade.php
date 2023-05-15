@@ -195,7 +195,7 @@
                                     <div class="form-group row">
                                         <label for="max_stops_allowed" class="col-4 col-form-label">Stops Allowed</label>
                                         <div class="col-8">
-                                            <select id="max_stops_allowed" name="max_stops_allowed" aria-describedby="max_stops_allowedHelpBlock" required="required" class="custom-select">
+                                            <select id="max_stops_allowed" name="max_stops_allowed" aria-describedby="max_stops_allowedHelpBlock" required="required" class="form-select">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -220,7 +220,7 @@
                                     <div class="form-group row">
                                         <label for="change_quantity_after_stops" class="col-4 col-form-label">Change Quantity After Stops</label>
                                         <div class="col-8">
-                                            <select id="change_quantity_after_stops" name="change_quantity_after_stops" aria-describedby="change_quantity_after_stopsHelpBlock" required="required" class="custom-select">
+                                            <select id="change_quantity_after_stops" name="change_quantity_after_stops" aria-describedby="change_quantity_after_stopsHelpBlock" required="required" class="form-select">
                                                 <option value="true">Yes</option>
                                                 <option value="false">No</option>
                                             </select>
@@ -239,7 +239,7 @@
                                     <div class="form-group row">
                                         <label for="quantity_after_stop" class="col-4 col-form-label">Quantity of Shares After Stop</label>
                                         <div class="col-8">
-                                            <select id="quantity_after_stop" name="quantity_after_stop" aria-describedby="quantity_after_stopHelpBlock" required="required" class="custom-select">
+                                            <select id="quantity_after_stop" name="quantity_after_stop" aria-describedby="quantity_after_stopHelpBlock" required="required" class="form-select">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -294,7 +294,7 @@
                                     <div class="form-group row">
                                         <label for="limit_price" class="col-4 col-form-label">Limit Price</label>
                                         <div class="col-8">
-                                            <select id="limit_price" name="limit_price" class="custom-select" aria-describedby="limit_priceHelpBlock">
+                                            <select id="limit_price" name="limit_price" class="form-select" aria-describedby="limit_priceHelpBlock">
                                                 <option value="lastPrice">Last Price</option>
                                                 <option value="bidPrice">Bid Price</option>
                                                 <option value="askPrice">Ask Price</option>
