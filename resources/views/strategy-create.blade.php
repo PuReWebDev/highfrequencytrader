@@ -395,7 +395,7 @@
                                 <form id="form-4" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
                                     <div class="col">
                                         <div class="mb-3 text-muted">Please
-                                            confirm your trade details</div>
+                                            Review Your Trade Strategy</div>
 
                                         <div id="trade-summary"></div>
 
@@ -517,27 +517,6 @@
 
         function closeModal() {
             // Reset wizard
-            var dataToSend = {
-                "strategy_name": $('#strategy_name').val(),
-                "enabled": $('#enabled').val(),
-                "trade_quantity": $('#trade_quantity').val(),
-                "number_of_trades": $('#number_of_trades').val(),
-                "running_counts": $('#running_counts').val()
-            };
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            });
-
-            jQuery.ajax({
-                type: 'POST',
-                url: "/strategies",
-                data: JSON.stringify(dataToSend),
-                dataType: "json",
-                success: function(data){ window.location.replace("https://highfrequencytradingservices.com/strategies"); }
-            });
             // $("form").submit();
             $('#smartwizard').smartWizard("reset");
 
@@ -554,6 +533,17 @@
             const strategy_name = $('#strategy_name').val();
             const trade_quantity = $('#trade_quantity').val();
             const enabled = $('#enabled').val();
+            const number_of_trades = $('#number_of_trades').val();
+            const running_counts = $('#running_counts').val();
+            const max_stock_price = $('#max_stock_price').val();
+            const max_stops_allowed = $('#max_stops_allowed').val();
+            const change_quantity_after_stops = $('#change_quantity_after_stops').val();
+            const quantity_after_stop = $('#quantity_after_stop').val();
+            const stop_price = $('#stop_price').val();
+            const limit_price = $('#limit_price').val();
+            const limit_price_offset = $('#limit_price_offset').val();
+            const high_price_buffer = $('#high_price_buffer').val();
+            const profit = $('#profit').val();
 
             let html = `<h4 class="mb-3-">Trade Details</h4>
                   <hr class="my-2">
@@ -579,6 +569,94 @@
                   <div class="row g-3 align-items-center">
                     <div class="col-auto">
                       <span class="form-text-">${trade_quantity}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">How Many Trades To Perform</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${number_of_trades}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Number Of Concurrent Trades</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${running_counts}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Max Stock Price</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${max_stock_price}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Stops Allowed</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${max_stops_allowed}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Change Quantity After Stops</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${change_quantity_after_stops}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Quantity of Shares After Stop</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${quantity_after_stop}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Stop Price</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${stop_price}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Limit Price</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${limit_price}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Limit Price Offset</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${limit_price_offset}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">High Price Buffer</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${high_price_buffer}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Profit Target Per Share</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${profit}</span>
                     </div>
                   </div>`;
             $("#trade-summary").html(html);
