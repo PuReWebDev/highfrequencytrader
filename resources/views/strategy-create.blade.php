@@ -41,7 +41,11 @@
 
                         <div class="tab-content">
                             <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-                                <form id="form-1" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
+
+                                <form id="form-1" method="post" action="/strategies"
+                                      enctype="multipart/form-data" class="row row-cols-1 ms-5
+                                 me-5 needs-validation" novalidate>
+                                    {{ csrf_field() }}
                                     <div class="col">
                                         <label for="first-name" class="form-label">First name</label>
                                         <input type="text" class="form-control" id="first-name" value="" required>
