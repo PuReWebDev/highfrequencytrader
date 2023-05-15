@@ -72,8 +72,10 @@
                                         <label for="enabled" class="col-4 col-form-label">Enabled For Trading</label>
                                         <div class="col-8">
                                             <select id="enabled" name="enabled" class="form-select" aria-describedby="enabledHelpBlock" required="required">
-                                                <option value="true">Enabled</option>
-                                                <option value="false">Disbled</option>
+                                                <option
+                                                    value="1">Enabled</option>
+                                                <option
+                                                    value="0">Disbled</option>
                                             </select>
                                             <div class="valid-feedback">
                                                 Looks good!
@@ -227,8 +229,8 @@
                                         <label for="change_quantity_after_stops" class="col-4 col-form-label">Change Quantity After Stops</label>
                                         <div class="col-8">
                                             <select id="change_quantity_after_stops" name="change_quantity_after_stops" aria-describedby="change_quantity_after_stopsHelpBlock" required="required" class="form-select">
-                                                <option value="true">Yes</option>
-                                                <option value="false">No</option>
+                                                <option value="1">Yes</option>
+                                                <option value="0">No</option>
                                             </select>
                                             <div class="valid-feedback">
                                                 Looks good!
