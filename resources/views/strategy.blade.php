@@ -15,20 +15,16 @@
                     <div class="table-responsive">
                         <table class="table table-striped caption-top"
                                id="strategies-table">
-                            <caption style="text-align: center;">Today's
-                                Movers
+                            <caption style="text-align: center;">Your Strategies
                             </caption>
                             <thead>
                             <tr>
                                 <th scope="col" style="white-space: nowrap;">
                                     <strong>#</strong></th>
-                                <th style="white-space: nowrap;">Symbol</th>
-                                <th style="white-space: nowrap;">Description
-                                </th>
-                                <th style="white-space: nowrap;">Last Price</th>
-                                <th style="white-space: nowrap;">Change</th>
-                                <th style="white-space: nowrap;">Total Volume
-                                </th>
+                                <th style="white-space: nowrap;">Name</th>
+                                <th style="white-space: nowrap;">Edit</th>
+                                <th style="white-space: nowrap;">Delete</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -43,7 +39,10 @@
 {{--                                                    }}</a></td>--}}
                                     <td style="white-space: nowrap;">{{
                                     $strategy->name}}</td>
-{{--                                    <td style="white-space: nowrap;">{{ $mover->last }}</td>--}}
+                                    <td style="white-space: nowrap;"><a
+                                            href="#">Edit</a> </td>
+                                    <td style="white-space: nowrap;"><a
+                                            href="#">Delete</a></td>
 {{--                                    <td style="white-space: nowrap;">+${{--}}
 {{--                                    $mover->change }}</td>--}}
 {{--                                    <td style="white-space: nowrap;">{{ $mover->totalVolume }}</td>--}}
