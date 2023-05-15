@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\WatchList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class StrategyController extends Controller
@@ -40,6 +41,7 @@ class StrategyController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug('New Strategy Posted', $request->toArray());
         dd($request->toArray());
     }
 
