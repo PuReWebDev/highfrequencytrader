@@ -266,7 +266,7 @@
                                         <label for="stop_price" class="col-4 col-form-label">Stop Price</label>
                                         <div class="col-8">
                                             <div class="input-group">
-                                                <div class="input-group-prepend">
+                                                <div class="input-group-prepend" style="display: inline-table">
                                                     <div class="input-group-text">-</div>
                                                 </div>
                                                 <input id="stop_price" name="stop_price" placeholder="0.80" type="text" class="form-control" aria-describedby="stop_priceHelpBlock" required="required">
