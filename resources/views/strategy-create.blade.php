@@ -351,7 +351,7 @@
                                                     </div>
                                                 </div>
                                                 <input id="high_price_buffer"
-                                                       name="high_price_buffer" placeholder="0.50" type="number" step=".01" class="form-control" aria-describedby="high_price_bufferHelpBlock">
+                                                       name="high_price_buffer" placeholder="0.50" type="number" step=".01" required="required" class="form-control" aria-describedby="high_price_bufferHelpBlock">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -374,7 +374,7 @@
                                                     </div>
                                                 </div>
                                                 <input id="profit"
-                                                       name="profit" placeholder="0.10" type="number" step=".01" class="form-control" aria-describedby="profitHelpBlock">
+                                                       name="profit" placeholder="0.10" type="number" step=".01" required="required" class="form-control" aria-describedby="profitHelpBlock">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
