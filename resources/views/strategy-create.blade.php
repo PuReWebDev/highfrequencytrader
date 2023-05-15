@@ -662,7 +662,7 @@
                     </div>
                   </div>`;
             $("#trade-summary").html(html);
-            // $('#smartwizard').smartWizard("fixHeight");
+            $('#smartwizard').smartWizard("fixHeight");
         }
 
         $(function() {
