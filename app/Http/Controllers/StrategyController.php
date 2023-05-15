@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Strategy;
 use App\Models\WatchList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,9 @@ class StrategyController extends Controller
      */
     public function index()
     {
-        //
+        $strategies = Strategy::where('user_id', Auth::id())->get();
+
+        return view('strategy', ['strategies' => $strategies]);
     }
 
     /**
