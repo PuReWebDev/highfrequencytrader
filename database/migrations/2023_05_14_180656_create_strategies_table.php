@@ -29,7 +29,7 @@ class CreateStrategiesTable extends Migration
             $table->boolean('change_quantity_after_stops');
             $table->integer('quantity_after_stop');
             $table->decimal('stop_price');
-            $table->decimal('limit_price');
+            $table->string('limit_price');
             $table->decimal('limit_price_offset');
             $table->decimal('high_price_buffer');
             $table->decimal('profit');
