@@ -68,28 +68,103 @@
                                             <span id="strategy_nameHelpBlock" class="form-text text-muted">The Name Can Be Anything You Choose</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <label for="first-name" class="form-label">First name</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="first-name" value="" required />
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please provide first name.
+                                    <div class="form-group row">
+                                        <label for="enabled" class="col-4 col-form-label">Enabled For Trading</label>
+                                        <div class="col-8">
+                                            <select id="enabled" name="enabled" class="custom-select" aria-describedby="enabledHelpBlock" required="required">
+                                                <option value="true">Enabled</option>
+                                                <option value="false">Disbled</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Enable or Disable
+                                            </div>
+                                            <span id="enabledHelpBlock" class="form-text text-muted">Enabled For Trading During Trading Hours</span>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <label for="validationCustom02" class="form-label">Last name</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               id="last-name" value="" required />
-                                        <div class="valid-feedback">
-                                            Looks good!
+                                    <div class="form-group row">
+                                        <label for="trade_quantity" class="col-4 col-form-label">Quantity of Shares Per Trade</label>
+                                        <div class="col-8">
+                                            <select id="trade_quantity" name="trade_quantity" class="custom-select" aria-describedby="trade_quantityHelpBlock" required="required">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select The Number of
+                                                Shares Per Trade
+                                            </div>
+                                            <span id="trade_quantityHelpBlock" class="form-text text-muted">How Many Individual Shares Should Be Purchased In Each Individual Trade.</span>
                                         </div>
-                                        <div class="invalid-feedback">
-                                            Please provide last name.
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="number_of_trades" class="col-4 col-form-label">How Many Trades To Perform</label>
+                                        <div class="col-8">
+                                            <select id="number_of_trades" name="number_of_trades" class="custom-select" aria-describedby="number_of_tradesHelpBlock" required="required">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">I0</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                <option value="200">200</option>
+                                                <option value="500">500</option>
+                                                <option value="1000">1000</option>
+                                                <option value="1500">1500</option>
+                                                <option value="2000">2000</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please Select The Number of
+                                                Trades To Attempt
+                                            </div>
+                                            <span id="number_of_tradesHelpBlock" class="form-text text-muted">Limit Trading After Total Number Of Trades</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="running_counts" class="col-4 col-form-label">Number Of Concurrent Trades</label>
+                                        <div class="col-8">
+                                            <select id="running_counts" name="running_counts" class="custom-select" aria-describedby="running_countsHelpBlock">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Select The Number of Trades
+                                                To Run At The Same Time
+                                            </div>
+                                            <span id="running_countsHelpBlock" class="form-text text-muted">The Total Number Of Buys/Sales Total At A Time</span>
                                         </div>
                                     </div>
                                 </form>
@@ -154,51 +229,19 @@
                                     <div class="col">
                                         <div class="mb-3 text-muted">Please confirm your order details</div>
 
-                                        <div id="order-details"></div>
+                                        <div id="trade-summary"></div>
 
-                                        <h4 class="mt-3">Payment</h4>
+                                        <h4 class="mt-3">Confirmation</h4>
                                         <hr class="my-2">
 
                                         <div class="row gy-3">
-                                            <div class="col-md-3">
-                                                <label for="cc-name" class="form-label">Name on card</label>
-                                                <input type="text" class="form-control" id="cc-name" value="My Name" placeholder="" required="">
-                                                <small class="text-muted">Full name as displayed on card</small>
-                                                <div class="invalid-feedback">
-                                                    Name on card is required
-                                                </div>
-                                            </div>
 
-                                            <div class="col-md-3">
-                                                <label for="cc-number" class="form-label">Credit card number</label>
-                                                <input type="text" class="form-control" id="cc-number" value="54545454545454" placeholder="" required="">
-                                                <div class="invalid-feedback">
-                                                    Credit card number is required
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="cc-expiration" class="form-label">Expiration</label>
-                                                <input type="text" class="form-control" id="cc-expiration" value="1/28" placeholder="" required="">
-                                                <div class="invalid-feedback">
-                                                    Expiration date required
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <label for="cc-cvv" class="form-label">CVV</label>
-                                                <input type="text" class="form-control" id="cc-cvv" value="123" placeholder="" required="">
-                                                <div class="invalid-feedback">
-                                                    Security code required
-                                                </div>
-                                            </div>
 
                                             <div class="col">
                                                 <input type="checkbox" class="form-check-input" id="save-info" required>
                                                 <label class="form-check-label" for="save-info">I agree to the terms and conditions</label>
                                             </div>
 
-                                            <small class="text-muted">This is an example page, do not enter any real data, even tho we don't submit this information!</small>
 
                                         </div>
                                     </div>
@@ -226,7 +269,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Congratulations! Your order is placed.
+                                    Your Trade Strategy Has Been Created
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" onclick="closeModal()">Ok, close and reset</button>
@@ -276,9 +319,9 @@
         function closeModal() {
             // Reset wizard
             var dataToSend = {
-                "name": $('#first-name').val(),
-                "lastname": $('#last-name').val(),
-                "strategy_name": $('#strategy_name').val()
+                "strategy_name": $('#strategy_name').val(),
+                "enabled": $('#enabled').val(),
+                "trade_quantity": $('#trade_quantity').val()
             };
 
             $.ajaxSetup({
@@ -307,36 +350,38 @@
         }
 
         function showConfirm() {
-            const name = $('#first-name').val() + ' ' + $('#last-name').val();
+            const strategy_name = $('#strategy_name').val();
+            const trade_quantity = $('#trade_quantity').val();
+            const enabled = $('#enabled').val();
             const products = $('#sel-products').val();
             const shipping = $('#address').val() + ' ' + $('#state').val() + ' ' + $('#zip').val();
-            let html = `<h4 class="mb-3-">Customer Details</h4>
+            let html = `<h4 class="mb-3-">Trade Details</h4>
                   <hr class="my-2">
                   <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                      <label class="col-form-label">Name</label>
+                      <label class="col-form-label">Strategy Name</label>
                     </div>
                     <div class="col-auto">
-                      <span class="form-text-">${name}</span>
-                    </div>
-                  </div>
-
-                  <h4 class="mt-3">Products</h4>
-                  <hr class="my-2">
-                  <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                      <span class="form-text-">${products}</span>
+                      <span class="form-text-">${strategy_name}</span>
                     </div>
                   </div>
 
-                  <h4 class="mt-3">Shipping</h4>
+                  <h4 class="mt-3">Enabled</h4>
                   <hr class="my-2">
                   <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                      <span class="form-text-">${shipping}</span>
+                      <span class="form-text-">${enabled}</span>
+                    </div>
+                  </div>
+
+                  <h4 class="mt-3">Trade Quantity</h4>
+                  <hr class="my-2">
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <span class="form-text-">${trade_quantity}</span>
                     </div>
                   </div>`;
-            $("#order-details").html(html);
+            $("#trade-summary").html(html);
             $('#smartwizard').smartWizard("fixHeight");
         }
 
@@ -386,7 +431,7 @@
                 // Focus first name
                 if (stepIndex == 1) {
                     setTimeout(() => {
-                        $('#first-name').focus();
+                        $('#strategy_name').focus();
                     }, 0);
                 }
             });
@@ -403,7 +448,8 @@
                     showNextButton: true, // show/hide a Next button
                     showPreviousButton: true, // show/hide a Previous button
                     position: 'bottom', // none/ top/ both bottom
-                    extraHtml: `<button class="btn btn-success" id="btnFinish" disabled onclick="onConfirm()">Complete Order</button>
+                    extraHtml: `<button class="btn btn-success"
+                    id="btnFinish" disabled onclick="onConfirm()">Complete Strategy</button>
                               <button class="btn btn-danger" id="btnCancel" onclick="onCancel()">Cancel</button>`
                 },
                 anchor: {
