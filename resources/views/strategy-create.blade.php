@@ -246,7 +246,8 @@
 
         function closeModal() {
             // Reset wizard
-            $("#form-1").submit();
+            // $("#form-1").submit();
+            $("form").submit();
             $('#smartwizard').smartWizard("reset");
 
             // Reset form
