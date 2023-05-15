@@ -16,25 +16,25 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-1">
                                     <div class="num">1</div>
-                                    Customer Details
+                                    Trade Details
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-2">
                                     <span class="num">2</span>
-                                    Products Details
+                                    Risk Management
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#step-3">
                                     <span class="num">3</span>
-                                    Shipping Details
+                                    Trade Entry/Exit Details
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="#step-4">
                                     <span class="num">4</span>
-                                    Confirm Order
+                                    Confirm Trade
                                 </a>
                             </li>
                         </ul>
@@ -47,6 +47,27 @@
                                       enctype="multipart/form-data" class="row row-cols-1 ms-5
                                  me-5 needs-validation" novalidate>
                                     {{ csrf_field() }}
+                                    <div class="form-group row">
+                                        <label for="strategy_name" class="col-4 col-form-label">Strategy Name</label>
+                                        <div class="col-8">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-lightbulb-o"></i>
+                                                    </div>
+                                                </div>
+                                                <input id="strategy_name" name="strategy_name" type="text" class="form-control" aria-describedby="strategy_nameHelpBlock" required="required">
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Please Provide A Name For
+                                                    Your Strategy.
+                                                </div>
+                                            </div>
+                                            <span id="strategy_nameHelpBlock" class="form-text text-muted">The Name Can Be Anything You Choose</span>
+                                        </div>
+                                    </div>
                                     <div class="col">
                                         <label for="first-name" class="form-label">First name</label>
                                         <input type="text"
@@ -257,6 +278,7 @@
             var dataToSend = {
                 "name": $('#first-name').val(),
                 "lastname": $('#last-name').val()
+                "strategy_name": $('#strategy_name').val()
             };
 
             $.ajaxSetup({
