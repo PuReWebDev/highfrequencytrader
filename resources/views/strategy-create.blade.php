@@ -554,6 +554,7 @@
                     "limit_price_offset": $('#limit_price_offset').val(),
                     "high_price_buffer": $('#high_price_buffer').val(),
                     "profit": $('#profit').val(),
+                    "symbols": $("input[name='symbols']").val()
                 };
 
                 $.ajaxSetup({
