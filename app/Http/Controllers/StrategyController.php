@@ -45,20 +45,22 @@ class StrategyController extends Controller
      */
     public function store(Request $request)
     {
-        $strategy_name = $request->input('strategy_name');
-        $enabled = $request->input('enabled');
-        $trade_quantity = $request->input('trade_quantity');
-        $number_of_trades = $request->input('number_of_trades');
-        $running_counts = $request->input('running_counts');
-        $max_stock_price = $request->input('max_stock_price');
-        $max_stops_allowed = $request->input('max_stops_allowed');
-        $change_quantity_after_stops = $request->input('change_quantity_after_stops');
-        $quantity_after_stop = $request->input('quantity_after_stop');
-        $stop_price = $request->input('stop_price');
-        $limit_price = $request->input('limit_price');
-        $limit_price_offset = $request->input('limit_price_offset');
-        $high_price_buffer= $request->input('high_price_buffer');
-        $profit = $request->input('profit');
+        $inputData = json_decode($request->getContent(), true, 512,
+            JSON_THROW_ON_ERROR);
+        $strategy_name = $inputData['strategy_name'];
+        $enabled = $inputData['enabled'];
+        $trade_quantity = $inputData['trade_quantity'];
+        $number_of_trades = $inputData['number_of_trades'];
+        $running_counts = $inputData['running_counts'];
+        $max_stock_price = $inputData['max_stock_price'];
+        $max_stops_allowed = $inputData['max_stops_allowed'];
+        $change_quantity_after_stops = $inputData['change_quantity_after_stops'];
+        $quantity_after_stop = $inputData['quantity_after_stop'];
+        $stop_price = $inputData['stop_price'];
+        $limit_price = $inputData['limit_price'];
+        $limit_price_offset = $inputData['limit_price_offset'];
+        $high_price_buffer= $inputData['high_price_buffer'];
+        $profit = $inputData['profit'];
 
         $data = [
             'strategy_name' => $strategy_name,
@@ -76,6 +78,8 @@ class StrategyController extends Controller
             'high_price_buffer' => $high_price_buffer,
             'profit' => $profit,
         ];
+
+
         Log::debug('New Strategy Posted', json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR));
         Log::debug('New Strategy Posted', $data);
         return response()->json([
