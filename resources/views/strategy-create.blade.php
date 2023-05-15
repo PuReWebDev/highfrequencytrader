@@ -240,14 +240,13 @@
                     return false;
                 }
 
-                $(form).submit();
-
-                // myModal.show();
+                myModal.show();
             }
         }
 
         function closeModal() {
             // Reset wizard
+            $("#form-1").submit();
             $('#smartwizard').smartWizard("reset");
 
             // Reset form
