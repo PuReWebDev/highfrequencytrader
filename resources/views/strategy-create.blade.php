@@ -47,7 +47,7 @@
                                       enctype="multipart/form-data" class="row row-cols-1 ms-5
                                  me-5 needs-validation" novalidate>
                                     {{ csrf_field() }}
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="strategy_name" class="col-4 col-form-label">Strategy Name</label>
                                         <div class="col-8">
                                             <div class="input-group">
@@ -68,7 +68,7 @@
                                             <span id="strategy_nameHelpBlock" class="form-text text-muted">The Name Can Be Anything You Choose</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="enabled" class="col-4 col-form-label">Enabled For Trading</label>
                                         <div class="col-8">
                                             <select id="enabled" name="enabled" class="form-select" aria-describedby="enabledHelpBlock" required="required">
@@ -84,7 +84,7 @@
                                             <span id="enabledHelpBlock" class="form-text text-muted">Enabled For Trading During Trading Hours</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="trade_quantity" class="col-4 col-form-label">Quantity of Shares Per Trade</label>
                                         <div class="col-8">
                                             <select id="trade_quantity" name="trade_quantity" class="form-select" aria-describedby="trade_quantityHelpBlock" required="required">
@@ -109,7 +109,7 @@
                                             <span id="trade_quantityHelpBlock" class="form-text text-muted">How Many Individual Shares Should Be Purchased In Each Individual Trade.</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="number_of_trades" class="col-4 col-form-label">How Many Trades To Perform</label>
                                         <div class="col-8">
                                             <select id="number_of_trades" name="number_of_trades" class="form-select" aria-describedby="number_of_tradesHelpBlock" required="required">
@@ -142,7 +142,7 @@
                                             <span id="number_of_tradesHelpBlock" class="form-text text-muted">Limit Trading After Total Number Of Trades</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="running_counts" class="col-4 col-form-label">Number Of Concurrent Trades</label>
                                         <div class="col-8">
                                             <select id="running_counts" name="running_counts" class="form-select" aria-describedby="running_countsHelpBlock">
@@ -171,7 +171,7 @@
                             </div>
                             <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
                                 <form id="form-2" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="max_stock_price" class="col-4 col-form-label">Max Stock Price</label>
                                         <div class="col-8">
                                             <div class="input-group">
@@ -198,7 +198,7 @@
                                             <span id="max_stock_priceHelpBlock" class="form-text text-muted">What Is The Maximum Price Per Share You Are Willing To Pay</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="max_stops_allowed" class="col-4 col-form-label">Stops Allowed</label>
                                         <div class="col-8">
                                             <select id="max_stops_allowed" name="max_stops_allowed" aria-describedby="max_stops_allowedHelpBlock" required="required" class="form-select">
@@ -223,7 +223,7 @@
                                             <span id="max_stops_allowedHelpBlock" class="form-text text-muted">The Number of Stops Allowed Before Trading Is Halted On This Symbol</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="change_quantity_after_stops" class="col-4 col-form-label">Change Quantity After Stops</label>
                                         <div class="col-8">
                                             <select id="change_quantity_after_stops" name="change_quantity_after_stops" aria-describedby="change_quantity_after_stopsHelpBlock" required="required" class="form-select">
@@ -242,7 +242,7 @@
                                             <span id="change_quantity_after_stopsHelpBlock" class="form-text text-muted">Do You Want To Change Trade Quantity If You Get Stopped Out?</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="quantity_after_stop" class="col-4 col-form-label">Quantity of Shares After Stop</label>
                                         <div class="col-8">
                                             <select id="quantity_after_stop" name="quantity_after_stop" aria-describedby="quantity_after_stopHelpBlock" required="required" class="form-select">
@@ -268,7 +268,7 @@
                                             <span id="quantity_after_stopHelpBlock" class="form-text text-muted">The Quantity of Shares To Trade With If You Have Been Stopped Out</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="stop_price" class="col-4 col-form-label">Stop Price</label>
                                         <div class="col-8">
                                             <div class="input-group">
@@ -298,7 +298,7 @@
                             </div>
                             <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
                                 <form id="form-3" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="limit_price" class="col-4 col-form-label">Limit Price</label>
                                         <div class="col-8">
                                             <select id="limit_price" name="limit_price" class="form-select" aria-describedby="limit_priceHelpBlock">
@@ -316,7 +316,7 @@
                                             <span id="limit_priceHelpBlock" class="form-text text-muted">What Part Of The Quote Do You Want To Base Your Limit Price</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="limit_price_offset" class="col-4 col-form-label">Limit Price Offset</label>
                                         <div class="col-8">
                                             <div class="input-group">
@@ -340,7 +340,7 @@
                                             <span id="limit_price_offsetHelpBlock" class="form-text text-muted">Limit Price Offset</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="high_price_buffer" class="col-4 col-form-label">High Price Buffer</label>
                                         <div class="col-8">
                                             <div class="input-group">
@@ -363,7 +363,7 @@
                                             <span id="high_price_bufferHelpBlock" class="form-text text-muted">Buffer From The High Price of The Day That Engine Should Not Place Trades At. Your Profit Target Must Be Less Than This Amount: HighPrice + Buffer > Limit Price + Profit</span>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin: 10px;">
                                         <label for="profit" class="col-4 col-form-label">Profit Amount</label>
                                         <div class="col-8">
                                             <div class="input-group">
