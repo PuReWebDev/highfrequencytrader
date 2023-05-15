@@ -40,15 +40,21 @@
                         </ul>
 
                         <div class="tab-content">
+                            <span id="form-1" method="post" action="/strategies"
+                                  enctype="multipart/form-data" class="row row-cols-1 ms-5
+                                 me-5 needs-validation" novalidate>
+                                {{ csrf_field() }}
                             <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
 
-                                <form id="form-1" method="post" action="/strategies"
-                                      enctype="multipart/form-data" class="row row-cols-1 ms-5
-                                 me-5 needs-validation" novalidate>
-                                    {{ csrf_field() }}
+{{--                                <form id="form-1" method="post" action="/strategies"--}}
+{{--                                      enctype="multipart/form-data" class="row row-cols-1 ms-5--}}
+{{--                                 me-5 needs-validation" novalidate>--}}
+{{--                                    {{ csrf_field() }}--}}
                                     <div class="col">
                                         <label for="first-name" class="form-label">First name</label>
-                                        <input type="text" class="form-control" id="first-name" value="" required>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="first-name" value="" required />
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>
@@ -58,7 +64,9 @@
                                     </div>
                                     <div class="col">
                                         <label for="validationCustom02" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="last-name" value="" required>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="last-name" value="" required />
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>
@@ -66,10 +74,12 @@
                                             Please provide last name.
                                         </div>
                                     </div>
-                                </form>
+{{--                                </form>--}}
                             </div>
                             <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-                                <form id="form-2" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
+{{--                                <form id="form-2" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>--}}
+                                <span id="form-2" class="row row-cols-1 ms-5
+                                me-5 needs-validation" novalidate>
                                     <div class="col-md-6">
                                         <label for="validationCustom04" class="form-label">Product</label>
                                         <select class="form-select" id="sel-products" multiple required>
@@ -85,10 +95,13 @@
                                             Please select product.
                                         </div>
                                     </div>
-                                </form>
+{{--                                </form>--}}
+                                </span>
                             </div>
                             <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-                                <form id="form-3" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
+{{--                                <form id="form-3" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>--}}
+                                <span id="form-3" class="row row-cols-1 ms-5
+                                me-5 needs-validation" novalidate>
                                     <div class="col">
                                         <label for="address" class="form-label">Address</label>
                                         <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
@@ -118,11 +131,14 @@
                                             Please provide a valid zip.
                                         </div>
                                     </div>
-                                </form>
+{{--                                </form>--}}
+                                </span>
                             </div>
                             <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
 
-                                <form id="form-4" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
+{{--                                <form id="form-4" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>--}}
+                                <span id="form-4" class="row row-cols-1 ms-5
+                                me-5 needs-validation" novalidate>
                                     <div class="col">
                                         <div class="mb-3 text-muted">Please confirm your order details</div>
 
@@ -174,11 +190,13 @@
 
                                         </div>
                                     </div>
-                                </form>
+{{--                                </form>--}}
+                                </span>
 
 
 
                             </div>
+                            </form>
                         </div>
 
                         <div class="progress">
@@ -246,8 +264,8 @@
 
         function closeModal() {
             // Reset wizard
-            // $("#form-1").submit();
-            $("form").submit();
+            $("#form-1").submit();
+            // $("form").submit();
             $('#smartwizard').smartWizard("reset");
 
             // Reset form
