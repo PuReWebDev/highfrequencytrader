@@ -52,7 +52,7 @@
                                         <div class="col-8">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text">
+                                                    <div class="input-group-text" style="display: inline-table">
                                                         <i class="fa fa-lightbulb-o"></i>
                                                     </div>
                                                 </div>
