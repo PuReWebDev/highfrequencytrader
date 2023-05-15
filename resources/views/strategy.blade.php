@@ -22,6 +22,7 @@
                                 <th scope="col" style="white-space: nowrap;">
                                     <strong>#</strong></th>
                                 <th style="white-space: nowrap;">Name</th>
+                                <th style="white-space: nowrap;">Enabled</th>
                                 <th style="white-space: nowrap;">Edit</th>
                                 <th style="white-space: nowrap;">Delete</th>
 
@@ -37,6 +38,8 @@
 {{--                                                    ('symbol',[$mover->symbol])}}">{{ $mover->symbol--}}
 {{--                                                    }}</a></td>--}}
                                     <td style="white-space: nowrap;">{{$strategy['strategy_name']}}</td>
+                                    <td style="white-space: nowrap;
+">{{$strategy['enabled']}}</td>
                                     <td style="white-space: nowrap;"><a
                                             href="#">Edit</a> </td>
                                     <td style="white-space: nowrap;"><a
