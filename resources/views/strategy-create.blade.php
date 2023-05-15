@@ -269,7 +269,7 @@
                                                 <div class="input-group-prepend" style="display: inline-table">
                                                     <div class="input-group-text">-</div>
                                                 </div>
-                                                <input id="stop_price" name="stop_price" placeholder="0.80" type="text" class="form-control" aria-describedby="stop_priceHelpBlock" required="required">
+                                                <input id="stop_price" name="stop_price" placeholder="0.80" type="number" class="form-control" aria-describedby="stop_priceHelpBlock" required="required">
                                                 <div class="input-group-append">
                                                     <div
                                                         class="input-group-text" style="display: inline-table">
@@ -319,7 +319,7 @@
                                                         <i class="fa fa-money"></i>
                                                     </div>
                                                 </div>
-                                                <input id="limit_price_offset" name="limit_price_offset" placeholder="0.25" type="text" aria-describedby="limit_price_offsetHelpBlock" required="required" class="form-control">
+                                                <input id="limit_price_offset" name="limit_price_offset" placeholder="0.25" type="number" aria-describedby="limit_price_offsetHelpBlock" required="required" class="form-control">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -342,7 +342,7 @@
                                                         <i class="fa fa-hand-stop-o"></i>
                                                     </div>
                                                 </div>
-                                                <input id="high_price_buffer" name="high_price_buffer" placeholder="0.50" type="text" class="form-control" aria-describedby="high_price_bufferHelpBlock">
+                                                <input id="high_price_buffer" name="high_price_buffer" placeholder="0.50" type="number" class="form-control" aria-describedby="high_price_bufferHelpBlock">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -364,7 +364,7 @@
                                                         <i class="fa fa-money"></i>
                                                     </div>
                                                 </div>
-                                                <input id="profit" name="profit" placeholder="0.10" type="text" class="form-control" aria-describedby="profitHelpBlock">
+                                                <input id="profit" name="profit" placeholder="0.10" type="number" class="form-control" aria-describedby="profitHelpBlock">
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
