@@ -240,7 +240,9 @@
                     return false;
                 }
 
-                myModal.show();
+                $(form).submit();
+
+                // myModal.show();
             }
         }
 
