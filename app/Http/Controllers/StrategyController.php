@@ -61,7 +61,7 @@ class StrategyController extends Controller
         $limit_price_offset = $inputData['limit_price_offset'];
         $high_price_buffer= $inputData['high_price_buffer'];
         $profit = $inputData['profit'];
-        $symbols = $inputData['symbols'];
+        $symbols = ['TSLA', 'AMZN'];
 
         $data = [
             'strategy_name' => $strategy_name,
