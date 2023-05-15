@@ -277,7 +277,7 @@
             // Reset wizard
             var dataToSend = {
                 "name": $('#first-name').val(),
-                "lastname": $('#last-name').val()
+                "lastname": $('#last-name').val(),
                 "strategy_name": $('#strategy_name').val()
             };
 
