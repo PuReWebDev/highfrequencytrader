@@ -31,14 +31,12 @@
                             @foreach($strategies as $strategy)
                                 <tr>
                                     <td scope="row"
-                                        style="white-space: nowrap;">{{
-                                                    $loop->index }}</td>
+                                        style="white-space: nowrap;">{{$loop->index }}</td>
 {{--                                    <td style="white-space:--}}
 {{--                                                    nowrap;"><a href="{{url--}}
 {{--                                                    ('symbol',[$mover->symbol])}}">{{ $mover->symbol--}}
 {{--                                                    }}</a></td>--}}
-                                    <td style="white-space: nowrap;">{{
-                                    $strategy['name']}}</td>
+                                    <td style="white-space: nowrap;">{{$strategy['strategy_nam']}}</td>
                                     <td style="white-space: nowrap;"><a
                                             href="#">Edit</a> </td>
                                     <td style="white-space: nowrap;"><a
