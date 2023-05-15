@@ -213,7 +213,6 @@
     </div>
 
     <script type="text/javascript">
-        const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 
 
         function onCancel() {
@@ -289,6 +288,7 @@
         }
 
         $(function() {
+            const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
             // Leave step event is used for validating the forms
             $("#smartwizard").on("leaveStep", function(e, anchorObject, currentStepIdx, nextStepIdx, stepDirection) {
                 // Validate only on forward movement
