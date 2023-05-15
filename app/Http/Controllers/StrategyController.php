@@ -42,7 +42,10 @@ class StrategyController extends Controller
     public function store(Request $request)
     {
         Log::debug('New Strategy Posted', $request->toArray());
-        dd($request->toArray());
+        return response()->json([
+            'success' => true,
+            'data' => $request->toArray(),
+        ]);
     }
 
     /**
