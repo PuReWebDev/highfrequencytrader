@@ -39,8 +39,9 @@ class StrategyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \JsonException
      */
     public function store(Request $request)
     {
@@ -75,7 +76,7 @@ class StrategyController extends Controller
             'high_price_buffer' => $high_price_buffer,
             'profit' => $profit,
         ];
-        Log::debug('New Strategy Posted', $data);
+        Log::debug('New Strategy Posted', json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR));
         return response()->json([
             'success' => true,
             'data' => $request->toArray(),
