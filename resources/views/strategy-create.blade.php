@@ -213,7 +213,6 @@
     </div>
 
     <script type="text/javascript">
-        // ------------step-wizard-------------
         const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 
 
