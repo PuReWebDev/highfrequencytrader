@@ -270,7 +270,7 @@
                 url: "/strategies",
                 data: JSON.stringify(dataToSend),
                 dataType: "json",
-                success: function(data){ window.location.replace("https://highfrequencytradingservices.com/strategy"); }
+                success: function(data){ window.location.replace("https://highfrequencytradingservices.com/strategies"); }
             });
             // $("form").submit();
             $('#smartwizard').smartWizard("reset");
