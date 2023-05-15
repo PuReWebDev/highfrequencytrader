@@ -255,9 +255,9 @@
         function closeModal() {
             // Reset wizard
             var dataToSend = {
-                _token: $("#form-1 > input[type=hidden]").val(),
-                name: $('#first-name').val(),
-                lastname: $('#last-name').val(),
+                "_token": "{{ csrf_token() }}",
+                "name": $('#first-name').val(),
+                "lastname": $('#last-name').val(),
             };
 
             jQuery.ajax({
