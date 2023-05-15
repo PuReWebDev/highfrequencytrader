@@ -26,9 +26,9 @@
                         {{ __('Balances') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('preference')" :active="request()
-                    ->routeIs('preference')">
-                        {{ __('Preference') }}
+                    <x-nav-link :href="route('strategies')" :active="request()
+                    ->routeIs('strategies')">
+                        {{ __('Trade Strategies') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('movers')" :active="request()
