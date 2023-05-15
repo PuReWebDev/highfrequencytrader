@@ -255,10 +255,16 @@
         function closeModal() {
             // Reset wizard
             var dataToSend = {
-                "_token": "{{ csrf_token() }}",
+                {{--"_token": "{{ csrf_token() }}",--}}
                 "name": $('#first-name').val(),
                 "lastname": $('#last-name').val(),
             };
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': {{ csrf_token() }}
+                }
+            });
 
             jQuery.ajax({
                 type: 'POST',
