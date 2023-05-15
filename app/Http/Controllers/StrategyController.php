@@ -61,6 +61,7 @@ class StrategyController extends Controller
         $limit_price_offset = $inputData['limit_price_offset'];
         $high_price_buffer= $inputData['high_price_buffer'];
         $profit = $inputData['profit'];
+        $symbols = $inputData['symbols'];
 
         $data = [
             'strategy_name' => $strategy_name,
@@ -77,6 +78,7 @@ class StrategyController extends Controller
             'limit_price_offset' => $limit_price_offset,
             'high_price_buffer' => $high_price_buffer,
             'profit' => $profit,
+            'symbols' => $symbols,
         ];
 
         Strategy::updateOrCreate(
@@ -99,6 +101,7 @@ class StrategyController extends Controller
                 'limit_price_offset' => $data['limit_price_offset'] ?? null,
                 'high_price_buffer' => $data['high_price_buffer'] ?? null,
                 'profit' => $data['profit'] ?? null,
+                'symbols' => json_encode($data['symbols'], JSON_THROW_ON_ERROR),
             ]
         );
 //        Log::debug('New Strategy Posted', json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR));
