@@ -189,6 +189,7 @@
                                                     Please Specify a Maximum
                                                     Price To Pay Per Share.
                                                 </div>
+                                                <span id="max_stock_priceHelpBlock" class="form-text text-muted">What Is The Maximum Price Per Share You Are Willing To Pay</span>
                                             </div>
                                         </div>
                                     </div>
