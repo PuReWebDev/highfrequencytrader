@@ -79,6 +79,28 @@ class StrategyController extends Controller
             'profit' => $profit,
         ];
 
+        Strategy::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'strategy_name' => $data['strategy_name'],
+            ],
+            [
+                'strategy_name' => $data['strategy_name'] ?? null,
+                'enabled' => $data['enabled'] ?? null,
+                'trade_quantity' => $data['trade_quantity'] ?? null,
+                'number_of_trades' => $data['number_of_trades'] ?? null,
+                'running_counts' => $data['running_counts'] ?? null,
+                'max_stock_price' => $data['max_stock_price'] ?? null,
+                'max_stops_allowed' => $data['max_stops_allowed'] ?? null,
+                'change_quantity_after_stops' => $data['change_quantity_after_stops'] ?? null,
+                'quantity_after_stop' => $data['quantity_after_stop'] ?? null,
+                'stop_price' => $data['stop_price'] ?? null,
+                'limit_price' => $data['limit_price'] ?? null,
+                'limit_price_offset' => $data['limit_price_offset'] ?? null,
+                'high_price_buffer' => $data['high_price_buffer'] ?? null,
+                'profit' => $data['profit'] ?? null,
+            ]
+        );
 //        Log::debug('New Strategy Posted', json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR));
         Log::debug('New Strategy Posted', $data);
         return response()->json([
