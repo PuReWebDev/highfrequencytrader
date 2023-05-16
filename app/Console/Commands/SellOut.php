@@ -6,6 +6,7 @@ use App\Models\Position;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -46,6 +47,7 @@ class SellOut extends Command
         Auth::loginUsingId(4, $remember = true);
         Accounts::tokenPreFlight();
 
+        Accounts::updateAccountData();
 //        $symbols = [
 
 
@@ -60,7 +62,12 @@ class SellOut extends Command
 //            ['symbol' => 'UBER', 'longQuantity' => 5],
 //        ];
 
-        $symbols = Position::where('user_id', Auth::id())->get();
+//        $symbols = Position::where('user_id', Auth::id())->get();
+        $symbols = Position::where([
+            ['user_id', Auth::id()],
+//                ['updated_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
+            ['updated_at', '>=', Carbon::now()->setTimezone('America/New_York')->subMinutes(10)],
+        ])->get();
 
         foreach ($symbols as $symbol) {
             $goodSymbols = [];
