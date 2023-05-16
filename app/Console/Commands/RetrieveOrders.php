@@ -130,6 +130,7 @@ class RetrieveOrders extends Command
 //                    Log::error('Json Exception Thrown', ['error' =>
 //                        $e->getMessage()]);
 //                }
+                sleep(1);
             }
 
             if ($status === 'FULL') {
