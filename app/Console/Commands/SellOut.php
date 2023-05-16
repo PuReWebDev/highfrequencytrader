@@ -66,7 +66,7 @@ class SellOut extends Command
         $symbols = Position::where([
             ['user_id', Auth::id()],
 //                ['updated_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
-            ['updated_at', '>=', Carbon::now()->setTimezone('America/New_York')->subMinutes(10)],
+            ['updated_at', '>=', Carbon::now()->setTimezone('America/New_York')->subMinutes(3)],
         ])->get();
 
         foreach ($symbols as $symbol) {
