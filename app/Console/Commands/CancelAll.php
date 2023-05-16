@@ -54,7 +54,7 @@ class CancelAll extends Command
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
 //            ['created_at', '>=', Carbon::now()->subMinutes(15)
 //                ->toDateTimeString()],
-        ])->whereIn('status', ['WORKING'])->get();
+        ])->whereIn('status', ['WORKING'])->orderBy('id', 'desc')->get();
 
         foreach ($pendingCancels as $pendingCancel) {
             try {
