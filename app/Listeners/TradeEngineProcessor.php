@@ -6,7 +6,6 @@ namespace App\Listeners;
 
 use App\Models\Order;
 use App\Models\Position;
-use App\Models\Quote;
 use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -187,15 +186,19 @@ class TradeEngineProcessor
 
             $currentStockPrice = $quote->lastPrice;
 
-            $previousQuote = Quote::where('symbol', $quote->symbol)->orderBy('id', 'desc')
-                ->first();
-
-            if ($currentStockPrice < $previousQuote['lastPrice']) {
-                // Only buy when he price is otw up
-                Log::info('Skipping Buy of'. $quote->symbol .' Previous Price of '
-                    .$previousQuote['lastPrice'].' is Higher Than Current Price: '. $currentStockPrice);
-                continue;
-            }
+//            $previousQuote = Quote::where([
+//                ['symbol','=', $quote->symbol],
+//                ['id','<', $quote->id],
+//                ])
+//                ->orderBy('id', 'desc')
+//                ->first();
+//
+//            if ($currentStockPrice < $previousQuote['lastPrice']) {
+//                // Only buy when he price is otw up
+//                Log::info('Skipping Buy of'. $quote->symbol .' Previous Price of '
+//                    .$previousQuote['lastPrice'].' is Higher Than Current Price: '. $currentStockPrice);
+//                continue;
+//            }
 
             if ($currentStockPrice > 600) {
                 Log::info('Stock Symbol '. $quote->symbol .' Too Expensive Right Now At: '. $quote->lastPrice . ' Skipping Orders');
@@ -228,7 +231,7 @@ class TradeEngineProcessor
 
             if (($quote->highPrice - .40) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
-                    number_format($currentStockPrice, 2, '.', ''),
+                    number_format($currentStockPrice - .05, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
                     number_format($currentStockPrice - 0.80, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
