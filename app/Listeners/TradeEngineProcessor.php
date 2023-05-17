@@ -109,7 +109,7 @@ class TradeEngineProcessor
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             // Set Some Default Values
-            $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+            $this->shareQuantityPerTrade[$tradeSymbol] = 3;
             $tradeHalted[$tradeSymbol] = false;
 
 //            $this->shareQuantityPerTrade['MSFT'] = 10;
