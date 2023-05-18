@@ -128,7 +128,7 @@ class TradeEngineProcessor
                 }
 
                 if (self::stoppedInLastFive($stoppedOrders,
-                    $stoppedCounts[$tradeSymbol])) {
+                    $tradeSymbol)) {
                     $tradeHalted[$tradeSymbol] = true;
                     Log::info("Symbol $tradeSymbol been stopped out in Last 5 Minutes Halting Trading For It");
                 }

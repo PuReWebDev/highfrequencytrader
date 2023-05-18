@@ -171,7 +171,7 @@ class RetrieveOrders extends Command
             ['instruction', '=', 'BUY'],
 //            ['created_at', '<=', Carbon::now()->setTimezone('America/New_York')->subMinutes(15)
 //            ['created_at', '<=', Carbon::now()->subMinutes(5)
-            ['created_at', '<=', $formatted],
+            ['created_at', '>=', $formatted],
             ['status', '=', 'WORKING'],
         ])->get();
 //        ])->whereIn('status', ['WORKING'])->get();
