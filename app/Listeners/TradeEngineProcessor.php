@@ -287,6 +287,8 @@ class TradeEngineProcessor
             ['start' => '02:30 PM', 'end' => '03:00 PM', 'quantity' => 11,],
             ['start' => '03:30 PM', 'end' => '04:00 PM', 'quantity' => 12,],
             ['start' => '02:00 PM', 'end' => '02:30 PM', 'quantity' => 13,],
+            ['start' => '02:30 PM', 'end' => '02:45 PM', 'quantity' => 14,],
+            ['start' => '02:45 PM', 'end' => '03:00 PM', 'quantity' => 2,],
         ];
 
         $now = Carbon::now()->setTimezone('America/New_York');
