@@ -214,13 +214,16 @@ class RetrieveOrders extends Command
      */
     private static function clearDuplicateOrders(): void
     {
+        Log::info('Checking For Duplicate Orders '. Carbon::now());
         $orders = Order::whereIn('id', function ( $query ) {
             $query->select('id')->from('orders')->groupBy('orderId')->havingRaw
             ('count(*) > 1');
         })->get();
 
         foreach ($orders as $order) {
+            Log::info('Deleting Duplicate Orders '. Carbon::now());
             Order::destroy($order['id']);
         }
+        Log::info('Duplicate Orders Check Completed '. Carbon::now());
     }
 }
