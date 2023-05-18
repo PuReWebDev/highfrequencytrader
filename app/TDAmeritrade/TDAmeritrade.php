@@ -479,7 +479,8 @@ class TDAmeritrade
         $fromEnteredTime = Carbon::today()->toDateString();
 
         if (strtoupper($status) === 'FULL') {
-            $fromEnteredTime = '2023-04-14';
+//            $fromEnteredTime = '2023-04-14';
+            $fromEnteredTime = '2023-05-16';
             $status = '';
         }
 
