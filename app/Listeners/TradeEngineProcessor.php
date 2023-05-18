@@ -109,7 +109,7 @@ class TradeEngineProcessor
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             // Set Some Default Values
-            $this->shareQuantityPerTrade[$tradeSymbol] = 5;
+            $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
             $tradeHalted[$tradeSymbol] = false;
 
 //            $this->shareQuantityPerTrade['MSFT'] = 10;
@@ -266,5 +266,39 @@ class TradeEngineProcessor
 
 
         } // end for each quote. Now take a moment
+    }
+
+    /**
+     * @return int
+     */
+    private static function quantityOverTime(): int
+    {
+        $timeQuantities = [
+            ['start' => '09:30 AM', 'end' => '10:00 AM', 'quantity' => 1,],
+            ['start' => '10:00 AM', 'end' => '10:30 AM', 'quantity' => 2,],
+            ['start' => '10:30 AM', 'end' => '11:00 AM', 'quantity' => 3,],
+            ['start' => '11:00 AM', 'end' => '11:30 AM', 'quantity' => 4,],
+            ['start' => '11:30 AM', 'end' => '12:00 PM', 'quantity' => 5,],
+            ['start' => '12:00 PM', 'end' => '12:30 PM', 'quantity' => 6,],
+            ['start' => '12:30 PM', 'end' => '01:00 PM', 'quantity' => 7,],
+            ['start' => '01:00 PM', 'end' => '01:30 PM', 'quantity' => 8,],
+            ['start' => '01:30 PM', 'end' => '02:00 PM', 'quantity' => 9,],
+            ['start' => '02:00 PM', 'end' => '02:30 PM', 'quantity' => 10,],
+            ['start' => '02:30 PM', 'end' => '03:00 PM', 'quantity' => 11,],
+            ['start' => '03:30 PM', 'end' => '04:00 PM', 'quantity' => 12,],
+            ['start' => '02:00 PM', 'end' => '02:30 PM', 'quantity' => 13,],
+        ];
+
+        $now = Carbon::now()->setTimezone('America/New_York');
+
+        foreach ($timeQuantities as $timeQuantity) {
+            $start = Carbon::createFromFormat('H:i a', $timeQuantity['start']);
+            $end =  Carbon::createFromFormat('H:i a', $timeQuantity['end']);
+            if ($now->isBetween($start, $end)) {
+                return $timeQuantity['quantity'];
+            }
+        }
+
+        return 0;
     }
 }
