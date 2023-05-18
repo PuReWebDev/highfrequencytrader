@@ -109,7 +109,8 @@ class TradeEngineProcessor
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             // Set Some Default Values
-            $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
+            $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+//            $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
             $tradeHalted[$tradeSymbol] = false;
 
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
