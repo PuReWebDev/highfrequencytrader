@@ -112,6 +112,7 @@ class RetrieveOrders extends Command
                     $this->info('Individual Order Retrieved and Updated: '.
                         $order['orderId']. ' And '. $count-- .' remaining '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                     usleep(2500000);
+                    OrdersProcessed::dispatch();
 //                    Log::info('Fetching Price History For '. $order['symbol']);
 //                    TDAmeritrade::getPriceHistory($order['symbol']);
 //                    usleep(2500000);
