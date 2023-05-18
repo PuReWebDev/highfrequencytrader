@@ -112,41 +112,30 @@ class TradeEngineProcessor
             $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
             $tradeHalted[$tradeSymbol] = false;
 
-//            $this->shareQuantityPerTrade['MSFT'] = 10;
-//            $this->shareQuantityPerTrade['MCD'] = 10;
-//            $this->shareQuantityPerTrade['ABNB'] = 10;
-//            $this->shareQuantityPerTrade['META'] = 10;
-//            $this->shareQuantityPerTrade['GOOGL'] = 10;
-//            $this->shareQuantityPerTrade['BIDU'] = 10;
-//            $this->shareQuantityPerTrade['AMZN'] = 10;
-//            $this->shareQuantityPerTrade['CVX'] = 10;
-//            $this->shareQuantityPerTrade['NXPI'] = 10;
-
-
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
                 $this->consecutiveTrades[$tradeSymbol] = 0;
             }
 
             if ($stoppedCounts[$tradeSymbol] >= 1) {
 
-                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                if ($stoppedCounts[$tradeSymbol] >= 3) {
+                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                }
+                if ($stoppedCounts[$tradeSymbol] >= 5) {
+                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+                    $tradeHalted[$tradeSymbol] = true;
+                    Log::info("Symbol $tradeSymbol been stopped out 5x Halting Trading For It");
+                }
+
+                if (self::stoppedInLastFive($stoppedOrders,
+                    $stoppedCounts[$tradeSymbol])) {
+                    $tradeHalted[$tradeSymbol] = true;
+                    Log::info("Symbol $tradeSymbol been stopped out in Last 5 Minutes Halting Trading For It");
+                }
 
                 // TODO place a trade that recovers the loss, based onincreasing the quantity
-                Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
             }
 
-            if ($stoppedCounts[$tradeSymbol] >= 2) {
-                $tradeHalted[$tradeSymbol] = true; // TODO break even -
-                // 1:1 once recovered, restart trade quantity
-                // trade post limits open cancel/replace
-                $this->shareQuantityPerTrade[$tradeSymbol] = 2;
-                Log::info("Symbol $tradeSymbol been stopped out. Halting Trading For It");
-            }
-//            if ($runningCounts[$tradeSymbol] >= 5) {
-//            if ($runningCounts[$tradeSymbol] >= 3) {
-//                $this->shareQuantityPerTrade[$tradeSymbol] = 5;
-////                $tradeHalted[$tradeSymbol] = true;
-//            }
             if ($runningCounts[$tradeSymbol] >= 1) {
                 $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = true;
@@ -164,6 +153,7 @@ class TradeEngineProcessor
         Log::debug('Sales Counts: ',$runningCounts);
         Log::debug('Stopped Counts: ',$stoppedCounts);
 
+        // TODO Price Count touches what the most in a given time frame
         // If all orders have completed, place a new OTO order
         if (count($goodSymbols) > 1) {
             // Grab The Current Price
@@ -204,30 +194,6 @@ class TradeEngineProcessor
                 continue;
             }
 
-//            foreach ($movers as $mover) {
-//                if ($quote->symbol === $mover['symbol']) {
-//                    if (($quote->highPrice - 0.50) > ($currentStockPrice + 1.00)) {
-//
-//                        OrderService::placeOtoOrder(
-//                            number_format($currentStockPrice, 2, '.', ''),
-//                            number_format($currentStockPrice + 1.00,2, '.', ''),
-//                            number_format($currentStockPrice - 3.00, 2, '.', ''),
-//                            $quote->symbol, 5);
-//
-//                        $message = "Mover Order placed: Buy ".number_format
-//                            ($currentStockPrice, 2, '.',
-//                                '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
-//                                '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-//                                3.00, 2, '.', '') . "
-//                       Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
-//
-//                        Log::debug($message);
-////                        usleep(500000);
-//
-//                    }
-//                }
-//            }
-
             if (($quote->highPrice - .30) > ($currentStockPrice + .10)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
@@ -245,26 +211,7 @@ class TradeEngineProcessor
                 usleep(500000);
             }
 
-//            foreach ($movers as $mover) {
-//                if ($quote->symbol === $mover['symbol']) {
-//                    if (($quote->highPrice - .60) > ($currentStockPrice + 1.00)) {
-//                        OrderService::placeOtoOrder(
-//                            number_format($currentStockPrice, 2, '.', ''),
-//                            number_format($currentStockPrice + 1.00,2, '.', ''),
-//                            number_format($currentStockPrice - 2.00, 2, '.', ''),
-//                            $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
-//                    }
-//                }
-//            }
-
             self::updateWatchList($quote);
-
-
-
-
-//            $this->consecutiveTrades[$quote->symbol]++;
-
-
         } // end for each quote. Now take a moment
     }
 
@@ -302,5 +249,29 @@ class TradeEngineProcessor
         }
 
         return 0;
+    }
+
+    /**
+     * stoppedInLastFive
+     * Check To See If The Symbol Has Been Stopped Out In The Last Five Minutes
+     * @param mixed $stops
+     * @param string $symbol
+     * @return bool
+     */
+    private static function stoppedInLastFive(mixed $stops, string $symbol):
+    bool
+    {
+        foreach ($stops as $stop) {
+            if (!empty($stop['stopPrice']) && $stop['status'] === 'FILLED' &&
+            $stop['symbol'] === $symbol) {
+                $then = Carbon::createFromFormat('Y-m-d H:i:s', $stop['created_at']);
+                if($then->diffInMinutes(Carbon::now()) < 5)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
