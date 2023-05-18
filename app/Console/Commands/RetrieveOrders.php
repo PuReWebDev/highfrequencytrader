@@ -70,6 +70,7 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'WORKING') {
+                self::clearDuplicateOrders();
                 $this->cancelStaleOrders();
 
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
@@ -205,6 +206,21 @@ class RetrieveOrders extends Command
             Log::info('Fetching Candle for: '. $symbol['symbol']);
             TDAmeritrade::getPriceHistory($symbol['symbol']);
             usleep(500000);
+        }
+    }
+
+    /**
+     *
+     */
+    private static function clearDuplicateOrders(): void
+    {
+        $orders = Order::whereIn('id', function ( $query ) {
+            $query->select('id')->from('orders')->groupBy('orderId')->havingRaw
+            ('count(*) > 1');
+        })->get();
+
+        foreach ($orders as $order) {
+            Order::destroy($order['id']);
         }
     }
 }
