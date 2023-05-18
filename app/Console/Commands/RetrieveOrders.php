@@ -70,8 +70,8 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'WORKING') {
-//                self::clearDuplicateOrders();
-                $this->cancelStaleOrders();
+                self::clearDuplicateOrders();
+//                $this->cancelStaleOrders();
 
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                 OrdersProcessed::dispatch();
@@ -122,7 +122,7 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'FILLED' || empty($status)) {
-//                self::clearDuplicateOrders();
+                self::clearDuplicateOrders();
 //                try {
 //                    self::getCandleSticks();
 //                } catch (GuzzleException $e) {
