@@ -122,6 +122,7 @@ class RetrieveOrders extends Command
             }
 
             if ($status === 'FILLED' || empty($status)) {
+                self::clearDuplicateOrders();
 //                try {
 //                    self::getCandleSticks();
 //                } catch (GuzzleException $e) {
