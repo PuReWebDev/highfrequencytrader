@@ -140,6 +140,7 @@ class TradeEngineProcessor
             if ($runningCounts[$tradeSymbol] >= 1 && $stoppedCounts[$tradeSymbol] >= 1) {
                 $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = true;
+                Log::info('Concurrency for Stopped Symbol Disabled '.$tradeSymbol);
             }
             if ($runningCounts[$tradeSymbol] >= 2) {
                 $this->shareQuantityPerTrade[$tradeSymbol] = 2;
