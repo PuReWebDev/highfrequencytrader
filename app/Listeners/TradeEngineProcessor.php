@@ -164,7 +164,6 @@ class TradeEngineProcessor
 
             if ($now->isBetween('09:30 AM', '04:00 PM')) {
                 // Place The Trades
-                dd('Stopping here just incase');
                 $this->getOrderResponse($quotes);
             } else {
                 Log::info('Trading Disallowed During Non-Tradng Hours '.$now);
