@@ -222,7 +222,7 @@ class TradeEngineProcessor
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                 Log::debug($message);
-                usleep(500000);
+                usleep(750000);
             }
 
             self::updateWatchList($quote);
