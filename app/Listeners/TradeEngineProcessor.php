@@ -160,8 +160,13 @@ class TradeEngineProcessor
             // Grab The Current Price
             $quotes = TDAmeritrade::quotes($goodSymbols);
 
-            // Place The Trades
-            $this->getOrderResponse($quotes);
+            $now = Carbon::now()->setTimezone('America/New_York');
+
+            if ($now->isBetween('09:30 AM', '04:00 PM')) {
+                // Place The Trades
+                $this->getOrderResponse($quotes);
+            }
+
         }
     }
 
@@ -236,7 +241,7 @@ class TradeEngineProcessor
             ['start' => '03:30 PM', 'end' => '04:00 PM', 'quantity' => 12,],
             ['start' => '02:00 PM', 'end' => '02:30 PM', 'quantity' => 13,],
             ['start' => '02:30 PM', 'end' => '02:45 PM', 'quantity' => 14,],
-            ['start' => '02:45 PM', 'end' => '03:00 PM', 'quantity' => 2,],
+            ['start' => '02:45 PM', 'end' => '04:00 PM', 'quantity' => 2,],
         ];
 
         $now = Carbon::now()->setTimezone('America/New_York');
