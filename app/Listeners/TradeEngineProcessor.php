@@ -137,7 +137,7 @@ class TradeEngineProcessor
                 // TODO place a trade that recovers the loss, based onincreasing the quantity
             }
 
-            if ($runningCounts[$tradeSymbol] >= 1) {
+            if ($runningCounts[$tradeSymbol] >= 2) {
                 $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = true;
             }
