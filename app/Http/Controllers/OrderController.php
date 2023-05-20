@@ -179,15 +179,15 @@ class OrderController extends Controller
         foreach ($filteredOrders as $symbol) {
             $filtered = $orders->where('symbol', '=', $symbol['symbol']);
             $stats = TDAmeritrade::extracted($filtered);
-            dd($stats);
+
             $statistics[$symbol['symbol']] = [
-                'workingCount' => $stats['0'],
-                'filledCount' => $stats['1'],
-                'rejectedCount' =>$stats['2'],
-                'cancelledCount' => $stats['3'],
-                'expiredCount' => $stats['4'],
-                'stoppedCount' => $stats['5'],
-                'stoppedTotalCount' => $stats['6'],
+                'workingCount' => $stats['0']['0'],
+                'filledCount' => $stats['1']['FILLED'],
+                'rejectedCount' =>$stats['2']['REJECTED'],
+                'cancelledCount' => $stats['3']['CANCELED'],
+                'expiredCount' => $stats['4']['0'],
+                'stoppedCount' => $stats['5']['0'],
+                'stoppedTotalCount' => $stats['6']['FILLED'],
             ];
         }
 
