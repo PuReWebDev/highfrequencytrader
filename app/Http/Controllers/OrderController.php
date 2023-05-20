@@ -181,13 +181,13 @@ class OrderController extends Controller
             $statStructure = ['workingCount', 'filledCount', 'rejectedCount',
                     'cancelledCount', 'expiredCount', 'stoppedCount', 'stoppedTotalCount'];
             $statistics[$symbol['symbol']] = list(
-                $statStructure['workingCount'],
-                $statStructure['filledCount'],
-                $statStructure['rejectedCount'],
-                $statStructure['cancelledCount'],
-                $statStructure['expiredCount'],
-                $statStructure['stoppedCount'],
-                $statStructure['stoppedTotalCount']
+                'workingCount' => $statStructure['workingCount'],
+                'filledCount' => $statStructure['filledCount'],
+                'rejectedCount' =>$statStructure['rejectedCount'],
+                'cancelledCount' => $statStructure['cancelledCount'],
+                'expiredCount' => $statStructure['expiredCount'],
+                'stoppedCount' => $statStructure['stoppedCount'],
+                'stoppedTotalCount' => $statStructure['stoppedTotalCount']
                 )=TDAmeritrade::extracted($filtered);
         }
 
