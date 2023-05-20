@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\TDAmeritrade\Accounts;
 use App\TDAmeritrade\TDAmeritrade;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -76,6 +77,8 @@ class OrderController extends Controller
 
         $Balance = Balance::where('user_id', Auth::id())->get();
 
+        dd(self::buildStatistics($orders));
+
         return View::make('order', [
             'orders' => $orders,
             'filledCount' => $filledCount,
@@ -89,6 +92,7 @@ class OrderController extends Controller
             'profitsTotal' => $this->profitsTotal,
             'lossTotal' => $this->lossTotal,
             'pl' => $this->profitsTotal - $this->lossTotal,
+            'statistics' => self::buildStatistics($orders),
         ]);
     }
 
@@ -158,5 +162,22 @@ class OrderController extends Controller
         //
     }
 
+    /**
+     * @param Collection $orders
+     * @return array
+     */
+    private static function buildStatistics(Collection $orders): array
+    {
+        $statistics = [];
+        $filteredOrders = $orders->unique('symbol');
 
+        $filteredOrders->values()->all();
+
+        foreach ($filteredOrders['symbols'] as $symbol) {
+            $filtered = $orders->where('symbol', '=', $symbol);
+            $statistics[$symbol] = TDAmeritrade::extracted($filtered);
+        }
+
+        return $statistics;
+    }
 }
