@@ -178,17 +178,15 @@ class OrderController extends Controller
 
         foreach ($filteredOrders as $symbol) {
             $filtered = $orders->where('symbol', '=', $symbol['symbol']);
-            $statStructure = ['workingCount', 'filledCount', 'rejectedCount',
-                    'cancelledCount', 'expiredCount', 'stoppedCount', 'stoppedTotalCount'];
-            $statistics[$symbol['symbol']] = list(
-                'workingCount' => $statStructure['workingCount'],
-                'filledCount' => $statStructure['filledCount'],
-                'rejectedCount' =>$statStructure['rejectedCount'],
-                'cancelledCount' => $statStructure['cancelledCount'],
-                'expiredCount' => $statStructure['expiredCount'],
-                'stoppedCount' => $statStructure['stoppedCount'],
-                'stoppedTotalCount' => $statStructure['stoppedTotalCount']
-                )=TDAmeritrade::extracted($filtered);
+            $stats = TDAmeritrade::extracted($filtered);
+            $statistics[$symbol['symbol']] = [
+                'workingCount' => $stats['workingCount'],
+                'filledCount' => $stats['filledCount'],
+                'rejectedCount' =>$stats['rejectedCount'],
+                'cancelledCount' => $stats['cancelledCount'],
+                'expiredCount' => $stats['expiredCount'],
+                'stoppedCount' => $stats['stoppedCount'],
+                'stoppedTotalCount' => $stats['stoppedTotalCount'];
         }
 
         return $statistics;
