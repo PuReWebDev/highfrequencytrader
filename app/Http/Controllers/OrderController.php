@@ -185,7 +185,7 @@ class OrderController extends Controller
             dd($workingCounts['0']);
 
             $statistics[$symbol['symbol']] = [
-                'workingCount' => ,
+                'workingCount' => '',
                 'filledCount' => $stats['1']['FILLED']?? 0,
                 'rejectedCount' =>$stats['2']['REJECTED']?? 0,
                 'cancelledCount' => $stats['3']['CANCELED']?? 0,
