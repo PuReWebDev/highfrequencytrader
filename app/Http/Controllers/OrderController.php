@@ -77,7 +77,10 @@ class OrderController extends Controller
 
         $Balance = Balance::where('user_id', Auth::id())->get();
 
-        dd(self::buildStatistics($orders));
+        if ($orders->count() > 1) {
+            dd(self::buildStatistics($orders));
+        }
+
 
         return View::make('order', [
             'orders' => $orders,
