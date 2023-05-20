@@ -181,13 +181,13 @@ class OrderController extends Controller
             $stats = TDAmeritrade::extracted($filtered);
 
             $statistics[$symbol['symbol']] = [
-                'workingCount' => $stats['0'],
+                'workingCount' => $stats['0'] ?? 0,
                 'filledCount' => $stats['1']['FILLED']?? 0,
                 'rejectedCount' =>$stats['2']['REJECTED']?? 0,
                 'cancelledCount' => $stats['3']['CANCELED']?? 0,
-                'expiredCount' => $stats['4'],
-                'stoppedCount' => $stats['5'],
-                'stoppedTotalCount' => $stats['6'],
+                'expiredCount' => $stats['4'] ?? 0,
+                'stoppedCount' => $stats['5'] ?? 0,
+                'stoppedTotalCount' => $stats['6'] ?? 0,
             ];
         }
 
