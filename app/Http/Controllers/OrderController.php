@@ -178,7 +178,7 @@ class OrderController extends Controller
 
         foreach ($filteredOrders as $symbol) {
             $filtered = $orders->where('symbol', '=', $symbol['symbol']);
-            $statistics[$symbol] = TDAmeritrade::extracted($filtered);
+            $statistics[$symbol['symbol']] = TDAmeritrade::extracted($filtered);
         }
 
         return $statistics;
