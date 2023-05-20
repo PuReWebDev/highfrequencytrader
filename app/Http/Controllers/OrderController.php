@@ -182,7 +182,7 @@ class OrderController extends Controller
 
             $statistics[$symbol['symbol']] = [
                 'workingCount' => $stats['0'] instanceof Collection ?
-                    $stats[0]->get(0) : $stats['0'],
+                    $stats[0]->get(1) : $stats['0'],
                 'filledCount' => $stats['1']['FILLED']?? 0,
                 'rejectedCount' =>$stats['2']['REJECTED']?? 0,
                 'cancelledCount' => $stats['3']['CANCELED']?? 0,
