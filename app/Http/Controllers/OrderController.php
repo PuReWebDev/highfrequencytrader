@@ -180,13 +180,13 @@ class OrderController extends Controller
             $filtered = $orders->where('symbol', '=', $symbol['symbol']);
             $stats = TDAmeritrade::extracted($filtered);
             $statistics[$symbol['symbol']] = [
-                'workingCount' => $stats['workingCount'],
-                'filledCount' => $stats['filledCount'],
-                'rejectedCount' =>$stats['rejectedCount'],
-                'cancelledCount' => $stats['cancelledCount'],
-                'expiredCount' => $stats['expiredCount'],
-                'stoppedCount' => $stats['stoppedCount'],
-                'stoppedTotalCount' => $stats['stoppedTotalCount']
+                'workingCount' => $stats['0'],
+                'filledCount' => $stats['1'],
+                'rejectedCount' =>$stats['2'],
+                'cancelledCount' => $stats['3'],
+                'expiredCount' => $stats['4'],
+                'stoppedCount' => $stats['5'],
+                'stoppedTotalCount' => $stats['6'],
             ];
         }
 
