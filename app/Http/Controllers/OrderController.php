@@ -182,7 +182,7 @@ class OrderController extends Controller
 
             $workingCounts = $stats['0']->all();
 
-            dd($workingCounts['0']);
+            dd($workingCounts[0]);
 
             $statistics[$symbol['symbol']] = [
                 'workingCount' => '',
