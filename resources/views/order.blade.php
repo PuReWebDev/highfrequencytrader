@@ -164,56 +164,56 @@
                                         </tr>
                                         @foreach($statistics as $statistic)
                                             <tr>
-                                                <td>@isset($statistic)
-                                                        {{ dd
-                                                        ($statistic['symbol']) }}
+                                                <td>@isset($statistic['symbol'])
+                                                        {{ $statistic['symbol'] }}
                                                     @endisset
-                                                    @empty($statistic['FILLED'])
+                                                    @empty($statistic['symbol'])
                                                         0
                                                     @endempty
                                                 </td>
-                                                <td>@isset($statistic['FILLED'])
-                                                        {{ $statistic['FILLED']}}
+                                                <td>@isset($statistic['filledCount'])
+                                                        {{ $statistic['filledCount']}}
                                                     @endisset
-                                                    @empty($statistic['FILLED'])
+                                                    @empty($statistic['filledCount'])
                                                         0
                                                     @endempty
                                                 </td>
-                                                <td>@isset($statistic['WORKING'])
-                                                        {{ $statistic['WORKING']}}
+                                                <td>@isset($statistic['workingCount'])
+                                                        {{ $statistic['workingCount']}}
                                                     @endisset
-                                                    @empty($statistic['WORKING'])
+                                                    @empty($statistic['workingCount'])
                                                         0
                                                     @endempty</td>
-                                                <td>@isset($statistic['REJECTED'])
-                                                        {{ $statistic['REJECTED'] }}
+                                                <td>@isset($statistic['rejectedCount'])
+                                                        {{ $statistic['rejectedCount'] }}
                                                     @endisset
-                                                    @empty($statistic['REJECTED'])
+                                                    @empty($statistic['rejectedCount'])
                                                         0
                                                     @endempty</td>
-                                                <td>@isset($statistic['CANCELED'])
-                                                        {{ $statistic['CANCELED'] }}
+                                                <td>@isset($statistic['cancelledCount'])
+                                                        {{ $statistic['cancelledCount'] }}
                                                     @endisset
-                                                    @empty($statistic['CANCELED'])
+                                                    @empty($statistic['cancelledCount'])
                                                         0
                                                     @endempty</td>
-                                                <td>@isset($statistic['EXPIRED'])
-                                                        {{ $statistic['EXPIRED'] }}
+                                                <td>@isset($statistic['expiredCount'])
+                                                        {{ $statistic['expiredCount'] }}
                                                     @endisset
-                                                    @empty($statistic['EXPIRED'])
+                                                    @empty($statistic['expiredCount'])
                                                         0
                                                     @endempty</td>
-                                                <td>{{ $statistic->count() }}</td>
-                                                <td style="text-align:center">@isset($statistic['FILLED'])
-                                                        {{ $statistic['FILLED'] }}
+                                                <td>{{ count($statistics[$statistic['symbol']])
+                                                }}</td>
+                                                <td style="text-align:center">@isset($statistic['filledCount'])
+                                                        {{ $statistic['filledCount'] }}
                                                     @endisset
-                                                    @empty($statistic['FILLED'])
+                                                    @empty($statistic['filledCount'])
                                                         0
                                                     @endempty</td>
-                                                <td style="text-align:center">@isset($statistic['FILLED'])
-                                                        {{ $statistic['FILLED'] }}
+                                                <td style="text-align:center">@isset($statistic['filledCount'])
+                                                        {{ $statistic['filledCount'] }}
                                                     @endisset
-                                                    @empty($statistic['FILLED'])
+                                                    @empty($statistic['filledCount'])
                                                         0
                                                     @endempty</td>
                                                 <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
