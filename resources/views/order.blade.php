@@ -204,16 +204,16 @@
                                                     @endempty</td>
                                                 <td>{{ count($statistics[$statistic['symbol']])
                                                 }}</td>
-                                                <td style="text-align:center">@isset($statistic['filledCount'])
-                                                        {{ $statistic['filledCount'] }}
+                                                <td style="text-align:center">@isset($statistic['stoppedCount'])
+                                                        {{ $statistic['stoppedCount'] }}
                                                     @endisset
-                                                    @empty($statistic['filledCount'])
+                                                    @empty($statistic['stoppedCount'])
                                                         0
                                                     @endempty</td>
-                                                <td style="text-align:center">@isset($statistic['filledCount'])
-                                                        {{ $statistic['filledCount'] }}
+                                                <td style="text-align:center">@isset($statistic['stoppedTotalCount'])
+                                                        {{ $statistic['stoppedTotalCount'] }}
                                                     @endisset
-                                                    @empty($statistic['filledCount'])
+                                                    @empty($statistic['stoppedTotalCount'])
                                                         0
                                                     @endempty</td>
                                                 <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
