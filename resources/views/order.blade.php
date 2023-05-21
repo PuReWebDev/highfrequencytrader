@@ -437,6 +437,7 @@
         });
         let table = new DataTable('#open-orders-table');
         let tableTwo = new DataTable('#filled-orders-table');
+        let tableThree = new DataTable('#summary-table');
     </script>
 
 
