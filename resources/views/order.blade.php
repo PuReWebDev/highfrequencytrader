@@ -100,7 +100,7 @@
                                     <th>Cancelled</th>
                                     <th>Expired</th>
                                     <th>Total</th>
-                                    <th style="white-space: nowrap;">Stopped (5 Mins)</th>
+{{--                                    <th style="white-space: nowrap;">Stopped (5 Mins)</th>--}}
                                     <th style="white-space: nowrap;">Stopped Total</th>
                                     <th style="white-space: nowrap;">Account Value</th>
                                     <th style="white-space: nowrap;">Today's Gains</th>
@@ -204,12 +204,12 @@
                                                     @endempty</td>
                                                 <td>{{ count($statistics[$statistic['symbol']])
                                                 }}</td>
-                                                <td style="text-align:center">@isset($statistic['stoppedCount'])
-                                                        {{ $statistic['stoppedCount'] }}
-                                                    @endisset
-                                                    @empty($statistic['stoppedCount'])
-                                                        0
-                                                    @endempty</td>
+{{--                                                <td style="text-align:center">@isset($statistic['stoppedCount'])--}}
+{{--                                                        {{ $statistic['stoppedCount'] }}--}}
+{{--                                                    @endisset--}}
+{{--                                                    @empty($statistic['stoppedCount'])--}}
+{{--                                                        0--}}
+{{--                                                    @endempty</td>--}}
                                                 <td style="text-align:center">@isset($statistic['stoppedTotalCount'])
                                                         {{ $statistic['stoppedTotalCount'] }}
                                                     @endisset
