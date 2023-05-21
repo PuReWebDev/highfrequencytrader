@@ -165,7 +165,8 @@
                                         @foreach($statistics as $statistic)
                                             <tr>
                                                 <td>@isset($statistic)
-                                                        {{ dd($statistic) }}
+                                                        {{ dd
+                                                        ($statistic['symbol']) }}
                                                     @endisset
                                                     @empty($statistic['FILLED'])
                                                         0
