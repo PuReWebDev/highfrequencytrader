@@ -93,6 +93,7 @@
                                 <caption style="text-align: center;">Total Counts</caption>
                                 <thead>
                                 <tr>
+                                    <th style="white-space: nowrap;">Symbol</th>
                                     <th style="white-space: nowrap;">Filled</th>
                                     <th>Working</th>
                                     <th>Rejected</th>
@@ -109,6 +110,7 @@
                                 </thead>
                                 <tbody>
                                         <tr>
+                                            <td>Combined</td>
                                             <td>@isset($filledCount['FILLED'])
                                                     {{ $filledCount['FILLED']}}
                                                 @endisset
@@ -160,6 +162,67 @@
                                             <td
                                                 style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
                                         </tr>
+                                        @foreach($statistics as $statistic)
+                                            <tr>
+                                                <td>@isset($statistic)
+                                                        {{ dd($statistic) }}
+                                                    @endisset
+                                                    @empty($statistic['FILLED'])
+                                                        0
+                                                    @endempty
+                                                </td>
+                                                <td>@isset($statistic['FILLED'])
+                                                        {{ $statistic['FILLED']}}
+                                                    @endisset
+                                                    @empty($statistic['FILLED'])
+                                                        0
+                                                    @endempty
+                                                </td>
+                                                <td>@isset($statistic['WORKING'])
+                                                        {{ $statistic['WORKING']}}
+                                                    @endisset
+                                                    @empty($statistic['WORKING'])
+                                                        0
+                                                    @endempty</td>
+                                                <td>@isset($statistic['REJECTED'])
+                                                        {{ $statistic['REJECTED'] }}
+                                                    @endisset
+                                                    @empty($statistic['REJECTED'])
+                                                        0
+                                                    @endempty</td>
+                                                <td>@isset($statistic['CANCELED'])
+                                                        {{ $statistic['CANCELED'] }}
+                                                    @endisset
+                                                    @empty($statistic['CANCELED'])
+                                                        0
+                                                    @endempty</td>
+                                                <td>@isset($statistic['EXPIRED'])
+                                                        {{ $statistic['EXPIRED'] }}
+                                                    @endisset
+                                                    @empty($statistic['EXPIRED'])
+                                                        0
+                                                    @endempty</td>
+                                                <td>{{ $statistic->count() }}</td>
+                                                <td style="text-align:center">@isset($statistic['FILLED'])
+                                                        {{ $statistic['FILLED'] }}
+                                                    @endisset
+                                                    @empty($statistic['FILLED'])
+                                                        0
+                                                    @endempty</td>
+                                                <td style="text-align:center">@isset($statistic['FILLED'])
+                                                        {{ $statistic['FILLED'] }}
+                                                    @endisset
+                                                    @empty($statistic['FILLED'])
+                                                        0
+                                                    @endempty</td>
+                                                <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
+                                                <td style="text-align:center">${{$profitsTotal }}</td>
+                                                <td
+                                                    style="text-align:center">-${{$lossTotal }}</td>
+                                                <td
+                                                    style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
+                                            </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
