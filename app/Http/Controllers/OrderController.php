@@ -25,12 +25,6 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-//        $prices = TDAmeritrade::getPriceHistory('TSLA');
-//        dd($prices);
-
-//        Accounts::tokenPreFlight();
-//        TDAmeritrade::getOrders();
-//        TDAmeritrade::getOrders('FILLED');
         Accounts::updateAccountData();
 
         $from_date = $request->input('from_date');
@@ -53,7 +47,6 @@ class OrderController extends Controller
             ['tag', '=', 'AA_PuReWebDev'],
         ])->whereNotNull('instruction')->whereNotNull('positionEffect')
             ->whereBetween('created_at', [$from_date, $to_date])->orderBy('orderId', 'DESC')->get();
-//            ->whereDate('created_at', Carbon::today())->orderBy('orderId', 'DESC')->get();
 
         $orders->each(function ($item, $key) {
 
@@ -77,9 +70,9 @@ class OrderController extends Controller
 
         $Balance = Balance::where('user_id', Auth::id())->get();
 
-        if ($orders->count() > 1) {
-            dd(self::buildStatistics($orders));
-        }
+//        if ($orders->count() > 1) {
+//            $statistics = self::buildStatistics($orders);
+//        }
 
 
         return View::make('order', [
@@ -95,7 +88,7 @@ class OrderController extends Controller
             'profitsTotal' => $this->profitsTotal,
             'lossTotal' => $this->lossTotal,
             'pl' => $this->profitsTotal - $this->lossTotal,
-            'statistics' => self::buildStatistics($orders),
+            'statistics' => $orders->count() > 1 ? self::buildStatistics($orders) : [],
         ]);
     }
 
