@@ -143,12 +143,12 @@
                                                     0
                                                 @endempty</td>
                                             <td>{{ $orders->count() }}</td>
-                                            <td style="text-align:center">@isset($stoppedCount['FILLED'])
-                                                    {{ $stoppedCount['FILLED'] }}
-                                                @endisset
-                                                @empty($stoppedCount['FILLED'])
-                                                    0
-                                                @endempty</td>
+{{--                                            <td style="text-align:center">@isset($stoppedCount['FILLED'])--}}
+{{--                                                    {{ $stoppedCount['FILLED'] }}--}}
+{{--                                                @endisset--}}
+{{--                                                @empty($stoppedCount['FILLED'])--}}
+{{--                                                    0--}}
+{{--                                                @endempty</td>--}}
                                             <td style="text-align:center">@isset($stoppedTotalCount['FILLED'])
                                                     {{ $stoppedTotalCount['FILLED'] }}
                                                 @endisset
