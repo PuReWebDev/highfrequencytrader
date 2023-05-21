@@ -181,7 +181,7 @@ class OrderController extends Controller
                 'workingCount' => $stats['0']->get(''),
                 'filledCount' => $stats['1']->get('FILLED'),
                 'rejectedCount' =>$stats['2']->get('REJECTED'),
-                'cancelledCount' => $stats['3']['CANCELED'],
+                'cancelledCount' => $stats['3']->get('CANCELED'),
                 'expiredCount' => $stats['4']->get(''),
                 'stoppedCount' => $stats['5']->get(''),
                 'stoppedTotalCount' => $stats['6']->get(''),
