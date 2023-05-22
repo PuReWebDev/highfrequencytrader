@@ -103,8 +103,8 @@
 {{--                                    <th style="white-space: nowrap;">Stopped (5 Mins)</th>--}}
                                     <th style="white-space: nowrap;">Stopped Total</th>
                                     <th style="white-space: nowrap;">Account Value</th>
-                                    <th style="white-space: nowrap;">Today's Gains</th>
-                                    <th style="white-space: nowrap;">Total Loss</th>
+                                    <th style="white-space: nowrap;">Gains</th>
+                                    <th style="white-space: nowrap;">Loss</th>
                                     <th style="white-space: nowrap;">Total P/L</th>
                                 </tr>
                                 </thead>
