@@ -119,10 +119,10 @@ class TradeEngineProcessor
 
             if ($stoppedCounts[$tradeSymbol] >= 1) {
 
-                if ($stoppedCounts[$tradeSymbol] >= 3) {
-                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
-                }
-                if ($stoppedCounts[$tradeSymbol] >= 5) {
+//                if ($stoppedCounts[$tradeSymbol] >= 2) {
+//                    $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+//                }
+                if ($stoppedCounts[$tradeSymbol] >= 2) {
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     $tradeHalted[$tradeSymbol] = true;
                     Log::info("Symbol $tradeSymbol been stopped out 5x Halting Trading For It");
@@ -142,8 +142,8 @@ class TradeEngineProcessor
                 $tradeHalted[$tradeSymbol] = true;
                 Log::info('Concurrency for Stopped Symbol Disabled '.$tradeSymbol);
             }
-            if ($runningCounts[$tradeSymbol] >= 3) {
-//            if ($runningCounts[$tradeSymbol] >= self::quantityOverTime()) {
+//            if ($runningCounts[$tradeSymbol] >= 3) {
+            if ($runningCounts[$tradeSymbol] >= self::quantityOverTime()) {
                 $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                 $tradeHalted[$tradeSymbol] = true;
             }
