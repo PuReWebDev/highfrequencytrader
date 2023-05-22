@@ -98,7 +98,7 @@
                                     <th>Working</th>
                                     <th>Rejected</th>
                                     <th>Cancelled</th>
-                                    <th>Expired</th>
+{{--                                    <th>Expired</th>--}}
                                     <th>Total</th>
 {{--                                    <th style="white-space: nowrap;">Stopped (5 Mins)</th>--}}
                                     <th style="white-space: nowrap;">Stopped Total</th>
@@ -136,12 +136,12 @@
                                                 @empty($cancelledCount['CANCELED'])
                                                     0
                                                 @endempty</td>
-                                            <td>@isset($expiredCount['EXPIRED'])
-                                                    {{ $expiredCount['EXPIRED'] }}
-                                                @endisset
-                                                @empty($expiredCount['EXPIRED'])
-                                                    0
-                                                @endempty</td>
+{{--                                            <td>@isset($expiredCount['EXPIRED'])--}}
+{{--                                                    {{ $expiredCount['EXPIRED'] }}--}}
+{{--                                                @endisset--}}
+{{--                                                @empty($expiredCount['EXPIRED'])--}}
+{{--                                                    0--}}
+{{--                                                @endempty</td>--}}
                                             <td>{{ $orders->count() }}</td>
 {{--                                            <td style="text-align:center">@isset($stoppedCount['FILLED'])--}}
 {{--                                                    {{ $stoppedCount['FILLED'] }}--}}
