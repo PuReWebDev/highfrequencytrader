@@ -228,7 +228,7 @@
 {{--                                                    style="text-align:center">-${{$lossTotal }}</td>--}}
                                                 <td>-</td>
 {{--                                                <td style="text-align:center">${{number_format($pl,2,'.',',')}}</td>--}}
-                                                <td>-</td>
+
                                             </tr>
                                         @endforeach
                                 </tbody>
