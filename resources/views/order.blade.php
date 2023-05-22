@@ -220,12 +220,15 @@
 {{--                                                        0--}}
 {{--                                                    @endempty</td>--}}
                                                 <td>-</td>
-                                                <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
-                                                <td style="text-align:center">${{$profitsTotal }}</td>
-                                                <td
-                                                    style="text-align:center">-${{$lossTotal }}</td>
-                                                <td
-                                                    style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
+{{--                                                <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>--}}
+                                                <td>-</td>
+{{--                                                <td style="text-align:center">${{$profitsTotal }}</td>--}}
+                                                <td>-</td>
+{{--                                                <td--}}
+{{--                                                    style="text-align:center">-${{$lossTotal }}</td>--}}
+                                                <td>-</td>
+{{--                                                <td style="text-align:center">${{number_format($pl,2,'.',',')}}</td>--}}
+                                                <td>-</td>
                                             </tr>
                                         @endforeach
                                 </tbody>
