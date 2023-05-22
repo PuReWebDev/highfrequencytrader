@@ -110,7 +110,7 @@
                                 </thead>
                                 <tbody>
                                         <tr>
-                                            <td>Combined</td>
+                                            <td>ALL</td>
                                             <td>@isset($filledCount['FILLED'])
                                                     {{ $filledCount['FILLED']}}
                                                 @endisset
