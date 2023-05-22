@@ -211,7 +211,7 @@ class TradeEngineProcessor
             if (($quote->highPrice - .30) > ($currentStockPrice + .05)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
-                    number_format($currentStockPrice + .05,2, '.', ''),
+                    number_format($currentStockPrice + .10,2, '.', ''),
                     number_format($currentStockPrice - 1.00, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
