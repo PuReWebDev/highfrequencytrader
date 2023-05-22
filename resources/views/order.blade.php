@@ -279,7 +279,7 @@
 {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td style="white-space: nowrap;">@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
-                                                        style="text-align:center;">$@if ($order->quantity === 15){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * .10,2,'.',',') }}@endif</td>
+                                                        style="text-align:center;">$@if ($order->quantity === 15){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * .05,2,'.',',') }}@endif</td>
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
