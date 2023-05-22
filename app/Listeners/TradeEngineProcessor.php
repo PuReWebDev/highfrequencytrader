@@ -216,9 +216,10 @@ class TradeEngineProcessor
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
-                        '').", Sell Price: " . number_format($currentStockPrice + .10, 2,
+                        '').", Sell Price: " . number_format
+                    ($currentStockPrice + .05, 2,
                         '.', '') . ", Stop Price: " . number_format($currentStockPrice -
-                        0.80, 2, '.', '') . "
+                        0.60, 2, '.', '') . "
                        Symbol: $quote->symbol, Quantity: ".$this->shareQuantityPerTrade[$quote->symbol];
 
                 Log::debug($message);
