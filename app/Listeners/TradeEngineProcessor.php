@@ -125,7 +125,7 @@ class TradeEngineProcessor
                 if ($stoppedCounts[$tradeSymbol] >= 2) {
                     $this->shareQuantityPerTrade[$tradeSymbol] = 2;
                     $tradeHalted[$tradeSymbol] = true;
-                    Log::info("Symbol $tradeSymbol been stopped out 5x Halting Trading For It");
+                    Log::info("Symbol $tradeSymbol been stopped out 2x Halting Trading For It");
                 }
 
                 if (self::stoppedInLastFive($stoppedOrders,
