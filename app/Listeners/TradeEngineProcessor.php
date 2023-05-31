@@ -130,7 +130,8 @@ class TradeEngineProcessor
 
                 if (self::stoppedInLastFive($stoppedOrders,
                     $tradeSymbol)) {
-                    $tradeHalted[$tradeSymbol] = true;
+//                    $tradeHalted[$tradeSymbol] = true;
+                    $this->shareQuantityPerTrade[$tradeSymbol] = 4;
                     Log::info("Symbol $tradeSymbol been stopped out in Last 5 Minutes Halting Trading For It");
                 }
 
@@ -212,7 +213,7 @@ class TradeEngineProcessor
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
                     number_format($currentStockPrice + .10,2, '.', ''),
-                    number_format($currentStockPrice - 1.00, 2, '.', ''),
+                    number_format($currentStockPrice - .10, 2, '.', ''),
                     $quote->symbol, $this->shareQuantityPerTrade[$quote->symbol]);
 
                 $message = "Order placed: Buy ".number_format($currentStockPrice, 2, '.',
@@ -280,7 +281,7 @@ class TradeEngineProcessor
             if (!empty($stop['stopPrice']) && $stop['status'] === 'FILLED' &&
             $stop['symbol'] === $symbol) {
                 $then = Carbon::createFromFormat('Y-m-d H:i:s', $stop['created_at']);
-                if($then->diffInMinutes(Carbon::now()) < 5)
+                if($then->diffInMinutes(Carbon::now()) < 20)
                 {
                     return true;
                 }
