@@ -340,15 +340,8 @@ class TDAmeritrade
         string      $startDate = '',
         bool|string $extendedHours = 'false'): array
     {
-        Accounts::tokenPreFlight();
-        $token = Token::where('user_id', Auth::id())->get();
-
         $data = [
             'base_uri' => SELF::BASE_URL_TD,
-            'headers'  => [
-                'Authorization' => 'Bearer ' . $token['0']['access_token'],
-                'Content-Type' => 'application/json',
-            ],
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'periodType' => $periodType,
