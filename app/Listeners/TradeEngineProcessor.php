@@ -188,7 +188,8 @@ class TradeEngineProcessor
     {
         foreach ($quotes as $quote) {
 
-            $currentStockPrice = $quote->lastPrice;
+//            $currentStockPrice = $quote->lastPrice;
+            $currentStockPrice = $quote->askPrice;
 
 //            $previousQuote = Quote::where([
 //                ['symbol','=', $quote->symbol],
