@@ -17,18 +17,18 @@
                         <form method="post" action="/orders"
                               enctype="multipart/form-data">
                             {{ csrf_field() }}
-                        <div class="row align-items-start">
-                            <div class="col">
+                            <div class="row align-items-start">
+                                <div class="col">
 
-                                <h2 class="mb-4">Select A Start Date To View
-                                    Orders From</h2>
+                                    <h2 class="mb-4">Select A Start Date To View
+                                        Orders From</h2>
 
-                                <div class="form-group">
-                                    <div class='input-group date'
-                                         id='fromdatetimepicker'>
-                                        <input name="from_date" type='text'
-                                               class="form-control" autocomplete="off" />
-                                        <span class="input-group-addon">
+                                    <div class="form-group">
+                                        <div class='input-group date'
+                                             id='fromdatetimepicker'>
+                                            <input name="from_date" type='text'
+                                                   class="form-control" autocomplete="off" />
+                                            <span class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
                                                  height="33"
@@ -37,20 +37,20 @@
                                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                                             </svg>
                                         </span>
+                                        </div>
                                     </div>
+
                                 </div>
+                                <div class="col">
 
-                            </div>
-                            <div class="col">
-
-                                <h2 class="mb-4">Select A To Date To View
-                                    Orders From</h2>
-                                <div class="form-group">
-                                    <div class='input-group date'
-                                         id='todatetimepicker'>
-                                        <input name="to_date" type='text'
-                                               class="form-control" autocomplete="off" />
-                                        <span class="input-group-addon">
+                                    <h2 class="mb-4">Select A To Date To View
+                                        Orders From</h2>
+                                    <div class="form-group">
+                                        <div class='input-group date'
+                                             id='todatetimepicker'>
+                                            <input name="to_date" type='text'
+                                                   class="form-control" autocomplete="off" />
+                                            <span class="input-group-addon">
                                             <svg xmlns="http://www.w3
                                             .org/2000/svg" width="33"
                                                  height="33"
@@ -59,368 +59,297 @@
                                                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
                                             </svg>
                                         </span>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
+                                <div class="col">
+                                    <h2 class="mb-4">Submit Once You've
+                                        Selected Your Date Ranges</h2>
+                                    <button class="btn btn-primary"
+                                            type="submit">Submit</button>
+                                </div>
                             </div>
-                            <div class="col">
-                                <h2 class="mb-4">Submit Once You've
-                                    Selected Your Date Ranges</h2>
-                                <button class="btn btn-primary"
-                                        type="submit">Submit</button>
-                            </div>
-                        </div>
 
                         </form>
                     </div>
 
                     @if (count($orders) >= 1)
 
-                                @foreach($orders as $order)
-                                    @if ($order->status === 'WORKING')
-                                        @php($displayWorking = true)
-                                    @endif
+                        @foreach($orders as $order)
+                            @if ($order->status === 'WORKING')
+                                @php($displayWorking = true)
+                            @endif
 
-                                    @if ($order->status === 'FILLED')
-                                        @php($displayFilled = true)
-                                    @endif
-                                @endforeach
+                            @if ($order->status === 'FILLED')
+                                @php($displayFilled = true)
+                            @endif
+                        @endforeach
                     @endif
 
-                        <div class="table-responsive">
-                            <table class="table table-striped caption-top"
-                                   id="summary-table">
-                                <caption style="text-align: center;">Total Counts</caption>
-                                <thead>
-                                <tr>
-                                    <th style="white-space: nowrap;">Symbol</th>
-                                    <th style="white-space: nowrap;">Filled</th>
-                                    <th>Working</th>
-                                    <th>Rejected</th>
-                                    <th>Cancelled</th>
-{{--                                    <th>Expired</th>--}}
-                                    <th>Total</th>
-{{--                                    <th style="white-space: nowrap;">Stopped (5 Mins)</th>--}}
-                                    <th style="white-space: nowrap;">Stopped Total</th>
-                                    <th style="white-space: nowrap;">Account Value</th>
-                                    <th style="white-space: nowrap;">Gains</th>
-                                    <th style="white-space: nowrap;">Loss</th>
-                                    <th style="white-space: nowrap;">Total P/L</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                        <tr>
-                                            <td>-</td>
-                                            <td>@isset($filledCount['FILLED'])
-                                                    {{ $filledCount['FILLED']}}
-                                                @endisset
-                                                @empty($filledCount['FILLED'])
-                                                    0
-                                                @endempty
-                                            </td>
-                                            <td>@isset($workingCount['WORKING'])
-                                                    {{ $workingCount['WORKING']}}
-                                                @endisset
-                                                @empty($workingCount['WORKING'])
-                                                    0
-                                                @endempty</td>
-                                            <td>@isset($rejectedCount['REJECTED'])
-                                                    {{ $rejectedCount['REJECTED'] }}
-                                                @endisset
-                                                @empty($rejectedCount['REJECTED'])
-                                                    0
-                                                @endempty</td>
-                                            <td>@isset($cancelledCount['CANCELED'])
-                                                    {{ $cancelledCount['CANCELED'] }}
-                                                @endisset
-                                                @empty($cancelledCount['CANCELED'])
-                                                    0
-                                                @endempty</td>
-{{--                                            <td>@isset($expiredCount['EXPIRED'])--}}
-{{--                                                    {{ $expiredCount['EXPIRED'] }}--}}
-{{--                                                @endisset--}}
-{{--                                                @empty($expiredCount['EXPIRED'])--}}
-{{--                                                    0--}}
-{{--                                                @endempty</td>--}}
-                                            <td>{{ $orders->count() }}</td>
-{{--                                            <td style="text-align:center">@isset($stoppedCount['FILLED'])--}}
-{{--                                                    {{ $stoppedCount['FILLED'] }}--}}
-{{--                                                @endisset--}}
-{{--                                                @empty($stoppedCount['FILLED'])--}}
-{{--                                                    0--}}
-{{--                                                @endempty</td>--}}
-                                            <td style="text-align:center">@isset($stoppedTotalCount['FILLED'])
-                                                    {{ $stoppedTotalCount['FILLED'] }}
-                                                @endisset
-                                                @empty($stoppedTotalCount['FILLED'])
-                                                    0
-                                                @endempty</td>
-                                            <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
-                                            <td style="text-align:center">${{$profitsTotal }}</td>
-                                            <td
-                                                style="text-align:center">-${{$lossTotal }}</td>
-                                            <td
-                                                style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
-                                        </tr>
-                                        @foreach($statistics as $statistic)
-                                            <tr>
-                                                <td>@isset($statistic['symbol'])
-                                                        {{ $statistic['symbol'] }}
-                                                    @endisset
-                                                    @empty($statistic['symbol'])
-                                                        0
-                                                    @endempty
-                                                </td>
-                                                <td>@isset($statistic['filledCount'])
-                                                        {{ $statistic['filledCount']}}
-                                                    @endisset
-                                                    @empty($statistic['filledCount'])
-                                                        0
-                                                    @endempty
-                                                </td>
-{{--                                                <td>@isset($statistic['workingCount'])--}}
-{{--                                                        {{ $statistic['workingCount']}}--}}
-{{--                                                    @endisset--}}
-{{--                                                    @empty($statistic['workingCount'])--}}
-{{--                                                        0--}}
-{{--                                                    @endempty</td>--}}
-                                                <td>-</td>
-                                                <td>@isset($statistic['rejectedCount'])
-                                                        {{ $statistic['rejectedCount'] }}
-                                                    @endisset
-                                                    @empty($statistic['rejectedCount'])
-                                                        0
-                                                    @endempty</td>
-                                                <td>@isset($statistic['cancelledCount'])
-                                                        {{ $statistic['cancelledCount'] }}
-                                                    @endisset
-                                                    @empty($statistic['cancelledCount'])
-                                                        0
-                                                    @endempty</td>
-{{--                                                <td>@isset($statistic['expiredCount'])--}}
-{{--                                                        {{ $statistic['expiredCount'] }}--}}
-{{--                                                    @endisset--}}
-{{--                                                    @empty($statistic['expiredCount'])--}}
-{{--                                                        0--}}
-{{--                                                    @endempty</td>--}}
-                                                <td>-</td>
-{{--                                                <td>{{ count($statistics[$statistic['symbol']])--}}
-{{--                                                }}</td>--}}
-                                                <td>-</td>
-{{--                                                <td style="text-align:center">@isset($statistic['stoppedCount'])--}}
-{{--                                                        {{ $statistic['stoppedCount'] }}--}}
-{{--                                                    @endisset--}}
-{{--                                                    @empty($statistic['stoppedCount'])--}}
-{{--                                                        0--}}
-{{--                                                    @endempty</td>--}}
-{{--                                                <td style="text-align:center">@isset($statistic['stoppedTotalCount'])--}}
-{{--                                                        {{ $statistic['stoppedTotalCount'] }}--}}
-{{--                                                    @endisset--}}
-{{--                                                    @empty($statistic['stoppedTotalCount'])--}}
-{{--                                                        0--}}
-{{--                                                    @endempty</td>--}}
-                                                <td>-</td>
-{{--                                                <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>--}}
-                                                <td>-</td>
-{{--                                                <td style="text-align:center">${{$profitsTotal }}</td>--}}
-                                                <td>-</td>
-{{--                                                <td--}}
-{{--                                                    style="text-align:center">-${{$lossTotal }}</td>--}}
-                                                <td>-</td>
-{{--                                                <td style="text-align:center">${{number_format($pl,2,'.',',')}}</td>--}}
+                    <div class="table-responsive">
+                        <table class="table table-striped caption-top"
+                               id="summary-table">
+                            <caption style="text-align: center;">Total Counts</caption>
+                            <thead>
+                            <tr>
+                                <th style="white-space: nowrap;">Filled</th>
+                                <th>Working</th>
+                                <th>Rejected</th>
+                                <th>Cancelled</th>
+                                <th>Expired</th>
+                                <th>Total</th>
+                                <th style="white-space: nowrap;">Stopped (5 Mins)</th>
+                                <th style="white-space: nowrap;">Stopped Total</th>
+                                <th style="white-space: nowrap;">Account Value</th>
+                                <th style="white-space: nowrap;">Today's Gains</th>
+                                <th style="white-space: nowrap;">Total Loss</th>
+                                <th style="white-space: nowrap;">Total P/L</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>@isset($filledCount['FILLED'])
+                                        {{ $filledCount['FILLED']}}
+                                    @endisset
+                                    @empty($filledCount['FILLED'])
+                                        0
+                                    @endempty
+                                </td>
+                                <td>@isset($workingCount['WORKING'])
+                                        {{ $workingCount['WORKING']}}
+                                    @endisset
+                                    @empty($workingCount['WORKING'])
+                                        0
+                                    @endempty</td>
+                                <td>@isset($rejectedCount['REJECTED'])
+                                        {{ $rejectedCount['REJECTED'] }}
+                                    @endisset
+                                    @empty($rejectedCount['REJECTED'])
+                                        0
+                                    @endempty</td>
+                                <td>@isset($cancelledCount['CANCELED'])
+                                        {{ $cancelledCount['CANCELED'] }}
+                                    @endisset
+                                    @empty($cancelledCount['CANCELED'])
+                                        0
+                                    @endempty</td>
+                                <td>@isset($expiredCount['EXPIRED'])
+                                        {{ $expiredCount['EXPIRED'] }}
+                                    @endisset
+                                    @empty($expiredCount['EXPIRED'])
+                                        0
+                                    @endempty</td>
+                                <td>{{ $orders->count() }}</td>
+                                <td style="text-align:center">@isset($stoppedCount['FILLED'])
+                                        {{ $stoppedCount['FILLED'] }}
+                                    @endisset
+                                    @empty($stoppedCount['FILLED'])
+                                        0
+                                    @endempty</td>
+                                <td style="text-align:center">@isset($stoppedTotalCount['FILLED'])
+                                        {{ $stoppedTotalCount['FILLED'] }}
+                                    @endisset
+                                    @empty($stoppedTotalCount['FILLED'])
+                                        0
+                                    @endempty</td>
+                                <td style="text-align:center">{{$balance['1']['liquidationValue'] }}</td>
+                                <td style="text-align:center">${{$profitsTotal }}</td>
+                                <td
+                                    style="text-align:center">-${{$lossTotal }}</td>
+                                <td
+                                    style="text-align:center">${{number_format($pl,2,'.',',')}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                                            </tr>
-                                        @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                        @isset($displayWorking)
-                            @if ($displayWorking === true)
-                                <div class="table-responsive">
-                                    <table data-order='[[ 1, "desc" ]]'
-                                           class="table table-striped caption-top"
-                                           id="open-orders-table">
-                                        <caption style="text-align: center;">Working Orders</caption>
-                                        <thead>
-                                        <tr>
-{{--                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>--}}
-                                            <th style="white-space: nowrap;">Symbol</th>
-                                            <th style="white-space: nowrap;">Order ID</th>
-                                            <th style="white-space: nowrap;">Parent ID</th>
-                                            <th style="white-space: nowrap;">Instruction</th>
-{{--                                            <th style="white-space: nowrap;">Position Effect</th>--}}
-{{--                                            <th style="white-space: nowrap;">Order Strategy Type</th>--}}
-{{--                                            <th style="white-space: nowrap;">Duration</th>--}}
-                                            <th style="white-space: nowrap;">Price</th>
-                                            <th style="white-space: nowrap;">Expected Profit</th>
-                                            <th style="white-space: nowrap;">Status</th>
-                                            <th style="white-space: nowrap;">Quantity</th>
-                                            <th style="white-space: nowrap;">Entered Time</th>
-                                            <th style="white-space: nowrap;">Elapsed</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($orders as $order)
-                                            @if ($order->status === 'WORKING')
-                                                @if ($order->price)
+                    @isset($displayWorking)
+                        @if ($displayWorking === true)
+                            <div class="table-responsive">
+                                <table data-order='[[ 1, "desc" ]]'
+                                       class="table table-striped caption-top"
+                                       id="open-orders-table">
+                                    <caption style="text-align: center;">Working Orders</caption>
+                                    <thead>
+                                    <tr>
+                                        {{--                                            <th scope="col"style="white-space: nowrap;"><strong>#</strong></th>--}}
+                                        <th style="white-space: nowrap;">Symbol</th>
+                                        <th style="white-space: nowrap;">Order ID</th>
+                                        <th style="white-space: nowrap;">Parent ID</th>
+                                        <th style="white-space: nowrap;">Instruction</th>
+                                        {{--                                            <th style="white-space: nowrap;">Position Effect</th>--}}
+                                        {{--                                            <th style="white-space: nowrap;">Order Strategy Type</th>--}}
+                                        {{--                                            <th style="white-space: nowrap;">Duration</th>--}}
+                                        <th style="white-space: nowrap;">Price</th>
+                                        <th style="white-space: nowrap;">Expected Profit</th>
+                                        <th style="white-space: nowrap;">Status</th>
+                                        <th style="white-space: nowrap;">Quantity</th>
+                                        <th style="white-space: nowrap;">Entered Time</th>
+                                        <th style="white-space: nowrap;">Elapsed</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($orders as $order)
+                                        @if ($order->status === 'WORKING')
+                                            @if ($order->price)
                                                 <tr>
-{{--                                                    <td scope="row"--}}
-{{--                                                        style="white-space: nowrap;">{{--}}
-{{--                                                    $loop->index }}</td>--}}
+                                                    {{--                                                    <td scope="row"--}}
+                                                    {{--                                                        style="white-space: nowrap;">{{--}}
+                                                    {{--                                                    $loop->index }}</td>--}}
                                                     <td style="white-space: nowrap;"><a href="{{url
                                                     ('symbol',[$order->symbol])}}">{{ $order->symbol
                                                     }}</a></td>
                                                     <td style="white-space: nowrap;">{{ $order->orderId }}</td>
                                                     <td style="white-space: nowrap;">{{ $order->parentOrderId}}</td>
                                                     <td style="white-space: nowrap;">{{ $order->instruction }}</td>
-{{--                                                    <td>{{ $order->positionEffect }}</td>--}}
-{{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
-{{--                                                    <td>{{ $order->duration }}</td>--}}
+                                                    {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
+                                                    {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
+                                                    {{--                                                    <td>{{ $order->duration }}</td>--}}
                                                     <td style="white-space: nowrap;">@if ($order->price)$@endif{{ $order->price }}</td>
                                                     <td
-                                                        style="text-align:center;">$@if ($order->quantity === 15){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * .05,2,'.',',') }}@endif</td>
+                                                        style="text-align:center;">$@if ($order->quantity === 15){{ number_format($order->quantity * .10,2,'.',',') }}@else{{ number_format($order->quantity * 1.00,2,'.',',') }}@endif</td>
                                                     <td style="white-space: nowrap;">{{ $order->status }}</td>
                                                     <td
                                                         style="text-align:center;">{{ $order->quantity }}</td>
-{{--                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>--}}
+                                                    {{--                                                    <td style="white-space: nowrap;">{{ \Carbon\Carbon::parse($order->enteredTime)->toDateTimeString() }}</td>--}}
                                                     <td style="white-space:
-                                                    nowrap;"><small>{{
+                                                    nowrap;">{{
                                                     \Carbon\Carbon::parse
-                                                    ($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i:s A') }}</small></td>
+                                                    ($order->enteredTime)->setTimezone('America/New_York')->format('Y-m-d g:i:s A') }}</td>
                                                     <td>{{ gmdate('H:i:s',
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
                                                     ->diffInSeconds(\Carbon\Carbon::now())) }}</td>
                                                 </tr>
-                                                @endif
                                             @endif
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                        @endisset
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    @endisset
 
                     <hr class="hr" style="margin-top: 25px;margin-bottom:
                     25px;"/>
 
-                        @isset($displayFilled)
-                            @if ($displayFilled === true)
-                                <div class="table-responsive">
-                                    <table data-order='[[ 1, "desc" ]]'
-                                           class="table table-striped caption-top"
-                                           id="filled-orders-table">
-                                        <caption style="text-align: center;">Filled Orders</caption>
-                                        <thead>
-                                        <tr>
-{{--                                            <th scope="col">#</th>--}}
-                                            <th style="white-space:nowrap;">Symbol</th>
-                                            <th style="white-space:nowrap;">Order ID</th>
-                                            <th style="white-space:nowrap;">Parent Order ID</th>
-                                            <th style="white-space:nowrap;">Instruction</th>
-{{--                                            <th style="white-space:nowrap;">Position Effect</th>--}}
-{{--                                            <th style="white-space:nowrap;">Order Strategy Type</th>--}}
-{{--                                            <th style="white-space:nowrap;">Duration</th>--}}
-                                            <th style="white-space:nowrap;">Price</th>
-                                            <th style="white-space:nowrap;">P/L</th>
-                                            <th style="">Quantity</th>
-                                            <th style="white-space:nowrap;">Entered Time</th>
-                                            <th style="white-space:nowrap;">Close Time</th>
-                                            <th>Elapsed</th>
-                                            {{--<th style="white-space:nowrap;--}}
-                                            {{--text-align:right;">Elapsed Time</th>--}}
-                                        </tr>
-                                        </thead>
-                                        <tbody style=".table-striped">
-                                        @foreach($orders as $order)
-                                            @if ($order->status === 'FILLED')
-                                                <tr>
-{{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
-                                                    <td><a href="{{url
+                    @isset($displayFilled)
+                        @if ($displayFilled === true)
+                            <div class="table-responsive">
+                                <table data-order='[[ 1, "desc" ]]'
+                                       class="table table-striped caption-top"
+                                       id="filled-orders-table">
+                                    <caption style="text-align: center;">Filled Orders</caption>
+                                    <thead>
+                                    <tr>
+                                        {{--                                            <th scope="col">#</th>--}}
+                                        <th style="white-space:nowrap;">Symbol</th>
+                                        <th style="white-space:nowrap;">Order ID</th>
+                                        <th style="white-space:nowrap;">Parent Order ID</th>
+                                        <th style="white-space:nowrap;">Instruction</th>
+                                        {{--                                            <th style="white-space:nowrap;">Position Effect</th>--}}
+                                        {{--                                            <th style="white-space:nowrap;">Order Strategy Type</th>--}}
+                                        {{--                                            <th style="white-space:nowrap;">Duration</th>--}}
+                                        <th style="white-space:nowrap;">Price</th>
+                                        <th style="white-space:nowrap;">P/L</th>
+                                        <th style="">Quantity</th>
+                                        <th style="white-space:nowrap;">Entered Time</th>
+                                        <th style="white-space:nowrap;">Close Time</th>
+                                        <th>Elapsed</th>
+                                        {{--<th style="white-space:nowrap;--}}
+                                        {{--text-align:right;">Elapsed Time</th>--}}
+                                    </tr>
+                                    </thead>
+                                    <tbody style=".table-striped">
+                                    @foreach($orders as $order)
+                                        @if ($order->status === 'FILLED')
+                                            <tr>
+                                                {{--                                                    <th scope="row">{{ $loop->index }}</th>--}}
+                                                <td><a href="{{url
                                                     ('symbol',[$order->symbol])}}">{{ $order->symbol
                                                     }}</a></td>
-                                                    <td><small>{{
+                                                <td><small>{{
                                                     $order->orderId
                                                     }}</small></td>
-                                                    <td><small>{{
+                                                <td><small>{{
                                                     $order->parentOrderId }}</small></td>
-                                                    <td>{{ $order->instruction }}</td>
-{{--                                                    <td>{{ $order->positionEffect }}</td>--}}
-{{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
-{{--                                                    <td>{{ $order->duration }}</td>--}}
-                                                    <td>@if ($order->price)$@endif{{ $order->price }}</td>
-                                                    <td
-                                                        style="text-align:center;@if($order->stopPrice)color:red;@endif">@isset($order->actualProfit)
-                                                            @if($order->stopPrice)-@endif${{$order->actualProfit }}
-                                                        @endisset
-                                                    </td>
-                                                    <td style="text-align:center">{{ $order->quantity }}</td>
-                                                    <td nowrap><small>{{
+                                                <td>{{ $order->instruction }}</td>
+                                                {{--                                                    <td>{{ $order->positionEffect }}</td>--}}
+                                                {{--                                                    <td>{{ $order->orderStrategyType }}</td>--}}
+                                                {{--                                                    <td>{{ $order->duration }}</td>--}}
+                                                <td>@if ($order->price)$@endif{{ $order->price }}</td>
+                                                <td
+                                                    style="text-align:center;@if($order->stopPrice)color:red;@endif">@isset($order->actualProfit)
+                                                        @if($order->stopPrice)-@endif${{$order->actualProfit }}
+                                                    @endisset
+                                                </td>
+                                                <td style="text-align:center">{{ $order->quantity }}</td>
+                                                <td nowrap><small>{{
                                                     \Carbon\Carbon::parse
                                                     ($order->enteredTime)
                                                     ->setTimezone('America/New_York')->format('Y-m-d g:i:s') }}</small></td>
-{{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->format('g:i:s a') }}</td>--}}
-                                                    <td nowrap><small>{{
+                                                {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->format('g:i:s a') }}</td>--}}
+                                                <td nowrap><small>{{
                                                     \Carbon\Carbon::parse($order->closeTime)->setTimezone('America/New_York')->format('Y-m-d g:i:s') }}</small></td>
-{{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>--}}
+                                                {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->toDateTimeString() }}</td>--}}
 
-                                                    <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>
-{{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)->format('g:i:s a') }}</td>--}}
+                                                <td>{{ gmdate('H:i:s', \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)) }}</td>
+                                                {{--                                                    <td>{{ \Carbon\Carbon::parse($order->closeTime)->diffInSeconds($order->enteredTime)->format('g:i:s a') }}</td>--}}
 
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                        @endisset
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    @endisset
 
-{{--                    @if (count($orders) >= 1)--}}
+                    {{--                    @if (count($orders) >= 1)--}}
                     @if (count($orders) >= 1000000)
-                    <div class="table-responsive">
-                        <table class="table" id="orders-table">
-                            <caption style="text-align: center; ">All
-                                Orders</caption>
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th>Symbol</th>
-                                <th>Order ID</th>
-                                <th>Parent Order ID</th>
-                                <th>Instruction</th>
-                                <th>Position Effect</th>
-                                <th>Order Strategy Type</th>
-                                <th>Duration</th>
-                                <th>Price</th>
-                                <th>Trade Profit</th>
-                                <th>Status</th>
-                                <th>Quantity</th>
-                                <th>Entered Time</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($orders as $order)
+                        <div class="table-responsive">
+                            <table class="table" id="orders-table">
+                                <caption style="text-align: center; ">All
+                                    Orders</caption>
+                                <thead>
                                 <tr>
-                                    <th scope="row">{{ $loop->index }}</th>
-                                    <td>{{ $order->symbol }}</td>
-                                    <td>{{ $order->orderId }}</td>
-                                    <td>{{ $order->parentOrderId }}</td>
-                                    <td>{{ $order->instruction }}</td>
-                                    <td>{{ $order->positionEffect }}</td>
-                                    <td>{{ $order->orderStrategyType }}</td>
-                                    <td>{{ $order->duration }}</td>
-                                    <td>{{ $order->price }}</td>
-                                    <td style="text-align:center">{{ $order->actualProfit }}</td>
-                                    <td>{{ $order->status }}</td>
-                                    <td style="text-align:center">{{ $order->quantity }}</td>
-                                    <td>{{ $order->enteredTime }}</td>
+                                    <th scope="col">#</th>
+                                    <th>Symbol</th>
+                                    <th>Order ID</th>
+                                    <th>Parent Order ID</th>
+                                    <th>Instruction</th>
+                                    <th>Position Effect</th>
+                                    <th>Order Strategy Type</th>
+                                    <th>Duration</th>
+                                    <th>Price</th>
+                                    <th>Trade Profit</th>
+                                    <th>Status</th>
+                                    <th>Quantity</th>
+                                    <th>Entered Time</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    <tr>
+                                        <th scope="row">{{ $loop->index }}</th>
+                                        <td>{{ $order->symbol }}</td>
+                                        <td>{{ $order->orderId }}</td>
+                                        <td>{{ $order->parentOrderId }}</td>
+                                        <td>{{ $order->instruction }}</td>
+                                        <td>{{ $order->positionEffect }}</td>
+                                        <td>{{ $order->orderStrategyType }}</td>
+                                        <td>{{ $order->duration }}</td>
+                                        <td>{{ $order->price }}</td>
+                                        <td style="text-align:center">{{ $order->actualProfit }}</td>
+                                        <td>{{ $order->status }}</td>
+                                        <td style="text-align:center">{{ $order->quantity }}</td>
+                                        <td>{{ $order->enteredTime }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endif
 
                 </div>
@@ -444,7 +373,6 @@
         });
         let table = new DataTable('#open-orders-table');
         let tableTwo = new DataTable('#filled-orders-table');
-        let tableThree = new DataTable('#summary-table');
     </script>
 
 
