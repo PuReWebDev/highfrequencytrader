@@ -336,8 +336,8 @@ class TradeEngineProcessor
             return $value >= $frequencyFilter;
         });
         krsort($frequencies);
-        $high = number_format(array_keys($frequencies)[0], 2, '.', ',');
-        $low = number_format(array_keys($frequencies)[count($frequencies) - 1], 2, '.', ',');
+        $high = number_format((float)array_keys($frequencies)[0], 2, '.', ',');
+        $low = number_format((float)array_keys($frequencies)[count($frequencies) - 1], 2, '.', ',');
         return compact('high', 'low', 'direction');
     }
 
