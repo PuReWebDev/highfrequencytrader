@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use App\Models\Order;
+use App\Models\Quote;
 use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -210,6 +211,20 @@ class TradeEngineProcessor
                 continue;
             }
 
+            // Check The Directionality of the prices
+            $lastFiveQuotes = Quote::where('symbol', $quote->symbol)->where('created_at',
+                '>',
+                Carbon::now()->subMinute(5)->toDateTimeString())->latest()
+                ->get();
+
+            $direction = self::getOptimalTradingRange
+            ($lastFiveQuotes->toArray());
+
+            if ($direction['direction'] !== 1) {
+                Log::info("The Direction of Symbol: $quote->symbol is heading down. Skipping Buy");
+                continue;
+            }
+
             if (($quote->highPrice - .30) > ($currentStockPrice + .05)) {
                 OrderService::placeOtoOrder(
                     number_format($currentStockPrice, 2, '.', ''),
@@ -291,4 +306,38 @@ class TradeEngineProcessor
 
         return false;
     }
+
+    /**
+     * Takes in an array of ticks and returns three components
+     * the high and low of the ticks range based on the most avarage prices
+     * and a direction based on the general direction of the array
+     *
+     * @param array $ticks
+     * @return array range of high frequency values
+     */
+    public static function getOptimalTradingRange(array $ticks) : array
+    {
+        $prices = [];
+        $direction = 0;
+
+        foreach($ticks as $tick) {
+            array_push($prices, (string)$tick['close']);
+            $direction += ($tick['close'] - $tick['open']) <=> 0;
+        }
+
+        $direction = $direction <=> 0;
+        $frequencies = array_count_values($prices);
+        $frequencyHigh = max(array_values($frequencies));
+        $frequencyLow = min(array_values($frequencies));
+        $frequencyRange = range($frequencyHigh, $frequencyLow);
+        $frequencyFilter = array_splice($frequencyRange, floor(count($frequencyRange) / 2))[0];
+        $frequencies = array_filter($frequencies, function($value) use($frequencyFilter) {
+            return $value >= $frequencyFilter;
+        });
+        krsort($frequencies);
+        $high = number_format(array_keys($frequencies)[0], 2, '.', ',');
+        $low = number_format(array_keys($frequencies)[count($frequencies) - 1], 2, '.', ',');
+        return compact('high', 'low', 'direction');
+    }
+
 }
