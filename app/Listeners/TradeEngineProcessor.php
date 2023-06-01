@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Listeners;
 
 use App\Models\Order;
-use App\Models\Quote;
 use App\Models\WatchList;
 use App\Services\OrderService;
 use App\TDAmeritrade\Accounts;
@@ -211,19 +210,19 @@ class TradeEngineProcessor
                 continue;
             }
 
-            // Check The Directionality of the prices
-            $lastFiveQuotes = Quote::where('symbol', $quote->symbol)->where('created_at',
-                '>',
-                Carbon::now()->subMinute(5)->toDateTimeString())->latest()
-                ->get();
-
-            $direction = self::getOptimalTradingRange
-            ($lastFiveQuotes->toArray());
-
-            if ($direction['direction'] !== 1) {
-                Log::info("The Direction of Symbol: $quote->symbol is heading down. Skipping Buy");
-                continue;
-            }
+//            // Check The Directionality of the prices
+//            $lastFiveQuotes = Quote::where('symbol', $quote->symbol)->where('created_at',
+//                '>',
+//                Carbon::now()->subMinute(5)->toDateTimeString())->latest()
+//                ->get();
+//
+//            $direction = self::getOptimalTradingRange
+//            ($lastFiveQuotes->toArray());
+//
+//            if ($direction['direction'] !== 1) {
+//                Log::info("The Direction of Symbol: $quote->symbol is heading down. Skipping Buy");
+//                continue;
+//            }
 
             if (($quote->highPrice - .30) > ($currentStockPrice + .05)) {
                 OrderService::placeOtoOrder(
