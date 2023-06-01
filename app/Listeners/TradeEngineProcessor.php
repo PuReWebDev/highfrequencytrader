@@ -321,8 +321,9 @@ class TradeEngineProcessor
         $direction = 0;
 
         foreach($ticks as $tick) {
-            array_push($prices, (string)$tick['close']);
-            $direction += ($tick['close'] - $tick['open']) <=> 0;
+            array_push($prices, (string)$tick['lastPrice']);
+//            $direction += ($tick['close'] - $tick['open']) <=> 0;
+            $direction += ($tick['lastPrice'] - $tick['askPrice']) <=> 0;
         }
 
         $direction = $direction <=> 0;
@@ -330,7 +331,7 @@ class TradeEngineProcessor
         $frequencyHigh = max(array_values($frequencies));
         $frequencyLow = min(array_values($frequencies));
         $frequencyRange = range($frequencyHigh, $frequencyLow);
-        $frequencyFilter = array_splice($frequencyRange, floor(count($frequencyRange) / 2))[0];
+        $frequencyFilter = array_splice($frequencyRange, (int)floor(count($frequencyRange) / 2))[0];
         $frequencies = array_filter($frequencies, function($value) use($frequencyFilter) {
             return $value >= $frequencyFilter;
         });
