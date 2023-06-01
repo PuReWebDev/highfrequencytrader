@@ -507,7 +507,7 @@ class TDAmeritrade
             $response = $client->request('get', SELF::API_VER . '/accounts/'
                 . $account['0']['accountId'] .'/orders', $data);
 
-            $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+            $responseData = json_decode($response->getBody()->getContents(), true, 512,
                 JSON_THROW_ON_ERROR);
 
             Accounts::processIncomingOrders($responseData);
