@@ -73,16 +73,6 @@ class RetrieveOrders extends Command
                 self::clearDuplicateOrders();
 //                $this->cancelStaleOrders();
 
-                try {
-                    self::getCandleSticks();
-                } catch (GuzzleException $e) {
-                    Log::error('Guzzle Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                } catch (JsonException $e) {
-                    Log::error('Json Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                }
-
                 $this->info('Dispatching To Trade Engine Processor '.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
                 OrdersProcessed::dispatch();
                 $this->info('Trade Engine Processor Completed'.Carbon::now()->setTimezone('America/New_York')->format('Y-m-d g:i A'));
@@ -129,6 +119,16 @@ class RetrieveOrders extends Command
 //                    TDAmeritrade::getPriceHistory($order['symbol']);
 //                    usleep(2500000);
 
+                }
+
+                try {
+                    self::getCandleSticks();
+                } catch (GuzzleException $e) {
+                    Log::error('Guzzle Exception Thrown', ['error' =>
+                        $e->getMessage()]);
+                } catch (JsonException $e) {
+                    Log::error('Json Exception Thrown', ['error' =>
+                        $e->getMessage()]);
                 }
 
 //                break;
