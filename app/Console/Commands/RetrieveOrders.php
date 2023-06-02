@@ -222,7 +222,7 @@ class RetrieveOrders extends Command
         foreach ($symbols as $symbol) {
             Log::info('Fetching Candle for: '. $symbol['symbol']);
             TDAmeritrade::getPriceHistory($symbol['symbol']);
-            usleep(500000);
+//            usleep(500000);
         }
     }
 
