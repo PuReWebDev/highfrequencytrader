@@ -109,8 +109,8 @@ class TradeEngineProcessor
 
         foreach ($this->tradeSymbols as $tradeSymbol) {
             // Set Some Default Values
-            $this->shareQuantityPerTrade[$tradeSymbol] = 2;
-//            $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
+//            $this->shareQuantityPerTrade[$tradeSymbol] = 2;
+            $this->shareQuantityPerTrade[$tradeSymbol] = self::quantityOverTime();
             $tradeHalted[$tradeSymbol] = false;
 
             if (empty($this->consecutiveTrades[$tradeSymbol])) {
@@ -131,7 +131,8 @@ class TradeEngineProcessor
                 if (self::stoppedInLastFive($stoppedOrders,
                     $tradeSymbol)) {
 //                    $tradeHalted[$tradeSymbol] = true;
-                    $this->shareQuantityPerTrade[$tradeSymbol] = 4;
+//                    $this->shareQuantityPerTrade[$tradeSymbol] = 4;
+                    $this->shareQuantityPerTrade[$tradeSymbol] *= 2;
                     Log::info("Symbol $tradeSymbol been stopped out in Last 5 Minutes Halting Trading For It");
                 }
 
