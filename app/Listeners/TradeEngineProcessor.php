@@ -217,6 +217,10 @@ class TradeEngineProcessor
                 Carbon::now()->subMinute(5)->toDateTimeString())->latest()
                 ->get();
 
+            if (count($lastFiveQuotes) <= 0) {
+                continue;
+            }
+
             $direction = self::getOptimalTradingRange
             ($lastFiveQuotes->toArray());
 
