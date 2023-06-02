@@ -214,7 +214,7 @@ class TradeEngineProcessor
             // Check The Directionality of the prices
             $lastFiveQuotes = Price::where('symbol', $quote->symbol)->where('created_at',
                 '>',
-                Carbon::now()->subMinute(5)->toDateTimeString())->latest()
+                Carbon::now()->subMinute(5)->toDateTimeString())
                 ->get();
 
             if (count($lastFiveQuotes) <= 0) {
