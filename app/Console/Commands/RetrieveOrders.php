@@ -104,15 +104,15 @@ class RetrieveOrders extends Command
                 $count = $orders->count();
                 Log::info('Start With Total Count of: '. $count);
 
-                try {
-                    self::getCandleSticks();
-                } catch (GuzzleException $e) {
-                    Log::error('Guzzle Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                } catch (JsonException $e) {
-                    Log::error('Json Exception Thrown', ['error' =>
-                        $e->getMessage()]);
-                }
+//                try {
+//                    self::getCandleSticks();
+//                } catch (GuzzleException $e) {
+//                    Log::error('Guzzle Exception Thrown', ['error' =>
+//                        $e->getMessage()]);
+//                } catch (JsonException $e) {
+//                    Log::error('Json Exception Thrown', ['error' =>
+//                        $e->getMessage()]);
+//                }
 
                 foreach ($orders as $order) {
                     TDAmeritrade::getOrder($order['orderId']);
