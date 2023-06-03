@@ -231,7 +231,13 @@ class TDAmeritrade
     public static function quote(string $symbol)
     {
         $client = new Client();
-        return $client->getWithAuth('/marketdata/' . $symbol . '/quotes');
+        
+        $response = $client->request('get', SELF::API_VER . '/marketdata/' . $symbol . '/quote', $data);
+
+        $responseData = json_decode((string) $response->getBody()->getContents(), true, 512,
+            JSON_THROW_ON_ERROR);
+
+        return $client->get();
     }
 
     /**
@@ -244,16 +250,8 @@ class TDAmeritrade
      */
     public static function quotes(array $symbols): mixed
     {
-        Accounts::tokenPreFlight();
-
-        $token = Token::where('user_id', Auth::id())->get();
-
         $data = [
             'base_uri' => SELF::BASE_URL_TD,
-            'headers'  => [
-                'Authorization' => 'Bearer ' . $token['0']['access_token'],
-                'Content-Type' => 'application/json',
-            ],
             'query' => [
                 'apikey' => config('tdameritrade.api_key'),
                 'symbol' => implode(',', $symbols)
