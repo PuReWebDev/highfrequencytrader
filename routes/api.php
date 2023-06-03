@@ -20,4 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('api')->group(function() {
     Route::get('/price/history/{symbol}', 'App\Http\Controllers\Api\PriceHistoryApiController@show');
+    Route::get('/quote/{symbol}', 'App\Http\Controllers\Api\QuoteApiController@show');
+    Route::get('/quotes', 'App\Http\Controllers\Api\QuoteApiController@index');
+    Route::get('/quotes/search', 'App\Http\Controllers\Api\QuoteApiController@search');
 });
